@@ -1,0 +1,23 @@
+Consegnare una relazione che illustri il lavoro effettuato per la progettazione della base di dati derivante dai requisiti indicati nella
+sezione “Requisiti iniziali” e che segua rigorosamente lo schema guida indicato nei file “2 Schema progettazione concettuale”,
+“3 Schema progettazione logica”, “4 DDL e DML”. Nella prima pagina della relazione devono essere riportati i nomi, cognomi,
+numeri di matricola e indirizzi e-mail dei componenti del gruppo.
+
+Supponendo che un gruppo sia composto dagli studenti di cognome A, B, C, si consegnino i seguenti file:
+
+- Un file “A_B_C_Relazione” contenente la relazione (unione dei file “2 Schema progettazione concettuale”, “3 Schema progettazione logica”,
+    “4 DDL e DML”, che non dovete consegnare separatamente).
+- Tre file “A_B_C_DDL.sql”, “A_B_C_DMLPOP.sql”, “A_B_C_DMLUPD.sql” contenenti gli script SQL indicati nel file “4 DDL e DML”.
+- Tutti i files dovranno essere consegnati in una cartella compressa “A_B_C.zip” insieme ai files della parte di progettazione.
+- La consegna del progetto, dovrà avvenire (almeno) 7 giorni prima della scadenza del contenitore per l'upload - reso disponibile di volta
+    in volta per ciascuna data di appello.
+- La consegna della soluzione NON vale come iscrizione all'esame nel relativo appello. Per prenotarsi all'appello occorre registrarsi su ESSE3.
+- Relazioni con sezioni incomplete, non verranno prese in considerazione e l'esame risulterà non superato.
+- Ciascun componente del gruppo deve sapere tutti gli aspetti presenti all'interno della relazione consegnata. La discussione è singola e
+    il voto può variare all'interno dello stesso gruppo
+- A ciascun gruppo verrà chiesto lo svolgimento di una query (della durata di 30 minuti, https://esami.dir.uniupo.it/course/view.php?id=597)
+    sulla propria soluzione di schema descritto nella relazione
+- Per l'accettazione del voto, vale il silenzio/assenso entro massimo 3 giorni dalla data dell'esame.
+- Essendo un corso relativo al primo semestre didattico, questo progetto è valido fino all'ultimo appello della sessione estiva (20 settembre 2024).
+    Per appelli successivi, si dovrà realizzare la nuova versione, tenendoconto dei requisiti iniziali che saranno presentati durante il nuovo corso
+    che inizierà a novembre 2024.
