@@ -107,10 +107,10 @@ La base di dati deve supportare le seguenti operazioni:
 
 ## 1.2. Glossario dei termini
 
-| Termine | Descrizione | Sinonimi | Collegamenti |
-|-|-|-|-|
+| Termine | Descrizione       | Sinonimi                    | Collegamenti                |
+| :------ | :---------------- | :-------------------------- | :-------------------------- |
 | termine | breve descrizione | sinonimi presenti nel testo | elementi collegati al testo |
-| | | | |
+|         |                   |                             |                             |
 
 ## 1.3. Requisiti riscritti
 
