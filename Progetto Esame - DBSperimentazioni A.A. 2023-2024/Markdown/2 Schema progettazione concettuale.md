@@ -99,7 +99,7 @@
 
 "*Inoltre, gli utenti hanno un portafoglio di bit (moneta virtuale che possono acquistare tramite la piattaforma), utilizzabile per effettuare donazioni agli streamer tramite differenti metodi di pagamento elettronici*"
 
-- Solo gli **utenti registrati** al servizio possono avere un **portafoglio di bit** 
+- Solo gli **utenti registrati** al servizio possono avere un **portafoglio di bit**
 
 ### 1.1.6 Requisiti dei follower
 
@@ -168,7 +168,7 @@ Qualsiasi altra operazione/funzionalità del sistema e/o modellazione di requisi
 
 ## 1.3. Requisiti riscritti
 
-> qui ci vanno i requisiti della sezione 1.1 riscritti senza sinonimi e con frasi standardizzate. 
+> qui ci vanno i requisiti della sezione 1.1 riscritti senza sinonimi e con frasi standardizzate.
 > Ricordarsi di marcare in maniera grafica <font color="red">~~ciò che è stato cancellato/sostituito~~</font> e <font color="light blue">**ciò che è stato aggiunto**</font>.
 
 Si vuole realizzare una base di dati per un servizio che permette di fare live streaming su vari argomenti. Il live streaming (o, più sinteticamente, la live) permette di interagire con il pubblico in tempo reale grazie a feed video, chat e altro.
@@ -181,7 +181,7 @@ Per ogni <font color="red">~~creatore di contenuti~~</font> <font color="light b
 
 <font color="red">~~I viewer~~</font> <font color="light blue">**Gli spettatori**</font> possono ~~diventare follower del canale degli streamer che preferiscono,~~ **seguire i canali dei loro streamer preferiti.** ~~e le loro~~ **Le** preferenze **degli spettatori** sono raccolte in un elenco di followee a cui ~~possono~~ **ogni spettatore può** accedere dal ~~loro~~ **proprio** profilo. <font color="red">~~I viewer~~</font> <font color="light blue">**Gli spettatori**</font> possono inoltre supportare gli streamer tramite la subscription (a pagamento) al loro canale, ottenendo dei privilegi (emoticon personalizzate, nessun limite di caratteri nella lunghezza dei commenti, ecc.). Inoltre, gli utenti <font color="light blue">**registrati**</font> hanno un portafoglio di bit (moneta virtuale che possono acquistare tramite la piattaforma), utilizzabile per effettuare donazioni agli streamer tramite differenti metodi di pagamento elettronici.
 
-Una volta che <font color="red">~~i viewer~~</font> <font color="light blue">**gli spettatori**</font> diventano follower, possono votare i contenuti multimediali degli streamer ~~, esprimendosi tramite l’utilizzo di~~ **attraverso** un voto su scala likert (nel range [1,10]). Oltre a chattare pubblicamente, gli utenti – attraverso un sistema di messaggistica privato embedded nella piattaforma - possono scambiarsi messaggi e contenuti multimediali privati. 
+Una volta che <font color="red">~~i viewer~~</font> <font color="light blue">**gli spettatori**</font> diventano follower, possono votare i contenuti multimediali degli streamer ~~, esprimendosi tramite l’utilizzo di~~ **attraverso** un voto su scala likert (nel range [1,10]). Oltre a chattare pubblicamente, gli utenti – attraverso un sistema di messaggistica privato embedded nella piattaforma - possono scambiarsi messaggi e contenuti multimediali privati.
 
 Gli utenti (sia guest che registrati), possono cercare i contenuti multimediali per hashtag o per categorie (ad es. Musica, Sport, Personaggi famosi, Arte, Talk-show, Games, Simulation, food&drinks, Creative, Strategy, Technology, etc…). Ogni utente registrato, in base ai contenuti/pagine/streamer che segue, ha una lista di contenuti multimediali suggeriti.
 
@@ -241,4 +241,3 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 |                                                                        |
 
 ## 1.5. Schema E-R + regole aziendali
-

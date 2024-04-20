@@ -1,0 +1,11 @@
+# i blocchi di codice in markdown saranno sempre circondati da '```'
+MD046: { "style": fenced }
+
+# mi serve inline html per togliere i warning e per un migliore risultato nell'esportazione del markdown in pdf (<div class="page">)
+MD033: false
+
+# disabilito la validazione della lunghezza della riga perché non ci serve
+line_length: false
+
+# disabilito la validazione dei blocchi 'blockquote' perché capita di crearli cosí
+no-blanks-blockquote: false
