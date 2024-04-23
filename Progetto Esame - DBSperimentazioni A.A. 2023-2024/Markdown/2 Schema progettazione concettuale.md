@@ -23,7 +23,10 @@
 - [1.2. Glossario dei termini](#12-glossario-dei-termini)
 - [1.3. Requisiti riscritti](#13-requisiti-riscritti)
 - [1.4. Requisiti strutturati in gruppi di frasi omogenee](#14-requisiti-strutturati-in-gruppi-di-frasi-omogenee)
-- [1.5. Schema E-R + regole aziendali](#15-schema-e-r--regole-aziendali)
+- [1.5. Schema E-R](#15-schema-e-r)
+  - [1.5.1 Regole aziendali](#151-regole-aziendali)
+  - [1.5.2 Vincoli d'integritá](#152-vincoli-dintegritá)
+  - [1.5.3 Derivazioni](#153-derivazioni)
 
 ---
 
@@ -239,4 +242,22 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 |------------------------------------------------------------------------|
 |                                                                        |
 
-## 1.5. Schema E-R + regole aziendali
+## 1.5. Schema E-R
+
+> QUI CI VA IL VOSTRO SCHEMA ER INIZIALE (NON RISTRUTTURATO).
+>
+> Per comodità, in questo schema ER inserite anche le ridondanze che analizzerete in fase di ristrutturazione.
+
+### 1.5.1 Regole aziendali
+
+### 1.5.2 Vincoli d'integritá
+
+| RVI | \<concetto\> deve/non deve \<espressione\> |
+| --- | ------------------------------------------ |
+| ... | ...                                        |
+
+### 1.5.3 Derivazioni
+
+| RDI | \<concetto\> si ottiene \<operazione\> |
+| --- | -------------------------------------- |
+| ... | ...                                    |
