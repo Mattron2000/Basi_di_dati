@@ -39,7 +39,7 @@
 
 ## 1.1 Requisiti iniziali
 
-> qui ci va il testo iniziale integrato con osservazioni fatte da voi. Per esempio, se vi vengono forniti dei file integrativi (screenshot dell’applicazione), potete integrare il testo con descrizioni di elementi/funzionalità che sono evidenti dai file. Oppure, potete integrare il testo con funzionalità ovvie dato il problema: se sto gestendo una piattaforma con degli utenti, ovviamente dovrò avere la possibilità di aggiungere un utente.
+<!-- > qui ci va il testo iniziale integrato con osservazioni fatte da voi. Per esempio, se vi vengono forniti dei file integrativi (screenshot dell’applicazione), potete integrare il testo con descrizioni di elementi/funzionalità che sono evidenti dai file. Oppure, potete integrare il testo con funzionalità ovvie dato il problema: se sto gestendo una piattaforma con degli utenti, ovviamente dovrò avere la possibilità di aggiungere un utente. -->
 
 "*Si vuole realizzare una base di dati per un servizio che permette di fare live streaming su vari argomenti. Il live streaming (o, più sinteticamente, la live) permette di interagire con il pubblico in tempo reale grazie a feed video, chat e altro.*"
 
@@ -162,7 +162,7 @@ Qualsiasi altra operazione/funzionalità del sistema e/o modellazione di requisi
 | clip              | parte di un video di tot. secondi                                             |                 | canale                   |
 | affilitate        | streamer che ha superato determinati criteri                                  |                 | streamer                 |
 | follower          | utente registrato che segue lo streamer e riceve notifiche delle sue attivitá |                 | streamer, canale         |
-| utenti fragili    | utente registrato che ha determinate disabilitá                               |                 | utente registrato        |
+| utente fragile    | utente registrato che ha determinate disabilitá                               |                 | utente registrato        |
 | bit               | moneta virtuale per effettuare donazioni agli streamer                        |                 | utenti                   |
 | subscription      | supporto economico che riceve uno streamer dagli spettatori                   |                 | spettatore, streamer     |
 | followee          | streamer che viene seguito dai follower                                       | streamer        | streamer, follower       |
@@ -170,20 +170,20 @@ Qualsiasi altra operazione/funzionalità del sistema e/o modellazione di requisi
 
 ## 1.3. Requisiti riscritti
 
-> qui ci vanno i requisiti della sezione 1.1 riscritti senza sinonimi e con frasi standardizzate.
-> Ricordarsi di marcare in maniera grafica <span style="color:red">~~ciò che è stato cancellato/sostituito~~</span> e <span style="color:blue">**ciò che è stato aggiunto**</span>.
+<!-- > qui ci vanno i requisiti della sezione 1.1 riscritti senza sinonimi e con frasi standardizzate.
+> Ricordarsi di marcare in maniera grafica <span style="color:red">~~ciò che è stato cancellato/sostituito~~</span> e <span style="color:blue">**ciò che è stato aggiunto**</span>. -->
 
 Si vuole realizzare una base di dati per un servizio che permette di fare live streaming su vari argomenti. Il live streaming (o, più sinteticamente, la live) permette di interagire con il pubblico in tempo reale grazie a feed video, chat e altro.
 
-Ogni utente può essere ~~spettatore o streamer,~~ **spettatore, streamer** o entrambi. Gli spettatori possono essere registrati al servizio oppure possono guardare le live in modo anonimo (guest). Per registrarsi, gli utenti devono indicare nome utente, password, data di nascita, <span style="color:blue">**oppure anche**</span> numero di telefono o indirizzo mail. Gli <span style="color:red">~~utenti iscritti~~</span> <span style="color:blue">**utenti registrati**</span> possono chattare, seguire lo streamer, creare <span style="color:red">~~dirette~~</span> <span style="color:blue">**live**</span>. Gli utenti registrati possono abbonarsi (diventando utenti “premium”) ~~ed avere così~~ **per avere** accesso a contenuti extra come interviste esclusive, podcast e chattare direttamente con i conduttori/artisti protagonisti dei film/concerti etc..
+Ogni utente può essere <span style="color:red">~~spettatore o streamer,~~</span> <span style="color:blue">**spettatore, streamer**</span> o entrambi. Gli spettatori possono essere registrati al servizio oppure possono guardare le live in modo anonimo (guest). Per registrarsi, gli utenti devono indicare nome utente, password, data di nascita, <span style="color:blue">**oppure anche**</span> numero di telefono o indirizzo mail. Gli <span style="color:red">~~utenti iscritti~~</span> <span style="color:blue">**utenti registrati**</span> possono chattare, seguire lo streamer, creare <span style="color:red">~~dirette~~</span> <span style="color:blue">**live**</span>. Gli utenti registrati possono abbonarsi (diventando utenti “premium”) <span style="color:red">~~ed avere così~~</span> <span style="color:blue">**per avere**</span> accesso a contenuti extra come interviste esclusive, podcast e chattare direttamente con i conduttori/artisti protagonisti dei film/concerti etc..
 
-~~Gli~~ **Ogni** streamer ~~hanno ciascuno~~ **ha** un canale, che può essere caratterizzato tramite una descrizione. ~~Per ogni~~ **Ogni** canale ~~, è possibile specificare~~ **può avere** una lista di social associati (ad esempio Instagram, YouTube, ecc.), un’immagine profilo e anche un trailer (Figura 1(a)). In ogni canale possono esserci live, video (live passate) e clip (video di durata breve). Le live possono anche non diventare video del canale ma ad ogni <span style="color:red">~~diretta live~~</span> <span style="color:blue">**live**</span>, viene inviata una notifica <span style="color:red">~~agli utenti che seguono il canale~~</span> <span style="color:blue">**ai follower del canale**</span>. Ognuno ha un titolo, una durata, appartiene a una categoria (Figura 1(b)) e può essere associato a diversi hashtags/emojis etc..). Per ogni live ~~, viene memorizzato~~ **si rappresentano** il numero medio di spettatori, i commenti e le reazioni (emojis, hashtags etc..) mentre per i video e le clip **si rappresentano** il numero di visualizzazioni.
+<span style="color:red">~~Gli~~</span> <span style="color:blue">**Ogni**</span> streamer <span style="color:red">~~hanno ciascuno~~</span> <span style="color:blue">**ha**</span> un canale, che può essere caratterizzato tramite una descrizione. <span style="color:red">~~Per ogni~~</span> <span style="color:blue">**Ogni**</span> canale <span style="color:red">~~, è possibile specificare~~</span> <span style="color:blue">**può avere**</span> una lista di social associati (ad esempio Instagram, YouTube, ecc.), un’immagine profilo e anche un trailer (Figura 1(a)). In ogni canale possono esserci live, video (live passate) e clip (video di durata breve). Le live possono anche non diventare video del canale ma ad ogni <span style="color:red">~~diretta live~~</span> <span style="color:blue">**live**</span>, viene inviata una notifica <span style="color:red">~~agli utenti che seguono il canale~~</span> <span style="color:blue">**ai follower del canale**</span>. Ognuno ha un titolo, una durata, appartiene a una categoria (Figura 1(b)) e può essere associato a diversi hashtags/emojis etc..). Per ogni live <span style="color:red">~~, viene memorizzato~~</span> <span style="color:blue">**si rappresentano**</span> il numero medio di spettatori, i commenti e le reazioni (emojis, hashtags etc..) mentre per i video e le clip <span style="color:blue">**si rappresentano**</span> il numero di visualizzazioni.
 
-Per ogni <span style="color:red">~~creatore di contenuti~~</span> <span style="color:blue">**streamer**</span> ~~, si memorizzano~~ **si rappresentano** il numero di live effettuate, il numero di minuti trasmessi (in <span style="color:red">~~diretta~~</span> <span style="color:blue">**live**</span> e non) e il numero medio di spettatori/utenti simultanei (sia premium che guest). Inoltre, sulla pagina del canale viene visualizzato il numero di followers. Quando uno streamer rispetta determinati parametri di performance (un minimo di 500 minuti trasmessi, una media di tre o più spettatori simultanei, almeno 50 followers), può diventare affiliate. Le <span style="color:red">~~stream~~</span> <span style="color:blue">**live**</span> hanno degli orari. Ogni streamer ha un calendario in cui può dire quando farà <span style="color:red">~~stream~~</span> <span style="color:blue">**live**</span> e indicare il titolo delle prossime live. Inoltre, ogni streamer può anche decidere di trasmettere <span style="color:red">~~dirette live~~</span> <span style="color:blue">**live**</span> solo agli utenti premium (che hanno accesso a contenuti esclusivi).
+Per ogni <span style="color:red">~~creatore di contenuti~~</span> <span style="color:blue">**streamer**</span> <span style="color:red">~~, si memorizzano~~</span> <span style="color:blue">**si rappresentano**</span> il numero di live effettuate, il numero di minuti trasmessi (in <span style="color:red">~~diretta~~</span> <span style="color:blue">**live**</span> e non) e il numero medio di spettatori/utenti simultanei (sia premium che guest). Inoltre, sulla pagina del canale viene visualizzato il numero di followers. Quando uno streamer rispetta determinati parametri di performance (un minimo di 500 minuti trasmessi, una media di tre o più spettatori simultanei, almeno 50 followers), può diventare affiliate. Le <span style="color:red">~~stream~~</span> <span style="color:blue">**live**</span> hanno degli orari. Ogni streamer ha un calendario in cui può dire quando farà <span style="color:red">~~stream~~</span> <span style="color:blue">**live**</span> e indicare il titolo delle prossime live. Inoltre, ogni streamer può anche decidere di trasmettere <span style="color:red">~~dirette live~~</span> <span style="color:blue">**live**</span> solo agli utenti premium (che hanno accesso a contenuti esclusivi).
 
-<span style="color:red">~~I viewer~~</span> <span style="color:blue">**Gli spettatori**</span> possono ~~diventare follower del canale degli streamer che preferiscono,~~ **seguire i canali dei loro streamer preferiti.** ~~e le loro~~ **Le** preferenze **degli spettatori** sono raccolte in un elenco di followee a cui ~~possono~~ **ogni spettatore può** accedere dal ~~loro~~ **proprio** profilo. <span style="color:red">~~I viewer~~</span> <span style="color:blue">**Gli spettatori**</span> possono inoltre supportare gli streamer tramite la subscription (a pagamento) al loro canale, ottenendo dei privilegi (emoticon personalizzate, nessun limite di caratteri nella lunghezza dei commenti, ecc.). Inoltre, gli utenti <span style="color:blue">**registrati**</span> hanno un portafoglio di bit (moneta virtuale che possono acquistare tramite la piattaforma), utilizzabile per effettuare donazioni agli streamer tramite differenti metodi di pagamento elettronici.
+<span style="color:red">~~I viewer~~</span> <span style="color:blue">**Gli spettatori**</span> possono <span style="color:red">~~diventare follower del canale degli streamer che preferiscono,~~</span> <span style="color:blue">**seguire i canali dei loro streamer preferiti.**</span> <span style="color:red">~~e le loro~~</span> <span style="color:blue">**Le**</span> preferenze <span style="color:blue">**degli spettatori**</span> sono raccolte in un elenco di followee a cui <span style="color:red">~~possono~~</span> <span style="color:blue">**ogni spettatore può**</span> accedere dal <span style="color:red">~~loro~~</span> <span style="color:blue">**proprio**</span> profilo. <span style="color:red">~~I viewer~~</span> <span style="color:blue">**Gli spettatori**</span> possono inoltre supportare gli streamer tramite la subscription (a pagamento) al loro canale, ottenendo dei privilegi (emoticon personalizzate, nessun limite di caratteri nella lunghezza dei commenti, ecc.). Inoltre, gli utenti <span style="color:blue">**registrati**</span> hanno un portafoglio di bit (moneta virtuale che possono acquistare tramite la piattaforma), utilizzabile per effettuare donazioni agli streamer tramite differenti metodi di pagamento elettronici.
 
-Una volta che <span style="color:red">~~i viewer~~</span> <span style="color:blue">**gli spettatori**</span> diventano follower, possono votare i contenuti multimediali degli streamer ~~, esprimendosi tramite l’utilizzo di~~ **attraverso** un voto su scala likert (nel range [1,10]). Oltre a chattare pubblicamente, gli utenti – attraverso un sistema di messaggistica privato embedded nella piattaforma - possono scambiarsi messaggi e contenuti multimediali privati.
+Una volta che <span style="color:red">~~i viewer~~</span> <span style="color:blue">**gli spettatori**</span> diventano follower, possono votare i contenuti multimediali degli streamer <span style="color:red">~~, esprimendosi tramite l’utilizzo di~~</span> <span style="color:blue">**attraverso**</span> un voto su scala likert (nel range [1,10]). Oltre a chattare pubblicamente, gli utenti – attraverso un sistema di messaggistica privato embedded nella piattaforma - possono scambiarsi messaggi e contenuti multimediali privati.
 
 Gli utenti (sia guest che registrati), possono cercare i contenuti multimediali per hashtag o per categorie (ad es. Musica, Sport, Personaggi famosi, Arte, Talk-show, Games, Simulation, food&drinks, Creative, Strategy, Technology, etc…). Ogni utente registrato, in base ai contenuti/pagine/streamer che segue, ha una lista di contenuti multimediali suggeriti.
 
@@ -206,41 +206,93 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 ## 1.4. Requisiti strutturati in gruppi di frasi omogenee
 
-| <mark>Frasi di carattere generale</mark>                               |
-|------------------------------------------------------------------------|
+| **Frasi di carattere generale** |
+| --- |
 | Si vuole realizzare una base di dati per un servizio che permette di fare live streaming su vari argomenti. Il live streaming (o, più sinteticamente, la live) permette di interagire con il pubblico in tempo reale grazie a feed video, chat e altro. |
 
-| <mark>Frasi relative a agli utenti</mark>                              |
-|------------------------------------------------------------------------|
-| Ogni utente può essere spettatore o streamer, spettatore, streamer o entrambi. |
+| Frasi relative a agli **utenti** |
+| --- |
+| Ogni utente può essere spettatore, streamer o entrambi. Oltre a chattare pubblicamente, gli utenti – attraverso un sistema di messaggistica privato embedded nella piattaforma - possono scambiarsi messaggi e contenuti multimediali privati. Gli utenti (sia guest che registrati), possono cercare i contenuti multimediali per hashtag o per categorie (ad es. Musica, Sport, Personaggi famosi, Arte, Talk-show, Games, Simulation, food&drinks, Creative, Strategy, Technology, etc…). |
 
-| <mark>Frasi relative agli spettatori</mark>                            |
-|------------------------------------------------------------------------|
-| Gli spettatori possono essere registrati al servizio oppure possono guardare le live in modo anonimo (guest). |
+| Frasi relative agli **spettatori** |
+| --- |
+| Gli spettatori possono essere registrati al servizio oppure possono guardare le live in modo anonimo (guest). Gli spettatori possono seguire i canali dei loro streamer preferiti. |
 
-| <mark>Frasi relative agli streamer</mark>                              |
-|------------------------------------------------------------------------|
-|  |
+| Frasi relative agli **streamer** |
+| --- |
+| Per ogni streamer si rappresentano il numero di live effettuate, il numero di minuti trasmessi (in  live e non) e il numero medio di spettatori/utenti simultanei (sia premium che guest). Ogni streamer ha un calendario in cui può dire quando farà live e indicare il titolo delle prossime live. Inoltre, ogni streamer può anche decidere di trasmettere live solo agli utenti premium (che hanno accesso a contenuti esclusivi). |
 
-| <mark>Frasi relative ai guest</mark>                                   |
-|------------------------------------------------------------------------|
-|                                                                        |
+| Frasi relative ai **guest** |
+| --- |
+| Gli spettatori [..] possono guardare le live in modo anonimo (guest). |
 
-| <mark>Frasi relative a ....</mark>                                     |
-|------------------------------------------------------------------------|
-|                                                                        |
+| Frasi relative agli **utenti registrati** |
+| --- |
+| Gli utenti registrati possono chattare, seguire lo streamer, creare live. Ogni utente registrato, in base ai contenuti/pagine/streamer che segue, ha una lista di contenuti multimediali suggeriti. |
 
-| <mark>Frasi relative a ....</mark>                                     |
-|------------------------------------------------------------------------|
-|                                                                        |
+| Frasi relative agli **utenti premium** |
+| --- |
+| Gli utenti registrati possono abbonarsi (diventando utenti “premium”) per avere accesso a contenuti extra come interviste esclusive, podcast e chattare direttamente con i conduttori/artisti protagonisti dei film/concerti etc.. |
 
-| <mark>Frasi relative a ....</mark>                                     |
-|------------------------------------------------------------------------|
-|                                                                        |
+| Frasi relative ai **canali** |
+| --- |
+| Ogni streamer ha un canale, che può essere caratterizzato tramite una descrizione. Ogni canale, può avere una lista di social associati (ad esempio Instagram, YouTube, ecc.), un’immagine profilo e anche un trailer (Figura 1(a)). In ogni canale possono esserci live, video (live passate) e clip (video di durata breve). Inoltre, sulla pagina del canale viene visualizzato il numero di followers. |
 
-| <mark>Frasi relative a ....</mark>                                     |
-|------------------------------------------------------------------------|
-|                                                                        |
+| Frasi relative ai **social** |
+| --- |
+| Ogni canale, può avere una lista di social associati (ad esempio Instagram, YouTube, ecc.) [..] |
+
+| Frasi relative alle **live** |
+| --- |
+| Le live possono anche non diventare video del canale ma ad ogni live, viene inviata una notifica ai follower del canale. Ognuna ha un titolo, una durata, appartiene a una categoria (Figura 1(b)) e può essere associata a diversi hashtags/emojis etc... Per ogni live si rappresentano il numero medio di spettatori, i commenti e le reazioni (emojis, hashtags etc..) [..]. Le live hanno degli orari. |
+
+| Frasi relative ai **video** |
+| --- |
+| Ognuno ha un titolo, una durata, appartiene a una categoria (Figura 1(b)) e può essere associato a diversi hashtags/emojis etc... [..] per i video [..] si rappresentano il numero di visualizzazioni. |
+
+| Frasi relative alle **clip** |
+| --- |
+| Ognuna ha un titolo, una durata, appartiene a una categoria (Figura 1(b)) e può essere associata a diversi hashtags/emojis etc... [..] per [..] le clip si rappresentano il numero di visualizzazioni. |
+
+| Frasi relative agli **affilitate** |
+| --- |
+| Quando uno streamer rispetta determinati parametri di performance (un minimo di 500 minuti trasmessi, una media di tre o più spettatori simultanei, almeno 50 followers), può diventare affiliate. |
+
+| Frasi relative ai **follower** |
+| --- |
+| Una volta che gli spettatori diventano follower, possono votare i contenuti multimediali degli streamer attraverso un voto su scala likert (nel range [1,10]). |
+
+| Frasi relative agli **utenti fragili** |
+| --- |
+| [..] gli utenti fragili, possono registrarsi al servizio avendo però a disposizione contenuti multimediali più inclusivi e accessibili (ad es. contenuti in LIS – Lingua Italiana dei Segni per le persone non udenti), oppure una versione delle pagine ad accesso facilitato (caratteri aumentati, stile delle pagine dei canai in b/w). |
+
+| Frasi relative alle **subscription** |
+| --- |
+| Gli spettatori possono inoltre supportare gli streamer tramite la subscription (a pagamento) al loro canale, ottenendo dei privilegi (emoticon personalizzate, nessun limite di caratteri nella lunghezza dei commenti, ecc.). |
+
+| Frasi relative ai **followee** |
+| --- |
+| Le preferenze degli spettatori sono raccolte in un elenco di streamer a cui ogni spettatore può accedere dal proprio profilo. |
+
+| Frasi relative ai **trailer** |
+| --- |
+| Ogni canale, può avere [..] anche un trailer (Figura 1(a)). |
+
+| Frasi relative ai  **bit** |
+| --- |
+| gli utenti registrati hanno un portafoglio di bit (moneta virtuale che possono acquistare tramite la piattaforma), utilizzabile per effettuare donazioni agli streamer tramite differenti metodi di pagamento elettronici. |
+
+| Frasi relative alla **registrazione** |
+| --- |
+| Per registrarsi, gli utenti devono indicare nome utente, password, data di nascita, oppure anche numero di telefono o indirizzo mail. |
+
+| Frasi relative alle **operazioni della base di dati** |
+| --- |
+| La base di dati deve supportare le seguenti operazioni: <br><br>- Una volta al giorno si controllano le condizioni per la qualifica di affiliate <br>- Una volta a settimana viene calcolata la classifica degli streamer più seguiti <br>- Una volta al giorno, viene calcolata la media dei like per ogni contenuto multimediale (per ogni streamer) <br>- Una volta al giorno, gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati (quelli che, in media, hanno ricevuto una votazione maggiore rispetto agli altri) <br>- Dieci volte al giorno, vengono controllati ed eliminati tutti i commenti con contenuti offensivi fatti dagli utenti per ogni contenuto multimediale (per ogni streamer), nelle categorie, nei canali e durante le dirette live <br>- Due volte al giorno vengono controllati i nuovi utenti registrati (sia premium – nuovi abbonati – sia utenti appartenenti a categorie fragili) <br>- Cinque volte al giorno, gli amministratori delle pagine degli streamer segnalano agli amministratori della base di dati, i profili fake che seguono i loro streamer <br>- Una volta ogni 6 mesi, gli amministratori possono visualizzare lo storico degli utenti premium (quelli storici (dato un range di date) che quelli recenti (relativi all’ultimo mese)) |
+
+| Frasi relative al **servizio di hosting** |
+| --- |
+| Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli amministratori delle pagine, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting. |
 
 ## 1.5. Schema E-R
 
@@ -253,11 +305,11 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 ### 1.5.2 Vincoli d'integritá
 
 | RVI | \<concetto\> deve/non deve \<espressione\> |
-| --- | ------------------------------------------ |
-| ... | ...                                        |
+| --- | --- |
+| ... | ... |
 
 ### 1.5.3 Derivazioni
 
 | RDI | \<concetto\> si ottiene \<operazione\> |
-| --- | -------------------------------------- |
-| ... | ...                                    |
+| --- | --- |
+| ... | ... |
