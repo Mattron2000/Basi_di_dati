@@ -14,16 +14,16 @@
   - [1.1.4 Requisiti della statistica degli streamer](#114-requisiti-della-statistica-degli-streamer)
   - [1.1.5 Requisiti della statistica dei canali](#115-requisiti-della-statistica-dei-canali)
   - [1.1.6 Requisiti dei bit](#116-requisiti-dei-bit)
-  - [1.1.6 Requisiti dei follower](#116-requisiti-dei-follower)
-  - [1.1.6 Requisiti delle diverse chat](#116-requisiti-delle-diverse-chat)
-  - [1.1.7 Requisiti della ricerca degli streramer per tutti i tipi di utenti](#117-requisiti-della-ricerca-degli-streramer-per-tutti-i-tipi-di-utenti)
-  - [1.1.8 Requisiti degli utenti fragili](#118-requisiti-degli-utenti-fragili)
-  - [1.1.9 Volume delle operazioni](#119-volume-delle-operazioni)
-  - [1.1.10 Requisiti gestione e costi della piattaforma](#1110-requisiti-gestione-e-costi-della-piattaforma)
-- [1.2. Glossario dei termini](#12-glossario-dei-termini)
-- [1.3. Requisiti riscritti](#13-requisiti-riscritti)
-- [1.4. Requisiti strutturati in gruppi di frasi omogenee](#14-requisiti-strutturati-in-gruppi-di-frasi-omogenee)
-- [1.5. Schema E-R](#15-schema-e-r)
+  - [1.1.7 Requisiti dei follower](#117-requisiti-dei-follower)
+  - [1.1.8 Requisiti delle diverse chat](#118-requisiti-delle-diverse-chat)
+  - [1.1.9 Requisiti della ricerca degli streramer per tutti i tipi di utenti](#119-requisiti-della-ricerca-degli-streramer-per-tutti-i-tipi-di-utenti)
+  - [1.1.10 Requisiti degli utenti fragili](#1110-requisiti-degli-utenti-fragili)
+  - [1.1.11 Volume delle operazioni](#1111-volume-delle-operazioni)
+  - [1.1.12 Requisiti gestione e costi della piattaforma](#1112-requisiti-gestione-e-costi-della-piattaforma)
+- [1.2 Glossario dei termini](#12-glossario-dei-termini)
+- [1.3 Requisiti riscritti](#13-requisiti-riscritti)
+- [1.4 Requisiti strutturati in gruppi di frasi omogenee](#14-requisiti-strutturati-in-gruppi-di-frasi-omogenee)
+- [1.5 Schema E-R](#15-schema-e-r)
   - [1.5.1 Regole aziendali](#151-regole-aziendali)
   - [1.5.2 Vincoli d'integritá](#152-vincoli-dintegritá)
   - [1.5.3 Derivazioni](#153-derivazioni)
@@ -104,27 +104,27 @@
 
 - Solo gli **utenti registrati** al servizio possono avere un **portafoglio di bit**
 
-### 1.1.6 Requisiti dei follower
+### 1.1.7 Requisiti dei follower
 
 "*Una volta che i viewer diventano follower, possono votare i contenuti multimediali degli streamer, esprimendosi tramite l’utilizzo di un voto su scala likert (nel range [1,10])*"
 
 - Il voto sarà concesso solo ai **follower**
 
-### 1.1.6 Requisiti delle diverse chat
+### 1.1.8 Requisiti delle diverse chat
 
 "*Oltre a chattare pubblicamente, gli utenti – attraverso un sistema di messaggistica privato embedded nella piattaforma - possono scambiarsi messaggi e contenuti multimediali privati*"
 
-### 1.1.7 Requisiti della ricerca degli streramer per tutti i tipi di utenti
+### 1.1.9 Requisiti della ricerca degli streramer per tutti i tipi di utenti
 
 "*Gli utenti (sia guest che registrati), possono cercare i contenuti multimediali per hashtag o per categorie (ad es. Musica, Sport, Personaggi famosi, Arte, Talk-show, Games, Simulation, food&drinks, Creative, Strategy, Technology, etc…). Ogni utente registrato, in base ai contenuti/pagine/streamer che segue, ha una lista di contenuti multimediali suggeriti.*"
 
-### 1.1.8 Requisiti degli utenti fragili
+### 1.1.10 Requisiti degli utenti fragili
 
 "*Infine, gli utenti fragili, possono registrarsi al servizio avendo però a disposizione contenuti multimediali più inclusivi e accessibili (ad es. contenuti in LIS – Lingua Italiana dei Segni per le persone non udenti), oppure una versione delle pagine ad accesso facilitato (caratteri aumentati, stile delle pagine dei canali in b/w).*"
 
 - Viene tenuta traccia degli **utenti fragili** e per loro i contenuti verranno erogati in **modalità differente**
 
-### 1.1.9 Volume delle operazioni
+### 1.1.11 Volume delle operazioni
 
 <em>"La base di dati deve supportare le seguenti operazioni:
 
@@ -139,13 +139,13 @@
 
 Qualsiasi altra operazione/funzionalità del sistema e/o modellazione di requisiti non descritti, purché motivata, è ben accetta! (… un po' di fantasia!!!)"</em>
 
-### 1.1.10 Requisiti gestione e costi della piattaforma
+### 1.1.12 Requisiti gestione e costi della piattaforma
 
 "*Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli amministratori delle pagine, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting*"
 
 ---
 
-## 1.2. Glossario dei termini
+## 1.2 Glossario dei termini
 
 | Termine           | Descrizione                                                                   | Sinonimi        | Collegamenti             |
 | ----------------- | ----------------------------------------------------------------------------- | --------------- | ------------------------ |
@@ -168,7 +168,7 @@ Qualsiasi altra operazione/funzionalità del sistema e/o modellazione di requisi
 | followee          | streamer che viene seguito dai follower                                       | streamer        | streamer, follower       |
 | trailer           | video creato dallo streamer come presentazione del canale                     |                 | canale                   |
 
-## 1.3. Requisiti riscritti
+## 1.3 Requisiti riscritti
 
 <!-- > qui ci vanno i requisiti della sezione 1.1 riscritti senza sinonimi e con frasi standardizzate.
 > Ricordarsi di marcare in maniera grafica <span style="color:red">~~ciò che è stato cancellato/sostituito~~</span> e <span style="color:blue">**ciò che è stato aggiunto**</span>. -->
@@ -204,7 +204,7 @@ Qualsiasi altra operazione/funzionalità del sistema e/o modellazione di requisi
 
 Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli amministratori delle pagine, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting.
 
-## 1.4. Requisiti strutturati in gruppi di frasi omogenee
+## 1.4 Requisiti strutturati in gruppi di frasi omogenee
 
 | **Frasi di carattere generale** |
 | --- |
@@ -294,7 +294,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 | --- |
 | Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli amministratori delle pagine, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting. |
 
-## 1.5. Schema E-R
+## 1.5 Schema E-R
 
 > QUI CI VA IL VOSTRO SCHEMA ER INIZIALE (NON RISTRUTTURATO).
 >
