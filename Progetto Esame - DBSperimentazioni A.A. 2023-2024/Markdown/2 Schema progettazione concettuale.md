@@ -296,9 +296,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 ## 1.5 Schema E-R
 
-> QUI CI VA IL VOSTRO SCHEMA ER INIZIALE (NON RISTRUTTURATO).
->
-> Per comodità, in questo schema ER inserite anche le ridondanze che analizzerete in fase di ristrutturazione.
+![Mappa E-R](../Diagrammi/1.5%20Schema%20E-R.png)
 
 ### 1.5.1 Regole aziendali
 
