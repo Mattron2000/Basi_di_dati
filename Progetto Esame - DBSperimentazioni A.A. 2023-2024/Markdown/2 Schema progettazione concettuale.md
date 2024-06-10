@@ -51,7 +51,7 @@
 
 "*Gli spettatori possono essere registrati al servizio oppure possono guardare le live in modo anonimo (guest).*"
 
-- Gli spettatori possono essere **registrati** al servizio oppure possono guardare le live in modo anonimo come **“guest”** (quindi nel DB non faremo la tabella dei guest perché altrimenti non sarebbero anonimi, al massimo faremo dei vincoli tali da bloccare operazioni che normalmente solo gli utenti iscritti farebbero, come chattare o abbonarsi)
+- Gli spettatori possono essere **registrati** al servizio oppure possono guardare le live in modo anonimo come **“guest”** (quindi nel DB ~~non faremo la tabella dei guest perché altrimenti non sarebbero anonimi, al massimo~~ faremo dei vincoli tali da bloccare operazioni che normalmente solo gli utenti iscritti farebbero, come chattare o abbonarsi)
 
 "*Per registrarsi, gli utenti devono indicare nome utente, password, data di nascita, numero di telefono o indirizzo mail.*"
 
@@ -66,7 +66,7 @@
 "*Gli streamer hanno ciascuno un canale, che può essere caratterizzato tramite una descrizione. Per ogni canale, è possibile specificare una lista di social associati (ad esempio Instagram, YouTube, ecc.), un’immagine profilo e anche un trailer (**Figura 1(a)**)*"
 
 - Ogni streamer può avere **un solo canale**
-- **Streamer** e **Canale** saranno due entità legate da un vincolo di integrità referenziale, così come le entità **Canale** e **Social**. Gli attributi **lista_social**, **immagine_profilo** e **trailer** sono opzionali, quindi potranno assumere il valore **null**
+- **Streamer** e **Canale** saranno due entità legate da un vincolo di integrità referenziale, così come le entità **Canale** e **Social**. ~~Gli attributi **lista_social**, **immagine_profilo** e **trailer** sono opzionali, quindi potranno assumere il valore **null**~~
 
 ### 1.1.3 Requisiti delle live, video e clip
 
@@ -76,7 +76,8 @@
 
 "*Ognuno ha un titolo, una durata, appartiene a una categoria (Figura 1(b) e può essere associato a diversi hashtags/emojis etc..). Per ogni live, viene memorizzato il numero medio di spettatori, i commenti e le reazioni (emojis, hashtags etc..) mentre per i video e le clip il numero di visualizzazioni*"
 
-- **Titolo**, **durata** e **categoria** saranno gli attributi delle entità **Live**, **Video** e **Clip**. L’attributo **categoria** è opzionale e in più le entità avranno gli attributi **canale** e **streamer** per poterne ricavare la provenienza. L’entità Live avrà anche gli attributi **media_spettatori**, **commenti** e **reazioni**, mentre le entità Video e Clip avranno anche l’attributo **visualizzazioni**
+- ~~**Titolo**, **durata** e **categoria** saranno gli attributi delle entità **Live**, **Video** e **Clip**. L’attributo **categoria** è opzionale e in più le entità avranno gli attributi **canale** e **streamer** per poterne ricavare la provenienza. L’entità Live avrà anche gli attributi **media_spettatori**, **commenti** e **reazioni**, mentre le entità Video e Clip avranno anche l’attributo **visualizzazioni**~~
+- L'attributo **durata** non verrà assegnato anche all'entità **Live**, siccome non è possibile calcolarne la durata al suo inizio. Per una live si salveranno quindi **data** e **ora** di inizio.
 
 ### 1.1.4 Requisiti della statistica degli streamer
 
@@ -151,7 +152,7 @@ Qualsiasi altra operazione/funzionalità del sistema e/o modellazione di requisi
 | ----------------- | ----------------------------------------------------------------------------- | --------------- | ------------------------ |
 | utente            | fruitore del servizio di live streaming                                       |                 | spettatore, streamer     |
 | spettatore        | utente che osserva le live e chatta                                           | viewer          | utente registrato, guest |
-| streamer          | utente registrato che crea live e contenuti                                   |                 | canale, follower         |
+| streamer          | utente registrato che crea live e contenuti  |amministratore delle pagine, creatore di contenuti| canale, follower         |
 | guest             | utente non registrato che osserva le live                                     |                 | live                     |
 | utente registrato | utente che si è registrato al servizio                                        | utente iscritto | follower                 |
 | utente premium    | utente registrato che paga la piattaforma per benefici maggiori               |                 | utente registrato        |
@@ -202,7 +203,7 @@ La base di dati deve supportare le seguenti operazioni:
 
 Qualsiasi altra operazione/funzionalità del sistema e/o modellazione di requisiti non descritti, purché motivata, è ben accetta! (… un po' di fantasia!!!)
 
-Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli amministratori delle pagine, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting.
+Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli <span style="color:red">~~amministratori delle pagine~~</span> <span style="color:blue">**streamer**</span>, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting.
 
 ## 1.4 Requisiti strutturati in gruppi di frasi omogenee
 
@@ -292,22 +293,33 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 | Frasi relative al **servizio di hosting** |
 | --- |
-| Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli amministratori delle pagine, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting. |
+| Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli streamer, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting. |
 
 ## 1.5 Schema E-R
 
 ![Mappa E-R](../Diagrammi/1.5%20Schema%20E-R.png)
 
+> eventuali commenti sullo schema ER  
+> sono stati usati pattern di progettazione?  
+> quale strategia di progetto avete utilizzato?  
+
 ### 1.5.1 Regole aziendali
 
 ### 1.5.2 Vincoli d'integritá
 
-| RVI | \<concetto\> deve/non deve \<espressione\> |
-| --- | --- |
-| ... | ... |
+| RVI | \<concetto\> deve/non deve \<espressione\>                                          |
+| --- | ----------------------------------------------------------------------------------- |
+| RV1 | Uno streamer deve essere un utente registrato al servizio.                          |
+| RV2 | Un guest non deve avere accesso alle funzionalità riservate agli utenti registrati. |
+| RV3 | Una clip non deve avere la stessa lunghezza dei video                               |
+| ... | ................................................................................... |
 
 ### 1.5.3 Derivazioni
 
-| RDI | \<concetto\> si ottiene \<operazione\> |
-| --- | --- |
-| ... | ... |
+| RDI | \<concetto\> si ottiene \<operazione\>                                                                                                             |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RD1 | Il numero totale di follower si ottiene sommando tutti gli utenti registrati che seguono il canale.                                                |
+| RD2 | Il numero di visualizzazioni di una clip o di un video si ottiene sommando tutti gli utenti (registrati e non) che hanno visulizzato il contenuto. |
+| RD3 | Il numero totale di minuti trasmessi da uno streamer si ottiene sommando la durata di ogni contenuto multimediale del canale.                      |
+| RD4 | Il permesso di voto si ottiene verificando che lo spettatore sia un utente registrato al servizio e che segua il canale                            |
+| ... | ....................................................................................                                                               |
