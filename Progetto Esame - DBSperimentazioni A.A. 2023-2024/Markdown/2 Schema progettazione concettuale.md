@@ -24,6 +24,11 @@
 - [1.3 Requisiti riscritti](#13-requisiti-riscritti)
 - [1.4 Requisiti strutturati in gruppi di frasi omogenee](#14-requisiti-strutturati-in-gruppi-di-frasi-omogenee)
 - [1.5 Schema E-R](#15-schema-e-r)
+  - [Commenti sullo Schema ER](#commenti-sullo-schema-er)
+    - [Pattern di Progettazione Utilizzati](#pattern-di-progettazione-utilizzati)
+    - [Strategia di Progetto Utilizzata](#strategia-di-progetto-utilizzata)
+    - [Analisi delle Relazioni e degli Attributi](#analisi-delle-relazioni-e-degli-attributi)
+  - [Conclusione](#conclusione)
   - [1.5.1 Regole aziendali](#151-regole-aziendali)
   - [1.5.2 Vincoli d'integritá](#152-vincoli-dintegritá)
   - [1.5.3 Derivazioni](#153-derivazioni)
@@ -299,9 +304,53 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 ![Mappa E-R](../Diagrammi/1.5%20Schema%20E-R.png)
 
-> eventuali commenti sullo schema ER  
-> sono stati usati pattern di progettazione?  
-> quale strategia di progetto avete utilizzato?  
+### Commenti sullo Schema ER
+
+#### Pattern di Progettazione Utilizzati
+
+1. **Associazioni N:N**:
+   - Diverse relazioni nel diagramma mostrano associazioni molti-a-molti (N:N), come `SOCIAL` associato a `CONTENUTO_MULTIMEDIALE`, `LINK` associato a `CONTENUTO_MULTIMEDIALE`, e `HASHTAG` associato a `CONTENUTO_MULTIMEDIALE`. Queste relazioni sono gestite con entità associative per mantenere l'integrità e la flessibilità del database.
+
+2. **Gerarchie di Generalizzazione/Specializzazione**:
+   - L'entità `UTENTE` è generalizzata in `GUEST` e `REGISTRATO`. Questo pattern è utilizzato per rappresentare le diverse tipologie di utenti, dove `REGISTRATO` ha attributi aggiuntivi rispetto a `GUEST`.
+
+3. **Aggregazioni**:
+   - Lo schema utilizza l'aggregazione per raggruppare entità correlate come `CONTENUTO_MULTIMEDIALE`, che include `LIVE`, `CLIP`, e `VIDEO`.
+
+4. **Entità Composite**:
+   - Alcune entità nel diagramma, come `PROGRAMMAZIONE`, rappresentano un aggregato di attributi e relazioni che definiscono un evento programmato.
+
+#### Strategia di Progetto Utilizzata
+
+1. **Normalizzazione**:
+   - Lo schema segue le regole di normalizzazione fino alla terza forma normale (3NF), garantendo che non ci siano ridondanze e che tutte le dipendenze funzionali siano rispettate. Questo si vede nell'utilizzo delle chiavi primarie e delle chiavi esterne per mantenere le relazioni tra le tabelle.
+
+2. **Modularità**:
+   - Le entità sono ben modularizzate per rappresentare differenti aspetti del sistema, come utenti, contenuti multimediali, e interazioni social. Questa strategia facilita la gestione e l'espansione del database.
+
+3. **Scalabilità**:
+   - L'uso di entità associative e la gestione delle relazioni N:N garantiscono che lo schema possa scalare orizzontalmente, permettendo un'espansione senza compromettere la performance.
+
+4. **Sicurezza e Integrità**:
+   - La strategia di utilizzare entità distinte per gestire aspetti sensibili come `PORTAFOGLIO` e `DONAZIONI` suggerisce una preoccupazione per la sicurezza e l'integrità dei dati finanziari.
+
+#### Analisi delle Relazioni e degli Attributi
+
+1. **Relazioni Utente-Contenuto**:
+   - Gli utenti possono seguire altri utenti, inviare messaggi, e votare contenuti multimediali, il che evidenzia un design orientato alla comunità e all'interazione sociale.
+
+2. **Gestione dei Contenuti**:
+   - I `STREAMER` gestiscono i `CANALI`, che a loro volta contengono `CONTENUTI_MULTIMEDIALI`. Questo rispecchia la struttura tipica delle piattaforme di streaming, dove i creatori di contenuti hanno un controllo completo sui loro canali e sui contenuti.
+
+3. **Visite e Visualizzazioni**:
+   - Le entità `VISITA`, `VISUALIZZAZIONE_VIDEO`, e `VISUALIZZAZIONE_CLIP` tengono traccia delle interazioni degli utenti con i contenuti multimediali, fornendo dati cruciali per l'analisi delle performance dei contenuti.
+
+4. **Abbonamenti e Donazioni**:
+   - La presenza di `PREMIUM`, `PORTAFOGLIO`, e `DONAZIONI` indica un sistema di monetizzazione ben definito, dove gli utenti possono effettuare donazioni e sottoscrivere abbonamenti premium.
+
+### Conclusione
+
+Lo schema ER mostrato utilizza un approccio ben strutturato e scalabile, seguendo i principi di normalizzazione e modularità. Le relazioni e le entità sono progettate per facilitare le interazioni sociali e la gestione dei contenuti, con una particolare attenzione alla sicurezza dei dati finanziari. La combinazione di queste strategie assicura che il sistema possa crescere e adattarsi a nuove esigenze senza compromettere l'integrità dei dati.
 
 ### 1.5.1 Regole aziendali
 
