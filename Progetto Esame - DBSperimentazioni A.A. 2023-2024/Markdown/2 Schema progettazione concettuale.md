@@ -27,6 +27,7 @@
   - [Commenti sullo Schema ER](#commenti-sullo-schema-er)
     - [Pattern di Progettazione Utilizzati](#pattern-di-progettazione-utilizzati)
     - [Strategia di Progetto Utilizzata](#strategia-di-progetto-utilizzata)
+  - [Commento finale](#commento-finale)
     - [Analisi delle Relazioni e degli Attributi](#analisi-delle-relazioni-e-degli-attributi)
   - [Conclusione](#conclusione)
   - [1.5.1 Regole aziendali](#151-regole-aziendali)
@@ -302,55 +303,91 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 ## 1.5 Schema E-R
 
-![Mappa E-R](../Diagrammi/1.5%20Schema%20E-R.png)
+![Mappa E-R](../Diagrammi/1.5%20Schema%20E-R%20copy.png)
 
 ### Commenti sullo Schema ER
 
 #### Pattern di Progettazione Utilizzati
 
-1. **Associazioni N:N**:
-   - Diverse relazioni nel diagramma mostrano associazioni molti-a-molti (N:N), come `SOCIAL` associato a `CONTENUTO_MULTIMEDIALE`, `LINK` associato a `CONTENUTO_MULTIMEDIALE`, e `HASHTAG` associato a `CONTENUTO_MULTIMEDIALE`. Queste relazioni sono gestite con entità associative per mantenere l'integrità e la flessibilità del database.
+1. **Reificazione di attributo di entità**:
+   - **Donazioni**: Gli attributi `mittente` e `destinatario` sono stati reificati in un'entità `DONAZIONE` per gestire i dettagli delle transazioni.
 
-2. **Gerarchie di Generalizzazione/Specializzazione**:
-   - L'entità `UTENTE` è generalizzata in `GUEST` e `REGISTRATO`. Questo pattern è utilizzato per rappresentare le diverse tipologie di utenti, dove `REGISTRATO` ha attributi aggiuntivi rispetto a `GUEST`.
+2. **Part-of**:
+   - **Clip e Video**: Le entità `CLIP` e `VIDEO` fanno parte dell'entità `CONTENUTO_MULTIMEDIALE`, riflettendo la loro relazione parte-tutto.
 
-3. **Aggregazioni**:
-   - Lo schema utilizza l'aggregazione per raggruppare entità correlate come `CONTENUTO_MULTIMEDIALE`, che include `LIVE`, `CLIP`, e `VIDEO`.
+3. **Instance-Of (Istanza di):**
+   - **Utenti e Registrati/Guest/Streamer/Spettatore:**
+     Gli utenti del sistema possono essere istanze di diverse categorie, come registrati, guest, streamer o spettatori. Ogni categoria di utente ha attributi e permessi specifici, ma tutti derivano dalla stessa entità di base "Utente".
+   - **Interazione e Commento/Reazione/Emoji:**
+     Le interazioni rappresentano una classe generale di azioni che includono commenti, reazioni ed emoji. Ogni tipo di interazione è un'istanza specifica di questa classe generale.
 
-4. **Entità Composite**:
-   - Alcune entità nel diagramma, come `PROGRAMMAZIONE`, rappresentano un aggregato di attributi e relazioni che definiscono un evento programmato.
+4. **Reificazione di un’associazione ricorsiva**:
+   - **Messaggi**: L'associazione tra `UTENTE` (mittente) e `UTENTE` (destinatario) attraverso i messaggi è stata reificata in un'entità `MESSAGGIO`, catturando dettagli come il testo e il timestamp.
+
+5. **Storicizzazione di un’entità**:
+   - **Donazioni e Hosting**: Le entità `DONAZIONE` e `HOSTING` includono attributi come `timestamp`, permettendo la storicizzazione delle transazioni e dei permessi di hosting.
+
+6. **Reificazione di attributo di associazione**:
+   - **Visualizzazione**: L'entità `VISUALIZZAZIONE` reifica l'associazione tra utenti e contenuti multimediali, permettendo di tracciare quando e chi ha visualizzato il contenuto.
+
+7. **Evoluzione di concetto**:
+   - **Utenti**: La distinzione tra `GUEST`, `REGISTRATO`, `SPETTATORE` e `STREAMER` rappresenta l'evoluzione del concetto di utente nel sistema, con ruoli e permessi differenti.
 
 #### Strategia di Progetto Utilizzata
 
-1. **Normalizzazione**:
+La combinazione di queste strategie ha permesso di costruire un modello bilanciato e flessibile, capace di gestire una varietà di scenari d'uso e di evolvere con le esigenze future del sistema.
+
+- **Strategia Mista**:
+  - **Top-down**: Inizialmente, sono state identificate le entità principali (ad es. `UTENTE`, `CONTENUTO_MULTIMEDIALE`, `CANALE`) e le loro relazioni fondamentali.
+  - **Bottom-up**: Successivamente, sono stati dettagliati attributi specifici e relazioni più complesse (ad es. `VISUALIZZAZIONE`, `MESSAGGIO`, `DONAZIONE`), costruendo sulla struttura esistente.
+  - **Inside-out**: Alcune parti dello schema, come la gestione dei contenuti multimediali e le interazioni sociali, sono state sviluppate concentrandosi su entità centrali (`CONTENUTO_MULTIMEDIALE`) e espandendo verso l'esterno.
+
+### Commento finale
+
+1. **Gerarchie di Generalizzazione**:
+   - L'entità `UTENTE` è generalizzata in `GUEST` e `REGISTRATO`. Questo pattern è utilizzato per rappresentare le diverse tipologie/ruoli di utenti, dove `REGISTRATO` ha vari attributi in piu rispetto a `GUEST`.
+
+2. **Pattern di Aggregazione**:
+   - Lo schema utilizza l'aggregazione in modo logico per raggruppare entità correlate in una struttura più gerarchica come `CONTENUTO_MULTIMEDIALE`, che include `LIVE`, `CLIP`, e `VIDEO`.
+
+3. **Separazione delle Responsabilità**:
+   - Le entità e le relazioni sono ben definite per separare le responsabilità e facilitare la gestione dei dati. Ad esempio, `MESSAGGIO` é prerogativa di `UTENTE`, separando così la gestione dei messaggi dagli utenti.
+
+4. **Normalizzazione**:
    - Lo schema segue le regole di normalizzazione fino alla terza forma normale (3NF), garantendo che non ci siano ridondanze e che tutte le dipendenze funzionali siano rispettate. Questo si vede nell'utilizzo delle chiavi primarie e delle chiavi esterne per mantenere le relazioni tra le tabelle.
 
-2. **Modularità**:
+5. **Modularità**:
    - Le entità sono ben modularizzate per rappresentare differenti aspetti del sistema, come utenti, contenuti multimediali, e interazioni social. Questa strategia facilita la gestione e l'espansione del database.
 
-3. **Scalabilità**:
-   - L'uso di entità associative e la gestione delle relazioni N:N garantiscono che lo schema possa scalare orizzontalmente, permettendo un'espansione senza compromettere la performance.
+6. **Flessibilità e Scalabilità**:
+   - Il design risulta flessibile e scalabile, permettendo l'aggiunta di nuove funzionalità senza modificare significativamente la struttura esistente. Ad esempio, la presenza di `CATEGORIA` e `HASHTAG` consente di classificare e taggare i contenuti in modo dinamico.
 
-4. **Sicurezza e Integrità**:
+7. **Sicurezza e Integrità**:
    - La strategia di utilizzare entità distinte per gestire aspetti sensibili come `PORTAFOGLIO` e `DONAZIONI` suggerisce una preoccupazione per la sicurezza e l'integrità dei dati finanziari.
 
 #### Analisi delle Relazioni e degli Attributi
 
 1. **Relazioni Utente-Contenuto**:
-   - Gli utenti possono seguire altri utenti, inviare messaggi, e votare contenuti multimediali, il che evidenzia un design orientato alla comunità e all'interazione sociale.
+   - Gli utenti registrati possono seguire altri utenti (streamer), inviare messaggi, e votare contenuti multimediali, il che evidenzia un design orientato alla comunità e all'interazione sociale.
 
 2. **Gestione dei Contenuti**:
    - I `STREAMER` gestiscono i `CANALI`, che a loro volta contengono `CONTENUTI_MULTIMEDIALI`. Questo rispecchia la struttura tipica delle piattaforme di streaming, dove i creatori di contenuti hanno un controllo completo sui loro canali e sui contenuti.
 
 3. **Visite e Visualizzazioni**:
-   - Le entità `VISITA`, `VISUALIZZAZIONE_VIDEO`, e `VISUALIZZAZIONE_CLIP` tengono traccia delle interazioni degli utenti con i contenuti multimediali, fornendo dati cruciali per l'analisi delle performance dei contenuti.
+   - L'entità `VISUALIZZAZIONE` tiene traccia delle interazioni degli utenti con i contenuti multimediali, fornendo dati cruciali per l'analisi delle performance dei contenuti.
 
 4. **Abbonamenti e Donazioni**:
    - La presenza di `PREMIUM`, `PORTAFOGLIO`, e `DONAZIONI` indica un sistema di monetizzazione ben definito, dove gli utenti possono effettuare donazioni e sottoscrivere abbonamenti premium.
 
+5. **Molteplicità delle Relazioni**:
+   - La molteplicità delle relazioni è ben definita, garantendo che le cardinalità siano rispettate. Ad esempio, un `UTENTE` può avere zero, uno o più messaggi (0,N) ma ogni `MESSAGGIO` ha un solo mittente (1,1).
+
+6. **Attributi Chiave**:
+   - Gli attributi chiave sono chiaramente identificati, come "nome utente" per `UTENTE` e "timestamp" per `MESSAGGIO`, assicurando l'unicità e la tracciabilità dei dati.
+
 ### Conclusione
 
-Lo schema ER mostrato utilizza un approccio ben strutturato e scalabile, seguendo i principi di normalizzazione e modularità. Le relazioni e le entità sono progettate per facilitare le interazioni sociali e la gestione dei contenuti, con una particolare attenzione alla sicurezza dei dati finanziari. La combinazione di queste strategie assicura che il sistema possa crescere e adattarsi a nuove esigenze senza compromettere l'integrità dei dati.
+Il design concettuale del database è ben strutturato e segue principi solidi di progettazione, come l'uso di pattern E-R, normalizzazione e aggregazione. Questi elementi contribuiscono a creare una struttura chiara, gestibile e scalabile. La strategia di separazione delle responsabilità, flessibilità e centralizzazione delle informazioni, insieme all'attenzione alla sicurezza dei dati finanziari, rende il sistema robusto. Le relazioni e gli attributi sono ben definiti, garantendo integrità e coerenza dei dati, e facilitano le interazioni sociali e la gestione dei contenuti. Complessivamente, lo schema E-R rappresenta un buon equilibrio tra complessità e funzionalità, pronto per essere tradotto in una struttura fisica efficiente e performante, capace di crescere e adattarsi a nuove esigenze senza compromettere l'integrità dei dati.
 
 ### 1.5.1 Regole aziendali
 
