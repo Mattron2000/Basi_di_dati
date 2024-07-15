@@ -393,19 +393,27 @@ Il design concettuale del database è ben strutturato e segue principi solidi di
 
 ### 1.5.2 Vincoli d'integritá
 
-| RVI | \<concetto\> deve/non deve \<espressione\>                                          |
-| --- | ----------------------------------------------------------------------------------- |
-| RV1 | Uno streamer deve essere un utente registrato al servizio.                          |
-| RV2 | Un guest non deve avere accesso alle funzionalità riservate agli utenti registrati. |
-| RV3 | Una clip non deve avere la stessa lunghezza dei video                               |
-| ... | ................................................................................... |
+| RVI | \<concetto\> deve/non deve \<espressione\>                                                                                       |
+| --- | -------------------------------------------------------------------------------------------------------------------------------- |
+| RV1 | Uno streamer deve essere un utente registrato al servizio.                                                                       |
+| RV2 | Un guest non deve avere accesso alle funzionalità riservate agli utenti registrati.                                              |
+| RV3 | Un messaggio deve avere un mittente e un destinatario                                                                            |
+| RV4 | Una donazione deve essere associata a un portafoglio e avere un mittente e un destinatario che dev'essere uno streamer.          |
+| RV5 | Un canale deve essere gestito da uno streamer.                                                                                   |
+| RV6 | Il "nome utente" dell'utente `GUEST` é composto dalla stringa 'guest_' piú l'UUID                                                |
+| RV7 | Gli attributi di `PROGRAMMAZIONE` non devono essere vuoti in quando saranno utili alla creazione del record nella tabella `LIVE` |
+| RV8 | Ogni `CONTENUTO_MULTIMEDIALE` deve avere una `CATEGORIA`                                                                         |
+| RV9 | La tabella `REAZIONE` deve essere associato ad una `EMOJI`                                                                       |
 
 ### 1.5.3 Derivazioni
 
-| RDI | \<concetto\> si ottiene \<operazione\>                                                                                                             |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| RD1 | Il numero totale di follower si ottiene sommando tutti gli utenti registrati che seguono il canale.                                                |
-| RD2 | Il numero di visualizzazioni di una clip o di un video si ottiene sommando tutti gli utenti (registrati e non) che hanno visulizzato il contenuto. |
-| RD3 | Il numero totale di minuti trasmessi da uno streamer si ottiene sommando la durata di ogni contenuto multimediale del canale.                      |
-| RD4 | Il permesso di voto si ottiene verificando che lo spettatore sia un utente registrato al servizio e che segua il canale                            |
-| ... | ....................................................................................                                                               |
+| RDI | \<concetto\> si ottiene \<operazione\>                                                                                                                                                            |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RD1 | Il numero totale di follower si ottiene sommando tutti gli utenti registrati che seguono il canale.                                                                                               |
+| RD2 | Il numero di visualizzazioni di una clip o di un video si ottiene sommando tutti gli utenti (registrati e non) che hanno visualizzato il contenuto.                                               |
+| RD3 | Il numero totale di minuti trasmessi da uno streamer si ottiene sommando la durata di ogni live del canale.                                                                                       |
+| RD4 | Il permesso di voto si ottiene verificando che lo spettatore sia un utente registrato al servizio e che segua il canale.                                                                          |
+| RD5 | La popolarità di un contenuto multimediale si ottiene contando il numero di visualizzazioni, commenti e reazioni ricevute.                                                                        |
+| RD6 | L'affluenza media si ottiene calcolando la media degli spettatori presenti durante le live.                                                                                                       |
+| RD7 | Il numero di interazioni si ottiene sommando commenti e reazioni associate a un contenuto multimediale.                                                                                           |
+| RD8 | Il numero medio degli spettatori di un'intera live si calcola facendo la somma del numero di spettatori per ogni intervallo di tempo dalla tabella `AFFLUENZA` e lo divide per il numero di righe |
