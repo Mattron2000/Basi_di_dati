@@ -29,65 +29,62 @@
 
 > < eventuali osservazioni. In particolare descrivere il ragionamento che ha portato a certi valori non espliciti nei requisiti.>
 >
+
 | Concetto               | Tipo | Volume     |
 | ---------------------- | ---- | ---------- |
-| UTENTI                 | E    | 100,000    |
-| PORTAFOGLIO            | E    | 100,000    |
-| DONAZIONI              | A    | 500,000    |
-| REGISTRATI             | E    | 80,000     |
-| PREMIUM                | A    | 20,000     |
+| UTENTE                 | E    | 100,000    |
+| PORTAFOGLIO            | E    | 70,000     |
+| donazione              | A    | 500,000    |
+| REGISTRATO             | E    | 80,000     |
+| PREMIUM                | E    | 20,000     |
 | STREAMER               | E    | 10,000     |
-| SPETTATORI             | E    | 70,000     |
-| PROGRAMMAZIONE         | A    | 200,000    |
+| SPETTATORE             | E    | 70,000     |
+| PROGRAMMAZIONE         | E    | 200,000    |
 | CANALE                 | E    | 10,000     |
 | CATEGORIA              | E    | 100        |
-| CONTENUTI_MULTIMEDIALI | E    | 1,000,000  |
-| LIVE                   | A    | 100,000    |
-| VIDEO                  | A    | 500,000    |
-| CLIP                   | A    | 200,000    |
-| VISUALIZZAZIONI_VIDEO  | A    | 10,000,000 |
-| VISUALIZZAZIONI_CLIP   | A    | 5,000,000  |
-| SOCIAL                 | E    | 1,000      |
-| LINK                   | E    | 100,000    |
-| VISITE                 | A    | 20,000,000 |
-| COMMENTI               | A    | 5,000,000  |
-| REAZIONI               | A    | 15,000,000 |
-| EMOJIS                 | E    | 5,000,000  |
-| HASHTAG                | E    | 10,000     |
-| CONTENUTI_HASHTAG      | A    | 1,000,000  |
-| FOLLOW                 | A    | 500,000    |
-| MESSAGGI               | A    | 2,000,000  |
-| VOTI                   | A    | 8,000,000  |
-| HOSTING                | A    | 50,000     |
+| CONTENUTO MULTIMEDIALE | E    | 1,000,000  |
+| LIVE                   | E    | 100,000    |
+| VIDEO                  | E    | 500,000    |
+| CLIP                   | E    | 900,000    |
+| VISUALIZZAZIONE        | E    | 10,000,000 |
+| LINK SOCIAL            | E    | 1,000      |
+| visita                 | A    | 20,000,000 |
+| COMMENTO               | E    | 5,000,000  |
+| REAZIONE               | E    | 15,000,000 |
+| EMOJI                  | E    | 3,800      |
+| HASHTAG                | E    | 5,000      |
+| follower               | A    | 500,000    |
+| MESSAGGIO              | E    | 2,000,000  |
+| voto                   | A    | 700,000    |
+| abbonamento            | A    | 20,000     |
+| HOSTING                | E    | 50,000     |
 
-1. **UTENTI**: Entità che rappresenta gli utenti della piattaforma.
+1. **UTENTE**: Entità che rappresenta gli utenti della piattaforma.
 2. **PORTAFOGLIO**: Entità che rappresenta il portafoglio di ciascun utente.
-3. **DONAZIONI**: Associazione che rappresenta le donazioni effettuate tra utenti.
-4. **REGISTRATI**: Entità che rappresenta gli utenti registrati con informazioni aggiuntive.
-5. **PREMIUM**: Associazione che rappresenta gli abbonamenti premium degli utenti.
+3. **donazione**: Associazione che rappresenta le donazioni effettuate da utenti a streamer.
+4. **REGISTRATO**: Entità che rappresenta gli utenti registrati con informazioni aggiuntive.
+5. **PREMIUM**: Entità che rappresenta gli utenti registrati con abbonamento premium attivo.
 6. **STREAMER**: Entità che rappresenta gli utenti che sono streamer.
-7. **SPETTATORI**: Entità che rappresenta gli utenti che sono spettatori.
-8. **PROGRAMMAZIONE**: Associazione che rappresenta gli eventi di programmazione.
+7. **SPETTATORE**: Entità che rappresenta gli utenti che sono spettatori.
+8. **PROGRAMMAZIONE**: Entità che rappresenta gli eventi programmati di live streaming.
 9. **CANALE**: Entità che rappresenta il canale gestito dallo streamer.
 10. **CATEGORIA**: Entità che rappresenta le categorie dei contenuti.
-11. **CONTENUTI_MULTIMEDIALI**: Entità che rappresenta i contenuti multimediali.
-12. **LIVE**: Associazione che rappresenta i contenuti live.
+11. **CONTENUTO MULTIMEDIALE**: Entità generale che rappresenta i contenuti multimediali.
+12. **LIVE**: Associazione che rappresenta le live.
 13. **VIDEO**: Associazione che rappresenta i video.
 14. **CLIP**: Associazione che rappresenta le clip.
-15. **VISUALIZZAZIONI_VIDEO**: Associazione che rappresenta le visualizzazioni dei video.
-16. **VISUALIZZAZIONI_CLIP**: Associazione che rappresenta le visualizzazioni delle clip.
-17. **SOCIAL**: Entità che rappresenta i social media collegati.
-18. **LINK**: Entità che rappresenta i link associati ai social media.
-19. **VISITE**: Associazione che rappresenta le visite ai contenuti multimediali.
-20. **COMMENTI**: Associazione che rappresenta i commenti sui contenuti multimediali.
-21. **REAZIONI**: Associazione che rappresenta le reazioni ai commenti.
-22. **EMOJIS**: Entità che rappresenta gli emoji usati nelle reazioni.
-23. **HASHTAG**: Entità che rappresenta gli hashtag utilizzati.
-24. **CONTENUTI_HASHTAG**: Associazione che rappresenta la relazione tra contenuti multimediali e hashtag.
-25. **FOLLOW**: Associazione che rappresenta i follow tra utenti.
-26. **MESSAGGI**: Associazione che rappresenta i messaggi inviati tra utenti.
-27. **VOTI**: Associazione che rappresenta i voti sui contenuti multimediali.
-28. **HOSTING**: Associazione che rappresenta i servizi di hosting utilizzati dagli utenti.
+15. **VISUALIZZAZIONE**: Associazione che rappresenta le visualizzazioni dei contenuti multimediale da parte degli utenti.
+16. **LINK SOCIAL**: Entità che rappresenta i link  dei social media scritti dal gestore del canale (streamer).
+17. **visita**: Associazione che rappresenta le visite ai contenuti multimediali.
+18. **COMMENTO**: Entità che rappresenta i commenti sulle live.
+19. **REAZIONE**: Associazione che rappresenta le reazioni alle live.
+20. **EMOJI**: Entità che rappresenta gli emoji usati nei commenti e reazioni.
+21. **HASHTAG**: Entità che rappresenta gli hashtag utilizzati.
+22. **follower**: Associazione che rappresenta i follow tra utenti registrati.
+23. **MESSAGGIO**: Entità che rappresenta i messaggi inviati tra utenti.
+24. **voto**: Associazione che rappresenta i voti sui contenuti multimediali.
+25. **abbonamento**: Associazione che rappresenta l'abbonamento degli utenti registrati a uno specifico utente streamer.
+26. **HOSTING**: Entità che rappresenta i servizi di hosting utilizzati dagli utenti.
 
 ## 2.2 Tavola delle operazioni
 
