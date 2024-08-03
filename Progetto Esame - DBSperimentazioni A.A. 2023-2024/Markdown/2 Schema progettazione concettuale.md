@@ -29,7 +29,6 @@
     - [Strategia di Progetto Utilizzata](#strategia-di-progetto-utilizzata)
   - [Commento finale](#commento-finale)
     - [Analisi delle Relazioni e degli Attributi](#analisi-delle-relazioni-e-degli-attributi)
-  - [Conclusione](#conclusione)
   - [1.5.1 Regole aziendali](#151-regole-aziendali)
   - [1.5.2 Vincoli d'integritá](#152-vincoli-dintegritá)
   - [1.5.3 Derivazioni](#153-derivazioni)
@@ -57,7 +56,7 @@
 
 "*Gli spettatori possono essere registrati al servizio oppure possono guardare le live in modo anonimo (guest).*"
 
-- Gli spettatori possono essere **registrati** al servizio oppure possono guardare le live in modo anonimo come **“guest”** (quindi nel DB ~~non faremo la tabella dei guest perché altrimenti non sarebbero anonimi, al massimo~~ faremo dei vincoli tali da bloccare operazioni che normalmente solo gli utenti iscritti farebbero, come chattare o abbonarsi)
+- Gli spettatori possono essere **registrati** al servizio oppure possono guardare le live in modo anonimo come **“guest”** (quindi nel DB faremo dei vincoli tali da bloccare operazioni che normalmente solo gli utenti iscritti farebbero, come chattare o abbonarsi)
 
 "*Per registrarsi, gli utenti devono indicare nome utente, password, data di nascita, numero di telefono o indirizzo mail.*"
 
@@ -69,10 +68,10 @@
 
 ### 1.1.2 Requisiti degli utenti che streammano
 
-"*Gli streamer hanno ciascuno un canale, che può essere caratterizzato tramite una descrizione. Per ogni canale, è possibile specificare una lista di social associati (ad esempio Instagram, YouTube, ecc.), un’immagine profilo e anche un trailer (**Figura 1(a)**)*"
+"*Gli streamer hanno ciascuno un canale, che può essere caratterizzato tramite una descrizione. Per ogni canale, è possibile specificare una lista di social associati (ad esempio Instagram, YouTube, ecc.), un’immagine profilo e anche un trailer (Figura 1(a))*"
 
 - Ogni streamer può avere **un solo canale**
-- **Streamer** e **Canale** saranno due entità legate da un vincolo di integrità referenziale, così come le entità **Canale** e **Social**. ~~Gli attributi **lista_social**, **immagine_profilo** e **trailer** sono opzionali, quindi potranno assumere il valore **null**~~
+- **Streamer** e **Canale** saranno due entità legate da un vincolo di integrità referenziale
 
 ### 1.1.3 Requisiti delle live, video e clip
 
@@ -82,8 +81,7 @@
 
 "*Ognuno ha un titolo, una durata, appartiene a una categoria (Figura 1(b) e può essere associato a diversi hashtags/emojis etc..). Per ogni live, viene memorizzato il numero medio di spettatori, i commenti e le reazioni (emojis, hashtags etc..) mentre per i video e le clip il numero di visualizzazioni*"
 
-- ~~**Titolo**, **durata** e **categoria** saranno gli attributi delle entità **Live**, **Video** e **Clip**. L’attributo **categoria** è opzionale e in più le entità avranno gli attributi **canale** e **streamer** per poterne ricavare la provenienza. L’entità Live avrà anche gli attributi **media_spettatori**, **commenti** e **reazioni**, mentre le entità Video e Clip avranno anche l’attributo **visualizzazioni**~~
-- L'attributo **durata** non verrà assegnato anche all'entità **Live**, siccome non è possibile calcolarne la durata al suo inizio. Per una live si salveranno quindi **data** e **ora** di inizio.
+- L'entità **Live** non avrà un attributo **durata**, siccome non è possibile calcolarne la durata al suo inizio. Per una live si salveranno quindi **data** e **ora** di inizio e di fine
 
 ### 1.1.4 Requisiti della statistica degli streamer
 
@@ -303,117 +301,97 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 ## 1.5 Schema E-R
 
-![Mappa E-R](../Diagrammi/1.5%20Schema%20E-R%20copy.png)
+![Mappa E-R](../Diagrammi/1.5%20Schema%20E-R%20def.png)
 
 ### Commenti sullo Schema ER
 
 #### Pattern di Progettazione Utilizzati
 
 1. **Reificazione di attributo di entità**:
-   - **Donazioni**: Gli attributi `mittente` e `destinatario` sono stati reificati in un'entità `DONAZIONE` per gestire i dettagli delle transazioni.
+   - **Categoria e Hashtag**: Gli attributi `categoria` e `hashstag` dell'entità `CONTENUTO MULTIMEDIALE` sono stati reificati nelle due entità `CATEGORIA` e `HASHTAG` rispettivamente, permettendo quindi una migliore gestione di hashtag e categorie.
+   - **Link Social**: L'attributo `link social` dell'entità `CANALE` è stato reificato nell'entità `LINK SOCIAL`, in modo tale da permettere una migliore gestione dei profili social del canale.
 
-2. **Part-of**:
-   - **Clip e Video**: Le entità `CLIP` e `VIDEO` fanno parte dell'entità `CONTENUTO_MULTIMEDIALE`, riflettendo la loro relazione parte-tutto.
+2. **Instance-Of (Istanza di)**:
+   - **Utenti e Registrati/Guest/Streamer/Spettatore**:
+   Gli utenti del sistema possono essere istanze di diverse categorie, come registrati, guest, streamer o spettatori. Ogni categoria di utente ha attributi e permessi specifici, ma tutti derivano dalla stessa entità di base `UTENTE`.
+   - **Interazione e Commento/Reazione/Emoji**:
+   Le interazioni rappresentano una classe generale di azioni che includono commenti, reazioni ed emoji. Ogni tipo di interazione è un'istanza specifica di questa classe generale.
+   - **Clip, Video e Live**:
+   Le entità `CLIP`, `VIDEO` e `LIVE` sono istanze specifiche della classe generale `CONTENUTO MULTIMEDIALE`, entità che rappresenta il concetto generico di "contenuto multimediale".
 
-3. **Instance-Of (Istanza di):**
-   - **Utenti e Registrati/Guest/Streamer/Spettatore:**
-     Gli utenti del sistema possono essere istanze di diverse categorie, come registrati, guest, streamer o spettatori. Ogni categoria di utente ha attributi e permessi specifici, ma tutti derivano dalla stessa entità di base "Utente".
-   - **Interazione e Commento/Reazione/Emoji:**
-     Le interazioni rappresentano una classe generale di azioni che includono commenti, reazioni ed emoji. Ogni tipo di interazione è un'istanza specifica di questa classe generale.
-
-4. **Reificazione di un’associazione ricorsiva**:
+3. **Reificazione di un’associazione ricorsiva**:
    - **Messaggi**: L'associazione tra `UTENTE` (mittente) e `UTENTE` (destinatario) attraverso i messaggi è stata reificata in un'entità `MESSAGGIO`, catturando dettagli come il testo e il timestamp.
+   - **Donazione e Portafoglio**: L'associazione `donazione` tra due portafogli è stata reificata in un'entità `DONAZIONE` per poter tenere traccia delle singole donazioni, grazie anche all'introduzione delle relazioni `mittente` e `destinatario` per tracciare ogni transazione di bit.
 
-5. **Storicizzazione di un’entità**:
-   - **Donazioni e Hosting**: Le entità `DONAZIONE` e `HOSTING` includono attributi come `timestamp`, permettendo la storicizzazione delle transazioni e dei permessi di hosting.
-
-6. **Reificazione di attributo di associazione**:
-   - **Visualizzazione**: L'entità `VISUALIZZAZIONE` reifica l'associazione tra utenti e contenuti multimediali, permettendo di tracciare quando e chi ha visualizzato il contenuto.
-
-7. **Evoluzione di concetto**:
+4. **Evoluzione di concetto**:
    - **Utenti**: La distinzione tra `GUEST`, `REGISTRATO`, `SPETTATORE` e `STREAMER` rappresenta l'evoluzione del concetto di utente nel sistema, con ruoli e permessi differenti.
 
 #### Strategia di Progetto Utilizzata
 
-La combinazione di queste strategie ha permesso di costruire un modello bilanciato e flessibile, capace di gestire una varietà di scenari d'uso e di evolvere con le esigenze future del sistema.
-
-- **Strategia Mista**:
-  - **Top-down**: Inizialmente, sono state identificate le entità principali (ad es. `UTENTE`, `CONTENUTO_MULTIMEDIALE`, `CANALE`) e le loro relazioni fondamentali.
-  - **Bottom-up**: Successivamente, sono stati dettagliati attributi specifici e relazioni più complesse (ad es. `VISUALIZZAZIONE`, `MESSAGGIO`, `DONAZIONE`), costruendo sulla struttura esistente.
-  - **Inside-out**: Alcune parti dello schema, come la gestione dei contenuti multimediali e le interazioni sociali, sono state sviluppate concentrandosi su entità centrali (`CONTENUTO_MULTIMEDIALE`) e espandendo verso l'esterno.
+- Nella realizzazione dello schema ER è stata utilizzata una **Strategia Mista**:
+  - **Top-down**: Inizialmente, sono state identificate le entità principali (ad es. `UTENTE`, `CONTENUTO MULTIMEDIALE`, `CANALE`) e le loro relazioni fondamentali.
+  - **Bottom-up**: Successivamente, sono stati dettagliati attributi specifici e relazioni più complesse (ad es. `MESSAGGIO` e `DONAZIONE`), costruendo sulla struttura esistente.
+  - **Inside-out**: Alcune parti dello schema, come la gestione dei contenuti multimediali e le interazioni sociali, sono state sviluppate concentrandosi su entità centrali (`CONTENUTO MULTIMEDIALE`) e espandendo verso l'esterno.
 
 ### Commento finale
 
 1. **Gerarchie di Generalizzazione**:
-   - L'entità `UTENTE` è generalizzata in `GUEST` e `REGISTRATO`. Questo pattern è utilizzato per rappresentare le diverse tipologie/ruoli di utenti, dove `REGISTRATO` ha vari attributi in piu rispetto a `GUEST`.
+   - L'entità `UTENTE` è generalizzata in `GUEST` e `REGISTRATO`. Questo pattern è utilizzato per rappresentare le diverse tipologie/ruoli di utenti, dove `REGISTRATO` ha vari attributi in più rispetto a `GUEST`.
 
 2. **Pattern di Aggregazione**:
-   - Lo schema utilizza l'aggregazione in modo logico per raggruppare entità correlate in una struttura più gerarchica come `CONTENUTO_MULTIMEDIALE`, che include `LIVE`, `CLIP`, e `VIDEO`.
+   - Lo schema utilizza l'aggregazione in modo logico per raggruppare entità correlate in una struttura più gerarchica come `CONTENUTO MULTIMEDIALE`, che include `LIVE`, `CLIP`, e `VIDEO`.
 
 3. **Separazione delle Responsabilità**:
    - Le entità e le relazioni sono ben definite per separare le responsabilità e facilitare la gestione dei dati. Ad esempio, `MESSAGGIO` é prerogativa di `UTENTE`, separando così la gestione dei messaggi dagli utenti.
-
-4. **Normalizzazione**:
-   - Lo schema segue le regole di normalizzazione fino alla terza forma normale (3NF), garantendo che non ci siano ridondanze e che tutte le dipendenze funzionali siano rispettate. Questo si vede nell'utilizzo delle chiavi primarie e delle chiavi esterne per mantenere le relazioni tra le tabelle.
-
-5. **Modularità**:
-   - Le entità sono ben modularizzate per rappresentare differenti aspetti del sistema, come utenti, contenuti multimediali, e interazioni social. Questa strategia facilita la gestione e l'espansione del database.
-
-6. **Flessibilità e Scalabilità**:
-   - Il design risulta flessibile e scalabile, permettendo l'aggiunta di nuove funzionalità senza modificare significativamente la struttura esistente. Ad esempio, la presenza di `CATEGORIA` e `HASHTAG` consente di classificare e taggare i contenuti in modo dinamico.
-
-7. **Sicurezza e Integrità**:
-   - La strategia di utilizzare entità distinte per gestire aspetti sensibili come `PORTAFOGLIO` e `DONAZIONI` suggerisce una preoccupazione per la sicurezza e l'integrità dei dati finanziari.
-
+  
 #### Analisi delle Relazioni e degli Attributi
 
 1. **Relazioni Utente-Contenuto**:
-   - Gli utenti registrati possono seguire altri utenti (streamer), inviare messaggi, e votare contenuti multimediali, il che evidenzia un design orientato alla comunità e all'interazione sociale.
+   - Gli utenti registrati possono seguire altri utenti (streamer), inviare messaggi e votare contenuti multimediali, permettendo una migliore interazione sociale tra gli utenti.
 
 2. **Gestione dei Contenuti**:
-   - I `STREAMER` gestiscono i `CANALI`, che a loro volta contengono `CONTENUTI_MULTIMEDIALI`. Questo rispecchia la struttura tipica delle piattaforme di streaming, dove i creatori di contenuti hanno un controllo completo sui loro canali e sui contenuti.
+   - Gli `STREAMER` gestiscono i `CANALI`, che a loro volta contengono `CONTENUTI MULTIMEDIALI`. Questo rispecchia la struttura tipica delle piattaforme di streaming, dove i creatori di contenuti hanno un controllo completo sui loro canali e sui contenuti.
 
-3. **Visite e Visualizzazioni**:
-   - L'entità `VISUALIZZAZIONE` tiene traccia delle interazioni degli utenti con i contenuti multimediali, fornendo dati cruciali per l'analisi delle performance dei contenuti.
+3. **Abbonamenti e Donazioni**:
+   - La presenza di `PREMIUM`, `PORTAFOGLIO`, e `DONAZIONI` indica un sistema di monetizzazione che permette agli utenti di effettuare donazioni e sottoscrivere abbonamenti premium.
 
-4. **Abbonamenti e Donazioni**:
-   - La presenza di `PREMIUM`, `PORTAFOGLIO`, e `DONAZIONI` indica un sistema di monetizzazione ben definito, dove gli utenti possono effettuare donazioni e sottoscrivere abbonamenti premium.
+4. **Molteplicità delle Relazioni**:
+   - La molteplicità delle relazioni è stata definita in modo preciso per garantire che le cardinalità vengano rispettate. Ad esempio, un `UTENTE` può mandare e ricevere zero, uno o più messaggi (0,N) ma ogni `MESSAGGIO` ha un solo mittente (1,1) e un solo destinatario (1,1).
 
-5. **Molteplicità delle Relazioni**:
-   - La molteplicità delle relazioni è ben definita, garantendo che le cardinalità siano rispettate. Ad esempio, un `UTENTE` può avere zero, uno o più messaggi (0,N) ma ogni `MESSAGGIO` ha un solo mittente (1,1).
-
-6. **Attributi Chiave**:
+5. **Attributi Chiave**:
    - Gli attributi chiave sono chiaramente identificati, come "nome utente" per `UTENTE` e "timestamp" per `MESSAGGIO`, assicurando l'unicità e la tracciabilità dei dati.
-
-### Conclusione
-
-Il design concettuale del database è ben strutturato e segue principi solidi di progettazione, come l'uso di pattern E-R, normalizzazione e aggregazione. Questi elementi contribuiscono a creare una struttura chiara, gestibile e scalabile. La strategia di separazione delle responsabilità, flessibilità e centralizzazione delle informazioni, insieme all'attenzione alla sicurezza dei dati finanziari, rende il sistema robusto. Le relazioni e gli attributi sono ben definiti, garantendo integrità e coerenza dei dati, e facilitano le interazioni sociali e la gestione dei contenuti. Complessivamente, lo schema E-R rappresenta un buon equilibrio tra complessità e funzionalità, pronto per essere tradotto in una struttura fisica efficiente e performante, capace di crescere e adattarsi a nuove esigenze senza compromettere l'integrità dei dati.
+  
+6. **Reazioni ed Emoji**:
+   - La relazione tra `REAZIONE` ed `EMOJI` è da intendersi come segue: in una **_reazione_** è presente uno ed un solo _emoji_ (siccome una reazione è essa stessa un singolo emoji) mentre ogni singolo **_emoji_** può essere presente molte volte nelle varie _reazioni_ oppure non venire mai utlizzato in nessuna _reazione_.
 
 ### 1.5.1 Regole aziendali
 
 ### 1.5.2 Vincoli d'integritá
 
-| RVI | \<concetto\> deve/non deve \<espressione\>                                                                                       |
-| --- | -------------------------------------------------------------------------------------------------------------------------------- |
-| RV1 | Uno streamer deve essere un utente registrato al servizio.                                                                       |
-| RV2 | Un guest non deve avere accesso alle funzionalità riservate agli utenti registrati.                                              |
-| RV3 | Un messaggio deve avere un mittente e un destinatario                                                                            |
-| RV4 | Una donazione deve essere associata a un portafoglio e avere un mittente e un destinatario che dev'essere uno streamer.          |
-| RV5 | Un canale deve essere gestito da uno streamer.                                                                                   |
-| RV6 | Il "nome utente" dell'utente `GUEST` é composto dalla stringa 'guest_' piú l'UUID                                                |
-| RV7 | Gli attributi di `PROGRAMMAZIONE` non devono essere vuoti in quando saranno utili alla creazione del record nella tabella `LIVE` |
-| RV8 | Ogni `CONTENUTO_MULTIMEDIALE` deve avere una `CATEGORIA`                                                                         |
-| RV9 | La tabella `REAZIONE` deve essere associato ad una `EMOJI`                                                                       |
+| RVI  | \<concetto\> deve/non deve \<espressione\>                                                           |
+| ---- | ---------------------------------------------------------------------------------------------------- |
+| RV1  | Uno streamer deve essere un utente registrato al servizio.                                           |
+| RV2  | Un guest non deve avere accesso alle funzionalità riservate agli utenti registrati.                  |
+| RV3  | Un messaggio deve avere un mittente e un destinatario.                                               |
+| RV4  | Una donazione deve essere associata a un portafoglio e avere un mittente e un destinatario.          |
+| RV5  | Il destinatario di una donazione deve essere uno streamer.                                           |
+| RV6  | Un canale deve essere gestito da uno streamer.                                                       |
+| RV7  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú l'UUID.           |
+| RV8  | Ogni programmazione deve avere un titolo e un timestamp, oltre alle opzioni LIS e premium compilate. |
+| RV9  | Ogni contenuto multimediale deve avere una categoria.                                                |
+| RV10 | Ogni reazione deve essere associata ad una emoji.                                                    |
+| RV11 | Ogni video deve essere associato ad una live per poter esistere.                                     |
+| RV12 | Ogni clip deve essere associata ad un video per poter esistere.                                      |
+| RV13 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.        |
 
 ### 1.5.3 Derivazioni
 
-| RDI | \<concetto\> si ottiene \<operazione\>                                                                                                                                                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| RD1 | Il numero totale di follower si ottiene sommando tutti gli utenti registrati che seguono il canale.                                                                                               |
-| RD2 | Il numero di visualizzazioni di una clip o di un video si ottiene sommando tutti gli utenti (registrati e non) che hanno visualizzato il contenuto.                                               |
-| RD3 | Il numero totale di minuti trasmessi da uno streamer si ottiene sommando la durata di ogni live del canale.                                                                                       |
-| RD4 | Il permesso di voto si ottiene verificando che lo spettatore sia un utente registrato al servizio e che segua il canale.                                                                          |
-| RD5 | La popolarità di un contenuto multimediale si ottiene contando il numero di visualizzazioni, commenti e reazioni ricevute.                                                                        |
-| RD6 | L'affluenza media si ottiene calcolando la media degli spettatori presenti durante le live.                                                                                                       |
-| RD7 | Il numero di interazioni si ottiene sommando commenti e reazioni associate a un contenuto multimediale.                                                                                           |
-| RD8 | Il numero medio degli spettatori di un'intera live si calcola facendo la somma del numero di spettatori per ogni intervallo di tempo dalla tabella `AFFLUENZA` e lo divide per il numero di righe |
+| RDI | \<concetto\> si ottiene \<operazione\>                                                                                                              |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RD1 | Il numero totale di follower si ottiene sommando tutti gli utenti registrati che seguono il canale.                                                 |
+| RD2 | Il numero di visualizzazioni di una clip o di un video si ottiene sommando tutti gli utenti (registrati e non) che hanno visualizzato il contenuto. |
+| RD3 | Il numero totale di minuti trasmessi da uno streamer si ottiene sommando la durata di ogni live del canale.                                         |
+| RD4 | Il permesso di voto si ottiene verificando che lo spettatore sia un utente registrato al servizio e che segua il canale.                            |
+| RD5 | La popolarità di un contenuto multimediale si ottiene contando il numero di visualizzazioni, commenti e reazioni ricevute.                          |
+| RD6 | L'affluenza media di una live si ottiene dividendo l'affluenza totale per il numero di affluenze momentanee calcolate durante la live.              |
+| RD7 | Il numero di interazioni si ottiene sommando commenti e reazioni associate a un contenuto multimediale.                                             |
