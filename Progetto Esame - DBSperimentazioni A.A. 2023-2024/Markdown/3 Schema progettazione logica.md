@@ -10,14 +10,35 @@
 - [2.2 Tavola delle operazioni](#22-tavola-delle-operazioni)
 - [2.3 Ristrutturazione dello schema E-R](#23-ristrutturazione-dello-schema-e-r)
   - [2.3.1 Analisi delle ridondanze](#231-analisi-delle-ridondanze)
-    - [2.3.1.1 RIDONDANZA 1 (\<nome ridondanza (attributo, associazione, ...)\>)](#2311-ridondanza-1-nome-ridondanza-attributo-associazione-)
-    - [2.3.1.2 RIDONDANZA 2 (\<nome ridondanza (attributo, associazione, ...)\>)](#2312-ridondanza-2-nome-ridondanza-attributo-associazione-)
+    - [2.3.1.1 RIDONDANZA 1 (ridondanza dei likert)](#2311-ridondanza-1-ridondanza-dei-likert)
+      - [2.3.1.1.1 DERIVAZIONE](#23111-derivazione)
+      - [2.3.1.1.2 OPERAZIONI COINVOLTE](#23112-operazioni-coinvolte)
+      - [2.3.1.1.3 PRESENZA DI RIDONDANZA](#23113-presenza-di-ridondanza)
+        - [2.3.1.1.3.1 Op3](#231131-op3)
+        - [2.3.1.1.3.2 Op4](#231132-op4)
+      - [2.3.1.1.4 ASSENZA DI RIDONDANZA](#23114-assenza-di-ridondanza)
+        - [2.3.1.1.4.1 Op3](#231141-op3)
+        - [2.3.1.1.4.2 Op4](#231142-op4)
+      - [2.3.1.1.5 TOTALI PER RIDONDANZA 1](#23115-totali-per-ridondanza-1)
+      - [2.3.1.1.6 Decisione](#23116-decisione)
+    - [2.3.1.2 RIDONDANZA 2 (ridondanza dell'affluenza media)](#2312-ridondanza-2-ridondanza-dellaffluenza-media)
+      - [2.3.1.2.1 DERIVAZIONE](#23121-derivazione)
+      - [2.3.1.2.2 OPERAZIONI COINVOLTE](#23122-operazioni-coinvolte)
+      - [2.3.1.2.3 PRESENZA DI RIDONDANZA](#23123-presenza-di-ridondanza)
+        - [2.3.1.2.3.1 Op9](#231231-op9)
+      - [2.3.1.2.4 ASSENZA DI RIDONDANZA](#23124-assenza-di-ridondanza)
+        - [2.3.1.2.4.1 Op9](#231241-op9)
+        - [2.3.1.2.5 TOTALI PER RIDONDANZA 2](#23125-totali-per-ridondanza-2)
+        - [2.3.1.2.6 Decisione](#23126-decisione)
   - [2.3.2 Eliminazione delle generalizzazioni](#232-eliminazione-delle-generalizzazioni)
     - [2.3.2.1 Generalizzazione 1 ()](#2321-generalizzazione-1-)
   - [2.3.3 Partizionamento/accorpamento di entità e associazioni](#233-partizionamentoaccorpamento-di-entità-e-associazioni)
     - [2.3.3.1 Partizionamento/Accorpamento 1 ()](#2331-partizionamentoaccorpamento-1-)
   - [2.3.4.scelta degli identificatori principali](#234scelta-degli-identificatori-principali)
 - [2.4 Schema E-R ristrutturato + regole aziendali](#24-schema-e-r-ristrutturato--regole-aziendali)
+  - [2.4.1 Regole aziendali](#241-regole-aziendali)
+  - [2.4.2 Vincoli di Integrità](#242-vincoli-di-integrità)
+  - [2.4.3 Derivazioni](#243-derivazioni)
 - [2.5 Schema relazionale con vincoli di integrità referenziale](#25-schema-relazionale-con-vincoli-di-integrità-referenziale)
 
 ## 2.1 Tavola dei volumi
@@ -32,12 +53,14 @@
 
 | Concetto                      | Tipo | Volume     |
 | ----------------------------- | ---- | ---------- |
-| UTENTE                        | E    | 100,000    |
+| UTENTE                        | E    | 200,000    |
+| GUEST                         | E    | 100,000    |
 | PORTAFOGLIO                   | E    | 70,000     |
 | conto                         | A    | 35,000     |
 | DONAZIONE                     | E    | 500,000    |
 | REGISTRATO                    | E    | 80,000     |
-| STREAMER                      | E    | 10,000     |
+| PREMIUM                       | E    | 35,000     |
+| STREAMER                      | E    | 30,000     |
 | gestione<sub>(S-C)</sub>      | A    | 10,000     |
 | SPETTATORE                    | E    | 70,000     |
 | streaming                     | A    | 150,000    |
@@ -123,6 +146,7 @@
 
 ## 2.2 Tavola delle operazioni
 
+<!--
 | Operazione | Descrizione                                             | Tipo | Frequenza |
 | ---------- | ------------------------------------------------------- | ---- | --------- |
 | Op1        | Creazione di un nuovo utente                            | I    | 150       |
@@ -153,121 +177,198 @@
 | Op26       | Invio di un messaggio tra utenti                        | I    | 400       |
 | Op27       | Voto su un contenuto multimediale                       | I    | 600       |
 | Op28       | Registrazione di un servizio di hosting utilizzato      | I    | 80        |
+-->
+
+| Operazione | Descrizione                                                                                                                        | Tipo | Frequenza              |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---- | ---------------------- |
+| Op1        | Controlla le condizioni per la qualifica di affiliate                                                                              | B    | Una volta al giorno    |
+| Op2        | Calcola la classifica degli streamer più seguiti                                                                                   | B    | Una volta a settimana  |
+| Op3        | Calcola la media dei like per ogni contenuto multimediale per ogni streamer                                                        | B    | Una volta al giorno    |
+| Op4        | Gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati                       | B    | Una  volta  al  giorno |
+| Op5        | Controlla ed elimina tutti i commenti offensivi per ogni contenuto multimediale, nelle categorie, canali e durante le live         | B    | Dieci volte al giorno  |
+| Op6        | Controlla i nuovi utenti registrati                                                                                                | B    | Due volte al giorno    |
+| Op7        | Gli amministratori del DB controlla le segnalazioni inviate dagli streamer di profili fake che lo seguono                          | I    | Cinque volte al giorno |
+| Op8        | Visualizzare agli amministratori lo storico degli utenti premium quelli storici (dato un range di dati)che quelli dell’ultimo mese | I    | Una volta ogni 6 mesi  |
+| Op9        | Stilare la media dei degli spettatori per ogni live uscito in quel mese per ogni streamer                                          | B    | Una volta ogni mese    |
 
 ## 2.3 Ristrutturazione dello schema E-R
 
 ### 2.3.1 Analisi delle ridondanze
 
-> <minimo 2 massimo 4 ridondanze>
->
-> <specificare eventuale soglia accessi risparmiati/byte aggiuntivi>
+Nel processo di ristrutturazione, ci concentreremo sull'analisi e la risoluzione delle seguenti ridondanze:
 
-#### 2.3.1.1 RIDONDANZA 1 (<nome ridondanza (attributo, associazione, ...)>)
+- **ridondanza dei likert**
+- **ridondanza dell'affluenza media**
 
-> Schema riassuntivo della ridondanza (vedi slide)
+#### 2.3.1.1 RIDONDANZA 1 (ridondanza dei likert)
 
-**DERIVAZIONE:** <descrivere come la ridondanza è derivabile>
+![Ridondanza 1](../Diagrammi/2.3.1.1%20ridondanza%201.png)
 
-**OPERAZIONI COINVOLTE**
-    • Opx
-    • Opy
-    • Opz
+##### 2.3.1.1.1 DERIVAZIONE
 
-**PRESENZA DI RIDONDANZA**
+L'attributo "numero likert" presente nella tabella `CONTENUTO MULTIMEDIALE` é derivabile contando quantii voti sono presenti nella tabella `VOTO` fatti dagli utenti registrati a uno specifico contenuto multimediale.
 
-**Opx**
+L'attributo "totale likert" presente nella tabella `CONTENUTO MULTIMEDIALE` é derivabile dalla somma dei voti presenti nella tabella `VOTO` fatti dagli utenti registrati a uno specifico contenuto multimediale.
 
-> Schema di operazione
+##### 2.3.1.1.2 OPERAZIONI COINVOLTE
 
-Tavola degli accessi:
+| Operazione | Descrizione                                                                                                  | Tipo | Frequenza           |
+| ---------- | ------------------------------------------------------------------------------------------------------------ | ---- | ------------------- |
+| Op3        | Calcola la media dei like per ogni contenuto multimediale per ogni streamer                                  | B    | Una volta al giorno |
+| Op4        | Gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati | B    | Una volta al giorno |
 
-| Concetto | Costrutto | Accessi | Tipo | Descrizione |
-| -------- | --------- | ------- | ---- | ----------- |
-|          |           |         |      |             |
-|          |           |         |      |             |
+##### 2.3.1.1.3 PRESENZA DI RIDONDANZA
 
-| Costo | Valori |
-| ----- | ------ |
-| S:    |        |
-| L:    |        |
-| TOT:  |        |
-
-**Opy**
+###### 2.3.1.1.3.1 Op3
 
 > Schema di operazione
 
 Tavola degli accessi:
 
-| Concetto | Costrutto | Accessi | Tipo | Descrizione |
-| -------- | --------- | ------- | ---- | ----------- |
-|          |           |         |      |             |
-|          |           |         |      |             |
+| Concetto               | Costrutto | Accessi | Tipo | Descrizione                             |
+| ---------------------- | --------- | ------- | ---- | --------------------------------------- |
+| CONTENUTO MULTIMEDIALE | E         | 1       | L    | Cerco "totale likert" e "numero likert" |
 
-| Costo | Valori |
-| ----- | ------ |
-| S:    |        |
-| L:    |        |
-| TOT:  |        |
+> La media mi sembra scontata scrivere si ottiene facendo la seguente divisione "totale likert" / "numero likert"
 
-...
+| Costo | Valori           |
+| ----- | ---------------- |
+| S:    | 0                |
+| L:    | 1                |
+| TOT:  | 1 accesso/giorno |
 
-**ASSENZA DI RIDONDANZA**
-
-**Opx**
+###### 2.3.1.1.3.2 Op4
 
 > Schema di operazione
 
 Tavola degli accessi:
 
-| Concetto | Costrutto | Accessi | Tipo | Descrizione |
-| -------- | --------- | ------- | ---- | ----------- |
-|          |           |         |      |             |
-|          |           |         |      |             |
+| Concetto               | Costrutto | Accessi | Tipo | Descrizione                                       |
+| ---------------------- | --------- | ------- | ---- | ------------------------------------------------- |
+| VIDEO                  | E         | 1       | L    | Prendo tutti gli identificativi dei video         |
+| CONTENUTO MULTIMEDIALE | E         | 1       | L    | Cerco "totale likert" e "numero likert" dei video |
 
-| Costo | Valori |
-| ----- | ------ |
-| S:    |        |
-| L:    |        |
-| TOT:  |        |
+| Costo | Valori           |
+| ----- | ---------------- |
+| S:    | 0                |
+| L:    | 2                |
+| TOT:  | 2 accesso/giorno |
 
-**Opy**
+##### 2.3.1.1.4 ASSENZA DI RIDONDANZA
+
+###### 2.3.1.1.4.1 Op3
 
 > Schema di operazione
 
 Tavola degli accessi:
 
-| Concetto | Costrutto | Accessi | Tipo | Descrizione |
-| -------- | --------- | ------- | ---- | ----------- |
-|          |           |         |      |             |
-|          |           |         |      |             |
+| Concetto | Costrutto | Accessi | Tipo | Descrizione    |
+| -------- | --------- | ------- | ---- | -------------- |
+| VOTO     | E         | 1       | L    | Cerco "likert" |
 
-| Costo | Valori |
-| ----- | ------ |
-| S:    |        |
-| L:    |        |
-| TOT:  |        |
+| Costo | Valori           |
+| ----- | ---------------- |
+| S:    | 0                |
+| L:    | 1                |
+| TOT:  | 1 accesso/giorno |
 
-...
+###### 2.3.1.1.4.2 Op4
 
-**TOTALI PER RIDONDANZA 1**
+> Schema di operazione
 
-| **Presenza di ridondanza** |       |
-| ------------------------- | ----- |
-| Spazio:                   | <...> |
-| Tempo:                    | <...> |
-| Decisione:                | <...> |
+Tavola degli accessi:
 
-| **Assenza di ridondanza** |       |
-| ------------------------- | ----- |
-| Spazio:                   | <...> |
-| Tempo:                    | <...> |
-| Decisione:                | <...> |
+| Concetto | Costrutto | Accessi | Tipo | Descrizione                               |
+| -------- | --------- | ------- | ---- | ----------------------------------------- |
+| VIDEO    | E         | 1       | L    | Prendo tutti gli identificativi dei video |
+| VOTO     | E         | 1       | L    | Cerco "likert"                            |
 
-#### 2.3.1.2 RIDONDANZA 2 (<nome ridondanza (attributo, associazione, ...)>)
+| Costo | Valori           |
+| ----- | ---------------- |
+| S:    | 0                |
+| L:    | 2                |
+| TOT:  | 2 accesso/giorno |
 
-> <come per ridondanza 1>
+##### 2.3.1.1.5 TOTALI PER RIDONDANZA 1
 
-> <eventuali ridondanze 3 e 4>
+| **Presenza di ridondanza** |                                   |
+| -------------------------- | --------------------------------- |
+| Spazio:                    | 2 * 4 * 1,000,000 Byte aggiuntivi |
+| Tempo:                     | 4 accessi/giorno                  |
+
+| **Assenza di ridondanza** |                  |
+| ------------------------- | ---------------- |
+| Spazio:                   | 0                |
+| Tempo:                    | 4 accessi/giorno |
+
+##### 2.3.1.1.6 Decisione
+
+Questa ridondanza risulta inutile in quanto non risparmia nemmeno un singolo accesso sprecando circa 7.6 MB.
+
+#### 2.3.1.2 RIDONDANZA 2 (ridondanza dell'affluenza media)
+
+![Ridondanza 2](../Diagrammi/2.3.1.2%20ridondanza%202.png)
+
+##### 2.3.1.2.1 DERIVAZIONE
+
+L'attributo "affluenza media" presente nella tabella `LIVE` é derivabile dalla somma del numero degli utenti spettatori presenti nella tabella `AFFLUENZA` a uno specifico contenuto multimediale diviso il numero delle righe coinvolte nella somma semre dalla medesima tabella.
+
+##### 2.3.1.2.2 OPERAZIONI COINVOLTE
+
+| Operazione | Descrizione                                                                               | Tipo | Frequenza           |
+| ---------- | ----------------------------------------------------------------------------------------- | ---- | ------------------- |
+| Op9        | Stilare la media dei degli spettatori per ogni live uscito in quel mese per ogni streamer | B    | Una volta ogni mese |
+
+##### 2.3.1.2.3 PRESENZA DI RIDONDANZA
+
+###### 2.3.1.2.3.1 Op9
+
+Tavola degli accessi:
+
+| Concetto | Costrutto | Accessi | Tipo | Descrizione                             |
+| -------- | --------- | ------- | ---- | --------------------------------------- |
+| LIVE     | E         | 1       | L    | Cerco "media affluenza" e "data inizio" |
+
+| Costo | Valori         |
+| ----- | -------------- |
+| S:    | 0              |
+| L:    | 1              |
+| TOT:  | 1 accesso/mese |
+
+##### 2.3.1.2.4 ASSENZA DI RIDONDANZA
+
+###### 2.3.1.2.4.1 Op9
+
+Tavola degli accessi:
+
+| Concetto  | Costrutto | Accessi | Tipo | Descrizione                                           |
+| --------- | --------- | ------- | ---- | ----------------------------------------------------- |
+| LIVE      | E         | 1       | L    | Cerco "data inizio" e filtro quelli del mese corrente |
+| AFFLUENZA | E         | 1       | L    | Cerco "numero spettatori"                             |
+
+> uno volta ottenuto questi due dati, faccio la somma del numero degli spettatori diviso il numero di righe coivolte di quella specifica live.
+
+| Costo | Valori         |
+| ----- | -------------- |
+| S:    | 0              |
+| L:    | 2              |
+| TOT:  | 2 accessi/mese |
+
+###### 2.3.1.2.5 TOTALI PER RIDONDANZA 2
+
+| **Presenza di ridondanza** |                           |
+| -------------------------- | ------------------------- |
+| Spazio:                    | 4 * 100,000 Byte occupati |
+| Tempo:                     | 1 accesso/mese            |
+
+| **Assenza di ridondanza** |                |
+| ------------------------- | -------------- |
+| Spazio:                   | 0              |
+| Tempo:                    | 2 accessi/mese |
+
+###### 2.3.1.2.6 Decisione
+
+In conclusione, si risulta uno spreco di circa 390 KB solamente per dimezzare il numero di accessi mensili.
 
 ### 2.3.2 Eliminazione delle generalizzazioni
 
@@ -301,17 +402,16 @@ Tavola degli accessi:
 
 > QUI CI VA IL VOSTRO SCHEMA ER RISTRUTTURATO
 
-**Regole aziendali**
+### 2.4.1 Regole aziendali
 
-**Vincoli di Integrità:**
-
+### 2.4.2 Vincoli di Integrità
 
 |     |                                        |
 | --- | -------------------------------------- |
 | RV1 | <concetto> deve/non deve <espressione> |
 |     |                                        |
 
-Derivazioni:
+### 2.4.3 Derivazioni
 
 |     |                                    |
 | --- | ---------------------------------- |
