@@ -202,7 +202,7 @@ Nel processo di ristrutturazione, ci concentreremo sull'analisi e la risoluzione
 
 #### 2.3.1.1 RIDONDANZA 1 (ridondanza dei likert)
 
-![Ridondanza 1](../Diagrammi/2.3.1.1%20ridondanza%201.png)
+![Ridondanza 1](../Immagini/2.3.1.1%20ridondanza%201.png)
 
 ##### 2.3.1.1.1 DERIVAZIONE
 
@@ -307,7 +307,7 @@ Questa ridondanza risulta inutile in quanto non risparmia nemmeno un singolo acc
 
 #### 2.3.1.2 RIDONDANZA 2 (ridondanza dell'affluenza media)
 
-![Ridondanza 2](../Diagrammi/2.3.1.2%20ridondanza%202.png)
+![Ridondanza 2](../Immagini/2.3.1.2%20ridondanza%202.png)
 
 ##### 2.3.1.2.1 DERIVAZIONE
 

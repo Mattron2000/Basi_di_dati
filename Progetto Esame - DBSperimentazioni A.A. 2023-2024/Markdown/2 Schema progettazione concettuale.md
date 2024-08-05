@@ -301,7 +301,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 ## 1.5 Schema E-R
 
-![Mappa E-R](../Diagrammi/1.5%20Schema%20E-R%20def.png)
+![Mappa E-R](../Immagini/1.5%20Schema%20E-R.png)
 
 ### Commenti sullo Schema ER
 
@@ -343,7 +343,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 3. **Separazione delle Responsabilità**:
    - Le entità e le relazioni sono ben definite per separare le responsabilità e facilitare la gestione dei dati. Ad esempio, `MESSAGGIO` é prerogativa di `UTENTE`, separando così la gestione dei messaggi dagli utenti.
-  
+
 #### Analisi delle Relazioni e degli Attributi
 
 1. **Relazioni Utente-Contenuto**:
@@ -360,7 +360,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 5. **Attributi Chiave**:
    - Gli attributi chiave sono chiaramente identificati, come "nome utente" per `UTENTE` e "timestamp" per `MESSAGGIO`, assicurando l'unicità e la tracciabilità dei dati.
-  
+
 6. **Reazioni ed Emoji**:
    - La relazione tra `REAZIONE` ed `EMOJI` è da intendersi come segue: in una **_reazione_** è presente uno ed un solo _emoji_ (siccome una reazione è essa stessa un singolo emoji) mentre ogni singolo **_emoji_** può essere presente molte volte nelle varie _reazioni_ oppure non venire mai utlizzato in nessuna _reazione_.
 
