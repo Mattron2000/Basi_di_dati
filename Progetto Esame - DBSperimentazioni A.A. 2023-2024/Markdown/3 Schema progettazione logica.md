@@ -31,7 +31,9 @@
         - [2.3.1.2.5 TOTALI PER RIDONDANZA 2](#23125-totali-per-ridondanza-2)
         - [2.3.1.2.6 Decisione](#23126-decisione)
   - [2.3.2 Eliminazione delle generalizzazioni](#232-eliminazione-delle-generalizzazioni)
-    - [2.3.2.1 Generalizzazione 1 ()](#2321-generalizzazione-1-)
+    - [2.3.2.1 Generalizzazione 1 (generalizzazione dell'utente)](#2321-generalizzazione-1-generalizzazione-dellutente)
+    - [2.3.2.2 Generalizzazione 2 (generalizzazione del contenuto multimediale)](#2322-generalizzazione-2-generalizzazione-del-contenuto-multimediale)
+    - [2.3.2.3 Generalizzazione 3 (generalizzazione del'interazione utenti-contenuto multimediale)](#2323-generalizzazione-3-generalizzazione-delinterazione-utenti-contenuto-multimediale)
   - [2.3.3 Partizionamento/accorpamento di entità e associazioni](#233-partizionamentoaccorpamento-di-entità-e-associazioni)
     - [2.3.3.1 Partizionamento/Accorpamento 1 ()](#2331-partizionamentoaccorpamento-1-)
   - [2.3.4.scelta degli identificatori principali](#234scelta-degli-identificatori-principali)
@@ -293,7 +295,7 @@ Tavola degli accessi:
 
 | **Presenza di ridondanza** |                                   |
 | -------------------------- | --------------------------------- |
-| Spazio:                    | 2 * 4 * 1,000,000 Byte aggiuntivi |
+| Spazio:                    | 8 * 1,000,000 Byte aggiuntivi |
 | Tempo:                     | 4 accessi/giorno                  |
 
 | **Assenza di ridondanza** |                  |
@@ -372,12 +374,39 @@ In conclusione, si risulta uno spreco di circa 390 KB solamente per dimezzare il
 
 ### 2.3.2 Eliminazione delle generalizzazioni
 
-> <se ce ne sono>
+Nel processo di ristrutturazione, ci concentreremo sull'analisi e la rimozione delle seguenti generalizzazioni:
 
-#### 2.3.2.1 Generalizzazione 1 (<generalizzazione>)
+- **generalizzazione dell'utente**
+- **generalizzazione del contenuto multimediale**
+- **generalizzazione del'interazione utenti-contenuto multimediale**
 
-> <commenti su tecnica usata e motivazioni.>
-> <regole aziendali introdotte>
+#### 2.3.2.1 Generalizzazione 1 (generalizzazione dell'utente)
+
+![Generalizzazione 1a](../Immagini/2.3.2.1%20generalizzazione%201a.png)
+
+Dallo schema E-R concettuale, noto che le tabelle figlie `GUEST`, `STREAMER` e `SPETTATORE` non hanno attributi, concentramoci prima sugli ultimi due:
+
+`STREAMER` e `SPETTATORE`, le due tabelle non sono effettivamente delle entità ma dei ruoli che l'entità padre `REGISTRATO` può assumere di tanto in tanto, quindi le tabelle possono essere incorporate nella tabella `REGISTRATO` senza aggiungere attributi "tipo".
+
+![Generalizzazione 1b](../Immagini/2.3.2.1%20generalizzazione%201b.png)
+
+Adesso ci concentriamo sulla tabella senza attributi rimasta:
+
+qui risulta controproducente incorporare le tabelle figlie, `GUEST` e `REGISTRATO`, alla tabella padre `UTENTE`, in quanto si creerebbero degli sprechi di spazio producendo una base dati denormalizzata con
+valori nulli per colpa di `GUEST`, insomma non è l'opzione giusta, ma potremmo incorporare solamente la tabella `GUEST` alla tabella madre in quanto un'utente guest, per essere identificato, basta solamente un nome utente univoco.
+
+![Generalizzazione 1c](../Immagini/2.3.2.1%20generalizzazione%201c.png)
+
+Alla fine rimane solo la tabella figlia `REGISTRATO` che ha numerosi attributi, quindi per evitare di incorporare alla tabella madre che crea sprechi di spazio scritto precedentemente, sostituisco la generalizzazione con una associazione "parte di".
+
+![Generalizzazione 1d](../Immagini/2.3.2.1%20generalizzazione%201d.png)
+
+Avendo due tabelle si crea una divisione tra le due sui permessi, in modo che la tabella `UTENTE` comprende sia utenti guest e utenti registrati e può essere utilizzato per permettere alla sola visualizzazione dei contenuti multimediali.
+Invece la tabella `REGISTRATO` viene utilizzato per compiere azioni dove gli utenti guest sono esclusi.
+
+#### 2.3.2.2 Generalizzazione 2 (generalizzazione del contenuto multimediale)
+
+#### 2.3.2.3 Generalizzazione 3 (generalizzazione del'interazione utenti-contenuto multimediale)
 
 ### 2.3.3 Partizionamento/accorpamento di entità e associazioni
 
