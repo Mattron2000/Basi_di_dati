@@ -50,9 +50,9 @@
 
 ### 1.1.1 Requisiti degli utenti iscritti
 
-"*Ogni utente può essere **spettatore** o **streamer**, o entrambi.*"
+"*Ogni utente può essere spettatore o streamer, o entrambi.*"
 
-- Ogni utente può essere spettatore o streamer, o entrambi (generalizzazione totale e sovrapposta)
+- Ogni utente può essere **spettatore** o **streamer**, o entrambi (generalizzazione totale e sovrapposta)
 
 "*Gli spettatori possono essere registrati al servizio oppure possono guardare le live in modo anonimo (guest).*"
 
@@ -75,11 +75,7 @@
 
 ### 1.1.3 Requisiti delle live, video e clip
 
-"*In ogni canale possono esserci live, video (live passate) e clip (video di durata breve). Le live possono anche non diventare video del canale ma ad ogni diretta live, viene inviata una notifica agli utenti che seguono il canale*"
-
-- Per distinguere clip da video, si imposteranno dei limiti di durata per le clip
-
-"*Ognuno ha un titolo, una durata, appartiene a una categoria (Figura 1(b) e può essere associato a diversi hashtags/emojis etc..). Per ogni live, viene memorizzato il numero medio di spettatori, i commenti e le reazioni (emojis, hashtags etc..) mentre per i video e le clip il numero di visualizzazioni*"
+"*In ogni canale possono esserci live, video (live passate) e clip (video di durata breve). Le live possono anche non diventare video del canale ma ad ogni diretta live, viene inviata una notifica agli utenti che seguono il canale. Ognuno ha un titolo, una durata, appartiene a una categoria (Figura 1(b) e può essere associato a diversi hashtags/emojis etc..). Per ogni live, viene memorizzato il numero medio di spettatori, i commenti e le reazioni (emojis, hashtags etc..) mentre per i video e le clip il numero di visualizzazioni*"
 
 - L'entità **Live** non avrà un attributo **durata**, siccome non è possibile calcolarne la durata al suo inizio. Per una live si salveranno quindi **data** e **ora** di inizio e di fine
 
@@ -101,7 +97,7 @@
 
 "*I viewer possono diventare follower del canale degli streamer che preferiscono, e le loro preferenze sono raccolte in un elenco di followee a cui possono accedere dal loro profilo. I viewer possono inoltre supportare gli streamer tramite la subscription (a pagamento) al loro canale, ottenendo dei privilegi (emoticon personalizzate, nessun limite di caratteri nella lunghezza dei commenti, ecc...)*"
 
-- Per ogni canale, verrà mantenuta una **lista degli utenti che supportano il canale** e che quindi avranno diritto a **privilegi**
+- Per ogni canale, verranno forniti dei **privilegi** a tutti **gli utenti che supportano il canale** tramite un abbonamento
 
 ### 1.1.6 Requisiti dei bit
 
@@ -321,7 +317,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 3. **Reificazione di un’associazione ricorsiva**:
    - **Messaggi**: L'associazione tra `UTENTE` (mittente) e `UTENTE` (destinatario) attraverso i messaggi è stata reificata in un'entità `MESSAGGIO`, catturando dettagli come il testo e il timestamp.
-   - **Donazione e Portafoglio**: L'associazione `donazione` tra due portafogli è stata reificata in un'entità `DONAZIONE` per poter tenere traccia delle singole donazioni, grazie anche all'introduzione delle relazioni `mittente` e `destinatario` per tracciare ogni transazione di bit.
+   - **Donazione e Portafoglio**: L'associazione `donazione` tra due portafogli è stata reificata in un'entità `DONAZIONE` per poter tenere traccia delle singole donazioni, grazie anche all'introduzione delle relazioni **_mittente<sub>(P-D)</sub>_** e **_destinatario<sub>(P-D)</sub>_** per tracciare ogni transazione di bit.
 
 4. **Evoluzione di concetto**:
    - **Utenti**: La distinzione tra `GUEST`, `REGISTRATO`, `SPETTATORE` e `STREAMER` rappresenta l'evoluzione del concetto di utente nel sistema, con ruoli e permessi differenti.
@@ -343,7 +339,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 3. **Separazione delle Responsabilità**:
    - Le entità e le relazioni sono ben definite per separare le responsabilità e facilitare la gestione dei dati. Ad esempio, `MESSAGGIO` é prerogativa di `UTENTE`, separando così la gestione dei messaggi dagli utenti.
-
+  
 #### Analisi delle Relazioni e degli Attributi
 
 1. **Relazioni Utente-Contenuto**:
@@ -360,7 +356,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 5. **Attributi Chiave**:
    - Gli attributi chiave sono chiaramente identificati, come "nome utente" per `UTENTE` e "timestamp" per `MESSAGGIO`, assicurando l'unicità e la tracciabilità dei dati.
-
+  
 6. **Reazioni ed Emoji**:
    - La relazione tra `REAZIONE` ed `EMOJI` è da intendersi come segue: in una **_reazione_** è presente uno ed un solo _emoji_ (siccome una reazione è essa stessa un singolo emoji) mentre ogni singolo **_emoji_** può essere presente molte volte nelle varie _reazioni_ oppure non venire mai utlizzato in nessuna _reazione_.
 
@@ -382,7 +378,8 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 | RV10 | Ogni reazione deve essere associata ad una emoji.                                                    |
 | RV11 | Ogni video deve essere associato ad una live per poter esistere.                                     |
 | RV12 | Ogni clip deve essere associata ad un video per poter esistere.                                      |
-| RV13 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.        |
+| RV13 | La durata di una clip deve essere inferiore a quella di un video.                                    |
+| RV14 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.        |
 
 ### 1.5.3 Derivazioni
 
