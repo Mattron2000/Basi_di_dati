@@ -406,7 +406,11 @@ Invece la tabella `REGISTRATO` viene utilizzato per compiere azioni dove gli ute
 
 #### 2.3.2.2 Generalizzazione 2 (generalizzazione del contenuto multimediale)
 
+![Generalizzazione 2a](../Immagini/2.3.2.2%20generalizzazione%202a.png)
+
 #### 2.3.2.3 Generalizzazione 3 (generalizzazione del'interazione utenti-contenuto multimediale)
+
+![Generalizzazione 3a](../Immagini/2.3.2.3%20generalizzazione%203a.png)
 
 ### 2.3.3 Partizionamento/accorpamento di entità e associazioni
 
