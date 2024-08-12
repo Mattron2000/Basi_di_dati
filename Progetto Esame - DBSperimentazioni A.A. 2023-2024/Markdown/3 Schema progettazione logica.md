@@ -45,10 +45,10 @@
 
 ## 2.1 Tavola dei volumi
 
-| Concetto   | Tipo  | Volume   |
+<!--| Concetto   | Tipo  | Volume   |
 | ---------- | ----- | -------- |
 | <concetto> | <E/A> | <volume> |
-|            |       |          |
+|            |       |          |-->
 
 > < eventuali osservazioni. In particolare descrivere il ragionamento che ha portato a certi valori non espliciti nei requisiti.>
 >
@@ -58,93 +58,99 @@
 | UTENTE                        | E    | 200,000    |
 | GUEST                         | E    | 100,000    |
 | PORTAFOGLIO                   | E    | 70,000     |
-| conto                         | A    | 35,000     |
+| conto                         | A    | 70,000     |
 | DONAZIONE                     | E    | 500,000    |
-| REGISTRATO                    | E    | 80,000     |
-| PREMIUM                       | E    | 35,000     |
-| STREAMER                      | E    | 30,000     |
-| gestione<sub>(S-C)</sub>      | A    | 10,000     |
-| SPETTATORE                    | E    | 70,000     |
-| streaming                     | A    | 150,000    |
+| REGISTRATO                    | E    | 100,000    |
+| STREAMER                      | E    | 40,000     |
+| gestione<sub>(S-C)</sub>      | A    | 40,000     |
+| SPETTATORE                    | E    | 60,000     |
+| streaming                     | A    | 200,000    |
 | PROGRAMMAZIONE                | E    | 200,000    |
-| CANALE                        | E    | 10,000     |
-| associazione<sub>(CM-H)</sub> | A    | 500,000    |
-| CATEGORIA                     | E    | 100        |
-| appartenenza                  | A    | 250,000    |
+| CANALE                        | E    | 40,000     |
+| associazione<sub>(CM-H)</sub> | A    | 2,000,000  |
+| CATEGORIA                     | E    | 6,000      |
+| appartenenza                  | A    | 1,000,000  |
 | CONTENUTO MULTIMEDIALE        | E    | 1,000,000  |
-| LIVE                          | E    | 100,000    |
-| VIDEO                         | E    | 500,000    |
-| CLIP                          | E    | 900,000    |
-| LINK SOCIAL                   | E    | 1,000      |
+| LIVE                          | E    | 250,000    |
+| VIDEO                         | E    | 200,000    |
+| CLIP                          | E    | 550,000    |
+| LINK SOCIAL                   | E    | 80,000     |
 | visita                        | A    | 20,000,000 |
 | INTERAZIONE                   | E    | 20,000,000 |
+| invio                         | A    | 20,000,000 |
 | COMMENTO                      | E    | 5,000,000  |
 | REAZIONE                      | E    | 15,000,000 |
-| EMOJI                         | E    | 3,800      |
-| HASHTAG                       | E    | 5,000      |
-| follower                      | A    | 500,000    |
+| EMOJI                         | E    | 5,000      |
+| HASHTAG                       | E    | 10,000     |
+| follower                      | A    | 90,000     |
 | MESSAGGIO                     | E    | 2,000,000  |
-| voto                          | A    | 700,000    |
-| abbonamento                   | A    | 20,000     |
+| voto                          | A    | 1,500,000  |
+| abbonamento                   | A    | 150,000    |
 | HOSTING                       | E    | 50,000     |
-| rinnovo                       | A    | 100,000    |
-| contenitore                   | A    | 40,000     |
+| rinnovo                       | A    | 50,000     |
+| contenitore                   | A    | 1,000,000  |
 | AFFLUENZA                     | E    | 500,000    |
-| media spettatori              | A    | 250,000    |
+| media spettatori              | A    | 500,000    |
 | riferimento                   | A    | 200,000    |
-| scomposizione                 | A    | 900,000    |
-| presenza<sub>(C-E)</sub>      | A    | 1,000,000  |
+| scomposizione                 | A    | 550,000    |
+| presenza<sub>(C-E)</sub>      | A    | 8,000,000  |
 | presenza<sub>(R-E)</sub>      | A    | 15,000,000 |
 | gestione<sub>(I-R)</sub>      | A    | 20,000,000 |
-| associazione<sub>(LS-C)</sub> | A    | 5,000      |
+| associazione<sub>(LS-C)</sub> | A    | 80,000     |
 | mittente<sub>(M-R)</sub>      | A    | 2,000,000  |
-| mittente<sub>(P-D)</sub>      | A    | 100,000    |
+| mittente<sub>(P-D)</sub>      | A    | 500,000    |
 | destinatario<sub>(M-R)</sub>  | A    | 2,000,000  |
-| destinatario<sub>(P-D)</sub>  | A    | 100,000    |
+| destinatario<sub>(P-D)</sub>  | A    | 500,000    |
 
 1. **UTENTE**: Entità che rappresenta gli utenti della piattaforma.
-2. **PORTAFOGLIO**: Entità che rappresenta il portafoglio di ciascun utente registrato.
-3. **DONAZIONE**: Entità che rappresenta le donazioni effettuate da utenti a streamer.
-4. **REGISTRATO**: Entità che rappresenta gli utenti registrati con informazioni aggiuntive.
-5. **INTERAZIONE**: Entità che rappresenta tutte le interazioni (commenti e reazioni) ad una live.
-6. **STREAMER**: Entità che rappresenta gli utenti che sono streamer.
-7. **SPETTATORE**: Entità che rappresenta gli utenti che sono spettatori.
-8. **PROGRAMMAZIONE**: Entità che rappresenta gli eventi programmati di live streaming.
-9. **CANALE**: Entità che rappresenta il canale gestito dallo streamer.
-10. **CATEGORIA**: Entità che rappresenta le categorie dei contenuti.
-11. **CONTENUTO MULTIMEDIALE**: Entità generale che rappresenta i contenuti multimediali.
-12. **LIVE**: Entità che rappresenta le live.
-13. **VIDEO**: Entità che rappresenta i video.
-14. **CLIP**: Entità che rappresenta le clip.
-15. **LINK SOCIAL**: Entità che rappresenta i link dei social media scritti dal gestore del canale (streamer).
-16. **visita**: Associazione che rappresenta le visite ai contenuti multimediali.
-17. **COMMENTO**: Entità che rappresenta i commenti sulle live.
-18. **REAZIONE**: Entità che rappresenta le reazioni alle live.
-19. **EMOJI**: Entità che rappresenta gli emoji usati nei commenti e reazioni.
-20. **HASHTAG**: Entità che rappresenta gli hashtag utilizzati.
-21. **follower**: Associazione che rappresenta i follow tra utenti registrati.
-22. **MESSAGGIO**: Entità che rappresenta i messaggi inviati tra utenti.
-23. **voto**: Associazione che rappresenta i voti ai contenuti multimediali.
-24. **abbonamento**: Associazione che rappresenta l'abbonamento degli utenti registrati a uno specifico utente streamer.
-25. **HOSTING**: Entità che rappresenta i servizi di hosting utilizzati dagli streamer.
-26. **conto**: Associazione che rappresenta il conto associato al portafoglio di bit dell'utente.
-27. **gestione<sub>(S-C)</sub>**: Associazione che rappresenta la gestione del canale da parte dello streamer.
-28. **streaming**: Associazione che rappresenta l'attività di streaming.
-29. **associazione<sub>(CM-H)</sub>**: Associazione che rappresenta l'associazione di un contenuto multimediale ad un hashtag.
-30. **appartenenza**: Associazione che rappresenta l'appartenenza di un contenuto multimediale ad una categoria.
-31. **rinnovo**: Associazione che rappresenta il rinnovo di un servizio di hosting.
-32. **contenitore**: Associazione che rappresenta la presenza di contenuti multimediali in un canale.
-33. **AFFLUENZA**: Entità che rappresenta il numero totale di spettatori di una live in un dato momento.
-34. **media spettatori**: Associazione che rappresenta le medie di spettatori di una live.
-35. **scomposizione**: Associazione che rappresenta la scomposizione di un video in clip.
-36. **presenza<sub>(C-E)</sub>**: Associazione che indica la presenza di emoji in un commento.
-37. **presenza<sub>(R-E)</sub>**: Associazione che indica la presenza di emoji in una reazione.
-38. **gestione<sub>(I-R)</sub>**: Associazione che rappresenta la gestione delle interazioni di ogni utente registrato.
-39. **associazione<sub>(LS-C)</sub>**: Associazione che rappresenta il collegamento tra il canale e i suoi profili social.
-40. **mittente<sub>(M-R)</sub>**: Associazione che rappresenta il mittente di un messaggio.
-41. **mittente<sub>(P-D)</sub>**: Associazione che rappresenta il mittente di una donazione.
-42. **destinatario<sub>(M-R)</sub>**: Associazione che rappresenta il destinatario di un messaggio.
-43. **destinatario<sub>(P-D)</sub>**: Associazione che rappresenta il destinatario di una donazione.
+2. **GUEST**: Entità che rappresenta gli utenti non registrati alla piattaforma (guest).
+3. **PORTAFOGLIO**: Entità che rappresenta il portafoglio di ciascun utente registrato.
+4. **DONAZIONE**: Entità che rappresenta le donazioni effettuate da utenti a streamer.
+5. **REGISTRATO**: Entità che rappresenta gli utenti registrati con informazioni aggiuntive.
+6. **INTERAZIONE**: Entità che rappresenta tutte le interazioni (commenti e reazioni) ad una live.
+7. **invio**: Associazione che rappresenta l'invio di una interazione durante una live.
+8. **STREAMER**: Entità che rappresenta gli utenti che sono streamer.
+9. **SPETTATORE**: Entità che rappresenta gli utenti che sono spettatori.
+10. **PROGRAMMAZIONE**: Entità che rappresenta gli eventi programmati di live streaming.
+11. **CANALE**: Entità che rappresenta il canale gestito dallo streamer.
+12. **CATEGORIA**: Entità che rappresenta le categorie dei contenuti.
+13. **CONTENUTO MULTIMEDIALE**: Entità generale che rappresenta i contenuti multimediali.
+14. **LIVE**: Entità che rappresenta le live.
+15. **VIDEO**: Entità che rappresenta i video.
+16. **CLIP**: Entità che rappresenta le clip.
+17. **LINK SOCIAL**: Entità che rappresenta i link dei social media scritti dal gestore del canale (streamer).
+18. **visita**: Associazione che rappresenta le visite ai contenuti multimediali.
+19. **COMMENTO**: Entità che rappresenta i commenti sulle live.
+20. **REAZIONE**: Entità che rappresenta le reazioni alle live.
+21. **EMOJI**: Entità che rappresenta gli emoji usati nei commenti e reazioni.
+22. **HASHTAG**: Entità che rappresenta gli hashtag utilizzati.
+23. **follower**: Associazione che rappresenta i follow tra utenti registrati.
+24. **MESSAGGIO**: Entità che rappresenta i messaggi inviati tra utenti.
+25. **voto**: Associazione che rappresenta i voti ai contenuti multimediali.
+26. **abbonamento**: Associazione che rappresenta l'abbonamento degli utenti registrati a uno specifico utente streamer.
+27. **HOSTING**: Entità che rappresenta i servizi di hosting utilizzati dagli streamer.
+28. **conto**: Associazione che rappresenta il conto associato al portafoglio di bit dell'utente.
+29. **gestione<sub>(S-C)</sub>**: Associazione che rappresenta la gestione del canale da parte dello streamer.
+30. **streaming**: Associazione che rappresenta l'attività di streaming.
+31. **associazione<sub>(CM-H)</sub>**: Associazione che rappresenta l'associazione di un contenuto multimediale ad un hashtag.
+32. **appartenenza**: Associazione che rappresenta l'appartenenza di un contenuto multimediale ad una categoria.
+33. **rinnovo**: Associazione che rappresenta il rinnovo di un servizio di hosting.
+34. **contenitore**: Associazione che rappresenta la presenza di contenuti multimediali in un canale.
+35. **AFFLUENZA**: Entità che rappresenta il numero totale di spettatori di una live in un dato momento.
+36. **media spettatori**: Associazione che rappresenta le medie di spettatori di una live.
+37. **scomposizione**: Associazione che rappresenta la scomposizione di un video in clip.
+38. **presenza<sub>(C-E)</sub>**: Associazione che indica la presenza di emoji in un commento.
+39. **presenza<sub>(R-E)</sub>**: Associazione che indica la presenza di emoji in una reazione.
+40. **gestione<sub>(I-R)</sub>**: Associazione che rappresenta la gestione delle interazioni di ogni utente registrato.
+41. **associazione<sub>(LS-C)</sub>**: Associazione che rappresenta il collegamento tra il canale e i suoi profili social.
+42. **mittente<sub>(M-R)</sub>**: Associazione che rappresenta il mittente di un messaggio.
+43. **mittente<sub>(P-D)</sub>**: Associazione che rappresenta il mittente di una donazione.
+44. **destinatario<sub>(M-R)</sub>**: Associazione che rappresenta il destinatario di un messaggio.
+45. **destinatario<sub>(P-D)</sub>**: Associazione che rappresenta il destinatario di una donazione.
+
+I volumi indicati sono stati decisi basandosi sul funzionamento verosimile di una piattaforma di streaming di questo tipo, focalizzandosi anche sul peso dei vari componenti, in base alla loro frequenza di utilizzo. Per esempio, le entità **CONTENUTO MULTIMEDIALE**, **REAZIONE**, **COMMENTO** e **INTERAZIONE** hanno volumi elevati perchè si presume che i contenuti multimediali presenti siano molti. Di conseguenza la quantità di interazioni di ogni utente è probabile che sia molto elevata, nonostante si ipotizza che le reazioni siano maggiori dei commenti (essendo più immediate).
+Sono state prese in considerazione anche le cardinalità delle associazioni e la partecipazione delle varie entità alle stesse, specialmente in caso di associazioni (1,1) e (0,N), come ad esempio **visita** o **mittente<sub>(P-D)</sub>**.
+Entità come **CATEGORIA** o **EMOJI** presentano volumi molto più bassi di entità come **REAZIONE** o **MESSAGGIO** perchè si pensa che le categorie siano in gran parte predefinite e che gli emoji siano standard e largamente riutilizzabili, mentre reazioni e messaggi siano operazioni realizzate molte volte e anche più volte dallo stesso utente.
 
 ## 2.2 Tavola delle operazioni
 
@@ -181,23 +187,23 @@
 | Op28       | Registrazione di un servizio di hosting utilizzato      | I    | 80        |
 -->
 
-| Operazione | Descrizione                                                                                                                        | Tipo | Frequenza              |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---- | ---------------------- |
-| Op1        | Controlla le condizioni per la qualifica di affiliate                                                                              | B    | Una volta al giorno    |
-| Op2        | Calcola la classifica degli streamer più seguiti                                                                                   | B    | Una volta a settimana  |
-| Op3        | Calcola la media dei like per ogni contenuto multimediale per ogni streamer                                                        | B    | Una volta al giorno    |
-| Op4        | Gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati                       | B    | Una  volta  al  giorno |
-| Op5        | Controlla ed elimina tutti i commenti offensivi per ogni contenuto multimediale, nelle categorie, canali e durante le live         | B    | Dieci volte al giorno  |
-| Op6        | Controlla i nuovi utenti registrati                                                                                                | B    | Due volte al giorno    |
-| Op7        | Gli amministratori del DB controlla le segnalazioni inviate dagli streamer di profili fake che lo seguono                          | I    | Cinque volte al giorno |
-| Op8        | Visualizzare agli amministratori lo storico degli utenti premium quelli storici (dato un range di dati)che quelli dell’ultimo mese | I    | Una volta ogni 6 mesi  |
-| Op9        | Stilare la media dei degli spettatori per ogni live uscito in quel mese per ogni streamer                                          | B    | Una volta ogni mese    |
+| Operazione | Descrizione                                                                                                                              | Tipo | Frequenza              |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---- | ---------------------- |
+| Op1        | Controlla le condizioni per la qualifica di affiliate                                                                                    | B    | Una volta al giorno    |
+| Op2        | Calcola la classifica degli streamer più seguiti                                                                                         | B    | Una volta a settimana  |
+| Op3        | Per ogni streamer, calcola la media dei like per ogni contenuto multimediale                                                             | B    | Una volta al giorno    |
+| Op4        | Gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati                             | B    | Una  volta  al  giorno |
+| Op5        | Controlla ed elimina tutti i commenti offensivi per ogni contenuto multimediale, nelle categorie, nei canali e durante le live           | B    | Dieci volte al giorno  |
+| Op6        | Controlla i nuovi utenti registrati                                                                                                      | B    | Due volte al giorno    |
+| Op7        | Gli amministratori del DB controllano le segnalazioni inviate dagli streamer di profili fake che li seguono                              | I    | Cinque volte al giorno |
+| Op8        | Visualizzare agli amministratori lo storico degli utenti premium, sia quelli storici (dato un range di date) che quelli dell’ultimo mese | I    | Una volta ogni 6 mesi  |
+| Op9        | Per ogni streamer, stilare la media degli spettatori per ogni live uscita in quel mese                                                   | B    | Una volta al mese      |
 
 ## 2.3 Ristrutturazione dello schema E-R
 
 ### 2.3.1 Analisi delle ridondanze
 
-Nel processo di ristrutturazione, ci concentreremo sull'analisi e la risoluzione delle seguenti ridondanze:
+Nel processo di ristrutturazione, ci concentreremo sull'analisi e sulla risoluzione delle seguenti ridondanze:
 
 - **ridondanza dei likert**
 - **ridondanza dell'affluenza media**
@@ -208,15 +214,15 @@ Nel processo di ristrutturazione, ci concentreremo sull'analisi e la risoluzione
 
 ##### 2.3.1.1.1 DERIVAZIONE
 
-L'attributo "numero likert" presente nella tabella `CONTENUTO MULTIMEDIALE` é derivabile contando quantii voti sono presenti nella tabella `VOTO` fatti dagli utenti registrati a uno specifico contenuto multimediale.
+L'attributo "numero likert" dell'entità `CONTENUTO MULTIMEDIALE` é derivabile dal conteggio delle partecipazioni di un contenuto multimediale all'associazione `voto`.
 
-L'attributo "totale likert" presente nella tabella `CONTENUTO MULTIMEDIALE` é derivabile dalla somma dei voti presenti nella tabella `VOTO` fatti dagli utenti registrati a uno specifico contenuto multimediale.
+L'attributo "totale likert" dell'entità `CONTENUTO MULTIMEDIALE` é derivabile dalla somma dei valori dell'attributo **likert** dell'associazione `voto` di tutte le partecipazioni di un contenuto multimediale a questa associazione.
 
 ##### 2.3.1.1.2 OPERAZIONI COINVOLTE
 
 | Operazione | Descrizione                                                                                                  | Tipo | Frequenza           |
 | ---------- | ------------------------------------------------------------------------------------------------------------ | ---- | ------------------- |
-| Op3        | Calcola la media dei like per ogni contenuto multimediale per ogni streamer                                  | B    | Una volta al giorno |
+| Op3        | Per ogni streamer, calcola la media dei like per ogni contenuto multimediale                                 | B    | Una volta al giorno |
 | Op4        | Gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati | B    | Una volta al giorno |
 
 ##### 2.3.1.1.3 PRESENZA DI RIDONDANZA
