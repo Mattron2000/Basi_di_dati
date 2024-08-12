@@ -326,7 +326,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 - Nella realizzazione dello schema ER è stata utilizzata una **Strategia Mista**:
   - **Top-down**: Inizialmente, sono state identificate le entità principali (ad es. `UTENTE`, `CONTENUTO MULTIMEDIALE`, `CANALE`) e le loro relazioni fondamentali.
-  - **Bottom-up**: Successivamente, sono stati dettagliati attributi specifici e relazioni più complesse (ad es. `MESSAGGIO` e `DONAZIONE`), costruendo sulla struttura esistente.
+  - **Bottom-up**: Successivamente, sono stati dettagliati attributi specifici e relazioni più complesse (ad es. quelle riguardanti le entità `MESSAGGIO` e `DONAZIONE`), costruendo sulla struttura esistente.
   - **Inside-out**: Alcune parti dello schema, come la gestione dei contenuti multimediali e le interazioni sociali, sono state sviluppate concentrandosi su entità centrali (`CONTENUTO MULTIMEDIALE`) e espandendo verso l'esterno.
 
 ### Commento finale
