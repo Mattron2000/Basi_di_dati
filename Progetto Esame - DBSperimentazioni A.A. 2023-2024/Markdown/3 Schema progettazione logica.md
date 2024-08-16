@@ -10,18 +10,16 @@
 - [2.2 Tavola delle operazioni](#22-tavola-delle-operazioni)
 - [2.3 Ristrutturazione dello schema E-R](#23-ristrutturazione-dello-schema-e-r)
   - [2.3.1 Analisi delle ridondanze](#231-analisi-delle-ridondanze)
-    - [2.3.1.1 RIDONDANZA 1 (ridondanza dei likert)](#2311-ridondanza-1-ridondanza-dei-likert)
+    - [2.3.1.1 RIDONDANZA 1 (ridondanza dei likert) (DA SISTEMARE!!)](#2311-ridondanza-1-ridondanza-dei-likert-da-sistemare)
       - [2.3.1.1.1 DERIVAZIONE](#23111-derivazione)
       - [2.3.1.1.2 OPERAZIONI COINVOLTE](#23112-operazioni-coinvolte)
       - [2.3.1.1.3 PRESENZA DI RIDONDANZA](#23113-presenza-di-ridondanza)
-        - [2.3.1.1.3.1 Op3](#231131-op3)
-        - [2.3.1.1.3.2 Op4](#231132-op4)
+        - [2.3.1.1.3.1 Op4](#231131-op4)
       - [2.3.1.1.4 ASSENZA DI RIDONDANZA](#23114-assenza-di-ridondanza)
-        - [2.3.1.1.4.1 Op3](#231141-op3)
-        - [2.3.1.1.4.2 Op4](#231142-op4)
+        - [2.3.1.1.4.1 Op4](#231141-op4)
       - [2.3.1.1.5 TOTALI PER RIDONDANZA 1](#23115-totali-per-ridondanza-1)
       - [2.3.1.1.6 Decisione](#23116-decisione)
-    - [2.3.1.2 RIDONDANZA 2 (ridondanza dell'affluenza media)](#2312-ridondanza-2-ridondanza-dellaffluenza-media)
+    - [2.3.1.2 RIDONDANZA 2 (ridondanza dell'affluenza media) (DA RIVEDERE!)](#2312-ridondanza-2-ridondanza-dellaffluenza-media-da-rivedere)
       - [2.3.1.2.1 DERIVAZIONE](#23121-derivazione)
       - [2.3.1.2.2 OPERAZIONI COINVOLTE](#23122-operazioni-coinvolte)
       - [2.3.1.2.3 PRESENZA DI RIDONDANZA](#23123-presenza-di-ridondanza)
@@ -33,7 +31,7 @@
   - [2.3.2 Eliminazione delle generalizzazioni](#232-eliminazione-delle-generalizzazioni)
     - [2.3.2.1 Generalizzazione 1 (generalizzazione dell'utente)](#2321-generalizzazione-1-generalizzazione-dellutente)
     - [2.3.2.2 Generalizzazione 2 (generalizzazione del contenuto multimediale)](#2322-generalizzazione-2-generalizzazione-del-contenuto-multimediale)
-    - [2.3.2.3 Generalizzazione 3 (generalizzazione del'interazione utenti-contenuto multimediale)](#2323-generalizzazione-3-generalizzazione-delinterazione-utenti-contenuto-multimediale)
+    - [2.3.2.3 Generalizzazione 3 (generalizzazione dell'interazione utenti-contenuto multimediale)](#2323-generalizzazione-3-generalizzazione-dellinterazione-utenti-contenuto-multimediale)
   - [2.3.3 Partizionamento/accorpamento di entità e associazioni](#233-partizionamentoaccorpamento-di-entità-e-associazioni)
     - [2.3.3.1 Partizionamento/Accorpamento 1 ()](#2331-partizionamentoaccorpamento-1-)
   - [2.3.4.scelta degli identificatori principali](#234scelta-degli-identificatori-principali)
@@ -84,7 +82,7 @@
 | HASHTAG                       | E    | 10,000     |
 | follower                      | A    | 90,000     |
 | MESSAGGIO                     | E    | 2,000,000  |
-| voto                          | A    | 1,500,000  |
+| voto                          | A    | 1,400,000  |
 | abbonamento                   | A    | 150,000    |
 | HOSTING                       | E    | 50,000     |
 | rinnovo                       | A    | 50,000     |
@@ -137,7 +135,7 @@
 33. **rinnovo**: Associazione che rappresenta il rinnovo di un servizio di hosting.
 34. **contenitore**: Associazione che rappresenta la presenza di contenuti multimediali in un canale.
 35. **AFFLUENZA**: Entità che rappresenta il numero totale di spettatori di una live in un dato momento.
-36. **media spettatori**: Associazione che rappresenta le medie di spettatori di una live.
+36. **media spettatori**: Associazione che rappresenta le medie parziali di spettatori di una live.
 37. **scomposizione**: Associazione che rappresenta la scomposizione di un video in clip.
 38. **presenza<sub>(C-E)</sub>**: Associazione che indica la presenza di emoji in un commento.
 39. **presenza<sub>(R-E)</sub>**: Associazione che indica la presenza di emoji in una reazione.
@@ -208,25 +206,26 @@ Nel processo di ristrutturazione, ci concentreremo sull'analisi e sulla risoluzi
 - **ridondanza dei likert**
 - **ridondanza dell'affluenza media**
 
-#### 2.3.1.1 RIDONDANZA 1 (ridondanza dei likert)
+Per una maggiore leggibilità, i costrutti dello schema ER coinvolti verranno colorati di <span style="color:red">rosso</span>, mentre le ridondanze in <span style="color:blue">blu</span>.
 
-![Ridondanza 1](../Immagini/2.3.1.1%20ridondanza%201.png)
+#### 2.3.1.1 RIDONDANZA 1 (ridondanza dei likert) (DA SISTEMARE!!)
+
+![Ridondanza 1](../Immagini/ridondanze/2.3.1.1_rid_1_cor.png)
 
 ##### 2.3.1.1.1 DERIVAZIONE
 
-L'attributo "numero likert" dell'entità `CONTENUTO MULTIMEDIALE` é derivabile dal conteggio delle partecipazioni di un contenuto multimediale all'associazione `voto`.
+L'attributo **_numero likert_** dell'entità `CONTENUTO MULTIMEDIALE` é derivabile dal conteggio delle partecipazioni di un contenuto multimediale all'associazione `voto`.
 
-L'attributo "totale likert" dell'entità `CONTENUTO MULTIMEDIALE` é derivabile dalla somma dei valori dell'attributo **likert** dell'associazione `voto` di tutte le partecipazioni di un contenuto multimediale a questa associazione.
+<!--L'attributo "totale likert" dell'entità `CONTENUTO MULTIMEDIALE` é derivabile dalla somma dei valori dell'attributo **_likert_** dell'associazione `voto` di tutte le partecipazioni di un contenuto multimediale a questa associazione.-->
 
 ##### 2.3.1.1.2 OPERAZIONI COINVOLTE
 
 | Operazione | Descrizione                                                                                                  | Tipo | Frequenza           |
 | ---------- | ------------------------------------------------------------------------------------------------------------ | ---- | ------------------- |
-| Op3        | Per ogni streamer, calcola la media dei like per ogni contenuto multimediale                                 | B    | Una volta al giorno |
 | Op4        | Gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati | B    | Una volta al giorno |
 
 ##### 2.3.1.1.3 PRESENZA DI RIDONDANZA
-
+<!--
 ###### 2.3.1.1.3.1 Op3
 
 > Schema di operazione
@@ -244,26 +243,30 @@ Tavola degli accessi:
 | S:    | 0                |
 | L:    | 1                |
 | TOT:  | 1 accesso/giorno |
+-->
+###### 2.3.1.1.3.1 Op4
 
-###### 2.3.1.1.3.2 Op4
+Schema di operazione:
 
-> Schema di operazione
+![Schema operazione rid1](../Immagini/ridondanze/2.3.1.1_schema1.png)
 
 Tavola degli accessi:
 
-| Concetto               | Costrutto | Accessi | Tipo | Descrizione                                       |
-| ---------------------- | --------- | ------- | ---- | ------------------------------------------------- |
-| VIDEO                  | E         | 1       | L    | Prendo tutti gli identificativi dei video         |
-| CONTENUTO MULTIMEDIALE | E         | 1       | L    | Cerco "totale likert" e "numero likert" dei video |
+| Concetto               | Costrutto | Accessi     | Tipo | Descrizione                                          |
+| ---------------------- | --------- | ----------- | ---- | ---------------------------------------------------- |
+| VIDEO                  | E         | 1           | L    | Prendo tutti i contenuti multimediali che sono video |
+| CONTENUTO MULTIMEDIALE | E         | 1 (200,000) | L    | Leggo il numero di likert per ogni video             |
 
-| Costo | Valori           |
-| ----- | ---------------- |
-| S:    | 0                |
-| L:    | 2                |
-| TOT:  | 2 accesso/giorno |
+I video più votati saranno quelli con il maggiore numero di voti likert ricevuti.
+
+| Costo | Valori                                |
+| ----- | ------------------------------------- |
+| S:    | 0                                     |
+| L:    | 2 ((200,000 + 1) * 1 = 200,000 circa) |
+| TOT:  | 2 accesso/giorno (200,000)            |
 
 ##### 2.3.1.1.4 ASSENZA DI RIDONDANZA
-
+<!--
 ###### 2.3.1.1.4.1 Op3
 
 > Schema di operazione
@@ -272,70 +275,82 @@ Tavola degli accessi:
 
 | Concetto | Costrutto | Accessi | Tipo | Descrizione    |
 | -------- | --------- | ------- | ---- | -------------- |
-| VOTO     | E         | 1       | L    | Cerco "likert" |
+| voto     | A         | 1       | L    | Cerco "likert" |
 
 | Costo | Valori           |
 | ----- | ---------------- |
 | S:    | 0                |
 | L:    | 1                |
 | TOT:  | 1 accesso/giorno |
+-->
+###### 2.3.1.1.4.1 Op4
 
-###### 2.3.1.1.4.2 Op4
+Schema di operazione:
 
-> Schema di operazione
+![Schema operazione rid1a](../Immagini/ridondanze/2.3.1.1_schema1a.png)
 
 Tavola degli accessi:
 
-| Concetto | Costrutto | Accessi | Tipo | Descrizione                               |
-| -------- | --------- | ------- | ---- | ----------------------------------------- |
-| VIDEO    | E         | 1       | L    | Prendo tutti gli identificativi dei video |
-| VOTO     | E         | 1       | L    | Cerco "likert"                            |
+| Concetto | Costrutto | Accessi                 | Tipo | Descrizione                                          |
+| -------- | --------- | ----------------------- | ---- | ---------------------------------------------------- |
+| VIDEO    | E         | 1                       | L    | Prendo tutti i contenuti multimediali che sono video |
+| voto     | A         | 1 (1,400,000/200,000=7) | L    | Cerco il voto in likert di ogni video                |
 
-| Costo | Valori           |
-| ----- | ---------------- |
-| S:    | 0                |
-| L:    | 2                |
-| TOT:  | 2 accesso/giorno |
+| Costo | Valori               |
+| ----- | -------------------- |
+| S:    | 0                    |
+| L:    | 2 (7+1=8)            |
+| TOT:  | 2 accesso/giorno (8) |
 
 ##### 2.3.1.1.5 TOTALI PER RIDONDANZA 1
 
+> NB tipo dato integer = 4 byte
+
 | **Presenza di ridondanza** |                                   |
 | -------------------------- | --------------------------------- |
-| Spazio:                    | 8 * 1,000,000 Byte aggiuntivi |
-| Tempo:                     | 4 accessi/giorno                  |
+| Spazio:                    | 4 * 1 * 1,000,000 Byte aggiuntivi |
+| Tempo:                     | 4 accessi/giorno (200,000 circa)  |
 
-| **Assenza di ridondanza** |                  |
-| ------------------------- | ---------------- |
-| Spazio:                   | 0                |
-| Tempo:                    | 4 accessi/giorno |
+| **Assenza di ridondanza** |                      |
+| ------------------------- | -------------------- |
+| Spazio:                   | 0                    |
+| Tempo:                    | 4 accessi/giorno (8) |
 
 ##### 2.3.1.1.6 Decisione
 
-Questa ridondanza risulta inutile in quanto non risparmia nemmeno un singolo accesso sprecando circa 7.6 MB.
+<!--Questa ridondanza risulta inutile in quanto non risparmia nemmeno un singolo accesso sprecando circa 7.6 MB.
+Per questo motivo, si decide di eliminare la ridondanza togliendo i due attributi **_numero likert_** e **_totale likert_**.-->
+Questa ridondanza richiede molti accessi al giorno e uno spreco di circa 4 MB: per questo motivo, si decide di eliminare questa ridondanza togliendo l'attributo **_numero likert_** all'entità `CONTENUTO MULTIMEDIALE`.
 
-#### 2.3.1.2 RIDONDANZA 2 (ridondanza dell'affluenza media)
+#### 2.3.1.2 RIDONDANZA 2 (ridondanza dell'affluenza media) (DA RIVEDERE!)
 
-![Ridondanza 2](../Immagini/2.3.1.2%20ridondanza%202.png)
+![Ridondanza 2](../Immagini/ridondanze/2.3.1.2_rid_2_cor.png)
 
 ##### 2.3.1.2.1 DERIVAZIONE
 
-L'attributo "affluenza media" presente nella tabella `LIVE` é derivabile dalla somma del numero degli utenti spettatori presenti nella tabella `AFFLUENZA` a uno specifico contenuto multimediale diviso il numero delle righe coinvolte nella somma semre dalla medesima tabella.
+<!--L'attributo "affluenza media" dell'entità `LIVE` é derivabile dalla somma dei valori dell'attributo **_numero spettatori_** dell'entità `AFFLUENZA` diviso il numero di affluenze calcolate a partire dall'inizio della live (**_data inizio_**).-->
+
+L'attributo **_affluenza media_** dell'entità `LIVE` é derivabile dalla partecipazione di una live all'associazione `medie spettatori` non appena la live termina e considerando la data di inizio della stessa per trovare tutte le live del mese.
 
 ##### 2.3.1.2.2 OPERAZIONI COINVOLTE
 
-| Operazione | Descrizione                                                                               | Tipo | Frequenza           |
-| ---------- | ----------------------------------------------------------------------------------------- | ---- | ------------------- |
-| Op9        | Stilare la media dei degli spettatori per ogni live uscito in quel mese per ogni streamer | B    | Una volta ogni mese |
+| Operazione | Descrizione                                                                            | Tipo | Frequenza         |
+| ---------- | -------------------------------------------------------------------------------------- | ---- | ----------------- |
+| Op9        | Per ogni streamer, stilare la media degli spettatori per ogni live uscita in quel mese | B    | Una volta al mese |
 
 ##### 2.3.1.2.3 PRESENZA DI RIDONDANZA
 
 ###### 2.3.1.2.3.1 Op9
 
+Schema di operazione:
+
+![Schema operazione rid2](../Immagini/ridondanze/2.3.1.2_schema_op_rid2.png)
+
 Tavola degli accessi:
 
-| Concetto | Costrutto | Accessi | Tipo | Descrizione                             |
-| -------- | --------- | ------- | ---- | --------------------------------------- |
-| LIVE     | E         | 1       | L    | Cerco "media affluenza" e "data inizio" |
+| Concetto | Costrutto | Accessi | Tipo | Descrizione                                              |
+| -------- | --------- | ------- | ---- | -------------------------------------------------------- |
+| LIVE     | E         | 1       | L    | Leggo l'affluenza media e la data di inizio di ogni live |
 
 | Costo | Valori         |
 | ----- | -------------- |
@@ -347,36 +362,42 @@ Tavola degli accessi:
 
 ###### 2.3.1.2.4.1 Op9
 
+Schema di operazione:
+
+![Schema operazione rid2a](../Immagini/ridondanze/2.3.1.2_schema_op_rid2a.png)
+
 Tavola degli accessi:
 
-| Concetto  | Costrutto | Accessi | Tipo | Descrizione                                           |
-| --------- | --------- | ------- | ---- | ----------------------------------------------------- |
-| LIVE      | E         | 1       | L    | Cerco "data inizio" e filtro quelli del mese corrente |
-| AFFLUENZA | E         | 1       | L    | Cerco "numero spettatori"                             |
+| Concetto         | Costrutto | Accessi               | Tipo | Descrizione                                                                |
+| ---------------- | --------- | --------------------- | ---- | -------------------------------------------------------------------------- |
+| LIVE             | E         | 1                     | L    | Leggo la data di inizio di tutte le live e filtro quelle del mese corrente |
+| media spettatori | A         | 1 (500,000/250,000=2) | L    | Cerco la media di spettatori per ogni live del mese corrente               |
 
+<!--
 > uno volta ottenuto questi due dati, faccio la somma del numero degli spettatori diviso il numero di righe coivolte di quella specifica live.
+-->
 
-| Costo | Valori         |
-| ----- | -------------- |
-| S:    | 0              |
-| L:    | 2              |
-| TOT:  | 2 accessi/mese |
+| Costo | Valori             |
+| ----- | ------------------ |
+| S:    | 0                  |
+| L:    | 2 (1+2=3)          |
+| TOT:  | 2 accessi/mese (3) |
 
 ###### 2.3.1.2.5 TOTALI PER RIDONDANZA 2
 
 | **Presenza di ridondanza** |                           |
 | -------------------------- | ------------------------- |
-| Spazio:                    | 4 * 100,000 Byte occupati |
+| Spazio:                    | 4 * 250,000 Byte occupati |
 | Tempo:                     | 1 accesso/mese            |
 
-| **Assenza di ridondanza** |                |
-| ------------------------- | -------------- |
-| Spazio:                   | 0              |
-| Tempo:                    | 2 accessi/mese |
+| **Assenza di ridondanza** |                    |
+| ------------------------- | ------------------ |
+| Spazio:                   | 0                  |
+| Tempo:                    | 2 accessi/mese (3) |
 
 ###### 2.3.1.2.6 Decisione
 
-In conclusione, si risulta uno spreco di circa 390 KB solamente per dimezzare il numero di accessi mensili.
+In conclusione, si evidenzia uno spreco di 1 MB solamente per diminuire il numero di accessi mensili: per questo motivo, si decide di togliere la ridondanza eliminando l'attributo **_affluenza media_** dell'entità `LIVE`.
 
 ### 2.3.2 Eliminazione delle generalizzazioni
 
@@ -384,39 +405,65 @@ Nel processo di ristrutturazione, ci concentreremo sull'analisi e la rimozione d
 
 - **generalizzazione dell'utente**
 - **generalizzazione del contenuto multimediale**
-- **generalizzazione del'interazione utenti-contenuto multimediale**
+- **generalizzazione dell'interazione utenti-contenuto multimediale**
 
 #### 2.3.2.1 Generalizzazione 1 (generalizzazione dell'utente)
 
-![Generalizzazione 1a](../Immagini/2.3.2.1%20generalizzazione%201a.png)
+![Generalizzazione 1a](../Immagini/generalizzazioni/2.3.2.1_gen_1a_cor.png)
 
-Dallo schema E-R concettuale, noto che le tabelle figlie `GUEST`, `STREAMER` e `SPETTATORE` non hanno attributi, concentramoci prima sugli ultimi due:
+Dallo schema E-R concettuale, si può notare che le entità figlie `GUEST`, `STREAMER` e `SPETTATORE` o non hanno attributi oppure ne hanno solamente uno.
+Ci si concentra ora sulle ultime due entità figlie, `STREAMER` e `SPETTATORE`: non sono effettivamente delle entità, ma dei ruoli che l'entità padre `REGISTRATO` può assumere di tanto in tanto.
+Le due entità quindi possono essere incorporate nell'entità padre `REGISTRATO` senza aggiungere attributi "tipo", siccome il loro ruolo è facilmente intuibile dalle azioni di un utente registrato.
+La partecipazione dell'entità `REGISTRATO` all'associazione **_gestione<sub>(S-C)</sub>_** viene quindi aggiornata a (0,1), siccome solo uno streamer può avere un canale, mentre uno spettatore può non averlo (le altre partecipazioni e relative cardinalità rimangono inalterate).
+L'attributo **_affiliate_** che prima era dell'entità figlia `STREAMER` viene ora trasferito all'entità padre, ma con cardinalità (0,1) siccome la qualifica di affiliate può essere assegnata solo ad un utente streamer.
 
-`STREAMER` e `SPETTATORE`, le due tabelle non sono effettivamente delle entità ma dei ruoli che l'entità padre `REGISTRATO` può assumere di tanto in tanto, quindi le tabelle possono essere incorporate nella tabella `REGISTRATO` senza aggiungere attributi "tipo".
+![Generalizzazione 1b](../Immagini/generalizzazioni/2.3.2.1_gen_1b_cor.png)
 
-![Generalizzazione 1b](../Immagini/2.3.2.1%20generalizzazione%201b.png)
+Adesso ci si concentra sull'entità `GUEST` senza attributi rimasta:
 
-Adesso ci concentriamo sulla tabella senza attributi rimasta:
+qui risulta controproducente incorporare le entità figlie `GUEST` e `REGISTRATO` nell'entità padre `UTENTE`, in quanto si creerebbero degli sprechi di spazio producendo una base dati denormalizzata con
+valori nulli per colpa di `GUEST`. Si decide quindi di incorporare solamente l'entità `GUEST` nell'entità padre in quanto per identitficare un'utente guest basta solamente un nome utente univoco.
 
-qui risulta controproducente incorporare le tabelle figlie, `GUEST` e `REGISTRATO`, alla tabella padre `UTENTE`, in quanto si creerebbero degli sprechi di spazio producendo una base dati denormalizzata con
-valori nulli per colpa di `GUEST`, insomma non è l'opzione giusta, ma potremmo incorporare solamente la tabella `GUEST` alla tabella madre in quanto un'utente guest, per essere identificato, basta solamente un nome utente univoco.
+![Generalizzazione 1c](../Immagini/generalizzazioni/2.3.2.1_gen_1c_cor.png)
 
-![Generalizzazione 1c](../Immagini/2.3.2.1%20generalizzazione%201c.png)
+Ora rimane solo l'entità figlia `REGISTRATO`: avendo numerosi attributi, per evitare di incorporarla nell'entità padre causando uno spreco di spazio scritto precedentemente, si sostituisce la generalizzazione con l'associazione **_partizione_**.
 
-Alla fine rimane solo la tabella figlia `REGISTRATO` che ha numerosi attributi, quindi per evitare di incorporare alla tabella madre che crea sprechi di spazio scritto precedentemente, sostituisco la generalizzazione con una associazione "parte di".
+![Generalizzazione 1d](../Immagini/generalizzazioni/2.3.2.1_gen_1d_cor.png)
 
-![Generalizzazione 1d](../Immagini/2.3.2.1%20generalizzazione%201d.png)
-
-Avendo due tabelle si crea una divisione tra le due sui permessi, in modo che la tabella `UTENTE` comprende sia utenti guest e utenti registrati e può essere utilizzato per permettere alla sola visualizzazione dei contenuti multimediali.
-Invece la tabella `REGISTRATO` viene utilizzato per compiere azioni dove gli utenti guest sono esclusi.
+Avendo ora due entità si crea una divisione tra le due sui permessi, per fare in modo che l'entità `UTENTE` comprenda sia utenti guest che utenti registrati e possa essere utilizzata per permettere solamente la visualizzazione dei contenuti multimediali, vietando qualsiasi altra azione ai guest.
+L'entità `REGISTRATO` invece viene utilizzata per compiere azioni riservate agli utenti registrati.
 
 #### 2.3.2.2 Generalizzazione 2 (generalizzazione del contenuto multimediale)
 
-![Generalizzazione 2a](../Immagini/2.3.2.2%20generalizzazione%202a.png)
+![Generalizzazione 2a](../Immagini/generalizzazioni/2.3.2.2_gen_2a_cor.png)
 
-#### 2.3.2.3 Generalizzazione 3 (generalizzazione del'interazione utenti-contenuto multimediale)
+Dallo schema ER (considerato dopo l'eliminazione delle ridondanze), si può notare che la generalizzazione è totale ed esclusiva: le operazioni fanno ampiamente distinzione tra le entità figlie e a dimostrazione di ciò si ha la presenza di associazioni che coinvolgono le entità figlie separatamente; l'entità genitore però viene utilizzata in alcune operazioni più generiche, come ad esempio il calcolo della media dei like di ogni contenuto multimediale, indipendentemente che esso sia un video, una clip o una live.
+Essendo le entità figlie delle specializzazioni dell'entità padre `CONTENUTO MULTIMEDIALE` e avente quest'ultima pochi attributi, si potrebbe pernsare di accorpare ad esse l'entità genitore.
 
-![Generalizzazione 3a](../Immagini/2.3.2.3%20generalizzazione%203a.png)
+Questo però causerebbe almeno due problemi:
+
+ 1) l'aggiunta alle entità figlie di ogni associazione a cui l'entità padre partecipa, triplicando quindi il numero di associazioni    corrispondenti a **_voto_**, **_visita_**, **_appartenenza_**, **_associazione<sub>(CM-H)</sub>_** e **_contenitore_**;
+ 2) l'aumento degli accessi alle entità figlie e alle relative associazioni per operazioni che coinvolgono un contenuto multimediale in modo generico.
+
+Se invece si decidesse di accorpare le entità figlie all'entità padre, questo procedimento porterebbe anche all'introduzione di associazioni ricorsive e alla presenza di molti valori nulli (nonchè l'aggiunta di molti vincoli), ottenendo una base di dati denormalizzata e un notevole spreco di spazio in memoria.
+
+Anche se potrebbe generare più accessi, si decide infine di sostituire la generalizzazione con associazioni (**_contenuto live_**, **_contenuto video_** e **_contenuto clip_**), siccome questo procedimento produce entità con pochi attributi e garantisce il recupero di molti dati con un unico accesso a livello fisico.
+
+![Generalizzazione 2b](../Immagini/generalizzazioni/2.3.2.2_gen_2b.png)
+
+Tutte e tre le nuove associazioni hanno cardinalità (0,1) e (1,1) e le entità `LIVE`, `VIDEO` e `CLIP` sono identificate esternamente dall'entità `CONTENUTO MULTIMEDIALE`.
+Si aggiunge anche un vincolo di partecipazione alle tre nuove associazioni, in quanto un occorrenza di `CONTENUTO MULTIMEDIALE` non può partecipare a più di una associzione per volta: un contenuto multimediale deve infatti essere un video, una live o una clip.
+
+#### 2.3.2.3 Generalizzazione 3 (generalizzazione dell'interazione utenti-contenuto multimediale)
+
+![Generalizzazione 3a](../Immagini/generalizzazioni/2.3.2.3_gen_3a_cor.png)
+
+Dallo schema ER, si nota subito che le entità figlie partecipano entrambe ad una associazione con la medesima entità `EMOJI`. Inoltre, le operazioni che coinvolgono la generalizzazione non fanno molta distinzione tra le occorrenze delle varie entità, specialmente considerando che un commento e una reazione possono essere viste come una generica interazione sia rispetto all'utente che la crea che alla live che la riceve. Un aspetto degno di nota è la presenza di attributi solo nell'entità `COMMENTO` che, anche se occupano spazio (specialmente il messaggio che costituisce il commento), non hanno corrispondenti nell'entità `REAZIONE`. Infine, si possono osservare le cardinalità in gran parte identiche con le quali le entità figlie vengono associate all'entità `EMOJI`: possono infatti essere uniformate a (0,N) grazie all'introduzione di vincoli, permettendo la fusione delle associazioni **_presenza<sub>(C-E)</sub>_** e **_presenza<sub>(R-E)</sub>_** in una sola associazione **_presenza_**.
+Per questi motivi, si sceglie di accorpare le entità figlie nell'entità genitore `INTERAZIONE`.
+
+![Generalizzazione 3b](../Immagini/generalizzazioni/2.3.2.3_gen_3b.png)
+
+Per distinguere un commento da una reazione, è stato introdotto l'attributo **_tipologia_** e si impone il vincolo che un'iterazione di tipo **_reazione_** partecipi all'associazione **_presenza_** solamente con cardinalità (1,1). Gli attributi dell'entità `COMMENTO` sono stati anch'essi trasferiti all'entità `INTERAZIONE`, ma resi opzionali, in quanto non necessari per una reazione. Anche se questa scelta può portare a valori nulli e a uno spreco di spazio, permette però di ridurre notevolmente il numero di accessi a entità e associazioni e di semplificare le operazioni.
 
 ### 2.3.3 Partizionamento/accorpamento di entità e associazioni
 
