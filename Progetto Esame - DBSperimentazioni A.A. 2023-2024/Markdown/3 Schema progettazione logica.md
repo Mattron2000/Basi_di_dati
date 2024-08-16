@@ -414,15 +414,25 @@ Nel processo di ristrutturazione, ci concentreremo sull'analisi e la rimozione d
 Dallo schema E-R concettuale, si può notare che le entità figlie `GUEST`, `STREAMER` e `SPETTATORE` o non hanno attributi oppure ne hanno solamente uno.
 Ci si concentra ora sulle ultime due entità figlie, `STREAMER` e `SPETTATORE`: non sono effettivamente delle entità, ma dei ruoli che l'entità padre `REGISTRATO` può assumere di tanto in tanto.
 Le due entità quindi possono essere incorporate nell'entità padre `REGISTRATO` senza aggiungere attributi "tipo", siccome il loro ruolo è facilmente intuibile dalle azioni di un utente registrato.
-La partecipazione dell'entità `REGISTRATO` all'associazione **_gestione<sub>(S-C)</sub>_** viene quindi aggiornata a (0,1), siccome solo uno streamer può avere un canale, mentre uno spettatore può non averlo (le altre partecipazioni e relative cardinalità rimangono inalterate).
+
+Le cardinalità delle partecipazioni dell'entità `REGISTRATO` alle associazioni **_gestione<sub>(S-C)</sub>_** e **_rinnovo_** vengono di conseguenza aggiornate a:
+
+- (0,1) nella prima associazione, siccome solo uno streamer può avere un canale, mentre uno spettatore può non averlo;
+- (0,N) nella seconda associazione, in quanto solo un utente streamer può rinnovare il servizio di hosting (si impone anche il relativo vincolo).
+
+Le altre partecipazioni e relative cardinalità rimangono invece inalterate.
+
 L'attributo **_affiliate_** che prima era dell'entità figlia `STREAMER` viene ora trasferito all'entità padre, ma con cardinalità (0,1) siccome la qualifica di affiliate può essere assegnata solo ad un utente streamer.
+
+Viene inoltre imposto il vincolo che solo uno streamer può partecipare all'associazione **_streaming_**.
 
 ![Generalizzazione 1b](../Immagini/generalizzazioni/2.3.2.1_gen_1b_cor.png)
 
 Adesso ci si concentra sull'entità `GUEST` senza attributi rimasta:
 
-qui risulta controproducente incorporare le entità figlie `GUEST` e `REGISTRATO` nell'entità padre `UTENTE`, in quanto si creerebbero degli sprechi di spazio producendo una base dati denormalizzata con
-valori nulli per colpa di `GUEST`. Si decide quindi di incorporare solamente l'entità `GUEST` nell'entità padre in quanto per identitficare un'utente guest basta solamente un nome utente univoco.
+qui risulta controproducente incorporare le entità figlie `GUEST` e `REGISTRATO` nell'entità padre `UTENTE`, in quanto si creerebbero degli sprechi di spazio producendo una base dati denormalizzata con valori nulli per colpa di `GUEST`.
+
+Si decide quindi di incorporare solamente l'entità `GUEST` nell'entità padre in quanto per identitficare un'utente guest basta solamente un nome utente univoco.
 
 ![Generalizzazione 1c](../Immagini/generalizzazioni/2.3.2.1_gen_1c_cor.png)
 
@@ -438,6 +448,7 @@ L'entità `REGISTRATO` invece viene utilizzata per compiere azioni riservate agl
 ![Generalizzazione 2a](../Immagini/generalizzazioni/2.3.2.2_gen_2a_cor.png)
 
 Dallo schema ER (considerato dopo l'eliminazione delle ridondanze), si può notare che la generalizzazione è totale ed esclusiva: le operazioni fanno ampiamente distinzione tra le entità figlie e a dimostrazione di ciò si ha la presenza di associazioni che coinvolgono le entità figlie separatamente; l'entità genitore però viene utilizzata in alcune operazioni più generiche, come ad esempio il calcolo della media dei like di ogni contenuto multimediale, indipendentemente che esso sia un video, una clip o una live.
+
 Essendo le entità figlie delle specializzazioni dell'entità padre `CONTENUTO MULTIMEDIALE` e avente quest'ultima pochi attributi, si potrebbe pernsare di accorpare ad esse l'entità genitore.
 
 Questo però causerebbe almeno due problemi:
@@ -452,18 +463,30 @@ Anche se potrebbe generare più accessi, si decide infine di sostituire la gener
 ![Generalizzazione 2b](../Immagini/generalizzazioni/2.3.2.2_gen_2b.png)
 
 Tutte e tre le nuove associazioni hanno cardinalità (0,1) e (1,1) e le entità `LIVE`, `VIDEO` e `CLIP` sono identificate esternamente dall'entità `CONTENUTO MULTIMEDIALE`.
+
 Si aggiunge anche un vincolo di partecipazione alle tre nuove associazioni, in quanto un occorrenza di `CONTENUTO MULTIMEDIALE` non può partecipare a più di una associzione per volta: un contenuto multimediale deve infatti essere un video, una live o una clip.
 
 #### 2.3.2.3 Generalizzazione 3 (generalizzazione dell'interazione utenti-contenuto multimediale)
 
 ![Generalizzazione 3a](../Immagini/generalizzazioni/2.3.2.3_gen_3a_cor.png)
 
-Dallo schema ER, si nota subito che le entità figlie partecipano entrambe ad una associazione con la medesima entità `EMOJI`. Inoltre, le operazioni che coinvolgono la generalizzazione non fanno molta distinzione tra le occorrenze delle varie entità, specialmente considerando che un commento e una reazione possono essere viste come una generica interazione sia rispetto all'utente che la crea che alla live che la riceve. Un aspetto degno di nota è la presenza di attributi solo nell'entità `COMMENTO` che, anche se occupano spazio (specialmente il messaggio che costituisce il commento), non hanno corrispondenti nell'entità `REAZIONE`. Infine, si possono osservare le cardinalità in gran parte identiche con le quali le entità figlie vengono associate all'entità `EMOJI`: possono infatti essere uniformate a (0,N) grazie all'introduzione di vincoli, permettendo la fusione delle associazioni **_presenza<sub>(C-E)</sub>_** e **_presenza<sub>(R-E)</sub>_** in una sola associazione **_presenza_**.
+Dallo schema ER, si nota subito che le entità figlie partecipano entrambe ad una associazione con la medesima entità `EMOJI`.
+
+Inoltre, le operazioni che coinvolgono la generalizzazione non fanno molta distinzione tra le occorrenze delle varie entità, specialmente considerando che un commento e una reazione possono essere viste come una generica interazione sia rispetto all'utente che la crea che alla live che la riceve.
+
+Un aspetto degno di nota è la presenza di attributi solo nell'entità `COMMENTO` che, anche se occupano spazio (specialmente il messaggio che costituisce il commento), non hanno corrispondenti nell'entità `REAZIONE`.
+
+Infine, si possono osservare le cardinalità in gran parte identiche con le quali le entità figlie vengono associate all'entità `EMOJI`: possono infatti essere uniformate a (0,N) grazie all'introduzione di vincoli, permettendo la fusione delle associazioni **_presenza<sub>(C-E)</sub>_** e **_presenza<sub>(R-E)</sub>_** in una sola associazione **_presenza_**.
+
 Per questi motivi, si sceglie di accorpare le entità figlie nell'entità genitore `INTERAZIONE`.
 
 ![Generalizzazione 3b](../Immagini/generalizzazioni/2.3.2.3_gen_3b.png)
 
-Per distinguere un commento da una reazione, è stato introdotto l'attributo **_tipologia_** e si impone il vincolo che un'iterazione di tipo **_reazione_** partecipi all'associazione **_presenza_** solamente con cardinalità (1,1). Gli attributi dell'entità `COMMENTO` sono stati anch'essi trasferiti all'entità `INTERAZIONE`, ma resi opzionali, in quanto non necessari per una reazione. Anche se questa scelta può portare a valori nulli e a uno spreco di spazio, permette però di ridurre notevolmente il numero di accessi a entità e associazioni e di semplificare le operazioni.
+Per distinguere un commento da una reazione, è stato introdotto l'attributo **_tipologia_** e si impone il vincolo che un'iterazione di tipo **_reazione_** partecipi all'associazione **_presenza_** solamente con cardinalità (1,1). 
+
+Gli attributi dell'entità `COMMENTO` sono stati anch'essi trasferiti all'entità `INTERAZIONE`, ma resi opzionali, in quanto non necessari per una reazione.
+
+Anche se questa scelta può portare a valori nulli e a uno spreco di spazio, permette però di ridurre notevolmente il numero di accessi a entità e associazioni e di semplificare le operazioni.
 
 ### 2.3.3 Partizionamento/accorpamento di entità e associazioni
 
