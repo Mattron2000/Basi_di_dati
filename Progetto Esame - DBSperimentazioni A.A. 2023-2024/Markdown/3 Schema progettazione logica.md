@@ -37,7 +37,7 @@
       - [2.3.2.3.1 Regole aziendali introdotte](#23231-regole-aziendali-introdotte)
   - [2.3.3 Partizionamento/accorpamento di entità e associazioni](#233-partizionamentoaccorpamento-di-entità-e-associazioni)
     - [2.3.3.1 Partizionamento/Accorpamento 1 (partizionamento di associazione)](#2331-partizionamentoaccorpamento-1-partizionamento-di-associazione)
-  - [2.3.4.scelta degli identificatori principali](#234scelta-degli-identificatori-principali)
+  - [2.3.4 Scelta degli identificatori principali](#234-scelta-degli-identificatori-principali)
 - [2.4 Schema E-R ristrutturato + regole aziendali](#24-schema-e-r-ristrutturato--regole-aziendali)
   - [2.4.1 Regole aziendali](#241-regole-aziendali)
   - [2.4.2 Vincoli di Integrità](#242-vincoli-di-integrità)
@@ -418,7 +418,7 @@ Dallo schema E-R concettuale, si può notare che le entità figlie `GUEST`, `STR
 Ci si concentra ora sulle ultime due entità figlie, `STREAMER` e `SPETTATORE`: non sono effettivamente delle entità, ma dei ruoli che l'entità padre `REGISTRATO` può assumere di tanto in tanto.
 Le due entità quindi possono essere incorporate nell'entità padre `REGISTRATO` senza aggiungere attributi "tipo", siccome il loro ruolo è facilmente intuibile dalle azioni di un utente registrato.
 
-Le cardinalità delle partecipazioni dell'entità `REGISTRATO` alle associazioni `gestione<sub>(S-C)</sub>` e `rinnovo` vengono di conseguenza aggiornate a:
+Le cardinalità delle partecipazioni dell'entità `REGISTRATO` alle associazioni `gestione(S-C)` e `rinnovo` vengono di conseguenza aggiornate a:
 
 - (0,1) nella prima associazione, siccome solo uno streamer può avere un canale, mentre uno spettatore può non averlo;
 - (0,N) nella seconda associazione, in quanto solo un utente streamer può rinnovare il servizio di hosting (si impone anche il relativo vincolo).
@@ -462,7 +462,7 @@ Essendo le entità figlie delle specializzazioni dell'entità padre `CONTENUTO M
 
 Questo però causerebbe almeno due problemi:
 
- 1) l'aggiunta alle entità figlie di ogni associazione a cui l'entità padre partecipa, triplicando quindi il numero di associazioni    corrispondenti a `voto`, `visita`, `appartenenza`, `associazione<sub>(CM-H)</sub>` e `contenitore`;
+ 1) l'aggiunta alle entità figlie di ogni associazione a cui l'entità padre partecipa, triplicando quindi il numero di associazioni    corrispondenti a `voto`, `visita`, `appartenenza`, `associazione(CM-H)` e `contenitore`;
  2) l'aumento degli accessi alle entità figlie e alle relative associazioni per operazioni che coinvolgono un contenuto multimediale in modo generico.
 
 Se invece si decidesse di accorpare le entità figlie all'entità padre, questo procedimento porterebbe anche all'introduzione di associazioni ricorsive e alla presenza di molti valori nulli (nonchè l'aggiunta di molti vincoli), ottenendo una base di dati denormalizzata e un notevole spreco di spazio in memoria (considerando anche i volumi dell'entità `CONTENUTO MULTIMEDIALE`).
@@ -489,7 +489,7 @@ Inoltre, le operazioni che coinvolgono la generalizzazione non fanno molta disti
 
 Un aspetto degno di nota è la presenza di attributi solo nell'entità `COMMENTO` che, anche se occupano spazio (specialmente il messaggio che costituisce il commento), non hanno corrispondenti nell'entità `REAZIONE`.
 
-Infine, si possono osservare le cardinalità in gran parte identiche con le quali le entità figlie vengono associate all'entità `EMOJI`: possono infatti essere uniformate a (0,N) grazie all'introduzione di vincoli, permettendo la fusione delle associazioni `presenza<sub>(C-E)</sub>` e `presenza<sub>(R-E)</sub>` in una sola associazione **_presenza_**.
+Infine, si possono osservare le cardinalità in gran parte identiche con le quali le entità figlie vengono associate all'entità `EMOJI`: possono infatti essere uniformate a (0,N) grazie all'introduzione di vincoli, permettendo la fusione delle associazioni `presenza(C-E)` e `presenza(R-E)` in una sola associazione **_presenza_**.
 
 Per questi motivi, si sceglie di accorpare le entità figlie nell'entità genitore `INTERAZIONE`.
 
@@ -521,20 +521,38 @@ Porzione di schema dopo il partizionamento:
 
 ![Partizionamento 1a](../Immagini/partizionamenti/2.3.3.1_part1a.png)
 
-Si è scelto di partizionare l'associazione `associazione<sub>(CM-H)</sub>` perchè quando si crea un contenuto multimediale, lo si può associare ad hashtag già esistenti (predefiniti) oppure crearne di nuovi: in questo modo si facilitano la creazione e l'aggiunta di nuovi hashtag oltre all'assegnamento di un contenuto multimediale a uno o più hashtag in generale.
+Si è scelto di partizionare l'associazione `associazione(CM-H)` perchè quando si crea un contenuto multimediale, lo si può associare ad hashtag già esistenti (predefiniti) oppure crearne di nuovi: in questo modo si facilitano la creazione e l'aggiunta di nuovi hashtag oltre all'assegnamento di un contenuto multimediale a uno o più hashtag in generale.
 
 La tecnica usata è il **_partizionamento di associazione_** e produce le due nuove associazioni **_nuovo_** e **_predefinito_** che rappresentano rispettivamente gli hashtag nuovi e quelli predefiniti fino a quel momento.
 
-Le nuove cardinalità sono le stesse dell'associazione `associazione<sub>(CM-H)</sub>`, in quanto un contenuto multimediale può essere associato a molti hashtag oppure a nessuno e uno streamer può creare molti nuovi hashtag oppure nessuno da associare ai propri contenuti.
+Le nuove cardinalità sono le stesse dell'associazione `associazione(CM-H)`, in quanto un contenuto multimediale può essere associato a molti hashtag oppure a nessuno e uno streamer può creare molti nuovi hashtag oppure nessuno da associare ai propri contenuti.
 
-### 2.3.4.scelta degli identificatori principali
+### 2.3.4 Scelta degli identificatori principali
 
-| Entità        | Identificatore principale               |
-| ------------- | --------------------------------------- |
-| <nome entità> | <attributo/i scelto/i oppure SURROGATO> |
-|               |                                         |
+| Entità                 | Identificatore principale |
+| ---------------------- | ------------------------- |
+| UTENTE                 | nome utente               |
+| REGISTRATO             | username (_surrogato_)    |
+| PORTAFOGLIO            | utente (_surrogato_)      |
+| DONAZIONE              | utente, timestamp         |
+| MESSAGGIO              | timestamp, username       |
+| CANALE                 | streamer (_surrogato_)    |
+| LINK SOCIAL            | social, streamer          |
+| HOSTING                | timestamp, username       |
+| PROGRAMMAZIONE         | timestamp, username       |
+| CONTENUTO MULTIMEDIALE | titolo, streamer, nome    |
+| LIVE                   | id live (_surrogato_)     |
+| CLIP                   | id clip (_surrogato_)     |
+| VIDEO                  | id video (_surrogato_)    |
+| EMOJI                  | codice                    |
+| CATEGORIA              | nome                      |
+| HASHTAG                | nome                      |
+| INTERAZIONE            | username, id live         |
+| AFFLUENZA              | timestamp, id live        |
 
-> <eventuali commenti. In particolare, va spiegata la scelta di introdurre identificatori surrogati>
+Gli identificatori rappresentati nello schema ristrutturato sono tutti costituiti da pochi attributi e verranno quindi considerati tutti come chiavi primarie.
+
+Molte entità hanno identitficatori esterni. Alcuni di essi però sono stati sostituiti da identificatori surrogati, ma interni: questo perchè in alcuni casi ci si ritrovava ad avere più entità identificate esternamente collegate a catena e, per evitare questo, si è deciso di aggiungere un identificatore a quelle entità che erano identificanti per altre entità, ma al tempo stesso erano a loro volta identificate esternamente.
 
 ## 2.4 Schema E-R ristrutturato + regole aziendali
 
