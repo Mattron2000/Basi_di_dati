@@ -30,10 +30,13 @@
         - [2.3.1.2.6 Decisione](#23126-decisione)
   - [2.3.2 Eliminazione delle generalizzazioni](#232-eliminazione-delle-generalizzazioni)
     - [2.3.2.1 Generalizzazione 1 (generalizzazione dell'utente)](#2321-generalizzazione-1-generalizzazione-dellutente)
+      - [2.3.2.1.1 Regole aziendali introdotte](#23211-regole-aziendali-introdotte)
     - [2.3.2.2 Generalizzazione 2 (generalizzazione del contenuto multimediale)](#2322-generalizzazione-2-generalizzazione-del-contenuto-multimediale)
+      - [2.3.2.2.1 Regole aziendali introdotte](#23221-regole-aziendali-introdotte)
     - [2.3.2.3 Generalizzazione 3 (generalizzazione dell'interazione utenti-contenuto multimediale)](#2323-generalizzazione-3-generalizzazione-dellinterazione-utenti-contenuto-multimediale)
+      - [2.3.2.3.1 Regole aziendali introdotte](#23231-regole-aziendali-introdotte)
   - [2.3.3 Partizionamento/accorpamento di entità e associazioni](#233-partizionamentoaccorpamento-di-entità-e-associazioni)
-    - [2.3.3.1 Partizionamento/Accorpamento 1 ()](#2331-partizionamentoaccorpamento-1-)
+    - [2.3.3.1 Partizionamento/Accorpamento 1 (partizionamento di associazione)](#2331-partizionamentoaccorpamento-1-partizionamento-di-associazione)
   - [2.3.4.scelta degli identificatori principali](#234scelta-degli-identificatori-principali)
 - [2.4 Schema E-R ristrutturato + regole aziendali](#24-schema-e-r-ristrutturato--regole-aziendali)
   - [2.4.1 Regole aziendali](#241-regole-aziendali)
@@ -401,7 +404,7 @@ In conclusione, si evidenzia uno spreco di 1 MB solamente per diminuire il numer
 
 ### 2.3.2 Eliminazione delle generalizzazioni
 
-Nel processo di ristrutturazione, ci concentreremo sull'analisi e la rimozione delle seguenti generalizzazioni:
+Nel processo di ristrutturazione, ci concentreremo sull'analisi e sulla rimozione delle seguenti generalizzazioni:
 
 - **generalizzazione dell'utente**
 - **generalizzazione del contenuto multimediale**
@@ -415,7 +418,7 @@ Dallo schema E-R concettuale, si può notare che le entità figlie `GUEST`, `STR
 Ci si concentra ora sulle ultime due entità figlie, `STREAMER` e `SPETTATORE`: non sono effettivamente delle entità, ma dei ruoli che l'entità padre `REGISTRATO` può assumere di tanto in tanto.
 Le due entità quindi possono essere incorporate nell'entità padre `REGISTRATO` senza aggiungere attributi "tipo", siccome il loro ruolo è facilmente intuibile dalle azioni di un utente registrato.
 
-Le cardinalità delle partecipazioni dell'entità `REGISTRATO` alle associazioni **_gestione<sub>(S-C)</sub>_** e **_rinnovo_** vengono di conseguenza aggiornate a:
+Le cardinalità delle partecipazioni dell'entità `REGISTRATO` alle associazioni `gestione<sub>(S-C)</sub>` e `rinnovo` vengono di conseguenza aggiornate a:
 
 - (0,1) nella prima associazione, siccome solo uno streamer può avere un canale, mentre uno spettatore può non averlo;
 - (0,N) nella seconda associazione, in quanto solo un utente streamer può rinnovare il servizio di hosting (si impone anche il relativo vincolo).
@@ -424,7 +427,7 @@ Le altre partecipazioni e relative cardinalità rimangono invece inalterate.
 
 L'attributo **_affiliate_** che prima era dell'entità figlia `STREAMER` viene ora trasferito all'entità padre, ma con cardinalità (0,1) siccome la qualifica di affiliate può essere assegnata solo ad un utente streamer.
 
-Viene inoltre imposto il vincolo che solo uno streamer può partecipare all'associazione **_streaming_**.
+Viene inoltre imposto il vincolo che solo uno streamer può partecipare all'associazione `streaming`.
 
 ![Generalizzazione 1b](../Immagini/generalizzazioni/2.3.2.1_gen_1b_cor.png)
 
@@ -443,6 +446,12 @@ Ora rimane solo l'entità figlia `REGISTRATO`: avendo numerosi attributi, per ev
 Avendo ora due entità si crea una divisione tra le due sui permessi, per fare in modo che l'entità `UTENTE` comprenda sia utenti guest che utenti registrati e possa essere utilizzata per permettere solamente la visualizzazione dei contenuti multimediali, vietando qualsiasi altra azione ai guest.
 L'entità `REGISTRATO` invece viene utilizzata per compiere azioni riservate agli utenti registrati.
 
+##### 2.3.2.1.1 Regole aziendali introdotte
+
+- RVI: Solo un utente registrato che ha un canale (streamer) può partecipare all'associazione **_rinnovo_**.
+- RVII: Solo uno streamer può avere l'attributo **_affiliate_**.
+- RVIII: Solo uno streamer può partecipare all'associazione **_streaming_**.
+
 #### 2.3.2.2 Generalizzazione 2 (generalizzazione del contenuto multimediale)
 
 ![Generalizzazione 2a](../Immagini/generalizzazioni/2.3.2.2_gen_2a_cor.png)
@@ -453,10 +462,10 @@ Essendo le entità figlie delle specializzazioni dell'entità padre `CONTENUTO M
 
 Questo però causerebbe almeno due problemi:
 
- 1) l'aggiunta alle entità figlie di ogni associazione a cui l'entità padre partecipa, triplicando quindi il numero di associazioni    corrispondenti a **_voto_**, **_visita_**, **_appartenenza_**, **_associazione<sub>(CM-H)</sub>_** e **_contenitore_**;
+ 1) l'aggiunta alle entità figlie di ogni associazione a cui l'entità padre partecipa, triplicando quindi il numero di associazioni    corrispondenti a `voto`, `visita`, `appartenenza`, `associazione<sub>(CM-H)</sub>` e `contenitore`;
  2) l'aumento degli accessi alle entità figlie e alle relative associazioni per operazioni che coinvolgono un contenuto multimediale in modo generico.
 
-Se invece si decidesse di accorpare le entità figlie all'entità padre, questo procedimento porterebbe anche all'introduzione di associazioni ricorsive e alla presenza di molti valori nulli (nonchè l'aggiunta di molti vincoli), ottenendo una base di dati denormalizzata e un notevole spreco di spazio in memoria.
+Se invece si decidesse di accorpare le entità figlie all'entità padre, questo procedimento porterebbe anche all'introduzione di associazioni ricorsive e alla presenza di molti valori nulli (nonchè l'aggiunta di molti vincoli), ottenendo una base di dati denormalizzata e un notevole spreco di spazio in memoria (considerando anche i volumi dell'entità `CONTENUTO MULTIMEDIALE`).
 
 Anche se potrebbe generare più accessi, si decide infine di sostituire la generalizzazione con associazioni (**_contenuto live_**, **_contenuto video_** e **_contenuto clip_**), siccome questo procedimento produce entità con pochi attributi e garantisce il recupero di molti dati con un unico accesso a livello fisico.
 
@@ -464,7 +473,11 @@ Anche se potrebbe generare più accessi, si decide infine di sostituire la gener
 
 Tutte e tre le nuove associazioni hanno cardinalità (0,1) e (1,1) e le entità `LIVE`, `VIDEO` e `CLIP` sono identificate esternamente dall'entità `CONTENUTO MULTIMEDIALE`.
 
-Si aggiunge anche un vincolo di partecipazione alle tre nuove associazioni, in quanto un occorrenza di `CONTENUTO MULTIMEDIALE` non può partecipare a più di una associzione per volta: un contenuto multimediale deve infatti essere un video, una live o una clip.
+Si aggiunge anche un vincolo di partecipazione alle tre nuove associazioni, in quanto un occorrenza di `CONTENUTO MULTIMEDIALE` non può partecipare a più di una associazione per volta: un contenuto multimediale deve infatti essere un video, una live o una clip.
+
+##### 2.3.2.2.1 Regole aziendali introdotte
+
+- RVI: un contenuto multimediale non può partecipare a più di una associazione alla volta tra le associazioni **_contenuto live_**, **_contenuto video_** e **_contenuto clip_**.
 
 #### 2.3.2.3 Generalizzazione 3 (generalizzazione dell'interazione utenti-contenuto multimediale)
 
@@ -476,27 +489,43 @@ Inoltre, le operazioni che coinvolgono la generalizzazione non fanno molta disti
 
 Un aspetto degno di nota è la presenza di attributi solo nell'entità `COMMENTO` che, anche se occupano spazio (specialmente il messaggio che costituisce il commento), non hanno corrispondenti nell'entità `REAZIONE`.
 
-Infine, si possono osservare le cardinalità in gran parte identiche con le quali le entità figlie vengono associate all'entità `EMOJI`: possono infatti essere uniformate a (0,N) grazie all'introduzione di vincoli, permettendo la fusione delle associazioni **_presenza<sub>(C-E)</sub>_** e **_presenza<sub>(R-E)</sub>_** in una sola associazione **_presenza_**.
+Infine, si possono osservare le cardinalità in gran parte identiche con le quali le entità figlie vengono associate all'entità `EMOJI`: possono infatti essere uniformate a (0,N) grazie all'introduzione di vincoli, permettendo la fusione delle associazioni `presenza<sub>(C-E)</sub>` e `presenza<sub>(R-E)</sub>` in una sola associazione **_presenza_**.
 
 Per questi motivi, si sceglie di accorpare le entità figlie nell'entità genitore `INTERAZIONE`.
 
 ![Generalizzazione 3b](../Immagini/generalizzazioni/2.3.2.3_gen_3b.png)
 
-Per distinguere un commento da una reazione, è stato introdotto l'attributo **_tipologia_** e si impone il vincolo che un'iterazione di tipo **_reazione_** partecipi all'associazione **_presenza_** solamente con cardinalità (1,1). 
+Per distinguere un commento da una reazione, è stato introdotto l'attributo **_tipologia_** e si impone il vincolo che un'interazione di tipo **_reazione_** partecipi all'associazione **_presenza_** solamente con cardinalità (1,1).
 
 Gli attributi dell'entità `COMMENTO` sono stati anch'essi trasferiti all'entità `INTERAZIONE`, ma resi opzionali, in quanto non necessari per una reazione.
 
 Anche se questa scelta può portare a valori nulli e a uno spreco di spazio, permette però di ridurre notevolmente il numero di accessi a entità e associazioni e di semplificare le operazioni.
 
+##### 2.3.2.3.1 Regole aziendali introdotte
+
+- RVI: una reazione può partecipare all'associazione **_presenza_** solamente con cardinalità (1,1).
+
 ### 2.3.3 Partizionamento/accorpamento di entità e associazioni
 
-> <se ce ne sono>
+Nel processo di ristrutturazione, ci concentreremo sul partizionamento dell'associazione **_associazione<sub>(CM-H)</sub>_** che mette in relazione le entità `CONTENUTO MULTIMEDIALE` e `HASHTAG`.
 
-#### 2.3.3.1 Partizionamento/Accorpamento 1 (<generalizzazione>)
+Per comodità, le entità e associzioni coinvolte verranno colorate di <span style="color:blue">**blu**</span>.
 
-> PORZIONE DI SCHEMA PRIMA E DOPO  DEL PARTIZIONAMENTO/ACCORPAMENTO
+#### 2.3.3.1 Partizionamento/Accorpamento 1 (partizionamento di associazione)
 
-> <commenti su tecnica usata e motivazioni>
+Porzione di schema prima del partizionamento:
+
+![Partizionamento 1](../Immagini/partizionamenti/2.3.3.1_part1.png)
+
+Porzione di schema dopo il partizionamento:
+
+![Partizionamento 1a](../Immagini/partizionamenti/2.3.3.1_part1a.png)
+
+Si è scelto di partizionare l'associazione `associazione<sub>(CM-H)</sub>` perchè quando si crea un contenuto multimediale, lo si può associare ad hashtag già esistenti (predefiniti) oppure crearne di nuovi: in questo modo si facilitano la creazione e l'aggiunta di nuovi hashtag oltre all'assegnamento di un contenuto multimediale a uno o più hashtag in generale.
+
+La tecnica usata è il **_partizionamento di associazione_** e produce le due nuove associazioni **_nuovo_** e **_predefinito_** che rappresentano rispettivamente gli hashtag nuovi e quelli predefiniti fino a quel momento.
+
+Le nuove cardinalità sono le stesse dell'associazione `associazione<sub>(CM-H)</sub>`, in quanto un contenuto multimediale può essere associato a molti hashtag oppure a nessuno e uno streamer può creare molti nuovi hashtag oppure nessuno da associare ai propri contenuti.
 
 ### 2.3.4.scelta degli identificatori principali
 
