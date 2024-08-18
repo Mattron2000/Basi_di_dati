@@ -597,3 +597,101 @@ Molte entità hanno identitficatori esterni. Alcuni di essi però sono stati sos
 > <Relazione1 (Identificatore, Attributo1, …)>
 > <Relazione2 (Identificatore, Attributo1, …) Relazione2 (Attributo1) referenzia Relazionex (Attributoy)>
 > <Relazione3 (Identificatore, Attributo1, …)>
+
+Utente(<U>NomeUtente</U>)
+
+Registrato(<U>Username</U>, NumeroDiTelefono*, DataDiNascita, IndirizzoMail*, Password, Affiliate*, Premium, LIS)  
+> Registrato(Username) referenzia Utente(NomeUtente)  
+
+Messaggio(<U>Username</U>, <U>Timestamp</U>, Testo, Destinatario)  
+> Messaggio(Username) referenzia Registrato(Username)  
+> Messaggio(Destinatario) referenzia Registrato(Username)  
+
+Conto(<U>Username</U>, <U>Utente</U>)  
+> Conto(Username) referenzia Registrato(Username)  
+> Conto(Utente) referenzia Portafoglio(Utente)  
+
+Portafoglio(<U>Utente</U>, TotaleBits)  
+> Portafoglio(Utente) referenzia Registrato(Username)  
+
+Donazione(<U>Utente</U>, <U>Timestamp</U>, Bits, Streamer, Destinatario)  
+> Donazione(Utente) referenzia Portfoglio(Utente)  
+> Donazione(Destinatario) referenzia Portfoglio(Utente)  
+
+Hosting(<U>Username</U>, <U>Timestamp</U>, Pagato, Corrispetivo)  
+> Hosting(Username) referenzia Registrato(Username)  
+
+Programmazione(<U>Username</U>, Timestamp, Titolo, LIS, Premium)  
+> Programmazione(Username) referenzia Registrato(Username)  
+
+Abbonamento(<U>Username</U>, <U>Streamer</U>)  
+> Abbonamento(Username) referenzia Registrato(Username)  
+> Abbonamento(Streamer) referenzia Canale(Streamer)  
+
+Gestione<sub>(S-C)</sub>(<U>Username</U>, <U>Streamer</U>)  
+> Gestione<sub>(S-C)</sub>(Username) referenzia Registrato(Username)  
+> Gestione<sub>(S-C)</sub>(Streamer) referenzia Canale(Streamer)  
+
+Canale(<U>Streamer</U>, Descrizione*, ImmagineProfilo*, Trailer*)  
+> Canale(Streamer) referenzia Registrato(Utente)  
+
+Follower(<U>Username</U>, <U>Streamer</U>)  
+> Follower(Username) referenzia Registrato(Username)
+> Follower(Streamer) referenzia Canale(Streamer)  
+
+LinkSocial(<U>Streamer</U>, <U>Social</U>, Link)  
+> LinkSocial(Streamer) referenzia Canale(Streamer)  
+
+ContenutoMultimediale(<U>Canale</U>, <U>Titolo</U>, <U>Categoria</U>, LIS)  
+> ContenutoMultimediale(Canale) referenzia Canale(Streamer)  
+> ContenutoMultimediale(Categoria) referenzia Categoria(Nome)  
+
+Voto(<U>Username</U>, <U>Canale</U>, <U>Titolo</U>, <U>Categoria</U>, Likert)  
+> Voto(Username) referenzia Registrato(Username)  
+> Voto(Canale) referenzia ContenutoMultimediale(Canale)  
+> Voto(Titolo) referenzia ContenutoMultimediale(Titolo)  
+> Voto(Categoria) referenzia ContenutoMultimediale(Categoria)  
+
+Visita(<U>NomeUtente</U>, <U>Canale</U>, <U>Titolo</U>, <U>Categoria</U>, Like)  
+> Visita(NomeUtente) referenzia Utente(NomeUtente)  
+> Visita(Canale) referenzia ContenutoMultimediale(Canale)  
+> Visita(Titolo) referenzia ContenutoMultimediale(Titolo)  
+> Visita(Categoria) referenzia ContenutoMultimediale(Categoria)  
+
+Categoria(<U>Nome</U>)
+
+Hashtag(<U>Nome</U>)
+
+Nuovo(<U>Hashtag</U>, <U>Canale</U>, <U>Titolo</U>, <U>Categoria</U>)  
+> Nuovo(Hashtag) referenzia Hashtag(Nome)  
+> Nuovo(Canale) referenzia ContenutoMultimediale(Canale)  
+> Nuovo(Titolo) referenzia ContenutoMultimediale(Titolo)  
+> Nuovo(Categoria) referenzia ContenutoMultimediale(Categoria)  
+
+Predefinito(<U>Hashtag</U>, <U>Canale</U>, <U>Titolo</U>, <U>Categoria</U>)  
+> Predefinito(Hashtag) referenzia Hashtag(Nome)  
+> Predefinito(Canale) referenzia ContenutoMultimediale(Canale)  
+> Predefinito(Titolo) referenzia ContenutoMultimediale(Titolo)  
+> Predefinito(Categoria) referenzia ContenutoMultimediale(Categoria)  
+
+Live(<U>IdLive</U>, DataInizio, DataFine, Premium, ContenutoMultimediale)
+
+Clip(<U>IdClip</U>, Durata, Minutaggio, Video, ContenutoMultimediale)  
+> Clip(Video) referenzia Video(IdVideo)  
+
+Video(<U>IdVideo</U>, Durata, Live, ContenutoMultimediale)  
+> Video(Live) referenzia Live(IdLive)  
+
+Affluenza(<U>Live</U>, <U>Timestamp</U>, NumeroSpettatori)  
+> Affluenza(Live) referenzia Live(<U>IdLive</U>)  
+
+Interazione(<U>Username</U>, <U>Live</U>, Tipologia, Messaggio*, Timestamp*)  
+> Interazione(Username) referenzia Registrato(Username)  
+> Interazione(Live) referenzia Live(IdLive)  
+
+Emoji(<U>Codice</U>)
+  
+Presenza(<U>Username</U>, <U>Live</U>,<U>Codice</U>)  
+> Presenza(Username) referenzia Interazione(Username)  
+> Presenza(Live) referenzia Interazione(Live)  
+> Presenza(Codice referenzia Emoji(Codice))  
