@@ -556,23 +556,41 @@ Molte entità hanno identitficatori esterni. Alcuni di essi però sono stati sos
 
 ## 2.4 Schema E-R ristrutturato + regole aziendali
 
-> QUI CI VA IL VOSTRO SCHEMA ER RISTRUTTURATO
+![Schema E-R Ristrutturato](../Immagini/2.4%20Schema%20E-R%20ristrutturato.png)
 
 ### 2.4.1 Regole aziendali
 
 ### 2.4.2 Vincoli di Integrità
 
-|     |                                        |
-| --- | -------------------------------------- |
-| RV1 | <concetto> deve/non deve <espressione> |
-|     |                                        |
+| RVI  | \<concetto\> deve/non deve \<espressione\>                                                                                                                                                 |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| RV1  | Uno streamer deve essere un utente registrato al servizio e avere un canale.                                                                                                               |
+| RV2  | Uno spettatore non deve partecipare all'associazione **_rinnovo_**.                                                                                                                        |
+| RV3  | Uno spettatore non deve avere l'attributo **_affiliate_**.                                                                                                                                 |
+| RV4  | Uno spettatore non deve partecipare all'associazione **_streaming_**.                                                                                                                      |
+| RV5  | Un messaggio deve avere un mittente e un destinatario.                                                                                                                                     |
+| RV6  | Una donazione deve essere associata a un portafoglio e avere un mittente e un destinatario.                                                                                                |
+| RV7  | Il destinatario di una donazione deve essere uno streamer.                                                                                                                                 |
+| RV8  | Un canale deve essere gestito da uno streamer.                                                                                                                                             |
+| RV9  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú l'UUID.                                                                                                 |
+| RV10 | Un contenuto multimediale non deve partecipare contemporaneamente alle associazioni **_contenuto live_**, **_contenuto video_** e **_contenuto clip_**, ma solo ad una di esse alla volta. |
+| RV11 | Una reazione deve partecipare all'associazione **_presenza_** solamente con cardinalità (1,1)                                                                                              |
+| RV12 | Ogni video deve essere associato ad una live per poter esistere.                                                                                                                           |
+| RV13 | Ogni clip deve essere associata ad un video per poter esistere.                                                                                                                            |
+| RV14 | La durata di una clip deve essere inferiore a quella di un video.                                                                                                                          |
+| RV15 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.                                                                                              |
 
 ### 2.4.3 Derivazioni
 
-|     |                                    |
-| --- | ---------------------------------- |
-| RD1 | <concetto> si ottiene <operazione> |
-|     |                                    |
+| RDI | \<concetto\> si ottiene \<operazione\>                                                                                                              |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RD1 | Il numero totale di follower si ottiene sommando tutti gli utenti registrati che seguono il canale.                                                 |
+| RD2 | Il numero di visualizzazioni di una clip o di un video si ottiene sommando tutti gli utenti (registrati e non) che hanno visualizzato il contenuto. |
+| RD3 | Il numero totale di minuti trasmessi da uno streamer si ottiene sommando la durata di ogni live del canale.                                         |
+| RD4 | Il permesso di voto si ottiene verificando che lo spettatore sia un utente registrato al servizio e che segua il canale.                            |
+| RD5 | La popolarità di un contenuto multimediale si ottiene contando il numero di visualizzazioni e interazioni ricevute.                                 |
+| RD6 | L'affluenza media di una live si ottiene dividendo l'affluenza totale per il numero di affluenze momentanee calcolate durante la live.              |
+| RD7 | Il numero di interazioni si ottiene sommando tutte le interazioni ricevute da un contenuto multimediale.                                            |
 
 ## 2.5 Schema relazionale con vincoli di integrità referenziale
 
