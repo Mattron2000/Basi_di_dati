@@ -601,62 +601,62 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 
 Utente(<U>NomeUtente</U>)
 
-Registrato(<U>NomeUtente</U>, NumeroDiTelefono*, DataDiNascita, IndirizzoMail*, Password, Affiliate*, Premium, LIS)  
-> Registrato(NomeUtente) referenzia Utente(NomeUtente)  
+Registrato(<U>Username</U>, NumeroDiTelefono*, DataDiNascita, IndirizzoMail*, Password, Affiliate*, Premium, LIS)  
+> Registrato(Username) referenzia Utente(NomeUtente)  
 
-Messaggio(<U>NomeUtente</U>, <U>Timestamp</U>, Testo, Destinatario)  
-> Messaggio(NomeUtente) referenzia Registrato(NomeUtente)  
-> Messaggio(Destinatario) referenzia Registrato(NomeUtente)  
+Messaggio(<U>Mittente</U>, <U>TimestampMessaggio</U>, Testo, Destinatario)  
+> Messaggio(Mittente) referenzia Registrato(Username)  
+> Messaggio(Destinatario) referenzia Registrato(Username)  
 
-Portafoglio(<U>NomeUtente</U>, TotaleBits)  
-> Portafoglio(NomeUtente) referenzia Registrato(NomeUtente)  
+Portafoglio(<U>UtenteProprietario</U>, TotaleBits)  
+> Portafoglio(UtenteProprietario) referenzia Registrato(Username)  
 
-Donazione(<U>Utente</U>, <U>Timestamp</U>, Bits, Streamer, Destinatario)  
-> Donazione(Utente) referenzia Portfoglio(Utente)  
-> Donazione(Destinatario) referenzia Portfoglio(Utente)  
+Donazione(<U>MittenteDonazione</U>, <U>TimestampDonazione</U>, Bits, Streamer, Destinatario)  
+> Donazione(MittenteDonazione) referenzia Portfoglio(UtenteProprietario)  
+> Donazione(Destinatario) referenzia Portfoglio(UtenteProprietario)  
 
-Hosting(<U>NomeUtente</U>, <U>Timestamp</U>, Pagato, Corrispetivo)  
-> Hosting(NomeUtente) referenzia Registrato(NomeUtente)  
+Hosting(<U>UtenteStreamer</U>, <U>TimestampRinnovo</U>, Pagato, Corrispettivo)  
+> Hosting(UtenteStreamer) referenzia Registrato(Username)  
 
-Programmazione(<U>NomeUtente</U>, Timestamp, Titolo, LIS, Premium)  
-> Programmazione(NomeUtente) referenzia Registrato(NomeUtente)  
+Programmazione(<U>Streamer</U>, Timestamp, Titolo, LIS, Premium)  
+> Programmazione(Streamer) referenzia Registrato(Username)  
 
-Abbonamento(<U>Utente</U>, <U>Streamer</U>)  
-> Abbonamento(Utente) referenzia Registrato(NomeUtente)  
-> Abbonamento(Streamer) referenzia Canale(NomeUtente)  
+Abbonamento(<U>UtenteAbbonato</U>, <U>Streamer</U>)  
+> Abbonamento(UtenteAbbonato) referenzia Registrato(Username)  
+> Abbonamento(Streamer) referenzia Canale(StreamerProprietario)  
 
-Canale(<U>NomeUtente</U>, Descrizione*, ImmagineProfilo*, Trailer*)  
-> Canale(NomeUtente) referenzia Registrato(NomeUtente)  
+Canale(<U>StreamerProprietario</U>, Descrizione*, ImmagineProfilo*, Trailer*)  
+> Canale(StreamerProprietario) referenzia Registrato(Username)  
 
-Follower(<U>Utente</U>, <U>Streamer</U>)  
-> Follower(Utente) referenzia Registrato(NomeUtente)  
-> Follower(Streamer) referenzia Canale(NomeUtente)  
+Follower(<U>UtenteFollower</U>, <U>StreamerSeguito</U>)  
+> Follower(UtenteFollower) referenzia Registrato(Username)  
+> Follower(StreamerSeguito) referenzia Canale(StreamerProprietario)  
 
-LinkSocial(<U>Streamer</U>, <U>Social</U>, Link)  
-> LinkSocial(Streamer) referenzia Canale(NomeUtente)  
+LinkSocial(<U>CanaleAssociato</U>, <U>Social</U>, Link)  
+> LinkSocial(CanaleAssociato) referenzia Canale(StreamerProprietario)  
 
 ContenutoMultimediale(<U>IdContenuto</U>, Canale, Titolo, Categoria, LIS)  
-> ContenutoMultimediale(Canale) referenzia Canale(NomeUtente)  
-> ContenutoMultimediale(Categoria) referenzia Categoria(Nome)  
+> ContenutoMultimediale(Canale) referenzia Canale(StreamerProprietario)  
+> ContenutoMultimediale(Categoria) referenzia Categoria(NomeCategoria)  
 
-Voto(<U>Utente</U>, ContenutoMultimediale, Likert)  
-> Voto(Utente) referenzia Registrato(NomeUtente)  
+Voto(<U>UtenteRegistrato</U>, ContenutoMultimediale, Likert)  
+> Voto(UtenteRegistrato) referenzia Registrato(Username)  
 > Voto(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)
 
-Visita(<U>NomeUtente</U>, ContenutoMultimediale, Like)  
-> Visita(NomeUtente) referenzia Utente(NomeUtente)  
+Visita(<U>Utente</U>, ContenutoMultimediale, Like)  
+> Visita(Utente) referenzia Utente(NomeUtente)  
 > Visita(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)  
 
-Categoria(<U>Nome</U>)
+Categoria(<U>NomeCategoria</U>)
 
-Hashtag(<U>Nome</U>)
+Hashtag(<U>NomeHashtag</U>)
 
-Nuovo(<U>Hashtag</U>, <U>ContenutoMultimediale</U>)  
-> Nuovo(Hashtag) referenzia Hashtag(Nome)  
+Nuovo(<U>NuovoHashtag</U>, <U>ContenutoMultimediale</U>)  
+> Nuovo(NuovoHashtag) referenzia Hashtag(NomeHashtag)  
 > Nuovo(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)  
 
-Predefinito(<U>Hashtag</U>, <U>ContenutoMultimediale</U>)  
-> Predefinito(Hashtag) referenzia Hashtag(Nome)  
+Predefinito(<U>HashtagPredefinito</U>, <U>ContenutoMultimediale</U>)  
+> Predefinito(HashtagPredefinito) referenzia Hashtag(NomeHashtag)  
 > Predefinito(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)
 
 Live(<U>IdLive</U>, DataInizio, DataFine, Premium)
@@ -670,16 +670,16 @@ Video(<U>IdVideo</U>, Durata, Live)
 > Video(IdVideo) referenzia ContenutoMultimediale(IdContenuto)  
 > Video(Live) referenzia Live(IdLive)
 
-Affluenza(<U>Live</U>, <U>Timestamp</U>, NumeroSpettatori)  
+Affluenza(<U>Live</U>, <U>TimestampAffluenza</U>, NumeroSpettatori)  
 > Affluenza(Live) referenzia Live(IdLive)  
 
-Interazione(<U>Utente</U>, <U>Live</U>, Tipologia, Messaggio*, Timestamp*)  
-> Interazione(Utente) referenzia Registrato(NomeUtente)  
-> Interazione(Live) referenzia Live(IdLive)
+Interazione(<U>Spettatore</U>, <U>LiveCorrente</U>, Tipologia, Messaggio*, Timestamp*)  
+> Interazione(Spettatore) referenzia Registrato(Username)  
+> Interazione(LiveCorrente) referenzia Live(IdLive)
 
 Emoji(<U>Codice</U>)
   
-Presenza(<U>Utente</U>, <U>Live</U>,<U>Codice</U>)  
-> Presenza(Utente) referenzia Interazione(Utente)  
-> Presenza(Live) referenzia Interazione(Live)  
-> Presenza(Codice) referenzia Emoji(Codice)  
+Presenza(<U>SpettatoreLive</U>, <U>LiveAssociata</U>,<U>CodiceEmoji</U>)  
+> Presenza(SpettatoreLive) referenzia Interazione(Spettatore)  
+> Presenza(LiveAssociata) referenzia Interazione(LiveCorrente)  
+> Presenza(CodiceEmoji) referenzia Emoji(Codice)  
