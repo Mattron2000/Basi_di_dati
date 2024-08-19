@@ -529,34 +529,35 @@ Le nuove cardinalità sono le stesse dell'associazione `associazione(CM-H)`, in 
 
 ### 2.3.4 Scelta degli identificatori principali
 
-| Entità                 | Identificatore principale |
-| ---------------------- | ------------------------- |
-| UTENTE                 | nome utente               |
-| REGISTRATO             | username (_surrogato_)    |
-| PORTAFOGLIO            | utente (_surrogato_)      |
-| DONAZIONE              | utente, timestamp         |
-| MESSAGGIO              | timestamp, username       |
-| CANALE                 | streamer (_surrogato_)    |
-| LINK SOCIAL            | social, streamer          |
-| HOSTING                | timestamp, username       |
-| PROGRAMMAZIONE         | timestamp, username       |
-| CONTENUTO MULTIMEDIALE | titolo, streamer, nome    |
-| LIVE                   | id live (_surrogato_)     |
-| CLIP                   | id clip (_surrogato_)     |
-| VIDEO                  | id video (_surrogato_)    |
-| EMOJI                  | codice                    |
-| CATEGORIA              | nome                      |
-| HASHTAG                | nome                      |
-| INTERAZIONE            | username, id live         |
-| AFFLUENZA              | timestamp, id live        |
+| Entità                 | Identificatore principale  |
+| ---------------------- | -------------------------- |
+| UTENTE                 | nome utente                |
+| REGISTRATO             | nome utente                |
+| PORTAFOGLIO            | nome utente                |
+| DONAZIONE              | nome utente, timestamp     |
+| MESSAGGIO              | timestamp, nome utente     |
+| CANALE                 | nome utente                |
+| LINK SOCIAL            | social, nome utente        |
+| HOSTING                | timestamp, nome utente     |
+| PROGRAMMAZIONE         | timestamp, nome utente     |
+| CONTENUTO MULTIMEDIALE | id contenuto (_surrogato_) |
+| LIVE                   | id contenuto               |
+| CLIP                   | id contenuto               |
+| VIDEO                  | id contenuto               |
+| EMOJI                  | codice                     |
+| CATEGORIA              | nome                       |
+| HASHTAG                | nome                       |
+| INTERAZIONE            | nome utente, id contenuto  |
+| AFFLUENZA              | timestamp, id contenuto    |
 
 Gli identificatori rappresentati nello schema ristrutturato sono tutti costituiti da pochi attributi e verranno quindi considerati tutti come chiavi primarie.
 
-Molte entità hanno identitficatori esterni. Alcuni di essi però sono stati sostituiti da identificatori surrogati, ma interni: questo perchè in alcuni casi ci si ritrovava ad avere più entità identificate esternamente collegate a catena e, per evitare questo, si è deciso di aggiungere un identificatore a quelle entità che erano identificanti per altre entità, ma al tempo stesso erano a loro volta identificate esternamente.
+Molte entità hanno identitficatori esterni, ma costituiti da pochi attributi: per questo motivo si è deciso di mantenerli e di considerarli come chiavi primarie.
+Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDIALE`: questa entità infatti avrebbe avuto un identificatore composto da tre attributi (uno dei quali esterno) e ciò avrebbe complicato la traduzione in schema logico, causando la propagazione del suo lungo identificatore anche alle entità che essa stessa avrebbe identificato. Per queste ragioni, si è deciso di sostituire questo identificatore con un identificatore surrogato **_id contenuto_** univoco per ogni occorrenza di questa entità.
 
 ## 2.4 Schema E-R ristrutturato + regole aziendali
 
-![Schema E-R Ristrutturato](../Immagini/2.4%20Schema%20E-R%20ristrutturato.png)
+![Schema E-R Ristrutturato](../Immagini/2.4_ER_rist_1.png)
 
 ### 2.4.1 Regole aziendali
 
@@ -600,98 +601,85 @@ Molte entità hanno identitficatori esterni. Alcuni di essi però sono stati sos
 
 Utente(<U>NomeUtente</U>)
 
-Registrato(<U>Username</U>, NumeroDiTelefono*, DataDiNascita, IndirizzoMail*, Password, Affiliate*, Premium, LIS)  
-> Registrato(Username) referenzia Utente(NomeUtente)  
+Registrato(<U>NomeUtente</U>, NumeroDiTelefono*, DataDiNascita, IndirizzoMail*, Password, Affiliate*, Premium, LIS)  
+> Registrato(NomeUtente) referenzia Utente(NomeUtente)  
 
-Messaggio(<U>Username</U>, <U>Timestamp</U>, Testo, Destinatario)  
-> Messaggio(Username) referenzia Registrato(Username)  
-> Messaggio(Destinatario) referenzia Registrato(Username)  
+Messaggio(<U>NomeUtente</U>, <U>Timestamp</U>, Testo, Destinatario)  
+> Messaggio(NomeUtente) referenzia Registrato(NomeUtente)  
+> Messaggio(Destinatario) referenzia Registrato(NomeUtente)  
 
-Conto(<U>Username</U>, <U>Utente</U>)  
-> Conto(Username) referenzia Registrato(Username)  
-> Conto(Utente) referenzia Portafoglio(Utente)  
-
-Portafoglio(<U>Utente</U>, TotaleBits)  
-> Portafoglio(Utente) referenzia Registrato(Username)  
+Portafoglio(<U>NomeUtente</U>, TotaleBits)  
+> Portafoglio(NomeUtente) referenzia Registrato(NomeUtente)  
 
 Donazione(<U>Utente</U>, <U>Timestamp</U>, Bits, Streamer, Destinatario)  
 > Donazione(Utente) referenzia Portfoglio(Utente)  
 > Donazione(Destinatario) referenzia Portfoglio(Utente)  
 
-Hosting(<U>Username</U>, <U>Timestamp</U>, Pagato, Corrispetivo)  
-> Hosting(Username) referenzia Registrato(Username)  
+Hosting(<U>NomeUtente</U>, <U>Timestamp</U>, Pagato, Corrispetivo)  
+> Hosting(NomeUtente) referenzia Registrato(NomeUtente)  
 
-Programmazione(<U>Username</U>, Timestamp, Titolo, LIS, Premium)  
-> Programmazione(Username) referenzia Registrato(Username)  
+Programmazione(<U>NomeUtente</U>, Timestamp, Titolo, LIS, Premium)  
+> Programmazione(NomeUtente) referenzia Registrato(NomeUtente)  
 
-Abbonamento(<U>Username</U>, <U>Streamer</U>)  
-> Abbonamento(Username) referenzia Registrato(Username)  
-> Abbonamento(Streamer) referenzia Canale(Streamer)  
+Abbonamento(<U>Utente</U>, <U>Streamer</U>)  
+> Abbonamento(Utente) referenzia Registrato(NomeUtente)  
+> Abbonamento(Streamer) referenzia Canale(NomeUtente)  
 
-Gestione<sub>(S-C)</sub>(<U>Username</U>, <U>Streamer</U>)  
-> Gestione<sub>(S-C)</sub>(Username) referenzia Registrato(Username)  
-> Gestione<sub>(S-C)</sub>(Streamer) referenzia Canale(Streamer)  
+Canale(<U>NomeUtente</U>, Descrizione*, ImmagineProfilo*, Trailer*)  
+> Canale(NomeUtente) referenzia Registrato(NomeUtente)  
 
-Canale(<U>Streamer</U>, Descrizione*, ImmagineProfilo*, Trailer*)  
-> Canale(Streamer) referenzia Registrato(Utente)  
-
-Follower(<U>Username</U>, <U>Streamer</U>)  
-> Follower(Username) referenzia Registrato(Username)
-> Follower(Streamer) referenzia Canale(Streamer)  
+Follower(<U>Utente</U>, <U>Streamer</U>)  
+> Follower(Utente) referenzia Registrato(NomeUtente)  
+> Follower(Streamer) referenzia Canale(NomeUtente)  
 
 LinkSocial(<U>Streamer</U>, <U>Social</U>, Link)  
-> LinkSocial(Streamer) referenzia Canale(Streamer)  
+> LinkSocial(Streamer) referenzia Canale(NomeUtente)  
 
-ContenutoMultimediale(<U>Canale</U>, <U>Titolo</U>, <U>Categoria</U>, LIS)  
-> ContenutoMultimediale(Canale) referenzia Canale(Streamer)  
+ContenutoMultimediale(<U>IdContenuto</U>, Canale, Titolo, Categoria, LIS)  
+> ContenutoMultimediale(Canale) referenzia Canale(NomeUtente)  
 > ContenutoMultimediale(Categoria) referenzia Categoria(Nome)  
 
-Voto(<U>Username</U>, <U>Canale</U>, <U>Titolo</U>, <U>Categoria</U>, Likert)  
-> Voto(Username) referenzia Registrato(Username)  
-> Voto(Canale) referenzia ContenutoMultimediale(Canale)  
-> Voto(Titolo) referenzia ContenutoMultimediale(Titolo)  
-> Voto(Categoria) referenzia ContenutoMultimediale(Categoria)  
+Voto(<U>Utente</U>, ContenutoMultimediale, Likert)  
+> Voto(Utente) referenzia Registrato(NomeUtente)  
+> Voto(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)
 
-Visita(<U>NomeUtente</U>, <U>Canale</U>, <U>Titolo</U>, <U>Categoria</U>, Like)  
+Visita(<U>NomeUtente</U>, ContenutoMultimediale, Like)  
 > Visita(NomeUtente) referenzia Utente(NomeUtente)  
-> Visita(Canale) referenzia ContenutoMultimediale(Canale)  
-> Visita(Titolo) referenzia ContenutoMultimediale(Titolo)  
-> Visita(Categoria) referenzia ContenutoMultimediale(Categoria)  
+> Visita(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)  
 
 Categoria(<U>Nome</U>)
 
 Hashtag(<U>Nome</U>)
 
-Nuovo(<U>Hashtag</U>, <U>Canale</U>, <U>Titolo</U>, <U>Categoria</U>)  
+Nuovo(<U>Hashtag</U>, <U>ContenutoMultimediale</U>)  
 > Nuovo(Hashtag) referenzia Hashtag(Nome)  
-> Nuovo(Canale) referenzia ContenutoMultimediale(Canale)  
-> Nuovo(Titolo) referenzia ContenutoMultimediale(Titolo)  
-> Nuovo(Categoria) referenzia ContenutoMultimediale(Categoria)  
+> Nuovo(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)  
 
-Predefinito(<U>Hashtag</U>, <U>Canale</U>, <U>Titolo</U>, <U>Categoria</U>)  
+Predefinito(<U>Hashtag</U>, <U>ContenutoMultimediale</U>)  
 > Predefinito(Hashtag) referenzia Hashtag(Nome)  
-> Predefinito(Canale) referenzia ContenutoMultimediale(Canale)  
-> Predefinito(Titolo) referenzia ContenutoMultimediale(Titolo)  
-> Predefinito(Categoria) referenzia ContenutoMultimediale(Categoria)  
+> Predefinito(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)
 
-Live(<U>IdLive</U>, DataInizio, DataFine, Premium, ContenutoMultimediale)
+Live(<U>IdLive</U>, DataInizio, DataFine, Premium)
+> Live(IdLive) referenzia ContenutoMultimediale(IdContenuto)
 
-Clip(<U>IdClip</U>, Durata, Minutaggio, Video, ContenutoMultimediale)  
+Clip(<U>IdClip</U>, Durata, Minutaggio, Video)  
+> Clip(IdClip) referenzia ContenutoMultimediale(IdContenuto)  
 > Clip(Video) referenzia Video(IdVideo)  
 
-Video(<U>IdVideo</U>, Durata, Live, ContenutoMultimediale)  
-> Video(Live) referenzia Live(IdLive)  
+Video(<U>IdVideo</U>, Durata, Live)  
+> Video(IdVideo) referenzia ContenutoMultimediale(IdContenuto)  
+> Video(Live) referenzia Live(IdLive)
 
 Affluenza(<U>Live</U>, <U>Timestamp</U>, NumeroSpettatori)  
-> Affluenza(Live) referenzia Live(<U>IdLive</U>)  
+> Affluenza(Live) referenzia Live(IdLive)  
 
-Interazione(<U>Username</U>, <U>Live</U>, Tipologia, Messaggio*, Timestamp*)  
-> Interazione(Username) referenzia Registrato(Username)  
-> Interazione(Live) referenzia Live(IdLive)  
+Interazione(<U>Utente</U>, <U>Live</U>, Tipologia, Messaggio*, Timestamp*)  
+> Interazione(Utente) referenzia Registrato(NomeUtente)  
+> Interazione(Live) referenzia Live(IdLive)
 
 Emoji(<U>Codice</U>)
   
-Presenza(<U>Username</U>, <U>Live</U>,<U>Codice</U>)  
-> Presenza(Username) referenzia Interazione(Username)  
+Presenza(<U>Utente</U>, <U>Live</U>,<U>Codice</U>)  
+> Presenza(Utente) referenzia Interazione(Utente)  
 > Presenza(Live) referenzia Interazione(Live)  
-> Presenza(Codice referenzia Emoji(Codice))  
+> Presenza(Codice) referenzia Emoji(Codice)  
