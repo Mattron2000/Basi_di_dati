@@ -601,24 +601,24 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 
 Utente(<U>NomeUtente</U>)
 
-Registrato(<U>Username</U>, NumeroDiTelefono*, DataDiNascita, IndirizzoMail*, Password, Affiliate*, Premium, LIS)  
+Registrato(<U>Username</U>, Password, DataDiNascita, NumeroDiTelefono*, IndirizzoMail*, Affiliate*, Premium, LIS)  
 > Registrato(Username) referenzia Utente(NomeUtente)  
 
-Messaggio(<U>Mittente</U>, <U>TimestampMessaggio</U>, Testo, Destinatario)  
+Messaggio(<U>Mittente</U>, <U>TimestampMessaggio</U>, Destinatario, Testo)  
 > Messaggio(Mittente) referenzia Registrato(Username)  
 > Messaggio(Destinatario) referenzia Registrato(Username)  
 
 Portafoglio(<U>UtenteProprietario</U>, TotaleBits)  
 > Portafoglio(UtenteProprietario) referenzia Registrato(Username)  
 
-Donazione(<U>MittenteDonazione</U>, <U>TimestampDonazione</U>, Bits, Streamer, Destinatario)  
+Donazione(<U>MittenteDonazione</U>, <U>TimestampDonazione</U>, Destinatario, Streamer, Bits)  
 > Donazione(MittenteDonazione) referenzia Portfoglio(UtenteProprietario)  
 > Donazione(Destinatario) referenzia Portfoglio(UtenteProprietario)  
 
 Hosting(<U>UtenteStreamer</U>, <U>TimestampRinnovo</U>, Pagato, Corrispettivo)  
 > Hosting(UtenteStreamer) referenzia Registrato(Username)  
 
-Programmazione(<U>Streamer</U>, Timestamp, Titolo, LIS, Premium)  
+Programmazione(<U>Streamer</U>, <U>Timestamp</U>, Titolo, LIS, Premium)  
 > Programmazione(Streamer) referenzia Registrato(Username)  
 
 Abbonamento(<U>UtenteAbbonato</U>, <U>Streamer</U>)  
