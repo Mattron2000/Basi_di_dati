@@ -364,22 +364,21 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 ### 1.5.2 Vincoli d'integritá
 
-| RVI  | \<concetto\> deve/non deve \<espressione\>                                                           |
-| ---- | ---------------------------------------------------------------------------------------------------- |
-| RV1  | Uno streamer deve essere un utente registrato al servizio.                                           |
-| RV2  | Un guest non deve avere accesso alle funzionalità riservate agli utenti registrati.                  |
-| RV3  | Un messaggio deve avere un mittente e un destinatario.                                               |
-| RV4  | Una donazione deve essere associata a un portafoglio e avere un mittente e un destinatario.          |
-| RV5  | Il destinatario di una donazione deve essere uno streamer.                                           |
-| RV6  | Un canale deve essere gestito da uno streamer.                                                       |
-| RV7  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú l'UUID.           |
-| RV8  | Ogni programmazione deve avere un titolo e un timestamp, oltre alle opzioni LIS e premium compilate. |
-| RV9  | Ogni contenuto multimediale deve avere una categoria.                                                |
-| RV10 | Ogni reazione deve essere associata ad una emoji.                                                    |
-| RV11 | Ogni video deve essere associato ad una live per poter esistere.                                     |
-| RV12 | Ogni clip deve essere associata ad un video per poter esistere.                                      |
-| RV13 | La durata di una clip deve essere inferiore a quella di un video.                                    |
-| RV14 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.        |
+| RVI  | \<concetto\> deve/non deve \<espressione\>                                                    |
+| ---- | --------------------------------------------------------------------------------------------- |
+| RV1  | Uno streamer deve essere un utente registrato al servizio.                                    |
+| RV2  | Un guest non deve avere accesso alle funzionalità riservate agli utenti registrati.           |
+| RV3  | Un messaggio deve avere un mittente e un destinatario.                                        |
+| RV4  | Una donazione deve essere associata a un portafoglio e avere un mittente e un destinatario.   |
+| RV5  | Il destinatario di una donazione deve essere uno streamer.                                    |
+| RV6  | Un canale deve essere gestito da uno streamer.                                                |
+| RV7  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú l'UUID.    |
+| RV8  | Ogni contenuto multimediale deve avere una categoria.                                         |
+| RV9  | Ogni reazione deve essere associata ad una emoji.                                             |
+| RV10 | Ogni video deve essere associato ad una live per poter esistere.                              |
+| RV11 | Ogni clip deve essere associata ad un video per poter esistere.                               |
+| RV12 | La durata di una clip deve essere inferiore a quella di un video.                             |
+| RV13 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower. |
 
 ### 1.5.3 Derivazioni
 

@@ -639,11 +639,11 @@ ContenutoMultimediale(<U>IdContenuto</U>, Canale, Titolo, Categoria, LIS)
 > ContenutoMultimediale(Canale) referenzia Canale(StreamerProprietario)  
 > ContenutoMultimediale(Categoria) referenzia Categoria(NomeCategoria)  
 
-Voto(<U>UtenteRegistrato</U>, ContenutoMultimediale, Likert)  
+Voto(<U>UtenteRegistrato</U>, <U>ContenutoMultimediale</U>, Likert)  
 > Voto(UtenteRegistrato) referenzia Registrato(Username)  
 > Voto(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)
 
-Visita(<U>Utente</U>, ContenutoMultimediale, Like)  
+Visita(<U>Utente</U>, <U>ContenutoMultimediale</U>, Like)  
 > Visita(Utente) referenzia Utente(NomeUtente)  
 > Visita(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)  
 
@@ -679,7 +679,7 @@ Interazione(<U>Spettatore</U>, <U>LiveCorrente</U>, Tipologia, Messaggio*, Times
 
 Emoji(<U>Codice</U>)
   
-Presenza(<U>SpettatoreLive</U>, <U>LiveAssociata</U>,<U>CodiceEmoji</U>)  
+Presenza(<U>SpettatoreLive</U>, <U>LiveAssociata</U>, <U>CodiceEmoji</U>)  
 > Presenza(SpettatoreLive) referenzia Interazione(Spettatore)  
 > Presenza(LiveAssociata) referenzia Interazione(LiveCorrente)  
 > Presenza(CodiceEmoji) referenzia Emoji(Codice)  
