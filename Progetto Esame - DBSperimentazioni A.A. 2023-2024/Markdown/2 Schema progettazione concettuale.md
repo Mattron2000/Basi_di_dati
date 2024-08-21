@@ -37,8 +37,8 @@
 
 ## Componenti del gruppo
 
-1. Componente 1: Matteo, Palmieri, 20038775
-2. Componente 2: Andrea, Fincato, 20050547
+1. Componente 1: Matteo, Palmieri, 20038775, <20038775@studenti.uniupo.it>
+2. Componente 2: Andrea, Fincato, 20050547, <20050547@studenti.uniupo.it>
 
 ---
 

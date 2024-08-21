@@ -651,11 +651,11 @@ Categoria(<U>NomeCategoria</U>)
 
 Hashtag(<U>NomeHashtag</U>)
 
-Nuovo(<U>NuovoHashtag</U>, <U>ContenutoMultimediale</U>)  
+Nuovo(<U>NuovoHashtag</U>, ContenutoMultimediale)  
 > Nuovo(NuovoHashtag) referenzia Hashtag(NomeHashtag)  
 > Nuovo(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)  
 
-Predefinito(<U>HashtagPredefinito</U>, <U>ContenutoMultimediale</U>)  
+Predefinito(<U>HashtagPredefinito</U>, ContenutoMultimediale)  
 > Predefinito(HashtagPredefinito) referenzia Hashtag(NomeHashtag)  
 > Predefinito(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)
 
