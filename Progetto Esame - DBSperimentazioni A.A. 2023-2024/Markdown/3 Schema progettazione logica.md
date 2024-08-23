@@ -36,7 +36,6 @@
     - [2.3.2.3 Generalizzazione 3 (generalizzazione dell'interazione utenti-contenuto multimediale)](#2323-generalizzazione-3-generalizzazione-dellinterazione-utenti-contenuto-multimediale)
       - [2.3.2.3.1 Regole aziendali introdotte](#23231-regole-aziendali-introdotte)
   - [2.3.3 Partizionamento/accorpamento di entità e associazioni](#233-partizionamentoaccorpamento-di-entità-e-associazioni)
-    - [2.3.3.1 Partizionamento/Accorpamento 1 (partizionamento di associazione)](#2331-partizionamentoaccorpamento-1-partizionamento-di-associazione)
   - [2.3.4 Scelta degli identificatori principali](#234-scelta-degli-identificatori-principali)
 - [2.4 Schema E-R ristrutturato + regole aziendali](#24-schema-e-r-ristrutturato--regole-aziendali)
   - [2.4.1 Regole aziendali](#241-regole-aziendali)
@@ -192,7 +191,7 @@ Entità come **CATEGORIA** o **EMOJI** presentano volumi molto più bassi di ent
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---- | ---------------------- |
 | Op1        | Controlla le condizioni per la qualifica di affiliate                                                                                    | B    | Una volta al giorno    |
 | Op2        | Calcola la classifica degli streamer più seguiti                                                                                         | B    | Una volta a settimana  |
-| Op3        | Per ogni streamer, calcola la media dei like per ogni contenuto multimediale                                                             | B    | Una volta al giorno    |
+| Op3        | Per ogni streamer, calcola la media dei voti per ogni contenuto multimediale                                                             | B    | Una volta al giorno    |
 | Op4        | Gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati                             | B    | Una  volta  al  giorno |
 | Op5        | Controlla ed elimina tutti i commenti offensivi per ogni contenuto multimediale, nelle categorie, nei canali e durante le live           | B    | Dieci volte al giorno  |
 | Op6        | Controlla i nuovi utenti registrati                                                                                                      | B    | Due volte al giorno    |
@@ -507,7 +506,7 @@ Anche se questa scelta può portare a valori nulli e a uno spreco di spazio, per
 
 ### 2.3.3 Partizionamento/accorpamento di entità e associazioni
 
-Nel processo di ristrutturazione, ci concentreremo sul partizionamento dell'associazione **_associazione<sub>(CM-H)</sub>_** che mette in relazione le entità `CONTENUTO MULTIMEDIALE` e `HASHTAG`.
+<!--Nel processo di ristrutturazione, ci concentreremo sul partizionamento dell'associazione **_associazione<sub>(CM-H)</sub>_** che mette in relazione le entità `CONTENUTO MULTIMEDIALE` e `HASHTAG`.
 
 Per comodità, le entità e associzioni coinvolte verranno colorate di <span style="color:blue">**blu**</span>.
 
@@ -525,35 +524,35 @@ Si è scelto di partizionare l'associazione `associazione(CM-H)` perchè quando 
 
 La tecnica usata è il **_partizionamento di associazione_** e produce le due nuove associazioni **_nuovo_** e **_predefinito_** che rappresentano rispettivamente gli hashtag nuovi e quelli predefiniti fino a quel momento.
 
-Le nuove cardinalità sono le stesse dell'associazione `associazione(CM-H)`, in quanto un contenuto multimediale può essere associato a molti hashtag oppure a nessuno e uno streamer può creare molti nuovi hashtag oppure nessuno da associare ai propri contenuti.
+Le nuove cardinalità sono le stesse dell'associazione `associazione(CM-H)`, in quanto un contenuto multimediale può essere associato a molti hashtag oppure a nessuno e uno streamer può creare molti nuovi hashtag oppure nessuno da associare ai propri contenuti.-->
 
 ### 2.3.4 Scelta degli identificatori principali
 
-| Entità                 | Identificatore principale  |
-| ---------------------- | -------------------------- |
-| UTENTE                 | nome utente                |
-| REGISTRATO             | nome utente                |
-| PORTAFOGLIO            | nome utente                |
-| DONAZIONE              | nome utente, timestamp     |
-| MESSAGGIO              | timestamp, nome utente     |
-| CANALE                 | nome utente                |
-| LINK SOCIAL            | social, nome utente        |
-| HOSTING                | timestamp, nome utente     |
-| PROGRAMMAZIONE         | timestamp, nome utente     |
-| CONTENUTO MULTIMEDIALE | id contenuto (_surrogato_) |
-| LIVE                   | id contenuto               |
-| CLIP                   | id contenuto               |
-| VIDEO                  | id contenuto               |
-| EMOJI                  | codice                     |
-| CATEGORIA              | nome                       |
-| HASHTAG                | nome                       |
-| INTERAZIONE            | nome utente, id contenuto  |
-| AFFLUENZA              | timestamp, id contenuto    |
+| Entità                 | Identificatore principale            |
+| ---------------------- | ------------------------------------ |
+| UTENTE                 | nome utente                          |
+| REGISTRATO             | nome utente                          |
+| PORTAFOGLIO            | nome utente                          |
+| DONAZIONE              | nome utente, timestamp               |
+| MESSAGGIO              | timestamp, nome utente               |
+| CANALE                 | nome utente                          |
+| LINK SOCIAL            | social, nome utente                  |
+| HOSTING                | timestamp, nome utente               |
+| PROGRAMMAZIONE         | timestamp, nome utente               |
+| CONTENUTO MULTIMEDIALE | URL                                  |
+| LIVE                   | id contenuto                         |
+| CLIP                   | id contenuto                         |
+| VIDEO                  | id contenuto                         |
+| EMOJI                  | codice                               |
+| CATEGORIA              | nome                                 |
+| HASHTAG                | nome                                 |
+| INTERAZIONE            | nome utente, id contenuto, timestamp |
+| AFFLUENZA              | timestamp, id contenuto              |
 
 Gli identificatori rappresentati nello schema ristrutturato sono tutti costituiti da pochi attributi e verranno quindi considerati tutti come chiavi primarie.
 
 Molte entità hanno identitficatori esterni, ma costituiti da pochi attributi: per questo motivo si è deciso di mantenerli e di considerarli come chiavi primarie.
-Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDIALE`: questa entità infatti avrebbe avuto un identificatore composto da tre attributi (uno dei quali esterno) e ciò avrebbe complicato la traduzione in schema logico, causando la propagazione del suo lungo identificatore anche alle entità che essa stessa avrebbe identificato. Per queste ragioni, si è deciso di sostituire questo identificatore con un identificatore surrogato **_id contenuto_** univoco per ogni occorrenza di questa entità.
+Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDIALE`: questa entità infatti avrebbe avuto un identificatore composto da quattro attributi (uno dei quali esterno) e ciò avrebbe complicato la traduzione in schema logico, causando la propagazione del suo lungo identificatore anche alle entità che essa stessa avrebbe identificato. Per queste ragioni, si è deciso di considerare come identificatore soltanto l'attributo **_URL_**, essendo un URL già di per sè univoco.
 
 ## 2.4 Schema E-R ristrutturato + regole aziendali
 
@@ -592,6 +591,7 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 | RD5 | La popolarità di un contenuto multimediale si ottiene contando il numero di visualizzazioni e interazioni ricevute.                                 |
 | RD6 | L'affluenza media di una live si ottiene dividendo l'affluenza totale per il numero di affluenze momentanee calcolate durante la live.              |
 | RD7 | Il numero di interazioni si ottiene sommando tutte le interazioni ricevute da un contenuto multimediale.                                            |
+| RD8 | La media di voti di un contenuto multimediale si ottiene dividendo il punteggio totale dei voto del contenuto per il numero di voti ricevuti.       |
 
 ## 2.5 Schema relazionale con vincoli di integrità referenziale
 
@@ -601,7 +601,7 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 
 Utente(<U>NomeUtente</U>)
 
-Registrato(<U>Username</U>, Password, DataDiNascita, NumeroDiTelefono*, IndirizzoMail*, Affiliate*, Premium, LIS)  
+Registrato(<U>Username</U>, UserPassword, DataDiNascita, DataRegistrazione, NumeroDiTelefono*, IndirizzoMail*, Affiliate*, Premium, LIS)  
 > Registrato(Username) referenzia Utente(NomeUtente)  
 
 Messaggio(<U>Mittente</U>, <U>TimestampMessaggio</U>, Destinatario, Testo)  
@@ -615,10 +615,10 @@ Donazione(<U>MittenteDonazione</U>, <U>TimestampDonazione</U>, Destinatario, Str
 > Donazione(MittenteDonazione) referenzia Portfoglio(UtenteProprietario)  
 > Donazione(Destinatario) referenzia Portfoglio(UtenteProprietario)  
 
-Hosting(<U>UtenteStreamer</U>, <U>TimestampRinnovo</U>, Pagato, Corrispettivo)  
+Hosting(<U>UtenteStreamer</U>, <U>TimestampRinnovo</U>, Pagato, Scadenza)  
 > Hosting(UtenteStreamer) referenzia Registrato(Username)  
 
-Programmazione(<U>Streamer</U>, <U>Timestamp</U>, Titolo, LIS, Premium)  
+Programmazione(<U>Streamer</U>, <U>ProgTimestamp</U>, Titolo, LIS, Premium)  
 > Programmazione(Streamer) referenzia Registrato(Username)  
 
 Abbonamento(<U>UtenteAbbonato</U>, <U>Streamer</U>)  
@@ -632,54 +632,52 @@ Follower(<U>UtenteFollower</U>, <U>StreamerSeguito</U>)
 > Follower(UtenteFollower) referenzia Registrato(Username)  
 > Follower(StreamerSeguito) referenzia Canale(StreamerProprietario)  
 
-LinkSocial(<U>CanaleAssociato</U>, <U>Social</U>, Link)  
+LinkSocial(<U>CanaleAssociato</U>, <U>Social</U>, LinkProfilo)  
 > LinkSocial(CanaleAssociato) referenzia Canale(StreamerProprietario)  
 
-ContenutoMultimediale(<U>IdContenuto</U>, Canale, Titolo, Categoria, LIS)  
+ContenutoMultimediale(<U>IdURL</U>, Canale, Titolo, Categoria, LIS)  
 > ContenutoMultimediale(Canale) referenzia Canale(StreamerProprietario)  
 > ContenutoMultimediale(Categoria) referenzia Categoria(NomeCategoria)  
 
 Voto(<U>UtenteRegistrato</U>, <U>ContenutoMultimediale</U>, Likert)  
 > Voto(UtenteRegistrato) referenzia Registrato(Username)  
-> Voto(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)
+> Voto(ContenutoMultimediale) referenzia ContenutoMultimediale(IdURL)
 
-Visita(<U>Utente</U>, <U>ContenutoMultimediale</U>, Like)  
+Visita(<U>Utente</U>, <U>ContenutoMultimediale</U>, <U>TimestampVisita</U>)  
 > Visita(Utente) referenzia Utente(NomeUtente)  
-> Visita(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)  
+> Visita(ContenutoMultimediale) referenzia ContenutoMultimediale(IdURL)  
+**N.B.**: si è deciso di considerare anche l'attributo **TimestampVisita** come chiave primaria siccome un utente non avrebbe altrimenti potuto visitare un contenuto multimediale più volte, cosa invece possibile nello schema ER ristrutturato.
 
 Categoria(<U>NomeCategoria</U>)
 
 Hashtag(<U>NomeHashtag</U>)
 
-Nuovo(<U>NuovoHashtag</U>, ContenutoMultimediale)  
-> Nuovo(NuovoHashtag) referenzia Hashtag(NomeHashtag)  
-> Nuovo(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)  
-
-Predefinito(<U>HashtagPredefinito</U>, ContenutoMultimediale)  
-> Predefinito(HashtagPredefinito) referenzia Hashtag(NomeHashtag)  
-> Predefinito(ContenutoMultimediale) referenzia ContenutoMultimediale(IdContenuto)
+AssociazioneCM_H(<U>Hashtag</U>, <U>ContenutoMultimediale</U>)  
+> AssociazioneCM_H(Hashtag) referenzia Hashtag(NomeHashtag)  
+> AssociazioneCM_H(ContenutoMultimediale) referenzia ContenutoMultimediale(IIdURL)
 
 Live(<U>IdLive</U>, DataInizio, DataFine, Premium)
-> Live(IdLive) referenzia ContenutoMultimediale(IdContenuto)
+> Live(IdLive) referenzia ContenutoMultimediale(IdURL)
 
 Clip(<U>IdClip</U>, Durata, Minutaggio, Video)  
-> Clip(IdClip) referenzia ContenutoMultimediale(IdContenuto)  
+> Clip(IdClip) referenzia ContenutoMultimediale(IdURL)  
 > Clip(Video) referenzia Video(IdVideo)  
 
 Video(<U>IdVideo</U>, Durata, Live)  
-> Video(IdVideo) referenzia ContenutoMultimediale(IdContenuto)  
+> Video(IdVideo) referenzia ContenutoMultimediale(IdURL)  
 > Video(Live) referenzia Live(IdLive)
 
 Affluenza(<U>Live</U>, <U>TimestampAffluenza</U>, NumeroSpettatori)  
 > Affluenza(Live) referenzia Live(IdLive)  
 
-Interazione(<U>Spettatore</U>, <U>LiveCorrente</U>, Tipologia, Messaggio*, Timestamp*)  
+Interazione(<U>Spettatore</U>, <U>LiveCorrente</U>, <U>IntTimestamp</U>, Tipologia, Messaggio*)  
 > Interazione(Spettatore) referenzia Registrato(Username)  
 > Interazione(LiveCorrente) referenzia Live(IdLive)
 
 Emoji(<U>Codice</U>)
   
-Presenza(<U>SpettatoreLive</U>, <U>LiveAssociata</U>, <U>CodiceEmoji</U>)  
+Presenza(<U>SpettatoreLive</U>, <U>LiveAssociata</U>, <U>TimestampInt</U>, <U>CodiceEmoji</U>)  
 > Presenza(SpettatoreLive) referenzia Interazione(Spettatore)  
 > Presenza(LiveAssociata) referenzia Interazione(LiveCorrente)  
+> Presenza(TimestampInt) referenzia Interazione(IntTimestamp)  
 > Presenza(CodiceEmoji) referenzia Emoji(Codice)  

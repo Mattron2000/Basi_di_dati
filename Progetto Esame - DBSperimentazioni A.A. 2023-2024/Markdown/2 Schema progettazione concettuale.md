@@ -148,26 +148,27 @@ Qualsiasi altra operazione/funzionalità del sistema e/o modellazione di requisi
 
 ## 1.2 Glossario dei termini
 
-| Termine           | Descrizione                                                                   | Sinonimi        | Collegamenti             |
-| ----------------- | ----------------------------------------------------------------------------- | --------------- | ------------------------ |
-| utente            | fruitore del servizio di live streaming                                       |                 | spettatore, streamer     |
-| spettatore        | utente che osserva le live e chatta                                           | viewer          | utente registrato, guest |
-| streamer          | utente registrato che crea live e contenuti  |amministratore delle pagine, creatore di contenuti| canale, follower         |
-| guest             | utente non registrato che osserva le live                                     |                 | live                     |
-| utente registrato | utente che si è registrato al servizio                                        | utente iscritto | follower                 |
-| utente premium    | utente registrato che paga la piattaforma per benefici maggiori               |                 | utente registrato        |
-| canale            | pagina dello streamer, dove pubblica le live                                  |                 | streamer, social         |
-| social            | link social dello streamer                                                    |                 | canale                   |
-| live              | live corrente che lo streamer sta trasmettendo                                | stream, diretta | canale, streamer         |
-| video             | live passate dello streamer                                                   |                 | canale                   |
-| clip              | parte di un video di tot. secondi                                             |                 | canale                   |
-| affilitate        | streamer che ha superato determinati criteri                                  |                 | streamer                 |
-| follower          | utente registrato che segue lo streamer e riceve notifiche delle sue attivitá |                 | streamer, canale         |
-| utente fragile    | utente registrato che ha determinate disabilitá                               |                 | utente registrato        |
-| bit               | moneta virtuale per effettuare donazioni agli streamer                        |                 | utenti                   |
-| subscription      | supporto economico che riceve uno streamer dagli spettatori                   |                 | spettatore, streamer     |
-| followee          | streamer che viene seguito dai follower                                       | streamer        | streamer, follower       |
-| trailer           | video creato dallo streamer come presentazione del canale                     |                 | canale                   |
+| Termine           | Descrizione                                                                   | Sinonimi                                           | Collegamenti                         |
+| ----------------- | ----------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------ |
+| utente            | fruitore del servizio di live streaming                                       |                                                    | spettatore, streamer                 |
+| spettatore        | utente che osserva le live e chatta                                           | viewer                                             | utente registrato, guest             |
+| streamer          | utente registrato che crea live e contenuti                                   | amministratore delle pagine, creatore di contenuti | canale, follower                     |
+| guest             | utente non registrato che osserva le live                                     |                                                    | live                                 |
+| utente registrato | utente che si è registrato al servizio                                        | utente iscritto                                    | follower                             |
+| utente premium    | utente registrato che paga la piattaforma per benefici maggiori               |                                                    | utente registrato                    |
+| canale            | pagina dello streamer, dove pubblica le live                                  |                                                    | streamer, social                     |
+| social            | link social dello streamer                                                    |                                                    | canale                               |
+| live              | live corrente che lo streamer sta trasmettendo                                | stream, diretta                                    | canale, streamer                     |
+| video             | live passate dello streamer                                                   |                                                    | canale                               |
+| clip              | parte di un video di tot. secondi                                             |                                                    | canale                               |
+| affilitate        | streamer che ha superato determinati criteri                                  |                                                    | streamer                             |
+| follower          | utente registrato che segue lo streamer e riceve notifiche delle sue attivitá |                                                    | streamer, canale                     |
+| utente fragile    | utente registrato che ha determinate disabilitá                               |                                                    | utente registrato                    |
+| bit               | moneta virtuale per effettuare donazioni agli streamer                        |                                                    | utenti                               |
+| subscription      | supporto economico che riceve uno streamer dagli spettatori                   |                                                    | spettatore, streamer                 |
+| followee          | streamer che viene seguito dai follower                                       | streamer                                           | streamer, follower                   |
+| trailer           | video creato dallo streamer come presentazione del canale                     |                                                    | canale                               |
+| voto              | voto in likert che uno spettatore assegna ad un contenuto multimediale        | like                                               | utente registrato, live, video, clip |
 
 ## 1.3 Requisiti riscritti
 
@@ -194,7 +195,7 @@ La base di dati deve supportare le seguenti operazioni:
 
 - Una volta al giorno si controllano le condizioni per la qualifica di affiliate
 - Una volta a settimana viene calcolata la classifica degli streamer più seguiti
-- Una volta al giorno, viene calcolata la media dei like per ogni contenuto multimediale (per ogni streamer)
+- Una volta al giorno, viene calcolata la media dei <span style="color:red">~~like~~</span> <span style="color:blue">**voti**</span> per ogni contenuto multimediale (per ogni streamer)
 - Una volta al giorno, gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati (quelli che, in media, hanno      ricevuto una votazione maggiore rispetto agli altri)
 - Dieci volte al giorno, vengono controllati ed eliminati tutti i commenti con contenuti offensivi fatti dagli utenti per ogni contenuto multimediale (per ogni  streamer), nelle categorie, nei canali e durante le dirette live
 - Due volte al giorno vengono controllati i nuovi utenti registrati (sia premium – nuovi abbonati – sia utenti appartenenti a categorie fragili)
@@ -289,7 +290,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 | Frasi relative alle **operazioni della base di dati** |
 | --- |
-| La base di dati deve supportare le seguenti operazioni: <br><br>- Una volta al giorno si controllano le condizioni per la qualifica di affiliate <br>- Una volta a settimana viene calcolata la classifica degli streamer più seguiti <br>- Una volta al giorno, viene calcolata la media dei like per ogni contenuto multimediale (per ogni streamer) <br>- Una volta al giorno, gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati (quelli che, in media, hanno ricevuto una votazione maggiore rispetto agli altri) <br>- Dieci volte al giorno, vengono controllati ed eliminati tutti i commenti con contenuti offensivi fatti dagli utenti per ogni contenuto multimediale (per ogni streamer), nelle categorie, nei canali e durante le dirette live <br>- Due volte al giorno vengono controllati i nuovi utenti registrati (sia premium – nuovi abbonati – sia utenti appartenenti a categorie fragili) <br>- Cinque volte al giorno, gli amministratori delle pagine degli streamer segnalano agli amministratori della base di dati, i profili fake che seguono i loro streamer <br>- Una volta ogni 6 mesi, gli amministratori possono visualizzare lo storico degli utenti premium (quelli storici (dato un range di date) che quelli recenti (relativi all’ultimo mese)) |
+| La base di dati deve supportare le seguenti operazioni: <br><br>- Una volta al giorno si controllano le condizioni per la qualifica di affiliate <br>- Una volta a settimana viene calcolata la classifica degli streamer più seguiti <br>- Una volta al giorno, viene calcolata la media dei voti per ogni contenuto multimediale (per ogni streamer) <br>- Una volta al giorno, gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati (quelli che, in media, hanno ricevuto una votazione maggiore rispetto agli altri) <br>- Dieci volte al giorno, vengono controllati ed eliminati tutti i commenti con contenuti offensivi fatti dagli utenti per ogni contenuto multimediale (per ogni streamer), nelle categorie, nei canali e durante le dirette live <br>- Due volte al giorno vengono controllati i nuovi utenti registrati (sia premium – nuovi abbonati – sia utenti appartenenti a categorie fragili) <br>- Cinque volte al giorno, gli amministratori delle pagine degli streamer segnalano agli amministratori della base di dati, i profili fake che seguono i loro streamer <br>- Una volta ogni 6 mesi, gli amministratori possono visualizzare lo storico degli utenti premium (quelli storici (dato un range di date) che quelli recenti (relativi all’ultimo mese)) |
 
 | Frasi relative al **servizio di hosting** |
 | --- |
@@ -391,3 +392,4 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 | RD5 | La popolarità di un contenuto multimediale si ottiene contando il numero di visualizzazioni, commenti e reazioni ricevute.                          |
 | RD6 | L'affluenza media di una live si ottiene dividendo l'affluenza totale per il numero di affluenze momentanee calcolate durante la live.              |
 | RD7 | Il numero di interazioni si ottiene sommando commenti e reazioni associate a un contenuto multimediale.                                             |
+| RD8 | La media di voti di un contenuto multimediale si ottiene dividendo il punteggio totale dei voto del contenuto per il numero di voti ricevuti.       |
