@@ -506,6 +506,11 @@ Anche se questa scelta può portare a valori nulli e a uno spreco di spazio, per
 
 ### 2.3.3 Partizionamento/accorpamento di entità e associazioni
 
+Prima del partizionamento:  
+![Hosting](../Immagini/partizionamenti/hosting.png)  
+
+Dopo partizionamento:  
+![Hosting_partizionato](../Immagini/partizionamenti/hosting_part.png)
 <!--Nel processo di ristrutturazione, ci concentreremo sul partizionamento dell'associazione **_associazione<sub>(CM-H)</sub>_** che mette in relazione le entità `CONTENUTO MULTIMEDIALE` e `HASHTAG`.
 
 Per comodità, le entità e associzioni coinvolte verranno colorate di <span style="color:blue">**blu**</span>.
@@ -552,7 +557,7 @@ Le nuove cardinalità sono le stesse dell'associazione `associazione(CM-H)`, in 
 Gli identificatori rappresentati nello schema ristrutturato sono tutti costituiti da pochi attributi e verranno quindi considerati tutti come chiavi primarie.
 
 Molte entità hanno identitficatori esterni, ma costituiti da pochi attributi: per questo motivo si è deciso di mantenerli e di considerarli come chiavi primarie.
-Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDIALE`: questa entità infatti avrebbe avuto un identificatore composto da quattro attributi (uno dei quali esterno) e ciò avrebbe complicato la traduzione in schema logico, causando la propagazione del suo lungo identificatore anche alle entità che essa stessa avrebbe identificato. Per queste ragioni, si è deciso di considerare come identificatore soltanto l'attributo **_URL_**, essendo un URL già di per sè univoco.
+Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDIALE`: questa entità infatti avrebbe avuto un identificatore composto da quattro attributi (uno dei quali esterno) e ciò avrebbe complicato la traduzione in schema logico, causando la propagazione del suo lungo identificatore anche alle entità che essa stessa avrebbe identificato. Per queste ragioni, si è deciso di considerare come identificatore soltanto l'attributo **_URL_**, essendo un URL già di per sè un identificatore univoco.
 
 ## 2.4 Schema E-R ristrutturato + regole aziendali
 
