@@ -318,8 +318,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 3. **Reificazione di un’associazione ricorsiva**:
    - **Messaggi**: L'associazione tra `UTENTE` (mittente) e `UTENTE` (destinatario) attraverso i messaggi è stata reificata in un'entità `MESSAGGIO`, catturando dettagli come il testo e il timestamp.
-   - **Donazione e Portafoglio**: L'associazione `donazione` tra due portafogli è stata reificata in un'entità `DONAZIONE` per poter tenere traccia delle singole donazioni, grazie anche all'introduzione delle relazioni **_mittente<sub>(P-D)</sub>_** e **_destinatario<sub>(P-D)</sub>_** per tracciare ogni transazione di bit.
-
+  
 4. **Evoluzione di concetto**:
    - **Utenti**: La distinzione tra `GUEST`, `REGISTRATO`, `SPETTATORE` e `STREAMER` rappresenta l'evoluzione del concetto di utente nel sistema, con ruoli e permessi differenti.
 
@@ -327,7 +326,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 - Nella realizzazione dello schema ER è stata utilizzata una **Strategia Mista**:
   - **Top-down**: Inizialmente, sono state identificate le entità principali (ad es. `UTENTE`, `CONTENUTO MULTIMEDIALE`, `CANALE`) e le loro relazioni fondamentali.
-  - **Bottom-up**: Successivamente, sono stati dettagliati attributi specifici e relazioni più complesse (ad es. quelle riguardanti le entità `MESSAGGIO` e `DONAZIONE`), costruendo sulla struttura esistente.
+  - **Bottom-up**: Successivamente, sono stati dettagliati attributi specifici e relazioni più complesse (ad es. quelle riguardanti l'entità `MESSAGGIO`), costruendo sulla struttura esistente.
   - **Inside-out**: Alcune parti dello schema, come la gestione dei contenuti multimediali e le interazioni sociali, sono state sviluppate concentrandosi su entità centrali (`CONTENUTO MULTIMEDIALE`) e espandendo verso l'esterno.
 
 ### Commento finale
@@ -350,7 +349,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
    - Gli `STREAMER` gestiscono i `CANALI`, che a loro volta contengono `CONTENUTI MULTIMEDIALI`. Questo rispecchia la struttura tipica delle piattaforme di streaming, dove i creatori di contenuti hanno un controllo completo sui loro canali e sui contenuti.
 
 3. **Abbonamenti e Donazioni**:
-   - La presenza di `PREMIUM`, `PORTAFOGLIO`, e `DONAZIONI` indica un sistema di monetizzazione che permette agli utenti di effettuare donazioni e sottoscrivere abbonamenti premium.
+   - La presenza di `abbonamento`, `PORTAFOGLIO`, e `donazione` indica un sistema di monetizzazione che permette agli utenti di effettuare donazioni e sottoscrivere abbonamenti premium.
 
 4. **Molteplicità delle Relazioni**:
    - La molteplicità delle relazioni è stata definita in modo preciso per garantire che le cardinalità vengano rispettate. Ad esempio, un `UTENTE` può mandare e ricevere zero, uno o più messaggi (0,N) ma ogni `MESSAGGIO` ha un solo mittente (1,1) e un solo destinatario (1,1).
@@ -370,16 +369,14 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 | RV1  | Uno streamer deve essere un utente registrato al servizio.                                    |
 | RV2  | Un guest non deve avere accesso alle funzionalità riservate agli utenti registrati.           |
 | RV3  | Un messaggio deve avere un mittente e un destinatario.                                        |
-| RV4  | Una donazione deve essere associata a un portafoglio e avere un mittente e un destinatario.   |
-| RV5  | Il destinatario di una donazione deve essere uno streamer.                                    |
-| RV6  | Un canale deve essere gestito da uno streamer.                                                |
-| RV7  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú l'UUID.    |
-| RV8  | Ogni contenuto multimediale deve avere una categoria.                                         |
-| RV9  | Ogni reazione deve essere associata ad una emoji.                                             |
-| RV10 | Ogni video deve essere associato ad una live per poter esistere.                              |
-| RV11 | Ogni clip deve essere associata ad un video per poter esistere.                               |
-| RV12 | La durata di una clip deve essere inferiore a quella di un video.                             |
-| RV13 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower. |
+| RV4  | Un canale deve essere gestito da uno streamer.                                                |
+| RV5  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú l'UUID.    |
+| RV6  | Ogni contenuto multimediale deve avere una categoria.                                         |
+| RV7  | Ogni reazione deve essere associata ad una emoji.                                             |
+| RV8  | Ogni video deve essere associato ad una live per poter esistere.                              |
+| RV9  | Ogni clip deve essere associata ad un video per poter esistere.                               |
+| RV10 | La durata di una clip deve essere inferiore a quella di un video.                             |
+| RV11 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower. |
 
 ### 1.5.3 Derivazioni
 

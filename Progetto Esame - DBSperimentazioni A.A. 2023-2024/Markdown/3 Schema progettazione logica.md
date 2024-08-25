@@ -10,16 +10,18 @@
 - [2.2 Tavola delle operazioni](#22-tavola-delle-operazioni)
 - [2.3 Ristrutturazione dello schema E-R](#23-ristrutturazione-dello-schema-e-r)
   - [2.3.1 Analisi delle ridondanze](#231-analisi-delle-ridondanze)
-    - [2.3.1.1 RIDONDANZA 1 (ridondanza dei likert) (DA SISTEMARE!!)](#2311-ridondanza-1-ridondanza-dei-likert-da-sistemare)
+    - [2.3.1.1 RIDONDANZA 1 (ridondanza dei likert)](#2311-ridondanza-1-ridondanza-dei-likert)
       - [2.3.1.1.1 DERIVAZIONE](#23111-derivazione)
       - [2.3.1.1.2 OPERAZIONI COINVOLTE](#23112-operazioni-coinvolte)
       - [2.3.1.1.3 PRESENZA DI RIDONDANZA](#23113-presenza-di-ridondanza)
+        - [2.3.1.1.3.1 Op3](#231131-op3)
         - [2.3.1.1.3.1 Op4](#231131-op4)
       - [2.3.1.1.4 ASSENZA DI RIDONDANZA](#23114-assenza-di-ridondanza)
+        - [2.3.1.1.4.1 Op3](#231141-op3)
         - [2.3.1.1.4.1 Op4](#231141-op4)
       - [2.3.1.1.5 TOTALI PER RIDONDANZA 1](#23115-totali-per-ridondanza-1)
       - [2.3.1.1.6 Decisione](#23116-decisione)
-    - [2.3.1.2 RIDONDANZA 2 (ridondanza dell'affluenza media) (DA RIVEDERE!)](#2312-ridondanza-2-ridondanza-dellaffluenza-media-da-rivedere)
+    - [2.3.1.2 RIDONDANZA 2 (ridondanza dell'affluenza media)](#2312-ridondanza-2-ridondanza-dellaffluenza-media)
       - [2.3.1.2.1 DERIVAZIONE](#23121-derivazione)
       - [2.3.1.2.2 OPERAZIONI COINVOLTE](#23122-operazioni-coinvolte)
       - [2.3.1.2.3 PRESENZA DI RIDONDANZA](#23123-presenza-di-ridondanza)
@@ -35,7 +37,7 @@
       - [2.3.2.2.1 Regole aziendali introdotte](#23221-regole-aziendali-introdotte)
     - [2.3.2.3 Generalizzazione 3 (generalizzazione dell'interazione utenti-contenuto multimediale)](#2323-generalizzazione-3-generalizzazione-dellinterazione-utenti-contenuto-multimediale)
       - [2.3.2.3.1 Regole aziendali introdotte](#23231-regole-aziendali-introdotte)
-  - [2.3.3 Partizionamento/accorpamento di entità e associazioni](#233-partizionamentoaccorpamento-di-entità-e-associazioni)
+  - [2.3.3 Partizionamento/accorpamento di entità e associazioni (!BOZZA!)](#233-partizionamentoaccorpamento-di-entità-e-associazioni-bozza)
   - [2.3.4 Scelta degli identificatori principali](#234-scelta-degli-identificatori-principali)
 - [2.4 Schema E-R ristrutturato + regole aziendali](#24-schema-e-r-ristrutturato--regole-aziendali)
   - [2.4.1 Regole aziendali](#241-regole-aziendali)
@@ -59,7 +61,7 @@
 | GUEST                         | E    | 100,000    |
 | PORTAFOGLIO                   | E    | 70,000     |
 | conto                         | A    | 70,000     |
-| DONAZIONE                     | E    | 500,000    |
+| donazione                     | A    | 500,000    |
 | REGISTRATO                    | E    | 100,000    |
 | STREAMER                      | E    | 40,000     |
 | gestione<sub>(S-C)</sub>      | A    | 40,000     |
@@ -84,7 +86,7 @@
 | HASHTAG                       | E    | 10,000     |
 | follower                      | A    | 90,000     |
 | MESSAGGIO                     | E    | 2,000,000  |
-| voto                          | A    | 1,400,000  |
+| voto                          | A    | 1,200,000  |
 | abbonamento                   | A    | 150,000    |
 | HOSTING                       | E    | 50,000     |
 | rinnovo                       | A    | 50,000     |
@@ -97,15 +99,13 @@
 | presenza<sub>(R-E)</sub>      | A    | 15,000,000 |
 | gestione<sub>(I-R)</sub>      | A    | 20,000,000 |
 | associazione<sub>(LS-C)</sub> | A    | 80,000     |
-| mittente<sub>(M-R)</sub>      | A    | 2,000,000  |
-| mittente<sub>(P-D)</sub>      | A    | 500,000    |
-| destinatario<sub>(M-R)</sub>  | A    | 2,000,000  |
-| destinatario<sub>(P-D)</sub>  | A    | 500,000    |
+| mittente                      | A    | 2,000,000  |
+| destinatario                  | A    | 2,000,000  |
 
 1. **UTENTE**: Entità che rappresenta gli utenti della piattaforma.
 2. **GUEST**: Entità che rappresenta gli utenti non registrati alla piattaforma (guest).
 3. **PORTAFOGLIO**: Entità che rappresenta il portafoglio di ciascun utente registrato.
-4. **DONAZIONE**: Entità che rappresenta le donazioni effettuate da utenti a streamer.
+4. **donazione**: Associazione che rappresenta le donazioni effettuate da utenti a streamer.
 5. **REGISTRATO**: Entità che rappresenta gli utenti registrati con informazioni aggiuntive.
 6. **INTERAZIONE**: Entità che rappresenta tutte le interazioni (commenti e reazioni) ad una live.
 7. **invio**: Associazione che rappresenta l'invio di una interazione durante una live.
@@ -143,13 +143,11 @@
 39. **presenza<sub>(R-E)</sub>**: Associazione che indica la presenza di emoji in una reazione.
 40. **gestione<sub>(I-R)</sub>**: Associazione che rappresenta la gestione delle interazioni di ogni utente registrato.
 41. **associazione<sub>(LS-C)</sub>**: Associazione che rappresenta il collegamento tra il canale e i suoi profili social.
-42. **mittente<sub>(M-R)</sub>**: Associazione che rappresenta il mittente di un messaggio.
-43. **mittente<sub>(P-D)</sub>**: Associazione che rappresenta il mittente di una donazione.
-44. **destinatario<sub>(M-R)</sub>**: Associazione che rappresenta il destinatario di un messaggio.
-45. **destinatario<sub>(P-D)</sub>**: Associazione che rappresenta il destinatario di una donazione.
+42. **mittente**: Associazione che rappresenta il mittente di un messaggio.
+43. **destinatario**: Associazione che rappresenta il destinatario di un messaggio.
 
 I volumi indicati sono stati decisi basandosi sul funzionamento verosimile di una piattaforma di streaming di questo tipo, focalizzandosi anche sul peso dei vari componenti, in base alla loro frequenza di utilizzo. Per esempio, le entità **CONTENUTO MULTIMEDIALE**, **REAZIONE**, **COMMENTO** e **INTERAZIONE** hanno volumi elevati perchè si presume che i contenuti multimediali presenti siano molti. Di conseguenza la quantità di interazioni di ogni utente è probabile che sia molto elevata, nonostante si ipotizza che le reazioni siano maggiori dei commenti (essendo più immediate).
-Sono state prese in considerazione anche le cardinalità delle associazioni e la partecipazione delle varie entità alle stesse, specialmente in caso di associazioni (1,1) e (0,N), come ad esempio **visita** o **mittente<sub>(P-D)</sub>**.
+Sono state prese in considerazione anche le cardinalità delle associazioni e la partecipazione delle varie entità alle stesse, specialmente in caso di associazioni (1,1) e (0,N), come ad esempio **visita** o **mittente**.
 Entità come **CATEGORIA** o **EMOJI** presentano volumi molto più bassi di entità come **REAZIONE** o **MESSAGGIO** perchè si pensa che le categorie siano in gran parte predefinite e che gli emoji siano standard e largamente riutilizzabili, mentre reazioni e messaggi siano operazioni realizzate molte volte e anche più volte dallo stesso utente.
 
 ## 2.2 Tavola delle operazioni
@@ -210,7 +208,7 @@ Nel processo di ristrutturazione, ci concentreremo sull'analisi e sulla risoluzi
 
 Per una maggiore leggibilità, i costrutti dello schema ER coinvolti verranno colorati di <span style="color:red">rosso</span>, mentre le ridondanze in <span style="color:blue">blu</span>.
 
-#### 2.3.1.1 RIDONDANZA 1 (ridondanza dei likert) (DA SISTEMARE!!)
+#### 2.3.1.1 RIDONDANZA 1 (ridondanza dei likert)
 
 ![Ridondanza 1](../Immagini/ridondanze/2.3.1.1_rid_1_cor.png)
 
@@ -218,113 +216,122 @@ Per una maggiore leggibilità, i costrutti dello schema ER coinvolti verranno co
 
 L'attributo **_numero likert_** dell'entità `CONTENUTO MULTIMEDIALE` é derivabile dal conteggio delle partecipazioni di un contenuto multimediale all'associazione `voto`.
 
-<!--L'attributo "totale likert" dell'entità `CONTENUTO MULTIMEDIALE` é derivabile dalla somma dei valori dell'attributo **_likert_** dell'associazione `voto` di tutte le partecipazioni di un contenuto multimediale a questa associazione.-->
+L'attributo **_totale likert_** dell'entità `CONTENUTO MULTIMEDIALE` é derivabile dalla somma dei valori dell'attributo **_likert_** dell'associazione `voto` di tutte le partecipazioni di un contenuto multimediale a questa associazione.
 
 ##### 2.3.1.1.2 OPERAZIONI COINVOLTE
 
 | Operazione | Descrizione                                                                                                  | Tipo | Frequenza           |
 | ---------- | ------------------------------------------------------------------------------------------------------------ | ---- | ------------------- |
+| Op3        | Per ogni streamer, calcola la media dei voti per ogni contenuto multimediale                                 | B    | Una volta al giorno |
 | Op4        | Gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati | B    | Una volta al giorno |
 
 ##### 2.3.1.1.3 PRESENZA DI RIDONDANZA
-<!--
+
 ###### 2.3.1.1.3.1 Op3
 
-> Schema di operazione
-
-Tavola degli accessi:
-
-| Concetto               | Costrutto | Accessi | Tipo | Descrizione                             |
-| ---------------------- | --------- | ------- | ---- | --------------------------------------- |
-| CONTENUTO MULTIMEDIALE | E         | 1       | L    | Cerco "totale likert" e "numero likert" |
-
-> La media mi sembra scontata scrivere si ottiene facendo la seguente divisione "totale likert" / "numero likert"
-
-| Costo | Valori           |
-| ----- | ---------------- |
-| S:    | 0                |
-| L:    | 1                |
-| TOT:  | 1 accesso/giorno |
--->
-###### 2.3.1.1.3.1 Op4
-
-Schema di operazione:
-
-![Schema operazione rid1](../Immagini/ridondanze/2.3.1.1_schema1.png)
-
-Tavola degli accessi:
-
-| Concetto               | Costrutto | Accessi     | Tipo | Descrizione                                          |
-| ---------------------- | --------- | ----------- | ---- | ---------------------------------------------------- |
-| VIDEO                  | E         | 1           | L    | Prendo tutti i contenuti multimediali che sono video |
-| CONTENUTO MULTIMEDIALE | E         | 1 (200,000) | L    | Leggo il numero di likert per ogni video             |
-
-I video più votati saranno quelli con il maggiore numero di voti likert ricevuti.
-
-| Costo | Valori                                |
-| ----- | ------------------------------------- |
-| S:    | 0                                     |
-| L:    | 2 ((200,000 + 1) * 1 = 200,000 circa) |
-| TOT:  | 2 accesso/giorno (200,000)            |
-
-##### 2.3.1.1.4 ASSENZA DI RIDONDANZA
-<!--
-###### 2.3.1.1.4.1 Op3
-
-> Schema di operazione
-
-Tavola degli accessi:
-
-| Concetto | Costrutto | Accessi | Tipo | Descrizione    |
-| -------- | --------- | ------- | ---- | -------------- |
-| voto     | A         | 1       | L    | Cerco "likert" |
-
-| Costo | Valori           |
-| ----- | ---------------- |
-| S:    | 0                |
-| L:    | 1                |
-| TOT:  | 1 accesso/giorno |
--->
-###### 2.3.1.1.4.1 Op4
-
-Schema di operazione:
+Schema di operazione:  
 
 ![Schema operazione rid1a](../Immagini/ridondanze/2.3.1.1_schema1a.png)
 
 Tavola degli accessi:
 
-| Concetto | Costrutto | Accessi                 | Tipo | Descrizione                                          |
-| -------- | --------- | ----------------------- | ---- | ---------------------------------------------------- |
-| VIDEO    | E         | 1                       | L    | Prendo tutti i contenuti multimediali che sono video |
-| voto     | A         | 1 (1,400,000/200,000=7) | L    | Cerco il voto in likert di ogni video                |
+| Concetto               | Costrutto | Accessi | Tipo | Descrizione                                                                             |
+| ---------------------- | --------- | ------- | ---- | --------------------------------------------------------------------------------------- |
+| CONTENUTO MULTIMEDIALE | E         | 1       | L    | Leggo il punteggio totale in likert e il numero di voti per ogni contenuto multimediale |
 
-| Costo | Valori               |
-| ----- | -------------------- |
-| S:    | 0                    |
-| L:    | 2 (7+1=8)            |
-| TOT:  | 2 accesso/giorno (8) |
+La media dei voti di ogni contenuto multimediale si ottiene dividendo il punteggio totale in likert (**_totale likert_**) per il numero di voti (**_numero likert_**) ricevuti.
+
+| Costo | Valori           |
+| ----- | ---------------- |
+| S:    | 0                |
+| L:    | 1                |
+| TOT:  | 1 accesso/giorno |
+
+###### 2.3.1.1.3.1 Op4
+
+Schema di operazione:
+
+![Schema operazione rid1b](../Immagini/ridondanze/2.3.1.1_schema1b.png)
+
+Tavola degli accessi:
+
+| Concetto               | Costrutto | Accessi       | Tipo | Descrizione                                          |
+| ---------------------- | --------- | ------------- | ---- | ---------------------------------------------------- |
+| VIDEO                  | E         | 1             | L    | Prendo tutti i contenuti multimediali che sono video |
+| CONTENUTO MULTIMEDIALE | E         | 1 _(200,000)_ | L    | Leggo il numero di likert per ogni video             |
+
+I video più votati saranno quelli con il maggiore numero di voti ricevuti.
+
+| Costo | Valori                                  |
+| ----- | --------------------------------------- |
+| S:    | 0                                       |
+| L:    | 2 _((200,000 + 1) * 1 = 200,000 circa)_ |
+| TOT:  | 2 accesso/giorno _(200,000)_            |
+
+##### 2.3.1.1.4 ASSENZA DI RIDONDANZA
+
+###### 2.3.1.1.4.1 Op3
+
+Schema di operazione:
+
+![Schema operazione rid1a senza ridondanza](../Immagini/ridondanze/2.3.1.1_schema1a_norid.png)
+
+Tavola degli accessi:
+
+| Concetto               | Costrutto | Accessi                   | Tipo | Descrizione                                                                     |
+| ---------------------- | --------- | ------------------------- | ---- | ------------------------------------------------------------------------------- |
+| CONTENUTO MULTIMEDIALE | E         | 1                         | L    | Prendo tutti i contenuti multimediali                                           |
+| voto                   | A         | 1 _(1,200,000/1,000,000=1,2)_ | L    | Leggo quante volte e con quale punteggio ogni contenuto ha partecipato all'associazione |
+
+La media di voti di ogni contenuto multimediale si otterrà dividendo la somma di tutti i punteggi per il numero di partecipazioni all'associazione `voto`.
+
+| Costo | Valori                                               |
+| ----- | ---------------------------------------------------- |
+| S:    | 0                                                    |
+| L:    | 1 _(1+1.2=2.2)                                       |
+| TOT:  | 1 accesso/giorno _(poco più di 2 accessi al giorno)_ |
+
+###### 2.3.1.1.4.1 Op4
+
+Schema di operazione:
+
+![Schema operazione rid1b senza ridondanza](../Immagini/ridondanze/2.3.1.1_schema1b_norid.png)
+
+Tavola degli accessi:
+
+| Concetto               | Costrutto | Accessi                   | Tipo | Descrizione                                          |
+| ---------------------- | --------- | ------------------------- | ---- | ---------------------------------------------------- |
+| VIDEO                  | E         | 1                         | L    | Prendo tutti i contenuti multimediali che sono video |
+| CONTENUTO MULTIMEDIALE | E         | 1                         | L    | Leggo tutti gli URL dei video                        |
+| voto                   | A         | 1 _(1,200,000/200,000=6)_ | L    | Leggo il voto in likert di ogni video                |
+
+I video più votati saranno quelli con il maggiore numero di partecipazioni all'associazione `voto`.
+
+| Costo | Valori                 |
+| ----- | ---------------------- |
+| S:    | 0                      |
+| L:    | 2 _(1+1+6=8)_          |
+| TOT:  | 2 accesso/giorno _(6)_ |
 
 ##### 2.3.1.1.5 TOTALI PER RIDONDANZA 1
 
-> NB tipo dato integer = 4 byte
+| **Presenza di ridondanza** |                                       |
+| -------------------------- | ------------------------------------- |
+| Spazio:                    | 4 _(* 2)_ * 1,000,000 Byte aggiuntivi |
+| Tempo:                     | 4 accessi/giorno (200,000 circa)      |
 
-| **Presenza di ridondanza** |                                   |
-| -------------------------- | --------------------------------- |
-| Spazio:                    | 4 * 1 * 1,000,000 Byte aggiuntivi |
-| Tempo:                     | 4 accessi/giorno (200,000 circa)  |
-
-| **Assenza di ridondanza** |                      |
-| ------------------------- | -------------------- |
-| Spazio:                   | 0                    |
-| Tempo:                    | 4 accessi/giorno (8) |
+| **Assenza di ridondanza** |                               |
+| ------------------------- | ----------------------------- |
+| Spazio:                   | 0                             |
+| Tempo:                    | 4 accessi/giorno _(10 circa)_ |
 
 ##### 2.3.1.1.6 Decisione
 
 <!--Questa ridondanza risulta inutile in quanto non risparmia nemmeno un singolo accesso sprecando circa 7.6 MB.
 Per questo motivo, si decide di eliminare la ridondanza togliendo i due attributi **_numero likert_** e **_totale likert_**.-->
-Questa ridondanza richiede molti accessi al giorno e uno spreco di circa 4 MB: per questo motivo, si decide di eliminare questa ridondanza togliendo l'attributo **_numero likert_** all'entità `CONTENUTO MULTIMEDIALE`.
+Questa ridondanza richiede molti accessi al giorno e uno spreco di circa 8 MB: per questo motivo, si decide di eliminare questa ridondanza togliendo gli attributi **_numero likert_** e **_totale likert_** all'entità `CONTENUTO MULTIMEDIALE`.
 
-#### 2.3.1.2 RIDONDANZA 2 (ridondanza dell'affluenza media) (DA RIVEDERE!)
+#### 2.3.1.2 RIDONDANZA 2 (ridondanza dell'affluenza media)
 
 ![Ridondanza 2](../Immagini/ridondanze/2.3.1.2_rid_2_cor.png)
 
@@ -332,7 +339,7 @@ Questa ridondanza richiede molti accessi al giorno e uno spreco di circa 4 MB: p
 
 <!--L'attributo "affluenza media" dell'entità `LIVE` é derivabile dalla somma dei valori dell'attributo **_numero spettatori_** dell'entità `AFFLUENZA` diviso il numero di affluenze calcolate a partire dall'inizio della live (**_data inizio_**).-->
 
-L'attributo **_affluenza media_** dell'entità `LIVE` é derivabile dalla partecipazione di una live all'associazione `medie spettatori` non appena la live termina e considerando la data di inizio della stessa per trovare tutte le live del mese.
+L'attributo **_affluenza media_** dell'entità `LIVE` é derivabile dalla partecipazione di una live del mese corrente all'associazione `medie spettatori` non appena la live termina.
 
 ##### 2.3.1.2.2 OPERAZIONI COINVOLTE
 
@@ -350,9 +357,9 @@ Schema di operazione:
 
 Tavola degli accessi:
 
-| Concetto | Costrutto | Accessi | Tipo | Descrizione                                              |
-| -------- | --------- | ------- | ---- | -------------------------------------------------------- |
-| LIVE     | E         | 1       | L    | Leggo l'affluenza media e la data di inizio di ogni live |
+| Concetto | Costrutto | Accessi | Tipo | Descrizione                                                                                          |
+| -------- | --------- | ------- | ---- | ---------------------------------------------------------------------------------------------------- |
+| LIVE     | E         | 1       | L    | Leggo l'affluenza media e la data di inizio di ogni live, considerando solo quelle del mese corrente |
 
 | Costo | Valori         |
 | ----- | -------------- |
@@ -370,20 +377,20 @@ Schema di operazione:
 
 Tavola degli accessi:
 
-| Concetto         | Costrutto | Accessi               | Tipo | Descrizione                                                                |
-| ---------------- | --------- | --------------------- | ---- | -------------------------------------------------------------------------- |
-| LIVE             | E         | 1                     | L    | Leggo la data di inizio di tutte le live e filtro quelle del mese corrente |
-| media spettatori | A         | 1 (500,000/250,000=2) | L    | Cerco la media di spettatori per ogni live del mese corrente               |
+| Concetto         | Costrutto | Accessi                 | Tipo | Descrizione                                                                    |
+| ---------------- | --------- | ----------------------- | ---- | ------------------------------------------------------------------------------ |
+| LIVE             | E         | 1                       | L    | Leggo la data di inizio di ogni live e considero solo quelle del mese corrente |
+| media spettatori | A         | 1 _(500,000/250,000=2)_ | L    | Cerco la media di spettatori per ogni live del mese corrente                   |
 
 <!--
 > uno volta ottenuto questi due dati, faccio la somma del numero degli spettatori diviso il numero di righe coivolte di quella specifica live.
 -->
 
-| Costo | Valori             |
-| ----- | ------------------ |
-| S:    | 0                  |
-| L:    | 2 (1+2=3)          |
-| TOT:  | 2 accessi/mese (3) |
+| Costo | Valori               |
+| ----- | -------------------- |
+| S:    | 0                    |
+| L:    | 2 _(1+2=3)_          |
+| TOT:  | 2 accessi/mese _(3)_ |
 
 ###### 2.3.1.2.5 TOTALI PER RIDONDANZA 2
 
@@ -392,10 +399,10 @@ Tavola degli accessi:
 | Spazio:                    | 4 * 250,000 Byte occupati |
 | Tempo:                     | 1 accesso/mese            |
 
-| **Assenza di ridondanza** |                    |
-| ------------------------- | ------------------ |
-| Spazio:                   | 0                  |
-| Tempo:                    | 2 accessi/mese (3) |
+| **Assenza di ridondanza** |                      |
+| ------------------------- | -------------------- |
+| Spazio:                   | 0                    |
+| Tempo:                    | 2 accessi/mese _(3)_ |
 
 ###### 2.3.1.2.6 Decisione
 
@@ -486,7 +493,7 @@ Dallo schema ER, si nota subito che le entità figlie partecipano entrambe ad un
 
 Inoltre, le operazioni che coinvolgono la generalizzazione non fanno molta distinzione tra le occorrenze delle varie entità, specialmente considerando che un commento e una reazione possono essere viste come una generica interazione sia rispetto all'utente che la crea che alla live che la riceve.
 
-Un aspetto degno di nota è la presenza di attributi solo nell'entità `COMMENTO` che, anche se occupano spazio (specialmente il messaggio che costituisce il commento), non hanno corrispondenti nell'entità `REAZIONE`.
+Un aspetto degno di nota è la presenza di un attributo solo nell'entità `COMMENTO` che, anche se potrebbe occupare spazio, non ha corrispondenti nell'entità `REAZIONE`.
 
 Infine, si possono osservare le cardinalità in gran parte identiche con le quali le entità figlie vengono associate all'entità `EMOJI`: possono infatti essere uniformate a (0,N) grazie all'introduzione di vincoli, permettendo la fusione delle associazioni `presenza(C-E)` e `presenza(R-E)` in una sola associazione **_presenza_**.
 
@@ -496,7 +503,7 @@ Per questi motivi, si sceglie di accorpare le entità figlie nell'entità genito
 
 Per distinguere un commento da una reazione, è stato introdotto l'attributo **_tipologia_** e si impone il vincolo che un'interazione di tipo **_reazione_** partecipi all'associazione **_presenza_** solamente con cardinalità (1,1).
 
-Gli attributi dell'entità `COMMENTO` sono stati anch'essi trasferiti all'entità `INTERAZIONE`, ma resi opzionali, in quanto non necessari per una reazione.
+L'unico attributo dell'entità `COMMENTO` è stato quindi trasferito all'entità `INTERAZIONE`, ma resi opzionale, in quanto non necessario per una reazione.
 
 Anche se questa scelta può portare a valori nulli e a uno spreco di spazio, permette però di ridurre notevolmente il numero di accessi a entità e associazioni e di semplificare le operazioni.
 
@@ -504,7 +511,7 @@ Anche se questa scelta può portare a valori nulli e a uno spreco di spazio, per
 
 - RVI: una reazione può partecipare all'associazione **_presenza_** solamente con cardinalità (1,1).
 
-### 2.3.3 Partizionamento/accorpamento di entità e associazioni
+### 2.3.3 Partizionamento/accorpamento di entità e associazioni (!BOZZA!)
 
 Prima del partizionamento:  
 ![Hosting](../Immagini/partizionamenti/hosting.png)  
@@ -533,26 +540,25 @@ Le nuove cardinalità sono le stesse dell'associazione `associazione(CM-H)`, in 
 
 ### 2.3.4 Scelta degli identificatori principali
 
-| Entità                 | Identificatore principale            |
-| ---------------------- | ------------------------------------ |
-| UTENTE                 | nome utente                          |
-| REGISTRATO             | nome utente                          |
-| PORTAFOGLIO            | nome utente                          |
-| DONAZIONE              | nome utente, timestamp               |
-| MESSAGGIO              | timestamp, nome utente               |
-| CANALE                 | nome utente                          |
-| LINK SOCIAL            | social, nome utente                  |
-| HOSTING                | timestamp, nome utente               |
-| PROGRAMMAZIONE         | timestamp, nome utente               |
-| CONTENUTO MULTIMEDIALE | URL                                  |
-| LIVE                   | id contenuto                         |
-| CLIP                   | id contenuto                         |
-| VIDEO                  | id contenuto                         |
-| EMOJI                  | codice                               |
-| CATEGORIA              | nome                                 |
-| HASHTAG                | nome                                 |
-| INTERAZIONE            | nome utente, id contenuto, timestamp |
-| AFFLUENZA              | timestamp, id contenuto              |
+| Entità                 | Identificatore principale   |
+| ---------------------- | --------------------------- |
+| UTENTE                 | nome utente                 |
+| REGISTRATO             | nome utente                 |
+| PORTAFOGLIO            | nome utente                 |
+| MESSAGGIO              | timestamp, nome utente      |
+| CANALE                 | nome utente                 |
+| LINK SOCIAL            | social, nome utente         |
+| HOSTING                | timestamp, nome utente      |
+| PROGRAMMAZIONE         | timestamp, nome utente      |
+| CONTENUTO MULTIMEDIALE | URL                         |
+| LIVE                   | URL                         |
+| CLIP                   | URL                         |
+| VIDEO                  | URL                         |
+| EMOJI                  | codice                      |
+| CATEGORIA              | nome                        |
+| HASHTAG                | nome                        |
+| INTERAZIONE            | nome utente, URL, timestamp |
+| AFFLUENZA              | timestamp, URL              |
 
 Gli identificatori rappresentati nello schema ristrutturato sono tutti costituiti da pochi attributi e verranno quindi considerati tutti come chiavi primarie.
 
@@ -574,16 +580,14 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 | RV3  | Uno spettatore non deve avere l'attributo **_affiliate_**.                                                                                                                                 |
 | RV4  | Uno spettatore non deve partecipare all'associazione **_streaming_**.                                                                                                                      |
 | RV5  | Un messaggio deve avere un mittente e un destinatario.                                                                                                                                     |
-| RV6  | Una donazione deve essere associata a un portafoglio e avere un mittente e un destinatario.                                                                                                |
-| RV7  | Il destinatario di una donazione deve essere uno streamer.                                                                                                                                 |
-| RV8  | Un canale deve essere gestito da uno streamer.                                                                                                                                             |
-| RV9  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú l'UUID.                                                                                                 |
-| RV10 | Un contenuto multimediale non deve partecipare contemporaneamente alle associazioni **_contenuto live_**, **_contenuto video_** e **_contenuto clip_**, ma solo ad una di esse alla volta. |
-| RV11 | Una reazione deve partecipare all'associazione **_presenza_** solamente con cardinalità (1,1)                                                                                              |
-| RV12 | Ogni video deve essere associato ad una live per poter esistere.                                                                                                                           |
-| RV13 | Ogni clip deve essere associata ad un video per poter esistere.                                                                                                                            |
-| RV14 | La durata di una clip deve essere inferiore a quella di un video.                                                                                                                          |
-| RV15 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.                                                                                              |
+| RV6  | Un canale deve essere gestito da uno streamer.                                                                                                                                             |
+| RV7  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú l'UUID.                                                                                                 |
+| RV8 | Un contenuto multimediale non deve partecipare contemporaneamente alle associazioni **_contenuto live_**, **_contenuto video_** e **_contenuto clip_**, ma solo ad una di esse alla volta. |
+| RV9 | Una reazione deve partecipare all'associazione **_presenza_** solamente con cardinalità (1,1)                                                                                              |
+| RV10 | Ogni video deve essere associato ad una live per poter esistere.                                                                                                                           |
+| RV11 | Ogni clip deve essere associata ad un video per poter esistere.                                                                                                                            |
+| RV12 | La durata di una clip deve essere inferiore a quella di un video.                                                                                                                          |
+| RV13 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.                                                                                              |
 
 ### 2.4.3 Derivazioni
 
@@ -616,9 +620,9 @@ Messaggio(<U>Mittente</U>, <U>TimestampMessaggio</U>, Destinatario, Testo)
 Portafoglio(<U>UtenteProprietario</U>, TotaleBits)  
 > Portafoglio(UtenteProprietario) referenzia Registrato(Username)  
 
-Donazione(<U>MittenteDonazione</U>, <U>TimestampDonazione</U>, Destinatario, Streamer, Bits)  
-> Donazione(MittenteDonazione) referenzia Portfoglio(UtenteProprietario)  
-> Donazione(Destinatario) referenzia Portfoglio(UtenteProprietario)  
+Donazione(<U>ProprietarioPortafoglio</U>, <U>CanaleStreamer</U>, <U>Timestamp<U>, Bits)  
+> Donazione(ProprietarioPortafoglio) referenzia Portfoglio(UtenteProprietario)  
+> Donazione(CanaleStreamer) referenzia Canale(UtenteProprietario)  
 
 Hosting(<U>UtenteStreamer</U>, <U>TimestampRinnovo</U>, Pagato, Scadenza)  
 > Hosting(UtenteStreamer) referenzia Registrato(Username)  
@@ -648,10 +652,9 @@ Voto(<U>UtenteRegistrato</U>, <U>ContenutoMultimediale</U>, Likert)
 > Voto(UtenteRegistrato) referenzia Registrato(Username)  
 > Voto(ContenutoMultimediale) referenzia ContenutoMultimediale(IdURL)
 
-Visita(<U>Utente</U>, <U>ContenutoMultimediale</U>, <U>TimestampVisita</U>)  
+Visita(<U>Utente</U>, <U>ContenutoMultimediale</U>)  
 > Visita(Utente) referenzia Utente(NomeUtente)  
 > Visita(ContenutoMultimediale) referenzia ContenutoMultimediale(IdURL)  
-**N.B.**: si è deciso di considerare anche l'attributo **TimestampVisita** come chiave primaria siccome un utente non avrebbe altrimenti potuto visitare un contenuto multimediale più volte, cosa invece possibile nello schema ER ristrutturato.
 
 Categoria(<U>NomeCategoria</U>)
 
