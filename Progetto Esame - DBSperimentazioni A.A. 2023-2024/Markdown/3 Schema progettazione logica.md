@@ -37,7 +37,7 @@
       - [2.3.2.2.1 Regole aziendali introdotte](#23221-regole-aziendali-introdotte)
     - [2.3.2.3 Generalizzazione 3 (generalizzazione dell'interazione utenti-contenuto multimediale)](#2323-generalizzazione-3-generalizzazione-dellinterazione-utenti-contenuto-multimediale)
       - [2.3.2.3.1 Regole aziendali introdotte](#23231-regole-aziendali-introdotte)
-  - [2.3.3 Partizionamento/accorpamento di entità e associazioni (!BOZZA!)](#233-partizionamentoaccorpamento-di-entità-e-associazioni-bozza)
+  - [2.3.3 Partizionamento/accorpamento di entità e associazioni](#233-partizionamentoaccorpamento-di-entità-e-associazioni)
   - [2.3.4 Scelta degli identificatori principali](#234-scelta-degli-identificatori-principali)
 - [2.4 Schema E-R ristrutturato + regole aziendali](#24-schema-e-r-ristrutturato--regole-aziendali)
   - [2.4.1 Regole aziendali](#241-regole-aziendali)
@@ -86,7 +86,7 @@
 | HASHTAG                       | E    | 10,000     |
 | follower                      | A    | 90,000     |
 | MESSAGGIO                     | E    | 2,000,000  |
-| voto                          | A    | 1,200,000  |
+| voto                          | A    | 1,400,000  |
 | abbonamento                   | A    | 150,000    |
 | HOSTING                       | E    | 50,000     |
 | rinnovo                       | A    | 50,000     |
@@ -241,11 +241,11 @@ Tavola degli accessi:
 
 La media dei voti di ogni contenuto multimediale si ottiene dividendo il punteggio totale in likert (**_totale likert_**) per il numero di voti (**_numero likert_**) ricevuti.
 
-| Costo | Valori           |
-| ----- | ---------------- |
-| S:    | 0                |
-| L:    | 1                |
-| TOT:  | 1 accesso/giorno |
+| Costo | Valori                   |
+| ----- | ------------------------ |
+| S:    | 0 accessi/giorno         |
+| L:    | 1 * 1 = 1 accesso/giorno |
+| TOT:  | 1 accesso/giorno         |
 
 ###### 2.3.1.1.3.1 Op4
 
@@ -255,18 +255,18 @@ Schema di operazione:
 
 Tavola degli accessi:
 
-| Concetto               | Costrutto | Accessi       | Tipo | Descrizione                                          |
-| ---------------------- | --------- | ------------- | ---- | ---------------------------------------------------- |
-| VIDEO                  | E         | 1             | L    | Prendo tutti i contenuti multimediali che sono video |
-| CONTENUTO MULTIMEDIALE | E         | 1 _(200,000)_ | L    | Leggo il numero di likert per ogni video             |
+| Concetto               | Costrutto | Accessi | Tipo | Descrizione                                          |
+| ---------------------- | --------- | ------- | ---- | ---------------------------------------------------- |
+| VIDEO                  | E         | 1       | L    | Prendo tutti i contenuti multimediali che sono video |
+| CONTENUTO MULTIMEDIALE | E         | 200,000 | L    | Leggo il numero di likert per ogni video             |
 
 I video più votati saranno quelli con il maggiore numero di voti ricevuti.
 
-| Costo | Valori                                  |
-| ----- | --------------------------------------- |
-| S:    | 0                                       |
-| L:    | 2 _((200,000 + 1) * 1 = 200,000 circa)_ |
-| TOT:  | 2 accesso/giorno _(200,000)_            |
+| Costo | Valori                                     |
+| ----- | ------------------------------------------ |
+| S:    | 0 accessi/giorno                           |
+| L:    | (200,000 + 1) * 1 = 200,001 accessi/giorno |
+| TOT:  | 200,000 accessi/giorno circa               |
 
 ##### 2.3.1.1.4 ASSENZA DI RIDONDANZA
 
@@ -278,18 +278,18 @@ Schema di operazione:
 
 Tavola degli accessi:
 
-| Concetto               | Costrutto | Accessi                   | Tipo | Descrizione                                                                     |
-| ---------------------- | --------- | ------------------------- | ---- | ------------------------------------------------------------------------------- |
-| CONTENUTO MULTIMEDIALE | E         | 1                         | L    | Prendo tutti i contenuti multimediali                                           |
-| voto                   | A         | 1 _(1,200,000/1,000,000=1,2)_ | L    | Leggo quante volte e con quale punteggio ogni contenuto ha partecipato all'associazione |
+| Concetto               | Costrutto | Accessi                   | Tipo | Descrizione                                                                             |
+| ---------------------- | --------- | ------------------------- | ---- | --------------------------------------------------------------------------------------- |
+| CONTENUTO MULTIMEDIALE | E         | 1                         | L    | Prendo tutti i contenuti multimediali                                                   |
+| voto                   | A         | 1,400,000/1,000,000 = 1.4 | L    | Leggo quante volte e con quale punteggio ogni contenuto ha partecipato all'associazione |
 
 La media di voti di ogni contenuto multimediale si otterrà dividendo la somma di tutti i punteggi per il numero di partecipazioni all'associazione `voto`.
 
-| Costo | Valori                                               |
-| ----- | ---------------------------------------------------- |
-| S:    | 0                                                    |
-| L:    | 1 _(1+1.2=2.2)                                       |
-| TOT:  | 1 accesso/giorno _(poco più di 2 accessi al giorno)_ |
+| Costo | Valori                             |
+| ----- | ---------------------------------- |
+| S:    | 0 accessi/giorno                   |
+| L:    | (1 + 1.4) * 1 = 2.4 accessi/giorno |
+| TOT:  | poco più di 2 accessi/giorno       |
 
 ###### 2.3.1.1.4.1 Op4
 
@@ -299,36 +299,39 @@ Schema di operazione:
 
 Tavola degli accessi:
 
-| Concetto               | Costrutto | Accessi                   | Tipo | Descrizione                                          |
-| ---------------------- | --------- | ------------------------- | ---- | ---------------------------------------------------- |
-| VIDEO                  | E         | 1                         | L    | Prendo tutti i contenuti multimediali che sono video |
-| CONTENUTO MULTIMEDIALE | E         | 1                         | L    | Leggo tutti gli URL dei video                        |
-| voto                   | A         | 1 _(1,200,000/200,000=6)_ | L    | Leggo il voto in likert di ogni video                |
+| Concetto               | Costrutto | Accessi               | Tipo | Descrizione                                          |
+| ---------------------- | --------- | --------------------- | ---- | ---------------------------------------------------- |
+| VIDEO                  | E         | 1                     | L    | Prendo tutti i contenuti multimediali che sono video |
+| CONTENUTO MULTIMEDIALE | E         | 1                     | L    | Leggo tutti gli URL dei video                        |
+| voto                   | A         | 1,400,000/200,000 = 7 | L    | Leggo il voto in likert di ogni video                |
 
 I video più votati saranno quelli con il maggiore numero di partecipazioni all'associazione `voto`.
 
-| Costo | Valori                 |
-| ----- | ---------------------- |
-| S:    | 0                      |
-| L:    | 2 _(1+1+6=8)_          |
-| TOT:  | 2 accesso/giorno _(6)_ |
+| Costo | Valori              |
+| ----- | ------------------- |
+| S:    | 0 accessi/giorno    |
+| L:    | (1 + 1 + 7) * 1 = 9 |
+| TOT:  | 9 accesso/giorno    |
 
 ##### 2.3.1.1.5 TOTALI PER RIDONDANZA 1
 
-| **Presenza di ridondanza** |                                       |
-| -------------------------- | ------------------------------------- |
-| Spazio:                    | 4 _(* 2)_ * 1,000,000 Byte aggiuntivi |
-| Tempo:                     | 4 accessi/giorno (200,000 circa)      |
+Assumendo che gli attributi **_numero likert_** e **_totale likert_** occupino ciascuno 4 byte, si ottengono i seguenti valori:
 
-| **Assenza di ridondanza** |                               |
-| ------------------------- | ----------------------------- |
-| Spazio:                   | 0                             |
-| Tempo:                    | 4 accessi/giorno _(10 circa)_ |
+| **Presenza di ridondanza** |                                   |
+| -------------------------- | --------------------------------- |
+| Spazio:                    | 4 * 2 * 1,000,000 Byte aggiuntivi |
+| Tempo:                     | 200,000 accessi/giorno circa      |
+
+| **Assenza di ridondanza** |                         |
+| ------------------------- | ----------------------- |
+| Spazio:                   | 0                       |
+| Tempo:                    | 11 accessi/giorno circa |
 
 ##### 2.3.1.1.6 Decisione
 
 <!--Questa ridondanza risulta inutile in quanto non risparmia nemmeno un singolo accesso sprecando circa 7.6 MB.
 Per questo motivo, si decide di eliminare la ridondanza togliendo i due attributi **_numero likert_** e **_totale likert_**.-->
+
 Questa ridondanza richiede molti accessi al giorno e uno spreco di circa 8 MB: per questo motivo, si decide di eliminare questa ridondanza togliendo gli attributi **_numero likert_** e **_totale likert_** all'entità `CONTENUTO MULTIMEDIALE`.
 
 #### 2.3.1.2 RIDONDANZA 2 (ridondanza dell'affluenza media)
@@ -339,7 +342,7 @@ Questa ridondanza richiede molti accessi al giorno e uno spreco di circa 8 MB: p
 
 <!--L'attributo "affluenza media" dell'entità `LIVE` é derivabile dalla somma dei valori dell'attributo **_numero spettatori_** dell'entità `AFFLUENZA` diviso il numero di affluenze calcolate a partire dall'inizio della live (**_data inizio_**).-->
 
-L'attributo **_affluenza media_** dell'entità `LIVE` é derivabile dalla partecipazione di una live del mese corrente all'associazione `medie spettatori` non appena la live termina.
+L'attributo **_affluenza media_** dell'entità `LIVE` é derivabile dalla partecipazione di una live del mese corrente all'associazione `media spettatori` non appena la live termina.
 
 ##### 2.3.1.2.2 OPERAZIONI COINVOLTE
 
@@ -361,11 +364,11 @@ Tavola degli accessi:
 | -------- | --------- | ------- | ---- | ---------------------------------------------------------------------------------------------------- |
 | LIVE     | E         | 1       | L    | Leggo l'affluenza media e la data di inizio di ogni live, considerando solo quelle del mese corrente |
 
-| Costo | Valori         |
-| ----- | -------------- |
-| S:    | 0              |
-| L:    | 1              |
-| TOT:  | 1 accesso/mese |
+| Costo | Valori                 |
+| ----- | ---------------------- |
+| S:    | 0                      |
+| L:    | 1 * 1 = 1 accesso/mese |
+| TOT:  | 1 accesso/mese         |
 
 ##### 2.3.1.2.4 ASSENZA DI RIDONDANZA
 
@@ -377,32 +380,30 @@ Schema di operazione:
 
 Tavola degli accessi:
 
-| Concetto         | Costrutto | Accessi                 | Tipo | Descrizione                                                                    |
-| ---------------- | --------- | ----------------------- | ---- | ------------------------------------------------------------------------------ |
-| LIVE             | E         | 1                       | L    | Leggo la data di inizio di ogni live e considero solo quelle del mese corrente |
-| media spettatori | A         | 1 _(500,000/250,000=2)_ | L    | Cerco la media di spettatori per ogni live del mese corrente                   |
+| Concetto         | Costrutto | Accessi             | Tipo | Descrizione                                                                    |
+| ---------------- | --------- | ------------------- | ---- | ------------------------------------------------------------------------------ |
+| LIVE             | E         | 1                   | L    | Leggo la data di inizio di ogni live e considero solo quelle del mese corrente |
+| media spettatori | A         | 500,000/250,000 = 2 | L    | Cerco la media di spettatori per ogni live del mese corrente                   |
 
-<!--
-> uno volta ottenuto questi due dati, faccio la somma del numero degli spettatori diviso il numero di righe coivolte di quella specifica live.
--->
-
-| Costo | Valori               |
-| ----- | -------------------- |
-| S:    | 0                    |
-| L:    | 2 _(1+2=3)_          |
-| TOT:  | 2 accessi/mese _(3)_ |
+| Costo | Valori                       |
+| ----- | ---------------------------- |
+| S:    | 0                            |
+| L:    | (1 + 2) * 1 = 3 accessi/mese |
+| TOT:  | 3 accessi/mese               |
 
 ###### 2.3.1.2.5 TOTALI PER RIDONDANZA 2
 
-| **Presenza di ridondanza** |                           |
-| -------------------------- | ------------------------- |
-| Spazio:                    | 4 * 250,000 Byte occupati |
-| Tempo:                     | 1 accesso/mese            |
+Assumendo che l'attributo **_affluenza media_** occupi 4 byte, si ottengono i seguenti valori:
+
+| **Presenza di ridondanza** |                               |
+| -------------------------- | ----------------------------- |
+| Spazio:                    | 4 * 1 * 250,000 Byte occupati |
+| Tempo:                     | 1 accesso/mese                |
 
 | **Assenza di ridondanza** |                      |
 | ------------------------- | -------------------- |
 | Spazio:                   | 0                    |
-| Tempo:                    | 2 accessi/mese _(3)_ |
+| Tempo:                    | 3 accessi/mese 3 |
 
 ###### 2.3.1.2.6 Decisione
 
@@ -511,32 +512,9 @@ Anche se questa scelta può portare a valori nulli e a uno spreco di spazio, per
 
 - RVI: una reazione può partecipare all'associazione **_presenza_** solamente con cardinalità (1,1).
 
-### 2.3.3 Partizionamento/accorpamento di entità e associazioni (!BOZZA!)
+### 2.3.3 Partizionamento/accorpamento di entità e associazioni
 
-Prima del partizionamento:  
-![Hosting](../Immagini/partizionamenti/hosting.png)  
-
-Dopo partizionamento:  
-![Hosting_partizionato](../Immagini/partizionamenti/hosting_part.png)
-<!--Nel processo di ristrutturazione, ci concentreremo sul partizionamento dell'associazione **_associazione<sub>(CM-H)</sub>_** che mette in relazione le entità `CONTENUTO MULTIMEDIALE` e `HASHTAG`.
-
-Per comodità, le entità e associzioni coinvolte verranno colorate di <span style="color:blue">**blu**</span>.
-
-#### 2.3.3.1 Partizionamento/Accorpamento 1 (partizionamento di associazione)
-
-Porzione di schema prima del partizionamento:
-
-![Partizionamento 1](../Immagini/partizionamenti/2.3.3.1_part1.png)
-
-Porzione di schema dopo il partizionamento:
-
-![Partizionamento 1a](../Immagini/partizionamenti/2.3.3.1_part1a.png)
-
-Si è scelto di partizionare l'associazione `associazione(CM-H)` perchè quando si crea un contenuto multimediale, lo si può associare ad hashtag già esistenti (predefiniti) oppure crearne di nuovi: in questo modo si facilitano la creazione e l'aggiunta di nuovi hashtag oltre all'assegnamento di un contenuto multimediale a uno o più hashtag in generale.
-
-La tecnica usata è il **_partizionamento di associazione_** e produce le due nuove associazioni **_nuovo_** e **_predefinito_** che rappresentano rispettivamente gli hashtag nuovi e quelli predefiniti fino a quel momento.
-
-Le nuove cardinalità sono le stesse dell'associazione `associazione(CM-H)`, in quanto un contenuto multimediale può essere associato a molti hashtag oppure a nessuno e uno streamer può creare molti nuovi hashtag oppure nessuno da associare ai propri contenuti.-->
+Nello schema ER, considerato dopo l'eliminazione delle ridondanze e delle generalizzazioni, non sono stati individuati concetti da partizionare o accorpare.
 
 ### 2.3.4 Scelta degli identificatori principali
 
@@ -560,14 +538,14 @@ Le nuove cardinalità sono le stesse dell'associazione `associazione(CM-H)`, in 
 | INTERAZIONE            | nome utente, URL, timestamp |
 | AFFLUENZA              | timestamp, URL              |
 
-Gli identificatori rappresentati nello schema ristrutturato sono tutti costituiti da pochi attributi e verranno quindi considerati tutti come chiavi primarie.
+Gli identificatori rappresentati nello schema ristrutturato sono tutti costituiti da pochi attributi e verranno quindi considerati tutti come chiavi primarie nello schema relazionale.
 
 Molte entità hanno identitficatori esterni, ma costituiti da pochi attributi: per questo motivo si è deciso di mantenerli e di considerarli come chiavi primarie.
 Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDIALE`: questa entità infatti avrebbe avuto un identificatore composto da quattro attributi (uno dei quali esterno) e ciò avrebbe complicato la traduzione in schema logico, causando la propagazione del suo lungo identificatore anche alle entità che essa stessa avrebbe identificato. Per queste ragioni, si è deciso di considerare come identificatore soltanto l'attributo **_URL_**, essendo un URL già di per sè un identificatore univoco.
 
 ## 2.4 Schema E-R ristrutturato + regole aziendali
 
-![Schema E-R Ristrutturato](../Immagini/2.4_ER_rist_1.png)
+![Schema E-R Ristrutturato](../Immagini/2.4%20Schema%20E-R%20ristrutturato.png)
 
 ### 2.4.1 Regole aziendali
 
@@ -600,7 +578,7 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 | RD5 | La popolarità di un contenuto multimediale si ottiene contando il numero di visualizzazioni e interazioni ricevute.                                 |
 | RD6 | L'affluenza media di una live si ottiene dividendo l'affluenza totale per il numero di affluenze momentanee calcolate durante la live.              |
 | RD7 | Il numero di interazioni si ottiene sommando tutte le interazioni ricevute da un contenuto multimediale.                                            |
-| RD8 | La media di voti di un contenuto multimediale si ottiene dividendo il punteggio totale dei voto del contenuto per il numero di voti ricevuti.       |
+| RD8 | La media di voti di un contenuto multimediale si ottiene dividendo il punteggio totale dei voti del contenuto per il numero di voti ricevuti.       |
 
 ## 2.5 Schema relazionale con vincoli di integrità referenziale
 
@@ -620,7 +598,7 @@ Messaggio(<U>Mittente</U>, <U>TimestampMessaggio</U>, Destinatario, Testo)
 Portafoglio(<U>UtenteProprietario</U>, TotaleBits)  
 > Portafoglio(UtenteProprietario) referenzia Registrato(Username)  
 
-Donazione(<U>ProprietarioPortafoglio</U>, <U>CanaleStreamer</U>, <U>Timestamp<U>, Bits)  
+Donazione(<U>ProprietarioPortafoglio</U>, <U>CanaleStreamer</U>, Timestamp, Bits)  
 > Donazione(ProprietarioPortafoglio) referenzia Portfoglio(UtenteProprietario)  
 > Donazione(CanaleStreamer) referenzia Canale(UtenteProprietario)  
 
@@ -662,7 +640,7 @@ Hashtag(<U>NomeHashtag</U>)
 
 AssociazioneCM_H(<U>Hashtag</U>, <U>ContenutoMultimediale</U>)  
 > AssociazioneCM_H(Hashtag) referenzia Hashtag(NomeHashtag)  
-> AssociazioneCM_H(ContenutoMultimediale) referenzia ContenutoMultimediale(IIdURL)
+> AssociazioneCM_H(ContenutoMultimediale) referenzia ContenutoMultimediale(IdURL)
 
 Live(<U>IdLive</U>, DataInizio, DataFine, Premium)
 > Live(IdLive) referenzia ContenutoMultimediale(IdURL)

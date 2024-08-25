@@ -389,4 +389,4 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 | RD5 | La popolarità di un contenuto multimediale si ottiene contando il numero di visualizzazioni, commenti e reazioni ricevute.                          |
 | RD6 | L'affluenza media di una live si ottiene dividendo l'affluenza totale per il numero di affluenze momentanee calcolate durante la live.              |
 | RD7 | Il numero di interazioni si ottiene sommando commenti e reazioni associate a un contenuto multimediale.                                             |
-| RD8 | La media di voti di un contenuto multimediale si ottiene dividendo il punteggio totale dei voto del contenuto per il numero di voti ricevuti.       |
+| RD8 | La media di voti di un contenuto multimediale si ottiene dividendo il punteggio totale dei voti del contenuto per il numero di voti ricevuti.       |
