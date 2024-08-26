@@ -64,7 +64,7 @@
 | donazione                     | A    | 500,000    |
 | REGISTRATO                    | E    | 100,000    |
 | STREAMER                      | E    | 40,000     |
-| gestione<sub>(S-C)</sub>      | A    | 40,000     |
+| controllo                     | A    | 40,000     |
 | SPETTATORE                    | E    | 60,000     |
 | streaming                     | A    | 200,000    |
 | PROGRAMMAZIONE                | E    | 200,000    |
@@ -88,8 +88,6 @@
 | MESSAGGIO                     | E    | 2,000,000  |
 | voto                          | A    | 1,400,000  |
 | abbonamento                   | A    | 150,000    |
-| HOSTING                       | E    | 50,000     |
-| rinnovo                       | A    | 50,000     |
 | contenitore                   | A    | 1,000,000  |
 | AFFLUENZA                     | E    | 500,000    |
 | media spettatori              | A    | 500,000    |
@@ -97,10 +95,15 @@
 | scomposizione                 | A    | 550,000    |
 | presenza<sub>(C-E)</sub>      | A    | 8,000,000  |
 | presenza<sub>(R-E)</sub>      | A    | 15,000,000 |
-| gestione<sub>(I-R)</sub>      | A    | 20,000,000 |
+| partecipazione                | A    | 20,000,000 |
 | associazione<sub>(LS-C)</sub> | A    | 80,000     |
 | mittente                      | A    | 2,000,000  |
 | destinatario                  | A    | 2,000,000  |
+| AMMINISTRATORE                | E    | 25,000     |
+| PROVIDER                      | E    | 15,000     |
+| gestione                      | A    | 40,000     |
+| hosting                       | A    | 40,000     |
+| rinnovo                       | A    | 100,000    |
 
 1. **UTENTE**: Entità che rappresenta gli utenti della piattaforma.
 2. **GUEST**: Entità che rappresenta gli utenti non registrati alla piattaforma (guest).
@@ -128,9 +131,9 @@
 24. **MESSAGGIO**: Entità che rappresenta i messaggi inviati tra utenti.
 25. **voto**: Associazione che rappresenta i voti ai contenuti multimediali.
 26. **abbonamento**: Associazione che rappresenta l'abbonamento degli utenti registrati a uno specifico utente streamer.
-27. **HOSTING**: Entità che rappresenta i servizi di hosting utilizzati dagli streamer.
+27. **hosting**: Associazione che rappresenta il provider del servizio di hosting che memorizza i contenuti di un canale.
 28. **conto**: Associazione che rappresenta il conto associato al portafoglio di bit dell'utente.
-29. **gestione<sub>(S-C)</sub>**: Associazione che rappresenta la gestione del canale da parte dello streamer.
+29. **controllo**: Associazione che rappresenta il controllo del canale da parte dello streamer.
 30. **streaming**: Associazione che rappresenta l'attività di streaming.
 31. **associazione<sub>(CM-H)</sub>**: Associazione che rappresenta l'associazione di un contenuto multimediale ad un hashtag.
 32. **appartenenza**: Associazione che rappresenta l'appartenenza di un contenuto multimediale ad una categoria.
@@ -141,14 +144,17 @@
 37. **scomposizione**: Associazione che rappresenta la scomposizione di un video in clip.
 38. **presenza<sub>(C-E)</sub>**: Associazione che indica la presenza di emoji in un commento.
 39. **presenza<sub>(R-E)</sub>**: Associazione che indica la presenza di emoji in una reazione.
-40. **gestione<sub>(I-R)</sub>**: Associazione che rappresenta la gestione delle interazioni di ogni utente registrato.
+40. **partecipazione**: Associazione che rappresenta la presenza di interazioni degli utenti ad una live.
 41. **associazione<sub>(LS-C)</sub>**: Associazione che rappresenta il collegamento tra il canale e i suoi profili social.
 42. **mittente**: Associazione che rappresenta il mittente di un messaggio.
 43. **destinatario**: Associazione che rappresenta il destinatario di un messaggio.
+44. **AMMINISTRATORE**: Entità che rappresenta gli amministratori delle pagine degli streamer.
+45. **PROVIDER**: Entità che rappresenta i provider del servizio di hosting.
+46. **gestione**: Associazione che rappresenta la gestione di un canale da parte di un amministratore delle pagine.
 
-I volumi indicati sono stati decisi basandosi sul funzionamento verosimile di una piattaforma di streaming di questo tipo, focalizzandosi anche sul peso dei vari componenti, in base alla loro frequenza di utilizzo. Per esempio, le entità **CONTENUTO MULTIMEDIALE**, **REAZIONE**, **COMMENTO** e **INTERAZIONE** hanno volumi elevati perchè si presume che i contenuti multimediali presenti siano molti. Di conseguenza la quantità di interazioni di ogni utente è probabile che sia molto elevata, nonostante si ipotizza che le reazioni siano maggiori dei commenti (essendo più immediate).
-Sono state prese in considerazione anche le cardinalità delle associazioni e la partecipazione delle varie entità alle stesse, specialmente in caso di associazioni (1,1) e (0,N), come ad esempio **visita** o **mittente**.
-Entità come **CATEGORIA** o **EMOJI** presentano volumi molto più bassi di entità come **REAZIONE** o **MESSAGGIO** perchè si pensa che le categorie siano in gran parte predefinite e che gli emoji siano standard e largamente riutilizzabili, mentre reazioni e messaggi siano operazioni realizzate molte volte e anche più volte dallo stesso utente.
+I volumi indicati sono stati decisi basandosi sul funzionamento verosimile di una piattaforma di streaming di questo tipo, focalizzandosi anche sul peso dei vari componenti, in base alla loro frequenza di utilizzo. Per esempio, le entità `CONTENUTO MULTIMEDIALE`, `REAZIONE`, `COMMENTO` e `INTERAZIONE` hanno volumi elevati perchè si presume che i contenuti multimediali presenti siano molti. Di conseguenza la quantità di interazioni di ogni utente è probabile che sia molto elevata, nonostante si ipotizza che le reazioni siano maggiori dei commenti (essendo più immediate).
+Sono state prese in considerazione anche le cardinalità delle associazioni e la partecipazione delle varie entità alle stesse, specialmente in caso di associazioni (1,1) e (0,N), come ad esempio `visita` o `mittente`.
+Entità come `CATEGORIA` o `EMOJI` presentano volumi molto più bassi di entità come `REAZIONE` o `MESSAGGIO` perchè si pensa che le categorie siano in gran parte predefinite e che gli emoji siano standard e largamente riutilizzabili, mentre reazioni e messaggi siano operazioni realizzate molte volte e anche più volte dallo stesso utente.
 
 ## 2.2 Tavola delle operazioni
 
@@ -185,17 +191,17 @@ Entità come **CATEGORIA** o **EMOJI** presentano volumi molto più bassi di ent
 | Op28       | Registrazione di un servizio di hosting utilizzato      | I    | 80        |
 -->
 
-| Operazione | Descrizione                                                                                                                              | Tipo | Frequenza              |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---- | ---------------------- |
-| Op1        | Controlla le condizioni per la qualifica di affiliate                                                                                    | B    | Una volta al giorno    |
-| Op2        | Calcola la classifica degli streamer più seguiti                                                                                         | B    | Una volta a settimana  |
-| Op3        | Per ogni streamer, calcola la media dei voti per ogni contenuto multimediale                                                             | B    | Una volta al giorno    |
-| Op4        | Gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati                             | B    | Una  volta  al  giorno |
-| Op5        | Controlla ed elimina tutti i commenti offensivi per ogni contenuto multimediale, nelle categorie, nei canali e durante le live           | B    | Dieci volte al giorno  |
-| Op6        | Controlla i nuovi utenti registrati                                                                                                      | B    | Due volte al giorno    |
-| Op7        | Gli amministratori del DB controllano le segnalazioni inviate dagli streamer di profili fake che li seguono                              | I    | Cinque volte al giorno |
-| Op8        | Visualizzare agli amministratori lo storico degli utenti premium, sia quelli storici (dato un range di date) che quelli dell’ultimo mese | I    | Una volta ogni 6 mesi  |
-| Op9        | Per ogni streamer, stilare la media degli spettatori per ogni live uscita in quel mese                                                   | B    | Una volta al mese      |
+| Operazione | Descrizione                                                                                                                                           | Tipo | Frequenza              |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ---------------------- |
+| Op1        | Controlla le condizioni per la qualifica di affiliate                                                                                                 | B    | Una volta al giorno    |
+| Op2        | Calcola la classifica degli streamer più seguiti                                                                                                      | B    | Una volta a settimana  |
+| Op3        | Per ogni streamer, calcola la media dei voti per ogni contenuto multimediale                                                                          | B    | Una volta al giorno    |
+| Op4        | Gli amministratori delle pagine, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati                             | B    | Una  volta  al  giorno |
+| Op5        | Controlla ed elimina tutti i commenti offensivi per ogni contenuto multimediale, nelle categorie, nei canali e durante le live                        | B    | Dieci volte al giorno  |
+| Op6        | Controlla i nuovi utenti registrati                                                                                                                   | B    | Due volte al giorno    |
+| Op7        | Gli amministratori del DB controllano le segnalazioni inviate dagli streamer di profili fake che li seguono                                           | I    | Cinque volte al giorno |
+| Op8        | Visualizzare agli amministratori delle pagine lo storico degli utenti premium, sia quelli storici (dato un range di date) che quelli dell’ultimo mese | I    | Una volta ogni 6 mesi  |
+| Op9        | Per ogni streamer, stilare la media degli spettatori per ogni live uscita in quel mese                                                                | B    | Una volta al mese      |
 
 ## 2.3 Ristrutturazione dello schema E-R
 
@@ -425,10 +431,7 @@ Dallo schema E-R concettuale, si può notare che le entità figlie `GUEST`, `STR
 Ci si concentra ora sulle ultime due entità figlie, `STREAMER` e `SPETTATORE`: non sono effettivamente delle entità, ma dei ruoli che l'entità padre `REGISTRATO` può assumere di tanto in tanto.
 Le due entità quindi possono essere incorporate nell'entità padre `REGISTRATO` senza aggiungere attributi "tipo", siccome il loro ruolo è facilmente intuibile dalle azioni di un utente registrato.
 
-Le cardinalità delle partecipazioni dell'entità `REGISTRATO` alle associazioni `gestione(S-C)` e `rinnovo` vengono di conseguenza aggiornate a:
-
-- (0,1) nella prima associazione, siccome solo uno streamer può avere un canale, mentre uno spettatore può non averlo;
-- (0,N) nella seconda associazione, in quanto solo un utente streamer può rinnovare il servizio di hosting (si impone anche il relativo vincolo).
+La cardinalità della partecipazione dell'entità `REGISTRATO` all'associazione `controllo` viene di conseguenza aggiornata a (0,1), siccome solo uno streamer può avere un canale, mentre uno spettatore può non averlo.
 
 Le altre partecipazioni e relative cardinalità rimangono invece inalterate.
 
@@ -455,15 +458,14 @@ L'entità `REGISTRATO` invece viene utilizzata per compiere azioni riservate agl
 
 ##### 2.3.2.1.1 Regole aziendali introdotte
 
-- RVI: Solo un utente registrato che ha un canale (streamer) può partecipare all'associazione **_rinnovo_**.
-- RVII: Solo uno streamer può avere l'attributo **_affiliate_**.
-- RVIII: Solo uno streamer può partecipare all'associazione **_streaming_**.
+- RVI: Solo un utente registrato che ha un canale (streamer) può avere l'attributo **_affiliate_**.
+- RVII: Solo uno streamer può partecipare all'associazione **_streaming_**.
 
 #### 2.3.2.2 Generalizzazione 2 (generalizzazione del contenuto multimediale)
 
 ![Generalizzazione 2a](../Immagini/generalizzazioni/2.3.2.2_gen_2a_cor.png)
 
-Dallo schema ER (considerato dopo l'eliminazione delle ridondanze), si può notare che la generalizzazione è totale ed esclusiva: le operazioni fanno ampiamente distinzione tra le entità figlie e a dimostrazione di ciò si ha la presenza di associazioni che coinvolgono le entità figlie separatamente; l'entità genitore però viene utilizzata in alcune operazioni più generiche, come ad esempio il calcolo della media dei like di ogni contenuto multimediale, indipendentemente che esso sia un video, una clip o una live.
+Dallo schema ER (considerato dopo l'eliminazione delle ridondanze), si può notare che la generalizzazione è totale ed esclusiva: le operazioni fanno ampiamente distinzione tra le entità figlie e a dimostrazione di ciò si ha la presenza di associazioni che coinvolgono le entità figlie separatamente; l'entità genitore però viene utilizzata in alcune operazioni più generiche, come ad esempio il calcolo della media dei voti di ogni contenuto multimediale, indipendentemente che esso sia un video, una clip o una live.
 
 Essendo le entità figlie delle specializzazioni dell'entità padre `CONTENUTO MULTIMEDIALE` e avente quest'ultima pochi attributi, si potrebbe pernsare di accorpare ad esse l'entità genitore.
 
@@ -504,7 +506,7 @@ Per questi motivi, si sceglie di accorpare le entità figlie nell'entità genito
 
 Per distinguere un commento da una reazione, è stato introdotto l'attributo **_tipologia_** e si impone il vincolo che un'interazione di tipo **_reazione_** partecipi all'associazione **_presenza_** solamente con cardinalità (1,1).
 
-L'unico attributo dell'entità `COMMENTO` è stato quindi trasferito all'entità `INTERAZIONE`, ma resi opzionale, in quanto non necessario per una reazione.
+L'unico attributo dell'entità `COMMENTO` è stato quindi trasferito all'entità `INTERAZIONE`, ma reso opzionale, in quanto non necessario per una reazione.
 
 Anche se questa scelta può portare a valori nulli e a uno spreco di spazio, permette però di ridurre notevolmente il numero di accessi a entità e associazioni e di semplificare le operazioni.
 
@@ -526,7 +528,8 @@ Nello schema ER, considerato dopo l'eliminazione delle ridondanze e delle genera
 | MESSAGGIO              | timestamp, nome utente      |
 | CANALE                 | nome utente                 |
 | LINK SOCIAL            | social, nome utente         |
-| HOSTING                | timestamp, nome utente      |
+| AMMINISTRATORE         | codice                      |
+| PROVIDER               | nome provider               |
 | PROGRAMMAZIONE         | timestamp, nome utente      |
 | CONTENUTO MULTIMEDIALE | URL                         |
 | LIVE                   | URL                         |
@@ -554,18 +557,17 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 | RVI  | \<concetto\> deve/non deve \<espressione\>                                                                                                                                                 |
 | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | RV1  | Uno streamer deve essere un utente registrato al servizio e avere un canale.                                                                                                               |
-| RV2  | Uno spettatore non deve partecipare all'associazione **_rinnovo_**.                                                                                                                        |
-| RV3  | Uno spettatore non deve avere l'attributo **_affiliate_**.                                                                                                                                 |
-| RV4  | Uno spettatore non deve partecipare all'associazione **_streaming_**.                                                                                                                      |
-| RV5  | Un messaggio deve avere un mittente e un destinatario.                                                                                                                                     |
-| RV6  | Un canale deve essere gestito da uno streamer.                                                                                                                                             |
-| RV7  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú l'UUID.                                                                                                 |
-| RV8 | Un contenuto multimediale non deve partecipare contemporaneamente alle associazioni **_contenuto live_**, **_contenuto video_** e **_contenuto clip_**, ma solo ad una di esse alla volta. |
-| RV9 | Una reazione deve partecipare all'associazione **_presenza_** solamente con cardinalità (1,1)                                                                                              |
-| RV10 | Ogni video deve essere associato ad una live per poter esistere.                                                                                                                           |
-| RV11 | Ogni clip deve essere associata ad un video per poter esistere.                                                                                                                            |
-| RV12 | La durata di una clip deve essere inferiore a quella di un video.                                                                                                                          |
-| RV13 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.                                                                                              |
+| RV2  | Uno spettatore non deve avere l'attributo **_affiliate_**.                                                                                                                                 |
+| RV3  | Uno spettatore non deve partecipare all'associazione **_streaming_**.                                                                                                                      |
+| RV4  | Un messaggio deve avere un mittente e un destinatario.                                                                                                                                     |
+| RV5  | Un canale deve essere gestito da un amministratore.                                                                                                                                        |
+| RV6  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú l'UUID.                                                                                                 |
+| RV7  | Un contenuto multimediale non deve partecipare contemporaneamente alle associazioni **_contenuto live_**, **_contenuto video_** e **_contenuto clip_**, ma solo ad una di esse alla volta. |
+| RV8  | Una reazione deve partecipare all'associazione **_presenza_** solamente con cardinalità (1,1)                                                                                              |
+| RV9  | Ogni video deve essere associato ad una live per poter esistere.                                                                                                                           |
+| RV10 | Ogni clip deve essere associata ad un video per poter esistere.                                                                                                                            |
+| RV11 | La durata di una clip deve essere inferiore a quella di un video.                                                                                                                          |
+| RV12 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.                                                                                              |
 
 ### 2.4.3 Derivazioni
 
@@ -602,8 +604,18 @@ Donazione(<U>ProprietarioPortafoglio</U>, <U>CanaleStreamer</U>, Timestamp, Bits
 > Donazione(ProprietarioPortafoglio) referenzia Portfoglio(UtenteProprietario)  
 > Donazione(CanaleStreamer) referenzia Canale(UtenteProprietario)  
 
-Hosting(<U>UtenteStreamer</U>, <U>TimestampRinnovo</U>, Pagato, Scadenza)  
-> Hosting(UtenteStreamer) referenzia Registrato(Username)  
+Canale(<U>StreamerProprietario</U>, AdminCanale, HostingProvider, Descrizione*, ImmagineProfilo*, Trailer*)  
+> Canale(StreamerProprietario) referenzia Registrato(Username)  
+> Canale(AdminCanale) referenzia Amministratore(CodiceAdmin)  
+> Canale(HostingProvider) referenzia Provider(NomeProvider)
+
+Amministratore(<U>CodiceAdmin</U>, Nome, Cognome)  
+
+Provider(<U>NomeProvider</U>)
+
+Rinnovo(<U>Amministratore</U>, <U>Provider</U>, Scadenza, Pagato)  
+> Rinnovo(Amministratore) referenzia Amministratore(CodiceAdmin)  
+> Rinnovo(Provider) referenzia Provider(NomeProvider)
 
 Programmazione(<U>Streamer</U>, <U>ProgTimestamp</U>, Titolo, LIS, Premium)  
 > Programmazione(Streamer) referenzia Registrato(Username)  
@@ -611,9 +623,6 @@ Programmazione(<U>Streamer</U>, <U>ProgTimestamp</U>, Titolo, LIS, Premium)
 Abbonamento(<U>UtenteAbbonato</U>, <U>Streamer</U>)  
 > Abbonamento(UtenteAbbonato) referenzia Registrato(Username)  
 > Abbonamento(Streamer) referenzia Canale(StreamerProprietario)  
-
-Canale(<U>StreamerProprietario</U>, Descrizione*, ImmagineProfilo*, Trailer*)  
-> Canale(StreamerProprietario) referenzia Registrato(Username)  
 
 Follower(<U>UtenteFollower</U>, <U>StreamerSeguito</U>)  
 > Follower(UtenteFollower) referenzia Registrato(Username)  

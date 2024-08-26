@@ -148,27 +148,28 @@ Qualsiasi altra operazione/funzionalità del sistema e/o modellazione di requisi
 
 ## 1.2 Glossario dei termini
 
-| Termine           | Descrizione                                                                   | Sinonimi                                           | Collegamenti                         |
-| ----------------- | ----------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------ |
-| utente            | fruitore del servizio di live streaming                                       |                                                    | spettatore, streamer                 |
-| spettatore        | utente che osserva le live e chatta                                           | viewer                                             | utente registrato, guest             |
-| streamer          | utente registrato che crea live e contenuti                                   | amministratore delle pagine, creatore di contenuti | canale, follower                     |
-| guest             | utente non registrato che osserva le live                                     |                                                    | live                                 |
-| utente registrato | utente che si è registrato al servizio                                        | utente iscritto                                    | follower                             |
-| utente premium    | utente registrato che paga la piattaforma per benefici maggiori               |                                                    | utente registrato                    |
-| canale            | pagina dello streamer, dove pubblica le live                                  |                                                    | streamer, social                     |
-| social            | link social dello streamer                                                    |                                                    | canale                               |
-| live              | live corrente che lo streamer sta trasmettendo                                | stream, diretta                                    | canale, streamer                     |
-| video             | live passate dello streamer                                                   |                                                    | canale                               |
-| clip              | parte di un video di tot. secondi                                             |                                                    | canale                               |
-| affilitate        | streamer che ha superato determinati criteri                                  |                                                    | streamer                             |
-| follower          | utente registrato che segue lo streamer e riceve notifiche delle sue attivitá |                                                    | streamer, canale                     |
-| utente fragile    | utente registrato che ha determinate disabilitá                               |                                                    | utente registrato                    |
-| bit               | moneta virtuale per effettuare donazioni agli streamer                        |                                                    | utenti                               |
-| subscription      | supporto economico che riceve uno streamer dagli spettatori                   |                                                    | spettatore, streamer                 |
-| followee          | streamer che viene seguito dai follower                                       | streamer                                           | streamer, follower                   |
-| trailer           | video creato dallo streamer come presentazione del canale                     |                                                    | canale                               |
-| voto              | voto in likert che uno spettatore assegna ad un contenuto multimediale        | like                                               | utente registrato, live, video, clip |
+| Termine                     | Descrizione                                                                                 | Sinonimi              | Collegamenti                         |
+| --------------------------- | ------------------------------------------------------------------------------------------- | --------------------- | ------------------------------------ |
+| utente                      | fruitore del servizio di live streaming                                                     |                       | spettatore, streamer                 |
+| spettatore                  | utente che osserva le live e chatta                                                         | viewer                | utente registrato, guest             |
+| streamer                    | utente registrato che crea live e contenuti                                                 | creatore di contenuti | canale, follower                     |
+| guest                       | utente non registrato che osserva le live                                                   |                       | live                                 |
+| utente registrato           | utente che si è registrato al servizio                                                      | utente iscritto       | follower                             |
+| utente premium              | utente registrato che paga la piattaforma per benefici maggiori                             |                       | utente registrato                    |
+| canale                      | pagina dello streamer, dove pubblica le live                                                |                       | streamer, social                     |
+| social                      | link social dello streamer                                                                  |                       | canale                               |
+| live                        | live corrente che lo streamer sta trasmettendo                                              | stream, diretta       | canale, streamer                     |
+| video                       | live passate dello streamer                                                                 |                       | canale                               |
+| clip                        | parte di un video di tot. secondi                                                           |                       | canale                               |
+| affilitate                  | streamer che ha superato determinati criteri                                                |                       | streamer                             |
+| follower                    | utente registrato che segue lo streamer e riceve notifiche delle sue attivitá               |                       | streamer, canale                     |
+| utente fragile              | utente registrato che ha determinate disabilitá                                             |                       | utente registrato                    |
+| bit                         | moneta virtuale per effettuare donazioni agli streamer                                      |                       | utenti                               |
+| subscription                | supporto economico che riceve uno streamer dagli spettatori                                 |                       | spettatore, streamer                 |
+| followee                    | streamer che viene seguito dai follower                                                     | streamer              | streamer, follower                   |
+| trailer                     | video creato dallo streamer come presentazione del canale                                   |                       | canale                               |
+| voto                        | voto in likert che uno spettatore assegna ad un contenuto multimediale                      | like                  | utente registrato, live, video, clip |
+| amministratore della pagina | persona che gestisce il canale di uno o più streamer, compreso il rinnovo del servizio di hosting | amministratore        | canale, streamer                     |
 
 ## 1.3 Requisiti riscritti
 
@@ -196,15 +197,15 @@ La base di dati deve supportare le seguenti operazioni:
 - Una volta al giorno si controllano le condizioni per la qualifica di affiliate
 - Una volta a settimana viene calcolata la classifica degli streamer più seguiti
 - Una volta al giorno, viene calcolata la media dei <span style="color:red">~~like~~</span> <span style="color:blue">**voti**</span> per ogni contenuto multimediale (per ogni streamer)
-- Una volta al giorno, gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati (quelli che, in media, hanno      ricevuto una votazione maggiore rispetto agli altri)
+- Una volta al giorno, gli amministratori <span style="color:blue">**delle pagine**</span>, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati (quelli che, in media, hanno      ricevuto una votazione maggiore rispetto agli altri)
 - Dieci volte al giorno, vengono controllati ed eliminati tutti i commenti con contenuti offensivi fatti dagli utenti per ogni contenuto multimediale (per ogni  streamer), nelle categorie, nei canali e durante le dirette live
 - Due volte al giorno vengono controllati i nuovi utenti registrati (sia premium – nuovi abbonati – sia utenti appartenenti a categorie fragili)
 - Cinque volte al giorno, gli amministratori delle pagine degli streamer segnalano agli amministratori della base di dati, i profili fake che seguono i loro streamer
-- Una volta ogni 6 mesi, gli amministratori possono visualizzare lo storico degli utenti premium (quelli storici (dato un range di date) che quelli recenti (relativi all’ultimo mese))
+- Una volta ogni 6 mesi, gli amministratori <span style="color:blue">**delle pagine**</span> possono visualizzare lo storico degli utenti premium (<span style="color:blue">**sia**</span> quelli storici (dato un range di date) che quelli recenti (relativi all’ultimo mese))
 
 Qualsiasi altra operazione/funzionalità del sistema e/o modellazione di requisiti non descritti, purché motivata, è ben accetta! (… un po' di fantasia!!!)
 
-Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli <span style="color:red">~~amministratori delle pagine~~</span> <span style="color:blue">**streamer**</span>, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting.
+Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli amministratori delle pagine, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting.
 
 ## 1.4 Requisiti strutturati in gruppi di frasi omogenee
 
@@ -290,11 +291,11 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 | Frasi relative alle **operazioni della base di dati** |
 | --- |
-| La base di dati deve supportare le seguenti operazioni: <br><br>- Una volta al giorno si controllano le condizioni per la qualifica di affiliate <br>- Una volta a settimana viene calcolata la classifica degli streamer più seguiti <br>- Una volta al giorno, viene calcolata la media dei voti per ogni contenuto multimediale (per ogni streamer) <br>- Una volta al giorno, gli amministratori, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati (quelli che, in media, hanno ricevuto una votazione maggiore rispetto agli altri) <br>- Dieci volte al giorno, vengono controllati ed eliminati tutti i commenti con contenuti offensivi fatti dagli utenti per ogni contenuto multimediale (per ogni streamer), nelle categorie, nei canali e durante le dirette live <br>- Due volte al giorno vengono controllati i nuovi utenti registrati (sia premium – nuovi abbonati – sia utenti appartenenti a categorie fragili) <br>- Cinque volte al giorno, gli amministratori delle pagine degli streamer segnalano agli amministratori della base di dati, i profili fake che seguono i loro streamer <br>- Una volta ogni 6 mesi, gli amministratori possono visualizzare lo storico degli utenti premium (quelli storici (dato un range di date) che quelli recenti (relativi all’ultimo mese)) |
+| La base di dati deve supportare le seguenti operazioni: <br><br>- Una volta al giorno si controllano le condizioni per la qualifica di affiliate <br>- Una volta a settimana viene calcolata la classifica degli streamer più seguiti <br>- Una volta al giorno, viene calcolata la media dei voti per ogni contenuto multimediale (per ogni streamer) <br>- Una volta al giorno, gli amministratori delle pagine, per ogni contenuto multimediale di ogni streamer, stilano il rating dei video più votati (quelli che, in media, hanno ricevuto una votazione maggiore rispetto agli altri) <br>- Dieci volte al giorno, vengono controllati ed eliminati tutti i commenti con contenuti offensivi fatti dagli utenti per ogni contenuto multimediale (per ogni streamer), nelle categorie, nei canali e durante le dirette live <br>- Due volte al giorno vengono controllati i nuovi utenti registrati (sia premium – nuovi abbonati – sia utenti appartenenti a categorie fragili) <br>- Cinque volte al giorno, gli amministratori delle pagine degli streamer segnalano agli amministratori della base di dati, i profili fake che seguono i loro streamer <br>- Una volta ogni 6 mesi, gli amministratori delle pagine possono visualizzare lo storico degli utenti premium (sia quelli storici (dato un range di date) che quelli recenti (relativi all’ultimo mese)) |
 
-| Frasi relative al **servizio di hosting** |
+| Frasi relative al **servizio di hosting** e agli **amministratori delle pagine** |
 | --- |
-| Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli streamer, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting. |
+| Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli amministratori delle pagine, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting. |
 
 ## 1.5 Schema E-R
 
@@ -326,7 +327,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 - Nella realizzazione dello schema ER è stata utilizzata una **Strategia Mista**:
   - **Top-down**: Inizialmente, sono state identificate le entità principali (ad es. `UTENTE`, `CONTENUTO MULTIMEDIALE`, `CANALE`) e le loro relazioni fondamentali.
-  - **Bottom-up**: Successivamente, sono stati dettagliati attributi specifici e relazioni più complesse (ad es. quelle riguardanti l'entità `MESSAGGIO`), costruendo sulla struttura esistente.
+  - **Bottom-up**: Successivamente, sono stati dettagliati attributi specifici e relazioni più complesse (ad es. quelle riguardanti le entità `MESSAGGIO`, `PROVIDER` e `AMMINISTRATORE`), costruendo sulla struttura esistente.
   - **Inside-out**: Alcune parti dello schema, come la gestione dei contenuti multimediali e le interazioni sociali, sono state sviluppate concentrandosi su entità centrali (`CONTENUTO MULTIMEDIALE`) e espandendo verso l'esterno.
 
 ### Commento finale
@@ -346,7 +347,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
    - Gli utenti registrati possono seguire altri utenti (streamer), inviare messaggi e votare contenuti multimediali, permettendo una migliore interazione sociale tra gli utenti.
 
 2. **Gestione dei Contenuti**:
-   - Gli `STREAMER` gestiscono i `CANALI`, che a loro volta contengono `CONTENUTI MULTIMEDIALI`. Questo rispecchia la struttura tipica delle piattaforme di streaming, dove i creatori di contenuti hanno un controllo completo sui loro canali e sui contenuti.
+   - Gli `AMMINISTRATORI` gestiscono i `CANALI`, che a loro volta contengono `CONTENUTI MULTIMEDIALI` creati e pubblicati dagli `STREAMER`. Questo rispecchia la struttura tipica delle piattaforme di streaming, dove gli streamer creano e pubblicano i contenuti nel proprio canale e gli amministratori delle pagine si occupano di gestirlo.
 
 3. **Abbonamenti e Donazioni**:
    - La presenza di `abbonamento`, `PORTAFOGLIO`, e `donazione` indica un sistema di monetizzazione che permette agli utenti di effettuare donazioni e sottoscrivere abbonamenti premium.
@@ -369,7 +370,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 | RV1  | Uno streamer deve essere un utente registrato al servizio.                                    |
 | RV2  | Un guest non deve avere accesso alle funzionalità riservate agli utenti registrati.           |
 | RV3  | Un messaggio deve avere un mittente e un destinatario.                                        |
-| RV4  | Un canale deve essere gestito da uno streamer.                                                |
+| RV4  | Un canale deve essere gestito da un amministratore.                                           |
 | RV5  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú l'UUID.    |
 | RV6  | Ogni contenuto multimediale deve avere una categoria.                                         |
 | RV7  | Ogni reazione deve essere associata ad una emoji.                                             |

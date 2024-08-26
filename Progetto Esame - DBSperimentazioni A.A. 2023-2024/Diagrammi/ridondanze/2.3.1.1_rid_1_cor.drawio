@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e" scale="1" border="10">
     <diagram id="-rriOPSDnHkLpZKLwRpb" name="Page-1">
-        <mxGraphModel dx="3340" dy="2746" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
+        <mxGraphModel dx="3001" dy="2512" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -115,7 +115,7 @@
                         <mxPoint x="15" y="-9" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="445" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;gestione&lt;sub style=&quot;&quot;&gt;(S-C)&lt;/sub&gt;&lt;/font&gt;" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="445" value="controllo" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="-2127.42" y="-1890.28" width="120" height="40.28" as="geometry"/>
                 </mxCell>
                 <mxCell id="446" value="" style="edgeStyle=none;jumpStyle=arc;html=1;endArrow=none;endFill=0;" parent="1" source="448" target="445" edge="1">
