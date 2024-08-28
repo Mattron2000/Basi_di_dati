@@ -47,13 +47,15 @@
 
 ## 2.1 Tavola dei volumi
 
-<!--| Concetto   | Tipo  | Volume   |
+<!--
+| Concetto   | Tipo  | Volume   |
 | ---------- | ----- | -------- |
 | <concetto> | <E/A> | <volume> |
-|            |       |          |-->
+|            |       |          |
 
 > < eventuali osservazioni. In particolare descrivere il ragionamento che ha portato a certi valori non espliciti nei requisiti.>
 >
+-->
 
 | Concetto                      | Tipo | Volume     |
 | ----------------------------- | ---- | ---------- |
@@ -615,7 +617,7 @@ Amministratore(<U>CodiceAdmin</U>, Nome, Cognome)
 
 Provider(<U>NomeProvider</U>)
 
-Rinnovo(<U>Amministratore</U>, <U>Provider</U>, Scadenza, Pagato)  
+Rinnovo(<U>Amministratore</U>, <U>Provider</U>, DataScadenza)  
 > Rinnovo(Amministratore) referenzia Amministratore(CodiceAdmin)  
 > Rinnovo(Provider) referenzia Provider(NomeProvider)
 

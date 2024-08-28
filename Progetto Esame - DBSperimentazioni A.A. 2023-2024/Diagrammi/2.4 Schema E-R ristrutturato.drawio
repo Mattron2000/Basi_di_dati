@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e" scale="1" border="20">
     <diagram id="4_nfnfdhDg5d41BVBWpk" name="Page-1">
-        <mxGraphModel dx="4943" dy="2647" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+        <mxGraphModel dx="3770" dy="1836" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -1270,15 +1270,6 @@
                         <mxPoint x="-2290" y="-1095.1799999999998" as="sourcePoint"/>
                         <mxPoint x="-2280" y="-1095.2599999999998" as="targetPoint"/>
                     </mxGeometry>
-                </mxCell>
-                <mxCell id="2010" value="" style="endArrow=oval;html=1;fillStyle=auto;strokeWidth=1;startSize=6;endSize=6;fillColor=#000000;startArrow=none;startFill=0;endFill=0;exitX=1;exitY=1;exitDx=0;exitDy=0;fontSize=11;" parent="1" source="1998" edge="1">
-                    <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="-2308.08" y="-1025.2599999999998" as="sourcePoint"/>
-                        <mxPoint x="-2280" y="-1045.2599999999998" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="2011" value="pagato" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;" parent="1" vertex="1">
-                    <mxGeometry x="-2285" y="-1060.4899999999998" width="60" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="2012" value="scadenza" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;" parent="1" vertex="1">
                     <mxGeometry x="-2285" y="-1110.1799999999998" width="70" height="30" as="geometry"/>
