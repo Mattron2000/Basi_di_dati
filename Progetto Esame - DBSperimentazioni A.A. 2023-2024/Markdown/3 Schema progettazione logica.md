@@ -584,9 +584,11 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 
 ## 2.5 Schema relazionale con vincoli di integrità referenziale
 
+<!--
 > <Relazione1 (Identificatore, Attributo1, …)>
 > <Relazione2 (Identificatore, Attributo1, …) Relazione2 (Attributo1) referenzia Relazionex (Attributoy)>
 > <Relazione3 (Identificatore, Attributo1, …)>
+-->
 
 Utente(<U>NomeUtente</U>)
 
