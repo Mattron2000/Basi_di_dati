@@ -82,8 +82,8 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Messaggio"
 (
 	"Mittente" text NOT NULL,
 	"TimestampMessaggio" timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	"Testo" text NOT NULL,
 	"Destinatario" text NOT NULL,
+	"Testo" text NOT NULL,
 	PRIMARY KEY ("Mittente", "TimestampMessaggio")
 );
 
@@ -158,19 +158,19 @@ COMMENT ON TABLE fincato_palmieri."Amministratore"
 
 CREATE TABLE IF NOT EXISTS fincato_palmieri."Rinnovo"
 (
-	"Provider" text,
 	"Amministratore" integer,
-	"Scadenza" date NOT NULL,
-	PRIMARY KEY ("Provider", "Amministratore")
+	"Provider" text,
+	"DataScadenza" date NOT NULL,
+	PRIMARY KEY ("Amministratore", "Provider")
 );
 
 ALTER TABLE IF EXISTS fincato_palmieri."Rinnovo"
-	ADD FOREIGN KEY ("Provider")
-		REFERENCES fincato_palmieri."Provider" ("NomeProvider")
-		ON UPDATE CASCADE
-		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("Amministratore")
 		REFERENCES fincato_palmieri."Amministratore" ("CodiceAdmin")
+		ON UPDATE CASCADE
+		ON DELETE CASCADE,
+	ADD FOREIGN KEY ("Provider")
+		REFERENCES fincato_palmieri."Provider" ("NomeProvider")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE;
 
@@ -237,7 +237,7 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."LinkSocial"
 (
 	"CanaleAssociato" text NOT NULL,
 	"Social" text NOT NULL,
-	"linkProfilo" text NOT NULL,
+	"LinkProfilo" text NOT NULL,
 	PRIMARY KEY ("CanaleAssociato", "Social")
 );
 
@@ -252,7 +252,7 @@ ALTER TABLE IF EXISTS fincato_palmieri."LinkSocial"
 	-- 				http://google.com/?q=some+text&param=3#dfsdf
 	-- 				https://www.google.com/api/?
 	-- 				https://www.google.com/api/login.php
-	ADD CHECK ("linkProfilo" ~* '^https?:\/\/(www\.)?([-\w@:%._\+~#=]{2,256}\.[a-z]{2,6})+(\/[\/\w\.-]*)*(\?\w+=.+)*$');
+	ADD CHECK ("LinkProfilo" ~* '^https?:\/\/(www\.)?([-\w@:%._\+~#=]{2,256}\.[a-z]{2,6})+(\/[\/\w\.-]*)*(\?\w+=.+)*$');
 
 COMMENT ON TABLE fincato_palmieri."LinkSocial"
 	IS 'Tabella contenenti i link social del canale';
