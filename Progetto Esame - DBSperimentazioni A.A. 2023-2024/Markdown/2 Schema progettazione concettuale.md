@@ -365,19 +365,19 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 ### 1.5.2 Vincoli d'integritá
 
-| RVI  | \<concetto\> deve/non deve \<espressione\>                                                    |
-| ---- | --------------------------------------------------------------------------------------------- |
-| RV1  | Uno streamer deve essere un utente registrato al servizio.                                    |
-| RV2  | Un guest non deve avere accesso alle funzionalità riservate agli utenti registrati.           |
-| RV3  | Un messaggio deve avere un mittente e un destinatario.                                        |
-| RV4  | Un canale deve essere gestito da un amministratore.                                           |
-| RV5  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú l'UUID.    |
-| RV6  | Ogni contenuto multimediale deve avere una categoria.                                         |
-| RV7  | Ogni reazione deve essere associata ad una emoji.                                             |
-| RV8  | Ogni video deve essere associato ad una live per poter esistere.                              |
-| RV9  | Ogni clip deve essere associata ad un video per poter esistere.                               |
-| RV10 | La durata di una clip deve essere inferiore a quella di un video.                             |
-| RV11 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower. |
+| RVI  | \<concetto\> deve/non deve \<espressione\>                                                                   |
+| ---- | ------------------------------------------------------------------------------------------------------------ |
+| RV1  | Uno streamer deve essere un utente registrato al servizio.                                                   |
+| RV2  | Un guest non deve avere accesso alle funzionalità riservate agli utenti registrati.                          |
+| RV3  | Un messaggio deve avere un mittente e un destinatario.                                                       |
+| RV4  | Un canale deve essere gestito da un amministratore.                                                          |
+| RV5  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú un numero intero univoco. |
+| RV6  | Ogni contenuto multimediale deve avere una categoria.                                                        |
+| RV7  | Ogni reazione deve essere associata ad una emoji.                                                            |
+| RV8  | Ogni video deve essere associato ad una live per poter esistere.                                             |
+| RV9  | Ogni clip deve essere associata ad un video per poter esistere.                                              |
+| RV10 | La durata di una clip deve essere inferiore a quella di un video.                                            |
+| RV11 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.                |
 
 ### 1.5.3 Derivazioni
 

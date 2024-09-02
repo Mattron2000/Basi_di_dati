@@ -24,14 +24,22 @@ DROP TABLE IF EXISTS fincato_palmieri."Messaggio";
 DROP TABLE IF EXISTS fincato_palmieri."Registrato";
 DROP TABLE IF EXISTS fincato_palmieri."Utente";
 DROP SCHEMA IF EXISTS "fincato_palmieri";
+DROP SEQUENCE IF EXISTS guest_sequence;
+DROP SEQUENCE IF EXISTS url_sequence;
 
 CREATE SCHEMA "fincato_palmieri";
+
+-- Sequenza che incrementa di 1 il numero intero associato ad un guest
+CREATE SEQUENCE IF NOT EXISTS guest_sequence;
+
+-- Sequenza che incrementa di 1 il numero associato ad un url, per creare un url simbolico univoco
+CREATE SEQUENCE IF NOT EXISTS url_sequence;
 
 -- Table: fincato_palmieri."Utente"
 
 CREATE TABLE IF NOT EXISTS fincato_palmieri."Utente"
 (
-    "NomeUtente" text PRIMARY KEY
+    "NomeUtente" text PRIMARY KEY DEFAULT ('guest_'||nextval('guest_sequence'))
 );
 
 ALTER TABLE IF EXISTS fincato_palmieri."Utente"
@@ -252,7 +260,7 @@ ALTER TABLE IF EXISTS fincato_palmieri."LinkSocial"
 	-- 				http://google.com/?q=some+text&param=3#dfsdf
 	-- 				https://www.google.com/api/?
 	-- 				https://www.google.com/api/login.php
-	ADD CHECK ("LinkProfilo" ~* '^https?:\/\/(www\.)?([-\w@:%._\+~#=]{2,256}\.[a-z]{2,6})+(\/[\/\w\.-]*)*(\?\w+=.+)*$');
+	ADD CHECK ("LinkProfilo" ~* '^https?:\/\/(www\.)?([-\w@:%._\+~#=]{2,}\.[a-z]{2,6})+(\/[\/\w\.-]*)*(\?\w+=.+)*$');
 
 COMMENT ON TABLE fincato_palmieri."LinkSocial"
 	IS 'Tabella contenenti i link social del canale';
@@ -357,7 +365,7 @@ COMMENT ON TABLE fincato_palmieri."Hashtag"
 
 CREATE TABLE IF NOT EXISTS fincato_palmieri."ContenutoMultimediale"
 (
-	"IdURL" text PRIMARY KEY,
+	"IdURL" text PRIMARY KEY DEFAULT ('url'||nextval('url_sequence')),
 	"Canale" text NOT NULL,
 	"Titolo" text NOT NULL,
 	"Categoria" text NOT NULL,
@@ -373,13 +381,14 @@ ALTER TABLE IF EXISTS fincato_palmieri."ContenutoMultimediale"
 		REFERENCES fincato_palmieri."Categoria" ("NomeCategoria")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
+	/*
 	-- Validazione tramite regex del link URL del contenuto mutimediale di qualsiasi tipo
 	-- 		ex.		https://www.asd.google.com/search?q=some+text&param=3#dfsd,
 	-- 				https://www.google.com
 	-- 				http://google.com/?q=some+text&param=3#dfsdf
 	-- 				https://www.google.com/api/?
 	-- 				https://www.google.com/api/login.php
-	ADD CHECK ("IdURL" ~* '^https?:\/\/(www\.)?([-\w@:%._\+~#=]{2,256}\.[a-z]{2,6})+(\/[\/\w\.-]*)*(\?\w+=.+)*$'),
+	ADD CHECK ("IdURL" ~* '^https?:\/\/(www\.)?([-\w@:%._\+~#=]{2,}\.[a-z]{2,6})+(\/[\/\w\.-]*)*(\?\w+=.+)*$'),*/
 	-- Vincolo che impedisce di impostare il titolo del contenuto mutimediale di qualsiasi tipo in una stringa vuota
 	ADD CHECK ("Titolo" <> '');
 
@@ -427,7 +436,7 @@ ALTER TABLE IF EXISTS fincato_palmieri."Voto"
 		REFERENCES fincato_palmieri."ContenutoMultimediale" ("IdURL")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
-	ADD CHECK ("Likert" <= 1 AND "Likert" <= 10);
+	ADD CHECK ("Likert" >= 1 AND "Likert" <= 10);
 
 COMMENT ON TABLE fincato_palmieri."Voto"
 	IS 'Tabella che contiene i voti lasciati dagli utenti registrati ai contenuti multimediali';

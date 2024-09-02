@@ -563,7 +563,7 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 | RV3  | Uno spettatore non deve partecipare all'associazione **_streaming_**.                                                                                                                      |
 | RV4  | Un messaggio deve avere un mittente e un destinatario.                                                                                                                                     |
 | RV5  | Un canale deve essere gestito da un amministratore.                                                                                                                                        |
-| RV6  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú l'UUID.                                                                                                 |
+| RV6  | Il "nome utente" dell'utente guest deve essere composto dalla stringa 'guest_' piú un numero intero univoco.                                                                               |
 | RV7  | Un contenuto multimediale non deve partecipare contemporaneamente alle associazioni **_contenuto live_**, **_contenuto video_** e **_contenuto clip_**, ma solo ad una di esse alla volta. |
 | RV8  | Una reazione deve partecipare all'associazione **_presenza_** solamente con cardinalità (1,1)                                                                                              |
 | RV9  | Ogni video deve essere associato ad una live per poter esistere.                                                                                                                           |
