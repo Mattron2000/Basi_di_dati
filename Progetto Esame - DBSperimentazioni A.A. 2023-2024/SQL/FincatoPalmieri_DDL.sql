@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS fincato_palmieri."Interazione";
 DROP TABLE IF EXISTS fincato_palmieri."Live";
 DROP TABLE IF EXISTS fincato_palmieri."Voto";
 DROP TABLE IF EXISTS fincato_palmieri."Visita";
+DROP TABLE IF EXISTS fincato_palmieri."AssociazioneCM_H";
 DROP TABLE IF EXISTS fincato_palmieri."ContenutoMultimediale";
 DROP TABLE IF EXISTS fincato_palmieri."Categoria";
 DROP TABLE IF EXISTS fincato_palmieri."Hashtag";
@@ -381,19 +382,43 @@ ALTER TABLE IF EXISTS fincato_palmieri."ContenutoMultimediale"
 		REFERENCES fincato_palmieri."Categoria" ("NomeCategoria")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
-	/*
 	-- Validazione tramite regex del link URL del contenuto mutimediale di qualsiasi tipo
 	-- 		ex.		https://www.asd.google.com/search?q=some+text&param=3#dfsd,
 	-- 				https://www.google.com
 	-- 				http://google.com/?q=some+text&param=3#dfsdf
 	-- 				https://www.google.com/api/?
 	-- 				https://www.google.com/api/login.php
-	ADD CHECK ("IdURL" ~* '^https?:\/\/(www\.)?([-\w@:%._\+~#=]{2,}\.[a-z]{2,6})+(\/[\/\w\.-]*)*(\?\w+=.+)*$'),*/
+	-- ADD CHECK ("IdURL" ~* '^https?:\/\/(www\.)?([-\w@:%._\+~#=]{2,}\.[a-z]{2,6})+(\/[\/\w\.-]*)*(\?\w+=.+)*$'),
+	-- Per motivi di semplicitá nel debug visto il contesto dell'esame universitario e il permesso del prof,
+	-- utilizzeremo il seguente formato: url1, url2, url3, ...
+	ADD CHECK ("IdURL" ~ '^url\d+$'),
 	-- Vincolo che impedisce di impostare il titolo del contenuto mutimediale di qualsiasi tipo in una stringa vuota
 	ADD CHECK ("Titolo" <> '');
 
 COMMENT ON TABLE fincato_palmieri."ContenutoMultimediale"
 	IS 'Tabella che contiene i valori comuni di diversi tipi di contenuti multimediali (LIVE, VIDEO e CLIP)';
+
+-- Table: fincato_palmieri."AssociazioneCM_H"
+
+CREATE TABLE IF NOT EXISTS fincato_palmieri."AssociazioneCM_H"
+(
+	"Hashtag" text,
+	"ContenutoMultimediale" text,
+	PRIMARY KEY ("Hashtag", "ContenutoMultimediale")
+);
+
+ALTER TABLE IF EXISTS fincato_palmieri."AssociazioneCM_H"
+	ADD FOREIGN KEY ("Hashtag")
+		REFERENCES fincato_palmieri."Hashtag" ("NomeHashtag")
+		ON UPDATE CASCADE
+		ON DELETE CASCADE,
+	ADD FOREIGN KEY ("ContenutoMultimediale")
+		REFERENCES fincato_palmieri."ContenutoMultimediale" ("IdURL")
+		ON UPDATE CASCADE
+		ON DELETE CASCADE;
+
+COMMENT ON TABLE fincato_palmieri."AssociazioneCM_H"
+	IS 'Tabella che contiene le associazioni create dagli utenti streamer ai propri contenuti multimediali';
 
 -- Table: fincato_palmieri."Visita"
 

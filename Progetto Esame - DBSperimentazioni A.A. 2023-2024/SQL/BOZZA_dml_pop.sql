@@ -12,27 +12,27 @@ insert into fincato_palmieri."Utente" values('utente4');
 insert into fincato_palmieri."Utente" values('utente5');
 
 --inserimento utente registrato
-insert into fincato_palmieri."Registrato"("Username","UserPassword","DataDiNascita","DataRegistrazione","LIS") 
+insert into fincato_palmieri."Registrato"("Username","UserPassword","DataDiNascita","DataRegistrazione","LIS")
 	values('utente1','password1!','19-05-2000','18-05-2020',false);
-insert into fincato_palmieri."Registrato"("Username","UserPassword","DataDiNascita","DataRegistrazione","NumeroDiTelefono","LIS") 
+insert into fincato_palmieri."Registrato"("Username","UserPassword","DataDiNascita","DataRegistrazione","NumeroDiTelefono","LIS")
 	values('utente2','password2!','19-05-2002','14-09-2021','+391111111111',false);
-insert into fincato_palmieri."Registrato"("Username","UserPassword","DataDiNascita","DataRegistrazione","NumeroDiTelefono","IndirizzoMail","LIS") 
+insert into fincato_palmieri."Registrato"("Username","UserPassword","DataDiNascita","DataRegistrazione","NumeroDiTelefono","IndirizzoMail","LIS")
 	values('utente3','password3!','17-09-2005','25-01-2019','+391114113111','test1@gmail.com',false);
-insert into fincato_palmieri."Registrato"("Username","UserPassword","DataDiNascita","DataRegistrazione","IndirizzoMail","Affiliate","LIS") 
+insert into fincato_palmieri."Registrato"("Username","UserPassword","DataDiNascita","DataRegistrazione","IndirizzoMail","Affiliate","LIS")
 	values('utente4','password4!','19-12-2003','26-04-2019','test2@yahoo.it',false,false);
-insert into fincato_palmieri."Registrato"("Username","UserPassword","DataDiNascita","DataRegistrazione","NumeroDiTelefono","IndirizzoMail","Affiliate","Premium","LIS") 
+insert into fincato_palmieri."Registrato"("Username","UserPassword","DataDiNascita","DataRegistrazione","NumeroDiTelefono","IndirizzoMail","Affiliate","Premium","LIS")
 	values('utente5','password5!','25-05-2006','25-02-2022','+39111411353','test3@libero.it',false,false,false);
 
 --inserimento messaggio
-insert into fincato_palmieri."Messaggio"("Mittente","TimestampMessaggio","Destinatario","Testo") 
+insert into fincato_palmieri."Messaggio"("Mittente","TimestampMessaggio","Destinatario","Testo")
 	values('utente1','22-07-2024 14:06:25','utente3','ciao, come va?');
-insert into fincato_palmieri."Messaggio"("Mittente","TimestampMessaggio","Destinatario","Testo") 
+insert into fincato_palmieri."Messaggio"("Mittente","TimestampMessaggio","Destinatario","Testo")
 	values('utente3','23-07-2024 20:37:35','utente1','tutto bene grazie, tu?');
-insert into fincato_palmieri."Messaggio"("Mittente","TimestampMessaggio","Destinatario","Testo") 
+insert into fincato_palmieri."Messaggio"("Mittente","TimestampMessaggio","Destinatario","Testo")
 	values('utente4','20-03-2024 14:16:25','utente5','hello');
-insert into fincato_palmieri."Messaggio"("Mittente","TimestampMessaggio","Destinatario","Testo") 
+insert into fincato_palmieri."Messaggio"("Mittente","TimestampMessaggio","Destinatario","Testo")
 	values('utente2','29-07-2024 20:09:35','utente1','ciaooo');
-insert into fincato_palmieri."Messaggio"("Mittente","TimestampMessaggio","Destinatario","Testo") 
+insert into fincato_palmieri."Messaggio"("Mittente","TimestampMessaggio","Destinatario","Testo")
 	values('utente5','29-07-2024 20:09:35','utente2','ciao utente');
 
 --inserimento portafoglio
@@ -61,11 +61,11 @@ insert into fincato_palmieri."Rinnovo"("Amministratore","Provider","DataScadenza
 	values (00050103,'VHOSTING','28-09-2024');
 
 --inserimento canale
-insert into fincato_palmieri."Canale"("StreamerProprietario","AdminCanale","HostingProvider") 
+insert into fincato_palmieri."Canale"("StreamerProprietario","AdminCanale","HostingProvider")
 	values ('utente3',00050103,'VHOSTING');
-insert into fincato_palmieri."Canale"("StreamerProprietario","AdminCanale","HostingProvider","Descrizione") 
+insert into fincato_palmieri."Canale"("StreamerProprietario","AdminCanale","HostingProvider","Descrizione")
 	values ('utente2',00050102,'Tiscali','Canale utente2');
-insert into fincato_palmieri."Canale"("StreamerProprietario","AdminCanale","HostingProvider","Descrizione","ImmagineProfilo","Trailer") 
+insert into fincato_palmieri."Canale"("StreamerProprietario","AdminCanale","HostingProvider","Descrizione","ImmagineProfilo","Trailer")
 	values ('utente4',00050101,'Aruba','Canale utente4','foto_utente2','trailer_canale');
 
 --inserimento programmazione
@@ -79,28 +79,28 @@ insert into fincato_palmieri."Programmazione"("Streamer","ProgTimestamp","Titolo
 	values ('utente4','11-08-2024 10:30:00','Prog utente4',true,true);
 
 --inserimento link social
-insert into fincato_palmieri."LinkSocial"("CanaleAssociato","Social","LinkProfilo") 
+insert into fincato_palmieri."LinkSocial"("CanaleAssociato","Social","LinkProfilo")
 	values ('utente3','Instagram','https://www.instagram.com');
-insert into fincato_palmieri."LinkSocial"("CanaleAssociato","Social","LinkProfilo") 
+insert into fincato_palmieri."LinkSocial"("CanaleAssociato","Social","LinkProfilo")
 	values ('utente3','Twitter','https://www.twitter.com');
-insert into fincato_palmieri."LinkSocial"("CanaleAssociato","Social","LinkProfilo") 
+insert into fincato_palmieri."LinkSocial"("CanaleAssociato","Social","LinkProfilo")
 	values ('utente3','Facebook','https://www.facebook.com');
-insert into fincato_palmieri."LinkSocial"("CanaleAssociato","Social","LinkProfilo") 
+insert into fincato_palmieri."LinkSocial"("CanaleAssociato","Social","LinkProfilo")
 	values ('utente4','Instagram','https://www.instagram.com');
-insert into fincato_palmieri."LinkSocial"("CanaleAssociato","Social","LinkProfilo") 
+insert into fincato_palmieri."LinkSocial"("CanaleAssociato","Social","LinkProfilo")
 	values ('utente2','Snapchat','https://www.snapchat.com');
 
 --inserimento donazione
-insert into fincato_palmieri."Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits") 
-	values ('utente1','utente2','25-04-2023 15:03:12',20); 
-insert into fincato_palmieri."Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits") 
-	values ('utente4','utente3','29-04-2023 15:03:12',15);  
-insert into fincato_palmieri."Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits") 
-	values ('utente3','utente4','21-04-2023 15:03:12',10); 
+insert into fincato_palmieri."Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits")
+	values ('utente1','utente2','25-04-2023 15:03:12',20);
+insert into fincato_palmieri."Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits")
+	values ('utente4','utente3','29-04-2023 15:03:12',15);
+insert into fincato_palmieri."Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits")
+	values ('utente3','utente4','21-04-2023 15:03:12',10);
 
 --inserimento follower
 insert into fincato_palmieri."Follower" values('utente1','utente2');
-insert into fincato_palmieri."Follower" values('utente2','utente3'); 
+insert into fincato_palmieri."Follower" values('utente2','utente3');
 insert into fincato_palmieri."Follower" values('utente3','utente4');
 insert into fincato_palmieri."Follower" values('utente5','utente4');
 insert into fincato_palmieri."Follower" values('utente2','utente2');
@@ -120,11 +120,11 @@ insert into fincato_palmieri."Categoria" values('Sport');
 insert into fincato_palmieri."Categoria" values('Musica');
 
 --inserimento hashtag
-insert into fincato_palmieri."Categoria" values('game');
-insert into fincato_palmieri."Categoria" values('food');
-insert into fincato_palmieri."Categoria" values('music');
-insert into fincato_palmieri."Categoria" values('sport');
-insert into fincato_palmieri."Categoria" values('technology');
+insert into fincato_palmieri."Hashtag" values('game');
+insert into fincato_palmieri."Hashtag" values('food');
+insert into fincato_palmieri."Hashtag" values('music');
+insert into fincato_palmieri."Hashtag" values('sport');
+insert into fincato_palmieri."Hashtag" values('technology');
 
 --inserimento contenuto multimediale
 insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente2','Live at the pub','Musica',false);
@@ -159,14 +159,12 @@ insert into fincato_palmieri."Live" values ('url2','15-06-2024 14:00:00','15-06-
 insert into fincato_palmieri."Live" values ('url1','27-02-2024 15:00:00','27-02-2024 17:05:26',false);
 insert into fincato_palmieri."Live" values ('url5','27-02-2024 15:00:00','27-02-2024 17:05:26',true);
 
-/*
 --inserimento associazione hashtag-contenuto
 insert into fincato_palmieri."AssociazioneCM_H" values ('game','url4');
 insert into fincato_palmieri."AssociazioneCM_H" values ('food','url4');
 insert into fincato_palmieri."AssociazioneCM_H" values ('music','url1');
 insert into fincato_palmieri."AssociazioneCM_H" values ('sport','url7');
 insert into fincato_palmieri."AssociazioneCM_H" values ('technology','url9');
-*/
 
 --inserimento emoji
 insert into fincato_palmieri."Emoji" values('&#x1F44D');
@@ -176,23 +174,23 @@ insert into fincato_palmieri."Emoji" values('&#x1F923');
 insert into fincato_palmieri."Emoji" values('&#x1F621');
 
 --inserimento interazione
-insert into fincato_palmieri."Interazione"("Spettatore","LiveCorrente","IntTimestamp","Tipologia") 
+insert into fincato_palmieri."Interazione"("Spettatore","LiveCorrente","IntTimestamp","Tipologia")
 	values ('utente3','url2','15-06-2024 14:15:00','reazione');
-insert into fincato_palmieri."Interazione"("Spettatore","LiveCorrente","IntTimestamp","Tipologia","Messaggio") 
+insert into fincato_palmieri."Interazione"("Spettatore","LiveCorrente","IntTimestamp","Tipologia","Messaggio")
 	values ('utente3','url2','15-06-2024 14:26:00','commento','grande, continua così!');
-insert into fincato_palmieri."Interazione"("Spettatore","LiveCorrente","IntTimestamp","Tipologia") 
+insert into fincato_palmieri."Interazione"("Spettatore","LiveCorrente","IntTimestamp","Tipologia")
 	values ('utente1','url9','24-02-2024 15:03:00','reazione');
-insert into fincato_palmieri."Interazione"("Spettatore","LiveCorrente","IntTimestamp","Tipologia","Messaggio") 
+insert into fincato_palmieri."Interazione"("Spettatore","LiveCorrente","IntTimestamp","Tipologia","Messaggio")
 	values ('utente5','url9','24-02-2024 15:09:00','commento','Che fatica');
 
 --inserimento presenza
-insert into fincato_palmieri."Presenza" 
+insert into fincato_palmieri."Presenza"
 	values ('utente3','url2','15-06-2024 14:15:00','&#x1F44D');
-insert into fincato_palmieri."Presenza" 
+insert into fincato_palmieri."Presenza"
 	values ('utente3','url2','15-06-2024 14:26:00','&#x1F44F');
-insert into fincato_palmieri."Presenza" 
+insert into fincato_palmieri."Presenza"
 	values ('utente1','url9','24-02-2024 15:03:00','&#x1F44D');
-insert into fincato_palmieri."Presenza" 
+insert into fincato_palmieri."Presenza"
 	values ('utente5','url9','24-02-2024 15:09:00','&#x1F923');
 
 --inserimento affluenza
