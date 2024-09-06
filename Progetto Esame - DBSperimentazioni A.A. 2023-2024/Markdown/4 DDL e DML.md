@@ -20,6 +20,12 @@
 
 > <qui inserite solo qualche commento (es. spiegazione del perché i dati da voi inseriti coprono i casi più frequenti e – possibilmente – quelli limite). Mettete il codice in un file a parte denominato VostriCognomi_DMLPOP.sql (es. Rossi_DMLPOP.sql)>
 
+I dati inseriti ricoprono i casi più frequenti di inserimento in una basi di dati di questo tipo.  
+Ci sono infatti inserimenti più frequenti per elementi cardine della piattaforma, come ad esempio l'aggiunta di un utente guest o registrato oppure l'aggiunta di un contenuto multimediale, mentre per altri elementi meno frequenti sono stai eseguiti pochi inserimenti, come ad esempio l'aggiunta di un amministratore o di un portafoglio.  
+Come si può notare, molti casi limite sono stati coperti, come ad esempio l'aggiunta di un utente registrato che non è uno streamer oppure l'aggiunta di un portafoglio non per forza a tutti gli utenti registrati.  
+A dimostrazione di ciò si può notare come in alcuni casi le informazioni opzionali vengano omesse oppure valorizzate tramite valori di default, per rappresentare ad esempio la mancanza di **_descrizione_** e **_trailer_** di un canale oppure le opzioni **_premium_** o **_LIS_** valorizzate di default a _false_.  
+Nella fase di popolamento si è quindi cercato di inserire dati basandosi su un'applicazione realistica di questo tipo.
+
 ## 5 DML di modifica
 
 > <soltanto qualche modifica del DB che rispecchi le operazioni più frequenti (es. aggiunta di un utente)>

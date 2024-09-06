@@ -30,8 +30,8 @@
   - [Commento finale](#commento-finale)
     - [Analisi delle Relazioni e degli Attributi](#analisi-delle-relazioni-e-degli-attributi)
   - [1.5.1 Regole aziendali](#151-regole-aziendali)
-  - [1.5.2 Vincoli d'integritá](#152-vincoli-dintegritá)
-  - [1.5.3 Derivazioni](#153-derivazioni)
+    - [1.5.1.1 Vincoli d'integritá](#1511-vincoli-dintegritá)
+    - [1.5.1.2 Derivazioni](#1512-derivazioni)
 
 ---
 
@@ -350,20 +350,20 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
    - Gli `AMMINISTRATORI` gestiscono i `CANALI`, che a loro volta contengono `CONTENUTI MULTIMEDIALI` creati e pubblicati dagli `STREAMER`. Questo rispecchia la struttura tipica delle piattaforme di streaming, dove gli streamer creano e pubblicano i contenuti nel proprio canale e gli amministratori delle pagine si occupano di gestirlo.
 
 3. **Abbonamenti e Donazioni**:
-   - La presenza di `abbonamento`, `PORTAFOGLIO`, e `donazione` indica un sistema di monetizzazione che permette agli utenti di effettuare donazioni e sottoscrivere abbonamenti premium.
+   - La presenza di `subscription`, `PORTAFOGLIO`, e `donazione` indica un sistema di monetizzazione che permette agli utenti di effettuare donazioni e sottoscrivere abbonamenti ai canali.
 
 4. **Molteplicità delle Relazioni**:
    - La molteplicità delle relazioni è stata definita in modo preciso per garantire che le cardinalità vengano rispettate. Ad esempio, un `UTENTE` può mandare e ricevere zero, uno o più messaggi (0,N) ma ogni `MESSAGGIO` ha un solo mittente (1,1) e un solo destinatario (1,1).
 
 5. **Attributi Chiave**:
-   - Gli attributi chiave sono chiaramente identificati, come "nome utente" per `UTENTE` e "timestamp" per `MESSAGGIO`, assicurando l'unicità e la tracciabilità dei dati.
+   - Gli attributi chiave sono chiaramente identificati, come **_nome utente_** per `UTENTE` e **_timestamp_** per `MESSAGGIO`, assicurando l'unicità e la tracciabilità dei dati.
   
 6. **Reazioni ed Emoji**:
    - La relazione tra `REAZIONE` ed `EMOJI` è da intendersi come segue: in una **_reazione_** è presente uno ed un solo _emoji_ (siccome una reazione è essa stessa un singolo emoji) mentre ogni singolo **_emoji_** può essere presente molte volte nelle varie _reazioni_ oppure non venire mai utlizzato in nessuna _reazione_.
 
 ### 1.5.1 Regole aziendali
 
-### 1.5.2 Vincoli d'integritá
+#### 1.5.1.1 Vincoli d'integritá
 
 | RVI  | \<concetto\> deve/non deve \<espressione\>                                                                   |
 | ---- | ------------------------------------------------------------------------------------------------------------ |
@@ -379,7 +379,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 | RV10 | La durata di una clip deve essere inferiore a quella di un video.                                            |
 | RV11 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.                |
 
-### 1.5.3 Derivazioni
+#### 1.5.1.2 Derivazioni
 
 | RDI | \<concetto\> si ottiene \<operazione\>                                                                                                              |
 | --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |

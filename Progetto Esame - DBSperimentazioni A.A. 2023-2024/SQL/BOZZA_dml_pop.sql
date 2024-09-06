@@ -105,12 +105,12 @@ insert into fincato_palmieri."Follower" values('utente3','utente4');
 insert into fincato_palmieri."Follower" values('utente5','utente4');
 insert into fincato_palmieri."Follower" values('utente2','utente2');
 
---inserimento abbonamento
-insert into fincato_palmieri."Abbonamento" values ('utente1','utente2');
-insert into fincato_palmieri."Abbonamento" values ('utente1','utente3');
-insert into fincato_palmieri."Abbonamento" values ('utente3','utente2');
-insert into fincato_palmieri."Abbonamento" values ('utente5','utente4');
-insert into fincato_palmieri."Abbonamento" values ('utente2','utente4');
+--inserimento abbonamento ad un canale
+insert into fincato_palmieri."Subscription" values ('utente1','utente2');
+insert into fincato_palmieri."Subscription" values ('utente1','utente3');
+insert into fincato_palmieri."Subscription" values ('utente3','utente2');
+insert into fincato_palmieri."Subscription" values ('utente5','utente4');
+insert into fincato_palmieri."Subscription" values ('utente2','utente4');
 
 --inserimento categoria
 insert into fincato_palmieri."Categoria" values('Tecnologia');
@@ -127,16 +127,16 @@ insert into fincato_palmieri."Hashtag" values('sport');
 insert into fincato_palmieri."Hashtag" values('technology');
 
 --inserimento contenuto multimediale
-insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente2','Live at the pub','Musica',false);
-insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente2','La storia del rock','Musica',true);
-insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente2','Live in Rome','Musica',false);
-insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente3','Ricetta della nonna #1','Cibo',false);
-insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente3','Cucina e videogames','Gaming',false);
-insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente3','Esercizi per il benessere fisico','Sport',false);
-insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente3','App e attività fisica','Gaming',false);
-insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente4','Pettorali e addominali','Sport',false);
-insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente4','Jogging e camminate','Sport',false);
-insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente4','Come installare giochi su pc','Tecnologia',false);
+insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente2','Live at the pub','Musica',false,false);
+insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente2','La storia del rock','Musica',true,false);
+insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente2','Live in Rome','Musica',false,true);
+insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente3','Ricetta della nonna #1','Cibo',false,false);
+insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente3','Cucina e videogames','Gaming',false,true);
+insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente3','Esercizi per il benessere fisico','Sport',false,false);
+insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente3','App e attività fisica','Gaming',false,false);
+insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente4','Pettorali e addominali','Sport',false,true);
+insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente4','Jogging e camminate','Sport',false,true);
+insert into fincato_palmieri."ContenutoMultimediale" values (DEFAULT,'utente4','Come installare giochi su pc','Tecnologia',false,false);
 
 --inserimento visita
 insert into fincato_palmieri."Visita" values ('guest_1','url1');
@@ -153,25 +153,29 @@ insert into fincato_palmieri."Voto" values ('utente4','url3',7);
 insert into fincato_palmieri."Voto" values ('utente5','url3',3);
 
 --inserimento live
-insert into fincato_palmieri."Live" values ('url6','25-02-2024 15:00:00','25-02-2024 17:05:26',false);
-insert into fincato_palmieri."Live" values ('url9','24-02-2024 15:00:00','24-02-2024 17:05:24',true);
-insert into fincato_palmieri."Live" values ('url2','15-06-2024 14:00:00','15-06-2024 17:45:26',false);
-insert into fincato_palmieri."Live" values ('url1','27-02-2024 15:00:00','27-02-2024 17:05:26',false);
-insert into fincato_palmieri."Live" values ('url5','27-02-2024 15:00:00','27-02-2024 17:05:26',true);
+insert into fincato_palmieri."Live" values ('url6','25-02-2024 15:00:00','25-02-2024 17:05:26');
+insert into fincato_palmieri."Live" values ('url9','24-02-2024 15:00:00','24-02-2024 17:05:24');
+insert into fincato_palmieri."Live" values ('url2','15-06-2024 14:00:00','15-06-2024 17:45:26');
+insert into fincato_palmieri."Live" values ('url1','27-02-2024 15:00:00','27-02-2024 17:05:26');
+insert into fincato_palmieri."Live" values ('url5','27-02-2024 15:00:00','27-02-2024 17:05:26');
 
 --inserimento associazione hashtag-contenuto
-insert into fincato_palmieri."AssociazioneCM_H" values ('game','url4');
-insert into fincato_palmieri."AssociazioneCM_H" values ('food','url4');
-insert into fincato_palmieri."AssociazioneCM_H" values ('music','url1');
-insert into fincato_palmieri."AssociazioneCM_H" values ('sport','url7');
-insert into fincato_palmieri."AssociazioneCM_H" values ('technology','url9');
+insert into fincato_palmieri."Associazione" values ('game','url4');
+insert into fincato_palmieri."Associazione" values ('food','url4');
+insert into fincato_palmieri."Associazione" values ('music','url1');
+insert into fincato_palmieri."Associazione" values ('sport','url7');
+insert into fincato_palmieri."Associazione" values ('technology','url10');
 
 --inserimento emoji
-insert into fincato_palmieri."Emoji" values('&#x1F44D');
-insert into fincato_palmieri."Emoji" values('&#x1F44E');
-insert into fincato_palmieri."Emoji" values('&#x1F44F');
-insert into fincato_palmieri."Emoji" values('&#x1F923');
-insert into fincato_palmieri."Emoji" values('&#x1F621');
+insert into fincato_palmieri."Emoji"("Codice") values('&#x1F44D'); --pollice in su'
+insert into fincato_palmieri."Emoji"("Codice") values('&#x1F44E'); --pollice in giu'
+insert into fincato_palmieri."Emoji"("Codice") values('&#x1F44F'); --applauso
+insert into fincato_palmieri."Emoji"("Codice") values('&#x1F602'); --faccina che ride (dritta)
+insert into fincato_palmieri."Emoji"("Codice","Personalizzato") values('&#x1F923','utente3'); --faccina che ride (inclinata)
+insert into fincato_palmieri."Emoji"("Codice","Personalizzato") values('&#x1F60D','utente3'); --faccina con occhi a cuore
+insert into fincato_palmieri."Emoji"("Codice") values('&#x1F62D'); --faccina che piange
+insert into fincato_palmieri."Emoji"("Codice") values('&#x1F621'); --faccina arrabbiata 
+insert into fincato_palmieri."Emoji"("Codice","Personalizzato") values('&#x1F625','utente2'); --faccina con goccia di sudore
 
 --inserimento interazione
 insert into fincato_palmieri."Interazione"("Spettatore","LiveCorrente","IntTimestamp","Tipologia")
@@ -183,7 +187,7 @@ insert into fincato_palmieri."Interazione"("Spettatore","LiveCorrente","IntTimes
 insert into fincato_palmieri."Interazione"("Spettatore","LiveCorrente","IntTimestamp","Tipologia","Messaggio")
 	values ('utente5','url9','24-02-2024 15:09:00','commento','Che fatica');
 
---inserimento presenza
+--inserimento presenza emoji in commenti e reazioni
 insert into fincato_palmieri."Presenza"
 	values ('utente3','url2','15-06-2024 14:15:00','&#x1F44D');
 insert into fincato_palmieri."Presenza"

@@ -28,8 +28,8 @@
         - [2.3.1.2.3.1 Op9](#231231-op9)
       - [2.3.1.2.4 ASSENZA DI RIDONDANZA](#23124-assenza-di-ridondanza)
         - [2.3.1.2.4.1 Op9](#231241-op9)
-        - [2.3.1.2.5 TOTALI PER RIDONDANZA 2](#23125-totali-per-ridondanza-2)
-        - [2.3.1.2.6 Decisione](#23126-decisione)
+      - [2.3.1.2.5 TOTALI PER RIDONDANZA 2](#23125-totali-per-ridondanza-2)
+      - [2.3.1.2.6 Decisione](#23126-decisione)
   - [2.3.2 Eliminazione delle generalizzazioni](#232-eliminazione-delle-generalizzazioni)
     - [2.3.2.1 Generalizzazione 1 (generalizzazione dell'utente)](#2321-generalizzazione-1-generalizzazione-dellutente)
       - [2.3.2.1.1 Regole aziendali introdotte](#23211-regole-aziendali-introdotte)
@@ -41,8 +41,8 @@
   - [2.3.4 Scelta degli identificatori principali](#234-scelta-degli-identificatori-principali)
 - [2.4 Schema E-R ristrutturato + regole aziendali](#24-schema-e-r-ristrutturato--regole-aziendali)
   - [2.4.1 Regole aziendali](#241-regole-aziendali)
-  - [2.4.2 Vincoli di Integrità](#242-vincoli-di-integrità)
-  - [2.4.3 Derivazioni](#243-derivazioni)
+    - [2.4.1.1 Vincoli di Integrità](#2411-vincoli-di-integrità)
+    - [2.4.1.2 Derivazioni](#2412-derivazioni)
 - [2.5 Schema relazionale con vincoli di integrità referenziale](#25-schema-relazionale-con-vincoli-di-integrità-referenziale)
 
 ## 2.1 Tavola dei volumi
@@ -57,55 +57,55 @@
 >
 -->
 
-| Concetto                      | Tipo | Volume     |
-| ----------------------------- | ---- | ---------- |
-| UTENTE                        | E    | 200,000    |
-| GUEST                         | E    | 100,000    |
-| PORTAFOGLIO                   | E    | 70,000     |
-| conto                         | A    | 70,000     |
-| donazione                     | A    | 500,000    |
-| REGISTRATO                    | E    | 100,000    |
-| STREAMER                      | E    | 40,000     |
-| controllo                     | A    | 40,000     |
-| SPETTATORE                    | E    | 60,000     |
-| streaming                     | A    | 200,000    |
-| PROGRAMMAZIONE                | E    | 200,000    |
-| CANALE                        | E    | 40,000     |
-| associazione<sub>(CM-H)</sub> | A    | 2,000,000  |
-| CATEGORIA                     | E    | 6,000      |
-| appartenenza                  | A    | 1,000,000  |
-| CONTENUTO MULTIMEDIALE        | E    | 1,000,000  |
-| LIVE                          | E    | 250,000    |
-| VIDEO                         | E    | 200,000    |
-| CLIP                          | E    | 550,000    |
-| LINK SOCIAL                   | E    | 80,000     |
-| visita                        | A    | 20,000,000 |
-| INTERAZIONE                   | E    | 20,000,000 |
-| invio                         | A    | 20,000,000 |
-| COMMENTO                      | E    | 5,000,000  |
-| REAZIONE                      | E    | 15,000,000 |
-| EMOJI                         | E    | 5,000      |
-| HASHTAG                       | E    | 10,000     |
-| follower                      | A    | 90,000     |
-| MESSAGGIO                     | E    | 2,000,000  |
-| voto                          | A    | 1,400,000  |
-| abbonamento                   | A    | 150,000    |
-| contenitore                   | A    | 1,000,000  |
-| AFFLUENZA                     | E    | 500,000    |
-| media spettatori              | A    | 500,000    |
-| riferimento                   | A    | 200,000    |
-| scomposizione                 | A    | 550,000    |
-| presenza<sub>(C-E)</sub>      | A    | 8,000,000  |
-| presenza<sub>(R-E)</sub>      | A    | 15,000,000 |
-| partecipazione                | A    | 20,000,000 |
-| associazione<sub>(LS-C)</sub> | A    | 80,000     |
-| mittente                      | A    | 2,000,000  |
-| destinatario                  | A    | 2,000,000  |
-| AMMINISTRATORE                | E    | 25,000     |
-| PROVIDER                      | E    | 15,000     |
-| gestione                      | A    | 40,000     |
-| hosting                       | A    | 40,000     |
-| rinnovo                       | A    | 100,000    |
+| Concetto                 | Tipo | Volume     |
+| ------------------------ | ---- | ---------- |
+| UTENTE                   | E    | 200,000    |
+| GUEST                    | E    | 100,000    |
+| PORTAFOGLIO              | E    | 70,000     |
+| conto                    | A    | 70,000     |
+| donazione                | A    | 500,000    |
+| REGISTRATO               | E    | 100,000    |
+| STREAMER                 | E    | 40,000     |
+| controllo                | A    | 40,000     |
+| SPETTATORE               | E    | 60,000     |
+| streaming                | A    | 200,000    |
+| PROGRAMMAZIONE           | E    | 200,000    |
+| CANALE                   | E    | 40,000     |
+| associazione             | A    | 2,000,000  |
+| CATEGORIA                | E    | 6,000      |
+| appartenenza             | A    | 1,000,000  |
+| CONTENUTO MULTIMEDIALE   | E    | 1,000,000  |
+| LIVE                     | E    | 250,000    |
+| VIDEO                    | E    | 200,000    |
+| CLIP                     | E    | 550,000    |
+| LINK SOCIAL              | E    | 80,000     |
+| visita                   | A    | 20,000,000 |
+| INTERAZIONE              | E    | 20,000,000 |
+| invio                    | A    | 20,000,000 |
+| COMMENTO                 | E    | 5,000,000  |
+| REAZIONE                 | E    | 15,000,000 |
+| EMOJI                    | E    | 5,000      |
+| HASHTAG                  | E    | 10,000     |
+| follower                 | A    | 90,000     |
+| MESSAGGIO                | E    | 2,000,000  |
+| voto                     | A    | 1,400,000  |
+| subscription             | A    | 150,000    |
+| contenitore              | A    | 1,000,000  |
+| AFFLUENZA                | E    | 500,000    |
+| media spettatori         | A    | 500,000    |
+| riferimento              | A    | 200,000    |
+| scomposizione            | A    | 550,000    |
+| presenza<sub>(C-E)</sub> | A    | 8,000,000  |
+| presenza<sub>(R-E)</sub> | A    | 15,000,000 |
+| partecipazione           | A    | 20,000,000 |
+| collegamento             | A    | 80,000     |
+| mittente                 | A    | 2,000,000  |
+| destinatario             | A    | 2,000,000  |
+| AMMINISTRATORE           | E    | 25,000     |
+| PROVIDER                 | E    | 15,000     |
+| gestione                 | A    | 40,000     |
+| hosting                  | A    | 40,000     |
+| rinnovo                  | A    | 100,000    |
 
 1. **UTENTE**: Entità che rappresenta gli utenti della piattaforma.
 2. **GUEST**: Entità che rappresenta gli utenti non registrati alla piattaforma (guest).
@@ -132,12 +132,12 @@
 23. **follower**: Associazione che rappresenta i follow tra utenti registrati.
 24. **MESSAGGIO**: Entità che rappresenta i messaggi inviati tra utenti.
 25. **voto**: Associazione che rappresenta i voti ai contenuti multimediali.
-26. **abbonamento**: Associazione che rappresenta l'abbonamento degli utenti registrati a uno specifico utente streamer.
+26. **subscription**: Associazione che rappresenta l'abbonamento degli utenti registrati a uno specifico utente streamer.
 27. **hosting**: Associazione che rappresenta il provider del servizio di hosting che memorizza i contenuti di un canale.
 28. **conto**: Associazione che rappresenta il conto associato al portafoglio di bit dell'utente.
 29. **controllo**: Associazione che rappresenta il controllo del canale da parte dello streamer.
 30. **streaming**: Associazione che rappresenta l'attività di streaming.
-31. **associazione<sub>(CM-H)</sub>**: Associazione che rappresenta l'associazione di un contenuto multimediale ad un hashtag.
+31. **associazione**: Associazione che rappresenta l'associazione di un contenuto multimediale ad un hashtag.
 32. **appartenenza**: Associazione che rappresenta l'appartenenza di un contenuto multimediale ad una categoria.
 33. **rinnovo**: Associazione che rappresenta il rinnovo di un servizio di hosting.
 34. **contenitore**: Associazione che rappresenta la presenza di contenuti multimediali in un canale.
@@ -147,7 +147,7 @@
 38. **presenza<sub>(C-E)</sub>**: Associazione che indica la presenza di emoji in un commento.
 39. **presenza<sub>(R-E)</sub>**: Associazione che indica la presenza di emoji in una reazione.
 40. **partecipazione**: Associazione che rappresenta la presenza di interazioni degli utenti ad una live.
-41. **associazione<sub>(LS-C)</sub>**: Associazione che rappresenta il collegamento tra il canale e i suoi profili social.
+41. **collegamento**: Associazione che rappresenta il collegamento tra il canale e i suoi profili social.
 42. **mittente**: Associazione che rappresenta il mittente di un messaggio.
 43. **destinatario**: Associazione che rappresenta il destinatario di un messaggio.
 44. **AMMINISTRATORE**: Entità che rappresenta gli amministratori delle pagine degli streamer.
@@ -399,7 +399,7 @@ Tavola degli accessi:
 | L:    | (1 + 2) * 1 = 3 accessi/mese |
 | TOT:  | 3 accessi/mese               |
 
-###### 2.3.1.2.5 TOTALI PER RIDONDANZA 2
+##### 2.3.1.2.5 TOTALI PER RIDONDANZA 2
 
 Assumendo che l'attributo **_affluenza media_** occupi 4 byte, si ottengono i seguenti valori:
 
@@ -413,7 +413,7 @@ Assumendo che l'attributo **_affluenza media_** occupi 4 byte, si ottengono i se
 | Spazio:                   | 0                    |
 | Tempo:                    | 3 accessi/mese 3 |
 
-###### 2.3.1.2.6 Decisione
+##### 2.3.1.2.6 Decisione
 
 In conclusione, si evidenzia uno spreco di 1 MB solamente per diminuire il numero di accessi mensili: per questo motivo, si decide di togliere la ridondanza eliminando l'attributo **_affluenza media_** dell'entità `LIVE`.
 
@@ -473,7 +473,7 @@ Essendo le entità figlie delle specializzazioni dell'entità padre `CONTENUTO M
 
 Questo però causerebbe almeno due problemi:
 
- 1) l'aggiunta alle entità figlie di ogni associazione a cui l'entità padre partecipa, triplicando quindi il numero di associazioni    corrispondenti a `voto`, `visita`, `appartenenza`, `associazione(CM-H)` e `contenitore`;
+ 1) l'aggiunta alle entità figlie di ogni associazione a cui l'entità padre partecipa, triplicando quindi il numero di associazioni    corrispondenti a `voto`, `visita`, `appartenenza`, `associazione` e `contenitore`;
  2) l'aumento degli accessi alle entità figlie e alle relative associazioni per operazioni che coinvolgono un contenuto multimediale in modo generico.
 
 Se invece si decidesse di accorpare le entità figlie all'entità padre, questo procedimento porterebbe anche all'introduzione di associazioni ricorsive e alla presenza di molti valori nulli (nonchè l'aggiunta di molti vincoli), ottenendo una base di dati denormalizzata e un notevole spreco di spazio in memoria (considerando anche i volumi dell'entità `CONTENUTO MULTIMEDIALE`).
@@ -554,7 +554,7 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 
 ### 2.4.1 Regole aziendali
 
-### 2.4.2 Vincoli di Integrità
+#### 2.4.1.1 Vincoli di Integrità
 
 | RVI  | \<concetto\> deve/non deve \<espressione\>                                                                                                                                                 |
 | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -571,7 +571,7 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 | RV11 | La durata di una clip deve essere inferiore a quella di un video.                                                                                                                          |
 | RV12 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.                                                                                              |
 
-### 2.4.3 Derivazioni
+#### 2.4.1.2 Derivazioni
 
 | RDI | \<concetto\> si ottiene \<operazione\>                                                                                                              |
 | --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -624,9 +624,9 @@ Rinnovo(<U>Amministratore</U>, <U>Provider</U>, DataScadenza)
 Programmazione(<U>Streamer</U>, <U>ProgTimestamp</U>, Titolo, LIS, Premium)  
 > Programmazione(Streamer) referenzia Registrato(Username)  
 
-Abbonamento(<U>UtenteAbbonato</U>, <U>Streamer</U>)  
-> Abbonamento(UtenteAbbonato) referenzia Registrato(Username)  
-> Abbonamento(Streamer) referenzia Canale(StreamerProprietario)  
+Subscription(<U>UtenteAbbonato</U>, <U>Streamer</U>)  
+> Subscription(UtenteAbbonato) referenzia Registrato(Username)  
+> Subscription(Streamer) referenzia Canale(StreamerProprietario)  
 
 Follower(<U>UtenteFollower</U>, <U>StreamerSeguito</U>)  
 > Follower(UtenteFollower) referenzia Registrato(Username)  
@@ -635,7 +635,7 @@ Follower(<U>UtenteFollower</U>, <U>StreamerSeguito</U>)
 LinkSocial(<U>CanaleAssociato</U>, <U>Social</U>, LinkProfilo)  
 > LinkSocial(CanaleAssociato) referenzia Canale(StreamerProprietario)  
 
-ContenutoMultimediale(<U>IdURL</U>, Canale, Titolo, Categoria, LIS)  
+ContenutoMultimediale(<U>IdURL</U>, Canale, Titolo, Categoria, LIS, Premium)  
 > ContenutoMultimediale(Canale) referenzia Canale(StreamerProprietario)  
 > ContenutoMultimediale(Categoria) referenzia Categoria(NomeCategoria)  
 
@@ -651,11 +651,11 @@ Categoria(<U>NomeCategoria</U>)
 
 Hashtag(<U>NomeHashtag</U>)
 
-AssociazioneCM_H(<U>Hashtag</U>, <U>ContenutoMultimediale</U>)  
-> AssociazioneCM_H(Hashtag) referenzia Hashtag(NomeHashtag)  
-> AssociazioneCM_H(ContenutoMultimediale) referenzia ContenutoMultimediale(IdURL)
+Associazione(<U>Hashtag</U>, <U>ContenutoMultimediale</U>)  
+> Associazione(Hashtag) referenzia Hashtag(NomeHashtag)  
+> Associazione(ContenutoMultimediale) referenzia ContenutoMultimediale(IdURL)
 
-Live(<U>IdLive</U>, DataInizio, DataFine, Premium)
+Live(<U>IdLive</U>, DataInizio, DataFine)
 > Live(IdLive) referenzia ContenutoMultimediale(IdURL)
 
 Clip(<U>IdClip</U>, Durata, Minutaggio, Video)  
@@ -673,7 +673,8 @@ Interazione(<U>Spettatore</U>, <U>LiveCorrente</U>, <U>IntTimestamp</U>, Tipolog
 > Interazione(Spettatore) referenzia Registrato(Username)  
 > Interazione(LiveCorrente) referenzia Live(IdLive)
 
-Emoji(<U>Codice</U>)
+Emoji(<U>Codice</U>, Personalizzato)  
+> Emoji(Personalizzato) referenzia Canale(StreamerProprietario)  
   
 Presenza(<U>SpettatoreLive</U>, <U>LiveAssociata</U>, <U>TimestampInt</U>, <U>CodiceEmoji</U>)  
 > Presenza(SpettatoreLive) referenzia Interazione(Spettatore)  

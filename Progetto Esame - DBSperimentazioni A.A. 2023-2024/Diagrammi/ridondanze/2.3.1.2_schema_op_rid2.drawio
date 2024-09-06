@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e" scale="1" border="10">
     <diagram id="-rriOPSDnHkLpZKLwRpb" name="Page-1">
-        <mxGraphModel dx="3340" dy="1646" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
+        <mxGraphModel dx="2927" dy="1356" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -17,17 +17,6 @@
                 </mxCell>
                 <mxCell id="442" value="&lt;font color=&quot;#ff0000&quot;&gt;LIVE&lt;/font&gt;" style="whiteSpace=wrap;html=1;strokeColor=#FF0000;" parent="1" vertex="1">
                     <mxGeometry x="-2391.4700000000003" y="-919.9499999999999" width="80" height="40" as="geometry"/>
-                </mxCell>
-                <mxCell id="451" style="edgeStyle=none;shape=connector;rounded=1;fillStyle=auto;html=1;labelBackgroundColor=default;strokeColor=default;strokeWidth=1;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=none;endFill=0;startSize=6;endSize=6;fillColor=#000000;startArrow=oval;startFill=0;" parent="1" target="442" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="-2330.895872814796" y="-881.0599999999997" as="targetPoint"/>
-                        <mxPoint x="-2330.93" y="-940.69" as="sourcePoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="452" value="premium" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=default;" parent="451" vertex="1" connectable="0">
-                    <mxGeometry x="-0.2572" y="1" relative="1" as="geometry">
-                        <mxPoint x="33" y="-8" as="offset"/>
-                    </mxGeometry>
                 </mxCell>
                 <mxCell id="455" value="" style="endArrow=oval;html=1;fillStyle=auto;strokeWidth=1;startSize=6;endSize=6;fillColor=#000000;startArrow=none;startFill=0;endFill=0;" parent="1" source="442" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
