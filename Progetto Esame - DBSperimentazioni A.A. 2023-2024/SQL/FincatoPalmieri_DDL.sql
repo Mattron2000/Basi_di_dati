@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS fincato_palmieri."Interazione";
 DROP TABLE IF EXISTS fincato_palmieri."Live";
 DROP TABLE IF EXISTS fincato_palmieri."Voto";
 DROP TABLE IF EXISTS fincato_palmieri."Visita";
-DROP TABLE IF EXISTS fincato_palmieri."AssociazioneCM_H";
+DROP TABLE IF EXISTS fincato_palmieri."Associazione";
 DROP TABLE IF EXISTS fincato_palmieri."ContenutoMultimediale";
 DROP TABLE IF EXISTS fincato_palmieri."Categoria";
 DROP TABLE IF EXISTS fincato_palmieri."Hashtag";
@@ -27,6 +27,8 @@ DROP TABLE IF EXISTS fincato_palmieri."Utente";
 DROP SCHEMA IF EXISTS "fincato_palmieri";
 DROP SEQUENCE IF EXISTS guest_sequence;
 DROP SEQUENCE IF EXISTS url_sequence;
+DROP DOMAIN IF EXISTS LikertDomain;
+DROP DOMAIN IF EXISTS InterazioneDomain;
 
 CREATE SCHEMA "fincato_palmieri";
 
@@ -36,15 +38,25 @@ CREATE SEQUENCE IF NOT EXISTS guest_sequence;
 -- Sequenza che incrementa di 1 il numero associato ad un url, per creare un url simbolico univoco
 CREATE SEQUENCE IF NOT EXISTS url_sequence;
 
+-- Dominio applicato all'attributo "Likert" per garantire il corretto valore del voto
+CREATE DOMAIN LikertDomain
+AS integer
+CHECK (value >= 1 AND value <= 10);
+
+-- Dominio applicato all'attributo "Tipologia" per garantire il corretto valore del tipo di interazione
+CREATE DOMAIN InterazioneDomain
+AS text
+CHECK (value = 'commento' OR value = 'reazione');
+
 -- Table: fincato_palmieri."Utente"
 
 CREATE TABLE IF NOT EXISTS fincato_palmieri."Utente"
 (
-    "NomeUtente" text PRIMARY KEY DEFAULT ('guest_'||nextval('guest_sequence'))
+    "NomeUtente" text PRIMARY KEY DEFAULT ('guest_' || nextval('guest_sequence'))
 );
 
 ALTER TABLE IF EXISTS fincato_palmieri."Utente"
-	ADD CHECK ("NomeUtente" <> '' AND length("NomeUtente") < 20);
+	ADD CHECK ("NomeUtente" <> '' AND length("NomeUtente") > 3 AND length("NomeUtente") < 20);
 
 COMMENT ON TABLE fincato_palmieri."Utente"
 	IS 'Lista username degli utenti guest e registrati';
@@ -261,7 +273,7 @@ ALTER TABLE IF EXISTS fincato_palmieri."LinkSocial"
 	-- 				http://google.com/?q=some+text&param=3#dfsdf
 	-- 				https://www.google.com/api/?
 	-- 				https://www.google.com/api/login.php
-	ADD CHECK ("LinkProfilo" ~* '^https?:\/\/(www\.)?([-\w@:%._\+~#=]{2,}\.[a-z]{2,6})+(\/[\/\w\.-]*)*(\?\w+=.+)*$');
+	ADD CHECK ("LinkProfilo" ~ '^https?:\/\/(www\.)?([-\w@:%._\+~#=]{2,}\.[a-z]{2,6})+(\/[\/\w\.-]*)*(\?\w+=.+)*$');
 
 COMMENT ON TABLE fincato_palmieri."LinkSocial"
 	IS 'Tabella contenenti i link social del canale';
@@ -366,11 +378,12 @@ COMMENT ON TABLE fincato_palmieri."Hashtag"
 
 CREATE TABLE IF NOT EXISTS fincato_palmieri."ContenutoMultimediale"
 (
-	"IdURL" text PRIMARY KEY DEFAULT ('url'||nextval('url_sequence')),
+	"IdURL" text PRIMARY KEY DEFAULT ('url' || nextval('url_sequence')),
 	"Canale" text NOT NULL,
 	"Titolo" text NOT NULL,
 	"Categoria" text NOT NULL,
-	"LIS" boolean NOT NULL DEFAULT false
+	"LIS" boolean NOT NULL DEFAULT false,
+	"Premium" boolean NOT NULL DEFAULT false
 );
 
 ALTER TABLE IF EXISTS fincato_palmieri."ContenutoMultimediale"
@@ -389,8 +402,6 @@ ALTER TABLE IF EXISTS fincato_palmieri."ContenutoMultimediale"
 	-- 				https://www.google.com/api/?
 	-- 				https://www.google.com/api/login.php
 	-- ADD CHECK ("IdURL" ~* '^https?:\/\/(www\.)?([-\w@:%._\+~#=]{2,}\.[a-z]{2,6})+(\/[\/\w\.-]*)*(\?\w+=.+)*$'),
-	-- Per motivi di semplicitá nel debug visto il contesto dell'esame universitario e il permesso del prof,
-	-- utilizzeremo il seguente formato: url1, url2, url3, ...
 	ADD CHECK ("IdURL" ~ '^url\d+$'),
 	-- Vincolo che impedisce di impostare il titolo del contenuto mutimediale di qualsiasi tipo in una stringa vuota
 	ADD CHECK ("Titolo" <> '');
@@ -398,16 +409,16 @@ ALTER TABLE IF EXISTS fincato_palmieri."ContenutoMultimediale"
 COMMENT ON TABLE fincato_palmieri."ContenutoMultimediale"
 	IS 'Tabella che contiene i valori comuni di diversi tipi di contenuti multimediali (LIVE, VIDEO e CLIP)';
 
--- Table: fincato_palmieri."AssociazioneCM_H"
+-- Table: fincato_palmieri."Associazione"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."AssociazioneCM_H"
+CREATE TABLE IF NOT EXISTS fincato_palmieri."Associazione"
 (
 	"Hashtag" text,
 	"ContenutoMultimediale" text,
 	PRIMARY KEY ("Hashtag", "ContenutoMultimediale")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."AssociazioneCM_H"
+ALTER TABLE IF EXISTS fincato_palmieri."Associazione"
 	ADD FOREIGN KEY ("Hashtag")
 		REFERENCES fincato_palmieri."Hashtag" ("NomeHashtag")
 		ON UPDATE CASCADE
@@ -417,7 +428,7 @@ ALTER TABLE IF EXISTS fincato_palmieri."AssociazioneCM_H"
 		ON UPDATE CASCADE
 		ON DELETE CASCADE;
 
-COMMENT ON TABLE fincato_palmieri."AssociazioneCM_H"
+COMMENT ON TABLE fincato_palmieri."Associazione"
 	IS 'Tabella che contiene le associazioni create dagli utenti streamer ai propri contenuti multimediali';
 
 -- Table: fincato_palmieri."Visita"
@@ -448,7 +459,7 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Voto"
 (
 	"UtenteRegistrato" text,
 	"ContenutoMultimediale" text,
-	"Likert" integer NOT NULL,
+	"Likert" LikertDomain NOT NULL,
 	PRIMARY KEY ("UtenteRegistrato", "ContenutoMultimediale")
 );
 
@@ -460,8 +471,7 @@ ALTER TABLE IF EXISTS fincato_palmieri."Voto"
 	ADD FOREIGN KEY ("ContenutoMultimediale")
 		REFERENCES fincato_palmieri."ContenutoMultimediale" ("IdURL")
 		ON UPDATE CASCADE
-		ON DELETE CASCADE,
-	ADD CHECK ("Likert" >= 1 AND "Likert" <= 10);
+		ON DELETE CASCADE;
 
 COMMENT ON TABLE fincato_palmieri."Voto"
 	IS 'Tabella che contiene i voti lasciati dagli utenti registrati ai contenuti multimediali';
@@ -490,10 +500,15 @@ COMMENT ON TABLE fincato_palmieri."Live"
 
 CREATE TABLE IF NOT EXISTS fincato_palmieri."Emoji"
 (
-	"Codice" text PRIMARY KEY
+	"Codice" text PRIMARY KEY,
+	"Personalizzato" text DEFAULT NULL
 );
 
 ALTER TABLE IF EXISTS fincato_palmieri."Emoji"
+	ADD FOREIGN KEY ("Personalizzato")
+		REFERENCES fincato_palmieri."Canale" ("StreamerProprietario")
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
 	ADD CHECK ("Codice" <> '');
 
 COMMENT ON TABLE fincato_palmieri."Emoji"
@@ -506,7 +521,7 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Interazione"
 	"Spettatore" text,
 	"LiveCorrente" text,
 	"IntTimestamp" timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-	"Tipologia" text NOT NULL,
+	"Tipologia" InterazioneDomain NOT NULL,
 	"Messaggio" text,
 	PRIMARY KEY ("Spettatore", "LiveCorrente", "IntTimestamp")
 );
@@ -520,8 +535,6 @@ ALTER TABLE IF EXISTS fincato_palmieri."Interazione"
 		REFERENCES fincato_palmieri."Registrato" ("Username")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
-	-- Vincolo che "Tipologia" può assumere solamente questi due valori come dominio
-	ADD CHECK ("Tipologia" = 'commento' OR "Tipologia" = 'reazione'),
 	-- Vincolo che l'interazione debba rispettare il seguente check altrimenti si perde il senso
 	ADD CHECK (("Tipologia" = 'commento' AND "Messaggio" IS NOT NULL AND "Messaggio" <> '') OR ("Tipologia" = 'reazione' AND "Messaggio" IS NULL));
 
