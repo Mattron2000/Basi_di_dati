@@ -508,7 +508,7 @@ ALTER TABLE IF EXISTS fincato_palmieri."Emoji"
 	ADD FOREIGN KEY ("Personalizzato")
 		REFERENCES fincato_palmieri."Canale" ("StreamerProprietario")
 		ON UPDATE CASCADE
-		ON DELETE CASCADE
+		ON DELETE CASCADE,
 	ADD CHECK ("Codice" <> '');
 
 COMMENT ON TABLE fincato_palmieri."Emoji"
