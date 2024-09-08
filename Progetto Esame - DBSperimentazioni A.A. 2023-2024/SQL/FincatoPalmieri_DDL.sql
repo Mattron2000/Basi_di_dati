@@ -1,36 +1,33 @@
-DROP TABLE IF EXISTS fincato_palmieri."Clip";
-DROP TABLE IF EXISTS fincato_palmieri."Video";
-DROP TABLE IF EXISTS fincato_palmieri."Affluenza";
-DROP TABLE IF EXISTS fincato_palmieri."Presenza";
-DROP TABLE IF EXISTS fincato_palmieri."Emoji";
-DROP TABLE IF EXISTS fincato_palmieri."Interazione";
-DROP TABLE IF EXISTS fincato_palmieri."Live";
-DROP TABLE IF EXISTS fincato_palmieri."Voto";
-DROP TABLE IF EXISTS fincato_palmieri."Visita";
-DROP TABLE IF EXISTS fincato_palmieri."Associazione";
-DROP TABLE IF EXISTS fincato_palmieri."ContenutoMultimediale";
-DROP TABLE IF EXISTS fincato_palmieri."Categoria";
-DROP TABLE IF EXISTS fincato_palmieri."Hashtag";
-DROP TABLE IF EXISTS fincato_palmieri."Subscription";
-DROP TABLE IF EXISTS fincato_palmieri."Follower";
-DROP TABLE IF EXISTS fincato_palmieri."Donazione";
-DROP TABLE IF EXISTS fincato_palmieri."LinkSocial";
-DROP TABLE IF EXISTS fincato_palmieri."Programmazione";
-DROP TABLE IF EXISTS fincato_palmieri."Canale";
-DROP TABLE IF EXISTS fincato_palmieri."Rinnovo";
-DROP TABLE IF EXISTS fincato_palmieri."Amministratore";
-DROP TABLE IF EXISTS fincato_palmieri."Provider";
-DROP TABLE IF EXISTS fincato_palmieri."Portafoglio";
-DROP TABLE IF EXISTS fincato_palmieri."Messaggio";
-DROP TABLE IF EXISTS fincato_palmieri."Registrato";
-DROP TABLE IF EXISTS fincato_palmieri."Utente";
-DROP SCHEMA IF EXISTS "fincato_palmieri";
+DROP TABLE IF EXISTS "Clip";
+DROP TABLE IF EXISTS "Video";
+DROP TABLE IF EXISTS "Affluenza";
+DROP TABLE IF EXISTS "Presenza";
+DROP TABLE IF EXISTS "Emoji";
+DROP TABLE IF EXISTS "Interazione";
+DROP TABLE IF EXISTS "Live";
+DROP TABLE IF EXISTS "Voto";
+DROP TABLE IF EXISTS "Visita";
+DROP TABLE IF EXISTS "Associazione";
+DROP TABLE IF EXISTS "ContenutoMultimediale";
+DROP TABLE IF EXISTS "Categoria";
+DROP TABLE IF EXISTS "Hashtag";
+DROP TABLE IF EXISTS "Subscription";
+DROP TABLE IF EXISTS "Follower";
+DROP TABLE IF EXISTS "Donazione";
+DROP TABLE IF EXISTS "LinkSocial";
+DROP TABLE IF EXISTS "Programmazione";
+DROP TABLE IF EXISTS "Canale";
+DROP TABLE IF EXISTS "Rinnovo";
+DROP TABLE IF EXISTS "Amministratore";
+DROP TABLE IF EXISTS "Provider";
+DROP TABLE IF EXISTS "Portafoglio";
+DROP TABLE IF EXISTS "Messaggio";
+DROP TABLE IF EXISTS "Registrato";
+DROP TABLE IF EXISTS "Utente";
 DROP SEQUENCE IF EXISTS guest_sequence;
 DROP SEQUENCE IF EXISTS url_sequence;
 DROP DOMAIN IF EXISTS LikertDomain;
 DROP DOMAIN IF EXISTS InterazioneDomain;
-
-CREATE SCHEMA "fincato_palmieri";
 
 -- Sequenza che incrementa di 1 il numero intero associato ad un guest
 CREATE SEQUENCE IF NOT EXISTS guest_sequence;
@@ -48,22 +45,22 @@ CREATE DOMAIN InterazioneDomain
 AS text
 CHECK (value = 'commento' OR value = 'reazione');
 
--- Table: fincato_palmieri."Utente"
+-- Table: "Utente"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Utente"
+CREATE TABLE IF NOT EXISTS "Utente"
 (
     "NomeUtente" text PRIMARY KEY DEFAULT ('guest_' || nextval('guest_sequence'))
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Utente"
+ALTER TABLE IF EXISTS "Utente"
 	ADD CHECK ("NomeUtente" <> '' AND length("NomeUtente") > 3 AND length("NomeUtente") < 20);
 
-COMMENT ON TABLE fincato_palmieri."Utente"
+COMMENT ON TABLE "Utente"
 	IS 'Lista username degli utenti guest e registrati';
 
--- Table: fincato_palmieri."Registrato"
+-- Table: "Registrato"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Registrato"
+CREATE TABLE IF NOT EXISTS "Registrato"
 (
     "Username" text PRIMARY KEY,
     "UserPassword" text NOT NULL,
@@ -76,9 +73,9 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Registrato"
     "LIS" boolean NOT NULL DEFAULT false
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Registrato"
+ALTER TABLE IF EXISTS "Registrato"
 	ADD CONSTRAINT "Registrato_fkey" FOREIGN KEY ("Username")
-        REFERENCES fincato_palmieri."Utente" ("NomeUtente")
+        REFERENCES "Utente" ("NomeUtente")
         ON UPDATE CASCADE
         ON DELETE CASCADE,
 	-- Vincolo per garantire che l'etá minima imposta dalla UE sia rispettata
@@ -94,12 +91,12 @@ ALTER TABLE IF EXISTS fincato_palmieri."Registrato"
 	-- 				+441234567890, +44 1234567890, +44 123 456 7890, +44-123-456-7890
     ADD CHECK ("NumeroDiTelefono" IS NULL OR "NumeroDiTelefono" ~ '^(\+\d{1,3}( |-)?)?(\d{10}|(\d{3} \d{3} \d{4})|(\d{3}-\d{3}-\d{4}))$');
 
-COMMENT ON TABLE fincato_palmieri."Registrato"
+COMMENT ON TABLE "Registrato"
     IS 'Tabella contenente gli utenti registrato, sia spettatori e streamer';
 
--- Table: fincato_palmieri."Messaggio"
+-- Table: "Messaggio"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Messaggio"
+CREATE TABLE IF NOT EXISTS "Messaggio"
 (
 	"Mittente" text NOT NULL,
 	"TimestampMessaggio" timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -108,13 +105,13 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Messaggio"
 	PRIMARY KEY ("Mittente", "TimestampMessaggio")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Messaggio"
+ALTER TABLE IF EXISTS "Messaggio"
 	ADD FOREIGN KEY ("Mittente")
-		REFERENCES fincato_palmieri."Registrato" ("Username")
+		REFERENCES "Registrato" ("Username")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("Destinatario")
-		REFERENCES fincato_palmieri."Registrato" ("Username")
+		REFERENCES "Registrato" ("Username")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	-- Check per garantire che il testo del messaggio inviato non sia vuoto
@@ -122,45 +119,45 @@ ALTER TABLE IF EXISTS fincato_palmieri."Messaggio"
 	-- Check per garantire che il mittente e destinatario del messaggio inviato non sia lo stesso
 	ADD CHECK ("Mittente" <> "Destinatario");
 
-COMMENT ON TABLE fincato_palmieri."Messaggio"
+COMMENT ON TABLE "Messaggio"
 	IS 'Tabella contenente i messaggi privati inviati tra utenti registrati';
 
--- Table: fincato_palmieri."Portafoglio"
+-- Table: "Portafoglio"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Portafoglio"
+CREATE TABLE IF NOT EXISTS "Portafoglio"
 (
 	"UtenteProprietario" text PRIMARY KEY,
 	"TotaleBits" integer NOT NULL DEFAULT 0
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Portafoglio"
+ALTER TABLE IF EXISTS "Portafoglio"
 	ADD FOREIGN KEY ("UtenteProprietario")
-		REFERENCES fincato_palmieri."Registrato" ("Username")
+		REFERENCES "Registrato" ("Username")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	-- Vincolo per garantire che il totale dei bits (il bilancio) non sia negativo
 	ADD CHECK ("TotaleBits" >= 0);
 
-COMMENT ON TABLE fincato_palmieri."Portafoglio"
+COMMENT ON TABLE "Portafoglio"
 	IS 'Tabella contenente i portafogli privati degli utenti registrati';
 
--- Table: fincato_palmieri."Provider"
+-- Table: "Provider"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Provider"
+CREATE TABLE IF NOT EXISTS "Provider"
 (
 	"NomeProvider" text PRIMARY KEY
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Provider"
+ALTER TABLE IF EXISTS "Provider"
 	-- Vincolo per garantire che il nome del provider non sia vuoto
 	ADD CHECK ("NomeProvider" <> '' AND length("NomeProvider") < 15);
 
-COMMENT ON TABLE fincato_palmieri."Provider"
+COMMENT ON TABLE "Provider"
 	IS 'Tabella contenente i provider disponibili per ospitare i contenuti multimediali creati dagli streamer sotto gestione degli amministratori';
 
--- Table: fincato_palmieri."Amministratore"
+-- Table: "Amministratore"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Amministratore"
+CREATE TABLE IF NOT EXISTS "Amministratore"
 (
 	"CodiceAdmin" integer PRIMARY KEY,
 	"Nome" text NOT NULL,
@@ -168,16 +165,16 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Amministratore"
 	UNIQUE ("Nome", "Cognome")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Amministratore"
+ALTER TABLE IF EXISTS "Amministratore"
 	ADD CHECK ("Cognome" <> '' AND length("Cognome") > 3 AND length("Cognome") < 20),
 	ADD CHECK ("Nome" <> '' AND length("Nome") > 3 AND length("Nome") < 20);
 
-COMMENT ON TABLE fincato_palmieri."Amministratore"
+COMMENT ON TABLE "Amministratore"
 	IS 'Tabella contenente gli amministratori delle pagine che hanno il ruolo di gestire i contenuti multimediali dei canali assegnati nei server del provider a cui ha pagato';
 
--- Table: fincato_palmieri."Rinnovo"
+-- Table: "Rinnovo"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Rinnovo"
+CREATE TABLE IF NOT EXISTS "Rinnovo"
 (
 	"Amministratore" integer,
 	"Provider" text,
@@ -185,22 +182,22 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Rinnovo"
 	PRIMARY KEY ("Amministratore", "Provider")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Rinnovo"
+ALTER TABLE IF EXISTS "Rinnovo"
 	ADD FOREIGN KEY ("Amministratore")
-		REFERENCES fincato_palmieri."Amministratore" ("CodiceAdmin")
+		REFERENCES "Amministratore" ("CodiceAdmin")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("Provider")
-		REFERENCES fincato_palmieri."Provider" ("NomeProvider")
+		REFERENCES "Provider" ("NomeProvider")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE;
 
-COMMENT ON TABLE fincato_palmieri."Rinnovo"
+COMMENT ON TABLE "Rinnovo"
 	IS 'Tabella che contiene i rinnovi effettuati dagli amministratori per poter continuare a gestire i contenuti multimediali con il provider';
 
--- Table: fincato_palmieri."Canale"
+-- Table: "Canale"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Canale"
+CREATE TABLE IF NOT EXISTS "Canale"
 (
 	"StreamerProprietario" text PRIMARY KEY,
 	"AdminCanale" integer NOT NULL,
@@ -210,29 +207,29 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Canale"
 	"Trailer" text
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Canale"
+ALTER TABLE IF EXISTS "Canale"
 	ADD FOREIGN KEY ("StreamerProprietario")
-		REFERENCES fincato_palmieri."Registrato" ("Username")
+		REFERENCES "Registrato" ("Username")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("AdminCanale")
-		REFERENCES fincato_palmieri."Amministratore" ("CodiceAdmin")
+		REFERENCES "Amministratore" ("CodiceAdmin")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("HostingProvider")
-		REFERENCES fincato_palmieri."Provider" ("NomeProvider")
+		REFERENCES "Provider" ("NomeProvider")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD CHECK ("Descrizione" IS NULL OR "Descrizione" <> ''),
 	ADD CHECK ("ImmagineProfilo" IS NULL OR "ImmagineProfilo" <> ''),
 	ADD CHECK ("Trailer" IS NULL OR "Trailer"  <> '');
 
-COMMENT ON TABLE fincato_palmieri."Canale"
+COMMENT ON TABLE "Canale"
 	IS 'Tabella contenenti i canali creati e gestiti dagli utenti registrati che vogliono pubblicare contenuti multimediali';
 
--- Table: fincato_palmieri."Programmazione"
+-- Table: "Programmazione"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Programmazione"
+CREATE TABLE IF NOT EXISTS "Programmazione"
 (
 	"Streamer" text NOT NULL,
 	"ProgTimestamp" timestamp with time zone NOT NULL,
@@ -242,19 +239,19 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Programmazione"
 	PRIMARY KEY ("Streamer", "ProgTimestamp")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Programmazione"
+ALTER TABLE IF EXISTS "Programmazione"
 	ADD FOREIGN KEY ("Streamer")
-		REFERENCES fincato_palmieri."Canale" ("StreamerProprietario")
+		REFERENCES "Canale" ("StreamerProprietario")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD CHECK ("Titolo" <> '');
 
-COMMENT ON TABLE fincato_palmieri."Programmazione"
+COMMENT ON TABLE "Programmazione"
 	IS 'Tabelle contenenti le programmazioni di live prefissate dallo streamer';
 
--- Table: fincato_palmieri."LinkSocial";
+-- Table: "LinkSocial";
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."LinkSocial"
+CREATE TABLE IF NOT EXISTS "LinkSocial"
 (
 	"CanaleAssociato" text NOT NULL,
 	"Social" text NOT NULL,
@@ -262,9 +259,9 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."LinkSocial"
 	PRIMARY KEY ("CanaleAssociato", "Social")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."LinkSocial"
+ALTER TABLE IF EXISTS "LinkSocial"
 	ADD FOREIGN KEY ("CanaleAssociato")
-		REFERENCES fincato_palmieri."Canale" ("StreamerProprietario")
+		REFERENCES "Canale" ("StreamerProprietario")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	-- Validazione tramite regex il link URL del social
@@ -275,12 +272,12 @@ ALTER TABLE IF EXISTS fincato_palmieri."LinkSocial"
 	-- 				https://www.google.com/api/login.php
 	ADD CHECK ("LinkProfilo" ~ '^https?:\/\/(www\.)?([-\w@:%._\+~#=]{2,}\.[a-z]{2,6})+(\/[\/\w\.-]*)*(\?\w+=.+)*$');
 
-COMMENT ON TABLE fincato_palmieri."LinkSocial"
+COMMENT ON TABLE "LinkSocial"
 	IS 'Tabella contenenti i link social del canale';
 
--- Table: fincato_palmieri."Donazione"
+-- Table: "Donazione"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Donazione"
+CREATE TABLE IF NOT EXISTS "Donazione"
 (
 	"ProprietarioPortafoglio" text NOT NULL,
 	"CanaleStreamer" text NOT NULL,
@@ -289,94 +286,94 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Donazione"
 	PRIMARY KEY ("ProprietarioPortafoglio", "Timestamp")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Donazione"
+ALTER TABLE IF EXISTS "Donazione"
 	ADD FOREIGN KEY ("ProprietarioPortafoglio")
-		REFERENCES fincato_palmieri."Portafoglio" ("UtenteProprietario")
+		REFERENCES "Portafoglio" ("UtenteProprietario")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("CanaleStreamer")
-		REFERENCES fincato_palmieri."Canale" ("StreamerProprietario")
+		REFERENCES "Canale" ("StreamerProprietario")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	-- Vincolo per garantire che il numero di bits da donare non sia negativo o zero
 	ADD CHECK ("Bits" > 0);
 
-COMMENT ON TABLE fincato_palmieri."Donazione"
+COMMENT ON TABLE "Donazione"
 	IS 'Tabella che contiene le donazioni effettuate da utente registrato a utente streamer (utente registrato che gestisce un canale)';
 
--- Table: fincato_palmieri."Follower"
+-- Table: "Follower"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Follower"
+CREATE TABLE IF NOT EXISTS "Follower"
 (
 	"UtenteFollower" text NOT NULL,
 	"StreamerSeguito" text NOT NULL,
 	PRIMARY KEY ("UtenteFollower", "StreamerSeguito")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Follower"
+ALTER TABLE IF EXISTS "Follower"
 	ADD FOREIGN KEY ("StreamerSeguito")
-		REFERENCES fincato_palmieri."Canale" ("StreamerProprietario")
+		REFERENCES "Canale" ("StreamerProprietario")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("UtenteFollower")
-		REFERENCES fincato_palmieri."Registrato" ("Username")
+		REFERENCES "Registrato" ("Username")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE;
 
-COMMENT ON TABLE fincato_palmieri."Follower"
+COMMENT ON TABLE "Follower"
 	IS 'Tabella che contiene le iscrizioni degli utenti registrati ai canali per avere le notifiche delle programmazioni delle live';
 
--- Table: fincato_palmieri."Subscription"
+-- Table: "Subscription"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Subscription"
+CREATE TABLE IF NOT EXISTS "Subscription"
 (
 	"UtenteAbbonato" text NOT NULL,
 	"Streamer" text NOT NULL,
 	PRIMARY KEY ("UtenteAbbonato", "Streamer")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Subscription"
+ALTER TABLE IF EXISTS "Subscription"
 	ADD FOREIGN KEY ("Streamer")
-		REFERENCES fincato_palmieri."Canale" ("StreamerProprietario")
+		REFERENCES "Canale" ("StreamerProprietario")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("UtenteAbbonato")
-		REFERENCES fincato_palmieri."Registrato" ("Username")
+		REFERENCES "Registrato" ("Username")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE;
 
-COMMENT ON TABLE fincato_palmieri."Subscription"
+COMMENT ON TABLE "Subscription"
 	IS 'Tabella che contiene gli abbonamenti degli utenti registrati ai canali per poter seguire anche i contenuti multimediali esclusivi ai soli abbonati';
 
--- Table: fincato_palmieri."Categoria"
+-- Table: "Categoria"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Categoria"
+CREATE TABLE IF NOT EXISTS "Categoria"
 (
 	"NomeCategoria" text PRIMARY KEY
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Categoria"
+ALTER TABLE IF EXISTS "Categoria"
 	ADD CHECK ("NomeCategoria" <> '');
 
-COMMENT ON TABLE fincato_palmieri."Categoria"
+COMMENT ON TABLE "Categoria"
 	IS 'Tabella contenente le categorie per poter filtrare i contenuti multimediale';
 
--- Table: fincato_palmieri."Hashtag"
+-- Table: "Hashtag"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Hashtag"
+CREATE TABLE IF NOT EXISTS "Hashtag"
 (
 	"NomeHashtag" text PRIMARY KEY
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Hashtag"
+ALTER TABLE IF EXISTS "Hashtag"
 	ADD CHECK ("NomeHashtag" <> '');
 
-COMMENT ON TABLE fincato_palmieri."Hashtag"
+COMMENT ON TABLE "Hashtag"
 	IS 'Tabella contenente gli hashtag per poter filtrare i contenuti multimediale';
 
--- Table: fincato_palmieri."ContenutoMultimediale"
+-- Table: "ContenutoMultimediale"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."ContenutoMultimediale"
+CREATE TABLE IF NOT EXISTS "ContenutoMultimediale"
 (
 	"IdURL" text PRIMARY KEY DEFAULT ('url' || nextval('url_sequence')),
 	"Canale" text NOT NULL,
@@ -386,76 +383,69 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."ContenutoMultimediale"
 	"Premium" boolean NOT NULL DEFAULT false
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."ContenutoMultimediale"
+ALTER TABLE IF EXISTS "ContenutoMultimediale"
 	ADD FOREIGN KEY ("Canale")
-		REFERENCES fincato_palmieri."Canale" ("StreamerProprietario")
+		REFERENCES "Canale" ("StreamerProprietario")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("Categoria")
-		REFERENCES fincato_palmieri."Categoria" ("NomeCategoria")
+		REFERENCES "Categoria" ("NomeCategoria")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
-	-- Validazione tramite regex del link URL del contenuto mutimediale di qualsiasi tipo
-	-- 		ex.		https://www.asd.google.com/search?q=some+text&param=3#dfsd,
-	-- 				https://www.google.com
-	-- 				http://google.com/?q=some+text&param=3#dfsdf
-	-- 				https://www.google.com/api/?
-	-- 				https://www.google.com/api/login.php
-	-- ADD CHECK ("IdURL" ~* '^https?:\/\/(www\.)?([-\w@:%._\+~#=]{2,}\.[a-z]{2,6})+(\/[\/\w\.-]*)*(\?\w+=.+)*$'),
 	ADD CHECK ("IdURL" ~ '^url\d+$'),
 	-- Vincolo che impedisce di impostare il titolo del contenuto mutimediale di qualsiasi tipo in una stringa vuota
 	ADD CHECK ("Titolo" <> '');
 
-COMMENT ON TABLE fincato_palmieri."ContenutoMultimediale"
+COMMENT ON TABLE "ContenutoMultimediale"
 	IS 'Tabella che contiene i valori comuni di diversi tipi di contenuti multimediali (LIVE, VIDEO e CLIP)';
 
--- Table: fincato_palmieri."Associazione"
+-- Table: "Associazione"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Associazione"
+CREATE TABLE IF NOT EXISTS "Associazione"
 (
 	"Hashtag" text,
 	"ContenutoMultimediale" text,
 	PRIMARY KEY ("Hashtag", "ContenutoMultimediale")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Associazione"
+ALTER TABLE IF EXISTS "Associazione"
 	ADD FOREIGN KEY ("Hashtag")
-		REFERENCES fincato_palmieri."Hashtag" ("NomeHashtag")
+		REFERENCES "Hashtag" ("NomeHashtag")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("ContenutoMultimediale")
-		REFERENCES fincato_palmieri."ContenutoMultimediale" ("IdURL")
+		REFERENCES "ContenutoMultimediale" ("IdURL")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE;
 
-COMMENT ON TABLE fincato_palmieri."Associazione"
+COMMENT ON TABLE "Associazione"
 	IS 'Tabella che contiene le associazioni create dagli utenti streamer ai propri contenuti multimediali';
 
--- Table: fincato_palmieri."Visita"
+-- Table: "Visita"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Visita"
+CREATE TABLE IF NOT EXISTS "Visita"
 (
 	"Utente" text,
 	"ContenutoMultimediale" text,
 	PRIMARY KEY ("Utente", "ContenutoMultimediale")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Visita"
+ALTER TABLE IF EXISTS "Visita"
 	ADD FOREIGN KEY ("Utente")
-		REFERENCES fincato_palmieri."Utente" ("NomeUtente")
+		REFERENCES "Utente" ("NomeUtente")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("ContenutoMultimediale")
-		REFERENCES fincato_palmieri."ContenutoMultimediale" ("IdURL")
+		REFERENCES "ContenutoMultimediale" ("IdURL")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE;
 
-COMMENT ON TABLE fincato_palmieri."Visita"
+COMMENT ON TABLE "Visita"
 	IS 'Tabella che contiene le visite effettuate dagli utenti guest e registrati ai contenuti multimediali';
 
--- Table: fincato_palmieri."Voto"
+-- Table: "Voto"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Voto"
+CREATE TABLE IF NOT EXISTS "Voto"
 (
 	"UtenteRegistrato" text,
 	"ContenutoMultimediale" text,
@@ -463,59 +453,59 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Voto"
 	PRIMARY KEY ("UtenteRegistrato", "ContenutoMultimediale")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Voto"
+ALTER TABLE IF EXISTS "Voto"
 	ADD FOREIGN KEY ("UtenteRegistrato")
-		REFERENCES fincato_palmieri."Registrato" ("Username")
+		REFERENCES "Registrato" ("Username")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("ContenutoMultimediale")
-		REFERENCES fincato_palmieri."ContenutoMultimediale" ("IdURL")
+		REFERENCES "ContenutoMultimediale" ("IdURL")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE;
 
-COMMENT ON TABLE fincato_palmieri."Voto"
+COMMENT ON TABLE "Voto"
 	IS 'Tabella che contiene i voti lasciati dagli utenti registrati ai contenuti multimediali';
 
--- Table: fincato_palmieri."Live"
+-- Table: "Live"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Live"
+CREATE TABLE IF NOT EXISTS "Live"
 (
 	"IdLive" text PRIMARY KEY,
 	"DataInizio" timestamp with time zone NOT NULL,
 	"DataFine" timestamp with time zone NOT NULL
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Live"
+ALTER TABLE IF EXISTS "Live"
 	ADD FOREIGN KEY ("IdLive")
-		REFERENCES fincato_palmieri."ContenutoMultimediale" ("IdURL")
+		REFERENCES "ContenutoMultimediale" ("IdURL")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD CHECK ("DataFine" > "DataInizio") ;
 
-COMMENT ON TABLE fincato_palmieri."Live"
+COMMENT ON TABLE "Live"
 	IS 'Tabella contenenti le informazioni dedicate ai contenuti multimediali di tipo live';
 
--- Table: fincato_palmieri."Live"
+-- Table: "Live"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Emoji"
+CREATE TABLE IF NOT EXISTS "Emoji"
 (
 	"Codice" text PRIMARY KEY,
 	"Personalizzato" text DEFAULT NULL
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Emoji"
+ALTER TABLE IF EXISTS "Emoji"
 	ADD FOREIGN KEY ("Personalizzato")
-		REFERENCES fincato_palmieri."Canale" ("StreamerProprietario")
+		REFERENCES "Canale" ("StreamerProprietario")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD CHECK ("Codice" <> '');
 
-COMMENT ON TABLE fincato_palmieri."Emoji"
+COMMENT ON TABLE "Emoji"
 	IS 'Tabella contenente le emoji consentite nei commenti delle live';
 
--- Table: fincato_palmieri."Interazione"
+-- Table: "Interazione"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Interazione"
+CREATE TABLE IF NOT EXISTS "Interazione"
 (
 	"Spettatore" text,
 	"LiveCorrente" text,
@@ -525,24 +515,24 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Interazione"
 	PRIMARY KEY ("Spettatore", "LiveCorrente", "IntTimestamp")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Interazione"
+ALTER TABLE IF EXISTS "Interazione"
 	ADD FOREIGN KEY ("LiveCorrente")
-		REFERENCES fincato_palmieri."Live" ("IdLive")
+		REFERENCES "Live" ("IdLive")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("Spettatore")
-		REFERENCES fincato_palmieri."Registrato" ("Username")
+		REFERENCES "Registrato" ("Username")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	-- Vincolo che l'interazione debba rispettare il seguente check altrimenti si perde il senso
 	ADD CHECK (("Tipologia" = 'commento' AND "Messaggio" IS NOT NULL AND "Messaggio" <> '') OR ("Tipologia" = 'reazione' AND "Messaggio" IS NULL));
 
-COMMENT ON TABLE fincato_palmieri."Interazione"
+COMMENT ON TABLE "Interazione"
 	IS 'Tabella contenente le interazioni (commenti e reazioni) effettuate dagli utenti registrati verso le live';
 
--- Table: fincato_palmieri."Presenza"
+-- Table: "Presenza"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Presenza"
+CREATE TABLE IF NOT EXISTS "Presenza"
 (
 	"SpettatoreLive" text,
 	"LiveAssociata" text,
@@ -551,22 +541,22 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Presenza"
 	PRIMARY KEY ("SpettatoreLive", "LiveAssociata", "TimestampInt", "CodiceEmoji")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Presenza"
+ALTER TABLE IF EXISTS "Presenza"
 	ADD FOREIGN KEY ("CodiceEmoji")
-		REFERENCES fincato_palmieri."Emoji" ("Codice")
+		REFERENCES "Emoji" ("Codice")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("SpettatoreLive", "LiveAssociata", "TimestampInt")
-		REFERENCES fincato_palmieri."Interazione" ("Spettatore", "LiveCorrente", "IntTimestamp")
+		REFERENCES "Interazione" ("Spettatore", "LiveCorrente", "IntTimestamp")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE;
 
-COMMENT ON TABLE fincato_palmieri."Presenza"
+COMMENT ON TABLE "Presenza"
 	IS 'Tabella "ponte" per permettere ai commenti e reazioni di avere emoji';
 
--- Table: fincato_palmieri."Affluenza"
+-- Table: "Affluenza"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Affluenza"
+CREATE TABLE IF NOT EXISTS "Affluenza"
 (
 	"Live" text,
 	"TimestampAffluenza" timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
@@ -574,43 +564,43 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Affluenza"
 	PRIMARY KEY ("Live", "TimestampAffluenza")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Affluenza"
+ALTER TABLE IF EXISTS "Affluenza"
 	ADD FOREIGN KEY ("Live")
-		REFERENCES fincato_palmieri."Live" ("IdLive")
+		REFERENCES "Live" ("IdLive")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	-- Vincolo per garantire che il numero di spettatori di un certo momento della live sia un numero non negativo
 	ADD CHECK ("NumeroSpettatori" >= 0);
 
-COMMENT ON TABLE fincato_palmieri."Affluenza"
+COMMENT ON TABLE "Affluenza"
 	IS 'Tabella contenente l''affluenza di una specifica istantanea della live';
 
--- Table: fincato_palmieri."Video"
+-- Table: "Video"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Video"
+CREATE TABLE IF NOT EXISTS "Video"
 (
 	"IdVideo" text PRIMARY KEY,
 	"Durata" integer NOT NULL,
 	"Live" text NOT NULL UNIQUE
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Video"
+ALTER TABLE IF EXISTS "Video"
 	ADD FOREIGN KEY ("IdVideo")
-		REFERENCES fincato_palmieri."ContenutoMultimediale" ("IdURL")
+		REFERENCES "ContenutoMultimediale" ("IdURL")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD FOREIGN KEY ("Live")
-		REFERENCES fincato_palmieri."Live" ("IdLive")
+		REFERENCES "Live" ("IdLive")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	ADD CHECK ("Durata" > 0);
 
-COMMENT ON TABLE fincato_palmieri."Video"
+COMMENT ON TABLE "Video"
 	IS 'Tabella contenente le live passate sottoforma di video';
 
--- Table: fincato_palmieri."Clip"
+-- Table: "Clip"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Clip"
+CREATE TABLE IF NOT EXISTS "Clip"
 (
 	"IdClip" text PRIMARY KEY,
 	"Durata" integer NOT NULL,
@@ -618,14 +608,14 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Clip"
 	"Video" text NOT NULL
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Clip"
+ALTER TABLE IF EXISTS "Clip"
 	ADD FOREIGN KEY ("Video")
-		REFERENCES fincato_palmieri."Video" ("IdVideo")
+		REFERENCES "Video" ("IdVideo")
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
 	-- Vincolo per assicurare che il valore della durata della clip sia positiva
 	ADD CHECK ("Durata" > 0),
 	ADD CHECK ("Minutaggio" > 0);
 
-COMMENT ON TABLE fincato_palmieri."Clip"
+COMMENT ON TABLE "Clip"
 	IS 'Tabella che contiene le clip, ovvero estratti di durata inferiore al video originale';
