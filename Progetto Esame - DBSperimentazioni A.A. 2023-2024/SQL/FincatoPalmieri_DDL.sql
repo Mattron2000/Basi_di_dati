@@ -482,8 +482,7 @@ CREATE TABLE IF NOT EXISTS fincato_palmieri."Live"
 (
 	"IdLive" text PRIMARY KEY,
 	"DataInizio" timestamp with time zone NOT NULL,
-	"DataFine" timestamp with time zone NOT NULL,
-	"Premium" boolean NOT NULL
+	"DataFine" timestamp with time zone NOT NULL
 );
 
 ALTER TABLE IF EXISTS fincato_palmieri."Live"
