@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS fincato_palmieri."Associazione";
 DROP TABLE IF EXISTS fincato_palmieri."ContenutoMultimediale";
 DROP TABLE IF EXISTS fincato_palmieri."Categoria";
 DROP TABLE IF EXISTS fincato_palmieri."Hashtag";
-DROP TABLE IF EXISTS fincato_palmieri."Abbonamento";
+DROP TABLE IF EXISTS fincato_palmieri."Subscription";
 DROP TABLE IF EXISTS fincato_palmieri."Follower";
 DROP TABLE IF EXISTS fincato_palmieri."Donazione";
 DROP TABLE IF EXISTS fincato_palmieri."LinkSocial";
@@ -326,16 +326,16 @@ ALTER TABLE IF EXISTS fincato_palmieri."Follower"
 COMMENT ON TABLE fincato_palmieri."Follower"
 	IS 'Tabella che contiene le iscrizioni degli utenti registrati ai canali per avere le notifiche delle programmazioni delle live';
 
--- Table: fincato_palmieri."Abbonamento"
+-- Table: fincato_palmieri."Subscription"
 
-CREATE TABLE IF NOT EXISTS fincato_palmieri."Abbonamento"
+CREATE TABLE IF NOT EXISTS fincato_palmieri."Subscription"
 (
 	"UtenteAbbonato" text NOT NULL,
 	"Streamer" text NOT NULL,
 	PRIMARY KEY ("UtenteAbbonato", "Streamer")
 );
 
-ALTER TABLE IF EXISTS fincato_palmieri."Abbonamento"
+ALTER TABLE IF EXISTS fincato_palmieri."Subscription"
 	ADD FOREIGN KEY ("Streamer")
 		REFERENCES fincato_palmieri."Canale" ("StreamerProprietario")
 		ON UPDATE CASCADE
@@ -345,7 +345,7 @@ ALTER TABLE IF EXISTS fincato_palmieri."Abbonamento"
 		ON UPDATE CASCADE
 		ON DELETE CASCADE;
 
-COMMENT ON TABLE fincato_palmieri."Abbonamento"
+COMMENT ON TABLE fincato_palmieri."Subscription"
 	IS 'Tabella che contiene gli abbonamenti degli utenti registrati ai canali per poter seguire anche i contenuti multimediali esclusivi ai soli abbonati';
 
 -- Table: fincato_palmieri."Categoria"
