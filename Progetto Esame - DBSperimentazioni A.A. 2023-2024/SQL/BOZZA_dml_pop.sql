@@ -60,6 +60,8 @@ insert into "Amministratore"("CodiceAdmin","Nome","Cognome") values (00050103,'M
 insert into "Rinnovo"("Amministratore","Provider","DataScadenza")
 	values (00050101,'Aruba','2024-10-12');
 insert into "Rinnovo"("Amministratore","Provider","DataScadenza")
+	values (00050101,'Amazon AWS','2024-10-10');
+insert into "Rinnovo"("Amministratore","Provider","DataScadenza")
 	values (00050102,'Tiscali','2024-10-02');
 insert into "Rinnovo"("Amministratore","Provider","DataScadenza")
 	values (00050103,'VHOSTING','2024-09-28');
@@ -71,6 +73,8 @@ insert into "Canale"("StreamerProprietario","AdminCanale","HostingProvider","Des
 	values ('utente2',00050102,'Tiscali','Canale utente2');
 insert into "Canale"("StreamerProprietario","AdminCanale","HostingProvider","Descrizione","ImmagineProfilo","Trailer")
 	values ('utente4',00050101,'Aruba','Canale utente4','foto_utente2','trailer_canale');
+insert into "Canale"("StreamerProprietario","AdminCanale","HostingProvider","Trailer")
+	values ('utente6',00050101,'Amazon AWS','trailer_canale_utente6');
 
 --inserimento programmazione
 insert into "Programmazione"("Streamer","ProgTimestamp","Titolo","LIS","Premium")
@@ -104,17 +108,17 @@ insert into "Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","
 
 --inserimento follower
 insert into "Follower" values('utente1','utente2');
-insert into "Follower" values('utente2','utente3');
+insert into "Follower" values('utente1','utente3');
 insert into "Follower" values('utente3','utente4');
 insert into "Follower" values('utente5','utente4');
-insert into "Follower" values('utente2','utente2');
+insert into "Follower" values('utente6','utente2');
 
 --inserimento abbonamento ad un canale
 insert into "Subscription" values ('utente1','utente2');
 insert into "Subscription" values ('utente1','utente3');
 insert into "Subscription" values ('utente3','utente2');
 insert into "Subscription" values ('utente5','utente4');
-insert into "Subscription" values ('utente2','utente4');
+insert into "Subscription" values ('utente6','utente4');
 
 --inserimento categoria
 insert into "Categoria" values('Tecnologia');
@@ -174,13 +178,13 @@ insert into "Clip" values ('url15',1,108,'url9');
 insert into "Visita" values ('guest_1','url1');
 insert into "Visita" values ('guest_2','url1');
 insert into "Visita" values ('utente1','url1');
-insert into "Visita" values ('utente2','url9'); 
+insert into "Visita" values ('utente6','url9'); 
 insert into "Visita" values ('utente3','url10');
 insert into "Visita" values ('utente3','url11');
 
 --inserimento voto
 insert into "Voto" values ('utente1','url9',9);
-insert into "Voto" values ('utente2','url9',10);
+insert into "Voto" values ('utente6','url9',10);
 insert into "Voto" values ('utente3','url7',8);
 insert into "Voto" values ('utente4','url3',7);
 insert into "Voto" values ('utente5','url3',3);
@@ -229,10 +233,3 @@ insert into "Affluenza" values ('url2','2024-02-26 14:50:00',250);
 insert into "Affluenza" values ('url8','2024-08-27 15:05:00',100);
 insert into "Affluenza" values ('url8','2024-08-27 16:40:00',90);
 
---inserimento parole offensive
-INSERT INTO "ParolaOffensiva" VALUES
-('offensiva1'),
-('offensiva2'),
-('offensiva3'),
-('offensiva1 offensiva2'), -- Esempio di riga con più parole offensive
-('offensiva4');
