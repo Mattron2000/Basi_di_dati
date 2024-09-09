@@ -18,9 +18,13 @@
   - [3.9 Interazione](#39-interazione)
 - [4 DML di popolamento di tutte le tabelle del database](#4-dml-di-popolamento-di-tutte-le-tabelle-del-database)
   - [4.1 Utenti registrati e streamer](#41-utenti-registrati-e-streamer)
-  - [4.2 Portafogli](#42-portafogli)
+  - [4.2 Portafogli, donazioni e programmazioni delle live](#42-portafogli-donazioni-e-programmazioni-delle-live)
   - [4.3 Amministratori, provider e rinnovi](#43-amministratori-provider-e-rinnovi)
   - [4.4 Messaggi e interazioni](#44-messaggi-e-interazioni)
+  - [4.5 Visite e voti](#45-visite-e-voti)
+  - [4.6 Contenuti multimediali ed emoji](#46-contenuti-multimediali-ed-emoji)
+  - [4.7 Canali e infromazioni opzionali nelle tabelle](#47-canali-e-infromazioni-opzionali-nelle-tabelle)
+  - [4.8 Link social e subscription](#48-link-social-e-subscription)
 - [5 DML di modifica](#5-dml-di-modifica)
 
 ## 3 DDL di creazione del database
@@ -94,34 +98,69 @@ Il CHECK presente in questa tabella impone che l'attributo **_"Messaggio"_** sia
 > <qui inserite solo qualche commento (es. spiegazione del perché i dati da voi inseriti coprono i casi più frequenti e – possibilmente – quelli limite). Mettete il codice in un file a parte denominato VostriCognomi_DMLPOP.sql (es. Rossi_DMLPOP.sql)>
 >-->
 
-I dati inseriti ricoprono i casi più frequenti di inserimento in una basi di dati di questo tipo, considerando anche molti casi limite.  
-Ci sono infatti inserimenti più frequenti per elementi cardine della piattaforma, come ad esempio l'aggiunta di un utente guest o registrato oppure l'aggiunta di un contenuto multimediale, mentre per altri elementi meno frequenti sono stai eseguiti pochi inserimenti, come ad esempio l'aggiunta di un amministratore o di un portafoglio.  
+I dati inseriti ricoprono i casi più frequenti di inserimento in una basi di dati di questo tipo, considerando anche molti casi limite che si possono verificare.  
+Ci sono infatti inserimenti più frequenti per elementi cardine della piattaforma, come ad esempio l'aggiunta di un utente guest o registrato oppure l'aggiunta di un contenuto multimediale, mentre per altri elementi meno frequenti sono stati eseguiti pochi inserimenti, come ad esempio l'aggiunta di un amministratore o di un portafoglio.  
+Nello specifico, i criteri principali che abbiamo utilizzato durante il popolamento della base di dati sono stati i seguenti (per comodità, vengono considerate alcune tabelle del database come esempio):
 
 ### 4.1 Utenti registrati e streamer
 
-Nella tabella **_Utente_** sono stati inserite tutte le tipologie di utenti, cercando di ricreare una situazione reale: ci sono infatti utenti che sono semplicemente guest, altri che sono o streamer o spettatori e altri ancora che sono sia streamer che spettatori.
+Nella tabella **_Utente_** sono state inserite tutte le tipologie di utenti, cercando di ricreare una situazione reale: ci sono infatti utenti che sono semplicemente guest, altri che sono o streamer o spettatori e altri ancora che sono sia streamer che spettatori.
 
-Uno streamer può essere infatti spettatore quando non trasmette in streaming o crea contenuti oppure non esserlo.
+Uno streamer può essere infatti spettatore quando non trasmette in streaming o crea contenuti, oppure non esserlo proprio.
 
-### 4.2 Portafogli
+### 4.2 Portafogli, donazioni e programmazioni delle live
 
-In questa tabella sono stati inseriti i portafogli solo di alcuni utenti registrati, siccome un utente registrato non è obbligato ad avere un portafoglio e a fare donazioni agli streamer.
+Nella tabella **_Portafoglio_** sono stati inseriti i portafogli solo di alcuni utenti registrati, siccome un utente registrato non è obbligato ad avere un portafoglio di bit e a fare donazioni agli streamer, ma può averlo ed effettuare più donazioni.
+
+Nella tabella **_Donazione_** si può notare infatti che non tutti gli streamer ricevono donazioni, ma un utente registrato può effettuare più donazioni a streamer diversi o allo stesso streamer.
+
+Criterio simile è stato applicato nel popolare la tabella **_Programmazione_**: uno streamer può anche non programmare nessuna live oppure programmarne più di una.
 
 ### 4.3 Amministratori, provider e rinnovi
 
-Per simulare ancora di più una situazione realistica, sono stati inseriti pochi dati perchè si suppone che i canali scelgano servizi di hosting diversi e che non tutti i provider vengano scelti dagli amministratori delle pagine degli streamer.  
+Per simulare ancora di più una situazione realistica, nelle tabella **_Amministratore_** e **_Rinnovo_** sono stati inseriti pochi dati perchè si suppone che i canali scelgano servizi di hosting diversi e che non tutti i provider vengano scelti dagli amministratori delle pagine.  
+
 I rinnovi inseriti sono i rinnovi correnti, con la relativa data di scadenza.  
-Sono stati inseriti anche i casi limite, ad esempio quando un amministratore gestisce più di un canale e un provider non fornisce nessun servizio di hosting oppure quando un amministratore gestisce rinnovi verso provider diversi per canali diversi.
+
+Sono stati inseriti anche i casi limite, che si possono verificare ad esempio quando un amministratore gestisce più di un canale e un provider non fornisce nessun servizio di hosting oppure quando un amministratore gestisce rinnovi verso provider diversi per canali diversi.
 
 ### 4.4 Messaggi e interazioni
 
 Nella tabella **_Messaggio_** sono stati inseriti i messaggi privati scambiati tra gli utenti registrati alla piattaforma e come nella realtà, non tutti gli utenti inviano o ricevono messaggi.
 
-A dimostrazione di ciò si può notare come in alcuni casi le informazioni opzionali vengano omesse oppure valorizzate tramite valori di default, per rappresentare ad esempio la mancanza di **_descrizione_** e **_trailer_** di un canale oppure le opzioni **_premium_** o **_LIS_** valorizzate di default a _false_.  
-Nella fase di popolamento si è quindi cercato di inserire dati basandosi su un'applicazione realistica di questo tipo.  
-Si può notare inoltre la presenza di contentui multimediali riservati agli utenti premium oppure di emoji personalizate per un canale, utilizzabili solo dagli utenti abbonati ad esso: questo per rispettare i privilegi concessi agli abbonati al canale o alla piattaforma, garantendo una separazione dei contenuti pubblici da quelli privati.  
-Sempre nei contenuti multimediali, sono stati inseriti in maniera il più possibile realistica: ci sono infatti live che non sono diventate video del canale e video che non sono stati divisi in clip. Inoltre ci sono live che non sono diventate video pubblici ma solo premium e clip di video pubblici che sono riservati agli utenti premium.  
-Anche visite, interazioni e voti sono stati inseriti in modo realistico, ovvero si può notare come non utti gli utenti visitano contenuti e non tutti i viewer votano i contenuti visualizzati, mentre non tutti gli spettatori interagiscono con commenti o reazioni.  
+Anche le interazioni sono state inserite in modo realistico: non tutti gli spettatori di una live interagiscono e se uno spettatore interagisce, può farlo attraverso commenti e/o reazioni.
+
+### 4.5 Visite e voti
+
+Qualsiasi utente può visualizzare contenuti multimediali pubblici, ma non tutti gli utenti possono assegnare un voto ai contenuti visualizzati.
+  
+Per questo motivo anche visite e voti sono stati inseriti tenendo conto che tutti gli utenti visitano contenuti pubblici e non tutti i viewer votano i contenuti visualizzati.  
+
+### 4.6 Contenuti multimediali ed emoji
+
+Tra i dati inseriti ci sono anche contenuti multimediali riservati agli utenti premium oppure emoji personalizate per un determinato canale, utilizzabili solo dagli utenti abbonati ad esso: questo per rispettare i privilegi concessi agli abbonati al canale o alla piattaforma, garantendo una separazione tra contenuti pubblici e riservati.
+
+I contenuti multimediali sono stati inseriti in maniera il più possibile realistica: ci sono infatti live che non sono diventate video del canale e video che non sono stati divisi in clip.  
+
+Sono state inserite inoltre live che non sono diventate video pubblici ma solo premium e clip di video pubblici che sono riservate agli utenti premium, per rappresentare i casi limite dell'aggiunta di contenuti da parte di uno streamer.
+
+### 4.7 Canali e infromazioni opzionali nelle tabelle
+
+In alcuni casi le informazioni opzionali sono state omesse oppure valorizzate tramite valori di default.
+
+Ad esempio, la mancanza di descrizione, immagine profilo e/o trailer di un canale viene indicata omettendo l'inserimento nella tabella **_Canale_** degli attributi **_"Descrizione"_**, **_"ImmagineProfilo"_** e/o **_"Trailer"_**.
+
+Situazione analoga si ritrova ad esempio nella tabella **_Registrato_** per gli attributi **_"Affiliate"_** nel caso di utenti non streamer, **_"NumeroDiTelefono"_** e **_"IndirizzoMail"_** per tutti gli utenti registrati.
+
+L'utilizzo di valori di default si può notare ad esempio nelle opzioni **_"Premium"_** o **_"LIS"_** valorizzate di default a _false_, nella tabella **_"ContenutoMultimediale"_**.  
+
+### 4.8 Link social e subscription
+
+Siccome non è detto che ogni utente registrato debba per forza abbonarsi ad un canale, sono stati inseriti utenti che non sottoscrivono nessuna subscription, come potrebbe davvero avvenire in una piattaforma di streaming.
+
+Considerando però che un utente può invece abbonarsi anche a più di un canale, sono stati in questo caso inseriti utenti che sottoscrivono una subscription a più canali e anche questo fatto non è raro in una piattaforma di streaming.
+
+Situazione analoga si può verificare ad esempio per i link ai social di un canale: nel popolamento della tabella **_LinkSocial_** sono stati infatti considerati canali con nessun collegamento a profili social e canali con invece più profili collegati.
 
 ## 5 DML di modifica
 <!--
@@ -130,4 +169,4 @@ Anche visite, interazioni e voti sono stati inseriti in modo realistico, ovvero 
 > <qui inserite solo qualche commento (es. quali operazioni del file corrispondono a quali operazioni della tabella delle operazioni). Mettete il codice in un file a parte denominato VostriCognomi_DMLUPD.sql (es. Rossi_DMLUPD.sql)>
 -->
 
-Le operazioni sono state gestiste attraverso delle viste per semplificare la manipolazione di dati.
+Le operazioni sono state gestiste attraverso delle viste per semplificare la manipolazione dei dati.

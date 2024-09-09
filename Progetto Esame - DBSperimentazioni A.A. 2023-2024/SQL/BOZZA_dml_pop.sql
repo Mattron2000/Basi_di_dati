@@ -100,11 +100,17 @@ insert into "LinkSocial"("CanaleAssociato","Social","LinkProfilo")
 
 --inserimento donazione
 insert into "Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits")
-	values ('utente1','utente2','2023-04-25 15:03:12',20);
+	values ('utente1','utente2','2023-04-25 15:03:10',20);
 insert into "Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits")
-	values ('utente4','utente3','2023-04-29 15:03:12',15);
+	values ('utente4','utente3','2023-04-29 15:13:12',15);
 insert into "Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits")
-	values ('utente3','utente4','2023-04-21 15:03:12',10);
+	values ('utente3','utente4','2023-04-21 15:23:18',10);
+insert into "Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits")
+	values ('utente6','utente4','2024-04-05  19:03:22',30);
+insert into "Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits")
+	values ('utente6','utente3','2024-05-05  19:43:22',4);
+insert into "Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits")
+	values ('utente1','utente2','2024-05-25 16:03:12',5);
 
 --inserimento follower
 insert into "Follower" values('utente1','utente2');
