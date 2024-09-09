@@ -1341,8 +1341,17 @@
                         <mxPoint x="-21" y="-21" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="2035" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;(0,1)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                <mxCell id="2035" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;(0,1)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="-3392" y="-444" width="39" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="2038" value="" style="endArrow=oval;html=1;fillStyle=auto;strokeWidth=1;startSize=6;endSize=6;fillColor=#000000;startArrow=none;startFill=0;endFill=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-2776.43" y="-1591.35" as="sourcePoint"/>
+                        <mxPoint x="-2746.35" y="-1610.7099999999998" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="2039" value="&lt;font style=&quot;font-size: 11px;&quot;&gt;segnalato&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="-2761.14" y="-1635.81" width="70" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

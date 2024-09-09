@@ -592,7 +592,7 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 > <Relazione3 (Identificatore, Attributo1, …)>
 -->
 
-Utente(<U>NomeUtente</U>)
+Utente(<U>NomeUtente</U>, Segnalato)
 
 Registrato(<U>Username</U>, UserPassword, DataDiNascita, DataRegistrazione, NumeroDiTelefono*, IndirizzoMail*, Affiliate*, Premium, LIS)
 > Registrato(Username) referenzia Utente(NomeUtente)

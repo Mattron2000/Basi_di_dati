@@ -1,16 +1,16 @@
 
 --inserimento utente
-insert into "Utente" values(DEFAULT);
-insert into "Utente" values(DEFAULT);
-insert into "Utente" values(DEFAULT);
-insert into "Utente" values(DEFAULT);
-insert into "Utente" values(DEFAULT);
-insert into "Utente" values('utente1');
-insert into "Utente" values('utente2');
-insert into "Utente" values('utente3');
-insert into "Utente" values('utente4');
-insert into "Utente" values('utente5');
-insert into "Utente" values('utente6');
+insert into "Utente" values(DEFAULT,DEFAULT);
+insert into "Utente" values(DEFAULT,DEFAULT);
+insert into "Utente" values(DEFAULT,DEFAULT);
+insert into "Utente" values(DEFAULT,DEFAULT);
+insert into "Utente" values(DEFAULT,DEFAULT);
+insert into "Utente" values('utente1',DEFAULT);
+insert into "Utente" values('utente2',DEFAULT);
+insert into "Utente" values('utente3',DEFAULT);
+insert into "Utente" values('utente4',DEFAULT);
+insert into "Utente" values('utente5',DEFAULT);
+insert into "Utente" values('utente6',DEFAULT);
 
 --inserimento utente registrato
 insert into "Registrato"("Username","UserPassword","DataDiNascita","DataRegistrazione","LIS")
