@@ -229,3 +229,10 @@ insert into "Affluenza" values ('url2','2024-02-26 14:50:00',250);
 insert into "Affluenza" values ('url8','2024-08-27 15:05:00',100);
 insert into "Affluenza" values ('url8','2024-08-27 16:40:00',90);
 
+--inserimento parole offensive
+INSERT INTO "ParolaOffensiva" VALUES
+('offensiva1'),
+('offensiva2'),
+('offensiva3'),
+('offensiva1 offensiva2'), -- Esempio di riga con più parole offensive
+('offensiva4');

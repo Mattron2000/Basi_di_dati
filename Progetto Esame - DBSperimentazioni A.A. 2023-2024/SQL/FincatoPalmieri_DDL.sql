@@ -619,3 +619,9 @@ ALTER TABLE IF EXISTS "Clip"
 
 COMMENT ON TABLE "Clip"
 	IS 'Tabella che contiene le clip, ovvero estratti di durata inferiore al video originale';
+
+-- Table: "ParolaOffensiva"
+
+CREATE TABLE IF NOT EXISTS "ParolaOffensiva" (
+    "Parola" text PRIMARY KEY
+);
