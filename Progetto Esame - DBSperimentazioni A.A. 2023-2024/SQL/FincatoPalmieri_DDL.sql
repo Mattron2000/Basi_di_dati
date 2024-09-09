@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS "ParolaOffensiva";
 DROP TABLE IF EXISTS "Clip";
 DROP TABLE IF EXISTS "Video";
 DROP TABLE IF EXISTS "Affluenza";
@@ -50,7 +49,8 @@ CHECK (value = 'commento' OR value = 'reazione');
 
 CREATE TABLE IF NOT EXISTS "Utente"
 (
-    "NomeUtente" text PRIMARY KEY DEFAULT ('guest_' || nextval('guest_sequence'))
+    "NomeUtente" text PRIMARY KEY DEFAULT ('guest_' || nextval('guest_sequence')),
+	"Segnalato" boolean NOT NULL DEFAULT false
 );
 
 ALTER TABLE IF EXISTS "Utente"
@@ -620,9 +620,3 @@ ALTER TABLE IF EXISTS "Clip"
 
 COMMENT ON TABLE "Clip"
 	IS 'Tabella che contiene le clip, ovvero estratti di durata inferiore al video originale';
-
--- Table: "ParolaOffensiva"
-
-CREATE TABLE IF NOT EXISTS "ParolaOffensiva" (
-    "Parola" text PRIMARY KEY
-);
