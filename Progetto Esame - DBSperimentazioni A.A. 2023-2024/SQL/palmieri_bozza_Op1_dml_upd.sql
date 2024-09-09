@@ -1,6 +1,6 @@
 -- Vista dove elenca gli utenti streamer
 
--- DROP VIEW "UtenteStreamerView";
+DROP VIEW IF EXISTS "UtenteStreamerView";
 
 CREATE VIEW "UtenteStreamerView" AS
 SELECT
@@ -14,7 +14,7 @@ FROM
 
 -- Vista di nome streamer e il relativo numero di follower
 
--- DROP VIEW "NumeroFollowerView";
+DROP VIEW IF EXISTS "NumeroFollowerView";
 
 CREATE VIEW "NumeroFollowerView" AS
 SELECT
@@ -37,8 +37,8 @@ ORDER BY
 
 -- Vista per Affluenza media per ogni Live
 
--- DROP VIEW "AffluenzaMediaPerCanaleVista";
--- DROP VIEW "AffluenzaMediaLiveVista";
+DROP VIEW IF EXISTS "AffluenzaMediaPerCanaleVista";
+DROP VIEW IF EXISTS "AffluenzaMediaLiveVista";
 
 CREATE VIEW "AffluenzaMediaLiveVista" AS
 SELECT
@@ -76,7 +76,7 @@ ORDER BY
 
 -- Vista per minuti trasmessi per ogni canale
 
--- DROP VIEW "MinutiTotaliTrasmesseVista";
+DROP VIEW IF EXISTS "MinutiTotaliTrasmesseVista";
 
 CREATE VIEW "MinutiTotaliTrasmesseVista" AS
 SELECT
@@ -98,7 +98,7 @@ ORDER BY
 -- FROM "MinutiTotaliTrasmesseVista"
 -- WHERE "MinutiTotaliTrasmesse" >= 500;
 
--- FINALE Op1
+-- Op1 Controlla le condizioni per la qualifica di affiliate
 
 UPDATE "Registrato"
 SET "Affiliate" = true
