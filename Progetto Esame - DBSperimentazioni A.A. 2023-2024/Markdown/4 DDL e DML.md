@@ -24,7 +24,7 @@
   - [4.5 Visite e voti](#45-visite-e-voti)
   - [4.6 Contenuti multimediali ed emoji](#46-contenuti-multimediali-ed-emoji)
   - [4.7 Canali e infromazioni opzionali nelle tabelle](#47-canali-e-infromazioni-opzionali-nelle-tabelle)
-  - [4.8 Link social e subscription](#48-link-social-e-subscription)
+  - [4.8 Link social, subscription e affluenza](#48-link-social-subscription-e-affluenza)
 - [5 DML di modifica](#5-dml-di-modifica)
 
 ## 3 DDL di creazione del database
@@ -154,13 +154,15 @@ Situazione analoga si ritrova ad esempio nella tabella **_Registrato_** per gli 
 
 L'utilizzo di valori di default si può notare ad esempio nelle opzioni **_"Premium"_** o **_"LIS"_** valorizzate di default a _false_, nella tabella **_"ContenutoMultimediale"_**.  
 
-### 4.8 Link social e subscription
+### 4.8 Link social, subscription e affluenza
 
 Siccome non è detto che ogni utente registrato debba per forza abbonarsi ad un canale, sono stati inseriti utenti che non sottoscrivono nessuna subscription, come potrebbe davvero avvenire in una piattaforma di streaming.
 
 Considerando però che un utente può invece abbonarsi anche a più di un canale, sono stati in questo caso inseriti utenti che sottoscrivono una subscription a più canali e anche questo fatto non è raro in una piattaforma di streaming.
 
 Situazione analoga si può verificare ad esempio per i link ai social di un canale: nel popolamento della tabella **_LinkSocial_** sono stati infatti considerati canali con nessun collegamento a profili social e canali con invece più profili collegati.
+
+Altra situazione verosimile si può presentare ad esempio nella tabella **_Affluenza_**, dove non per tutte le live viene calcolata l'affluenza momentanea a intervalli prestabiliti: ci sono infatti live dove l'affluenza viene calcolata una volta sola mentre altre dove il calcolo viene fatto più volte a intervalli regolari.
 
 ## 5 DML di modifica
 <!--
@@ -169,4 +171,9 @@ Situazione analoga si può verificare ad esempio per i link ai social di un cana
 > <qui inserite solo qualche commento (es. quali operazioni del file corrispondono a quali operazioni della tabella delle operazioni). Mettete il codice in un file a parte denominato VostriCognomi_DMLUPD.sql (es. Rossi_DMLUPD.sql)>
 -->
 
-Le operazioni sono state gestiste attraverso delle viste per semplificare la manipolazione dei dati.
+Le operazioni sono state gestiste attraverso delle viste per semplificare la manipolazione dei dati. Alcune operazioni sono state effettuate mediante l'utilizzo di una singola vista, mentre altre sono state effettuate con viste complementari di supporto.
+
+Ogni operazione effettuata corrisponde a un operazione presente nella tavola delle operazioni ed è implementata attraverso una o più viste. Nello specifico:
+
+- Op1: realizzata con tre viste di supporto e con il join per aggiornare la qualifica di affiliate agli utenti che la meritano
+- Op2:

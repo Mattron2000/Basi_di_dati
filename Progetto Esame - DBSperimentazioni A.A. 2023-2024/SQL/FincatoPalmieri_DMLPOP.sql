@@ -40,6 +40,7 @@ insert into "Messaggio"("Mittente","TimestampMessaggio","Destinatario","Testo")
 
 --inserimento portafoglio
 insert into "Portafoglio"("UtenteProprietario","TotaleBits") values ('utente1',150);
+insert into "Portafoglio"("UtenteProprietario","TotaleBits") values ('utente2',100);
 insert into "Portafoglio"("UtenteProprietario","TotaleBits") values ('utente3',26);
 insert into "Portafoglio"("UtenteProprietario","TotaleBits") values ('utente4',68);
 insert into "Portafoglio"("UtenteProprietario","TotaleBits") values ('utente6',119);
@@ -78,13 +79,13 @@ insert into "Canale"("StreamerProprietario","AdminCanale","HostingProvider","Tra
 
 --inserimento programmazione
 insert into "Programmazione"("Streamer","ProgTimestamp","Titolo","LIS","Premium")
-	values ('utente3','2024-08-20 16:00:00','Prog utente3',true,false);
+	values ('utente3','2024-10-20 16:00:00','Prog utente3',true,false);
 insert into "Programmazione"("Streamer","ProgTimestamp","Titolo","LIS","Premium")
-	values ('utente3','2024-08-22 19:00:00','Prog utente3 seconda',false,true);
+	values ('utente3','2024-10-22 19:00:00','Prog utente3 seconda',false,true);
 insert into "Programmazione"("Streamer","ProgTimestamp","Titolo","LIS","Premium")
-	values ('utente2','2024-08-21 19:30:00','Prog utente2',false,false);
+	values ('utente2','2024-10-21 19:30:00','Prog utente2',false,false);
 insert into "Programmazione"("Streamer","ProgTimestamp","Titolo","LIS","Premium")
-	values ('utente4','2024-08-11 10:30:00','Prog utente4',true,true);
+	values ('utente4','2024-10-11 10:30:00','Prog utente4',true,true);
 
 --inserimento link social
 insert into "LinkSocial"("CanaleAssociato","Social","LinkProfilo")
@@ -100,7 +101,7 @@ insert into "LinkSocial"("CanaleAssociato","Social","LinkProfilo")
 
 --inserimento donazione
 insert into "Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits")
-	values ('utente1','utente2','2023-04-25 15:03:10',20);
+	values ('utente1','utente3','2023-04-25 15:03:10',20);
 insert into "Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits")
 	values ('utente4','utente3','2023-04-29 15:13:12',15);
 insert into "Donazione"("ProprietarioPortafoglio","CanaleStreamer","Timestamp","Bits")
@@ -234,8 +235,15 @@ insert into "Presenza"
 	values ('utente5','url8','2024-08-27 15:09:00','&#x1F923');
 
 --inserimento affluenza
-insert into "Affluenza" values ('url2','2024-02-26 14:10:00',200);
-insert into "Affluenza" values ('url2','2024-02-26 14:50:00',250);
-insert into "Affluenza" values ('url8','2024-08-27 15:05:00',100);
-insert into "Affluenza" values ('url8','2024-08-27 16:40:00',90);
+insert into "Affluenza" values ('url1','2024-02-25 16:10:00',200);
+insert into "Affluenza" values ('url2','2024-02-26 14:30:00',250);
+insert into "Affluenza" values ('url2','2024-02-26 15:30:00',290);
+insert into "Affluenza" values ('url2','2024-02-26 16:00:00',290);
+insert into "Affluenza" values ('url4','2024-06-15 15:20:00',190);
+insert into "Affluenza" values ('url4','2024-06-15 16:40:00',214);
+insert into "Affluenza" values ('url8','2024-08-27 16:00:00',90);
+insert into "Affluenza" values ('url8','2024-08-27 17:00:00',110);
+insert into "Affluenza" values ('url11','2024-09-01 15:45:00',79);
+insert into "Affluenza" values ('url11','2024-09-01 16:30:00',95);
+insert into "Affluenza" values ('url11','2024-09-01 17:15:00',86);
 
