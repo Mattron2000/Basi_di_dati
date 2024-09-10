@@ -18,7 +18,7 @@ DROP VIEW IF EXISTS "NumeroFollowerView";
 
 CREATE VIEW "NumeroFollowerView" AS
 SELECT
-    c."StreamerProprietario" AS "Streamer",
+    C."StreamerProprietario" AS "Streamer",
     COUNT(F."UtenteFollower") AS "NumeroFollower"
 FROM
     "Canale" AS C
