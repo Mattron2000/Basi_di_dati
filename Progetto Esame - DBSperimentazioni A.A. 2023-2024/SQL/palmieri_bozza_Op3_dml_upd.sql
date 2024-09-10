@@ -1,8 +1,8 @@
 -- Op3 Per ogni streamer, calcola la media dei voti per ogni contenuto multimediale
 
-DROP VIEW IF EXISTS "MediaLikertPerCanaleVista";
+DROP VIEW IF EXISTS "MediaLikertPerContenutoVista";
 
-CREATE VIEW "MediaLikertPerCanaleVista" AS
+CREATE VIEW "MediaLikertPerContenutoVista" AS
 SELECT
     CM."Canale",
     CM."IdURL" AS "ContenutoMultimediale",
@@ -13,12 +13,9 @@ LEFT JOIN
     "Voto" AS V
     ON CM."IdURL" = V."ContenutoMultimediale"
 GROUP BY
-    CM."Canale",
     CM."IdURL"
 ORDER BY
-    "Canale",
-	CAST(REGEXP_REPLACE("IdURL", '\D', '', 'g') AS INTEGER),
 	"MediaLikert" DESC;
 
 SELECT *
-FROM "MediaLikertPerCanaleVista";
+FROM "MediaLikertPerContenutoVista";

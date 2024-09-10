@@ -15,21 +15,18 @@ JOIN
     "ContenutoMultimediale" C ON L."IdLive" = C."IdURL"
 WHERE
     I."Tipologia" = 'commento'
-    AND EXISTS (
-        SELECT 1
-        FROM "ParolaOffensiva" P
-        WHERE I."Messaggio" ILIKE '%' || P."Parola" || '%'
-    );
+AND
+    I."Messaggio" LIKE '%offensiva%';
 
-DELETE FROM "Interazione"
-WHERE ("Spettatore", "LiveCorrente", "IntTimestamp") IN (
-    SELECT *
-    FROM "CommentiOffensiviVista"
-);
-
--- -- DEBUG
--- SELECT * FROM "Interazione"
+-- DELETE FROM "Interazione"
 -- WHERE ("Spettatore", "LiveCorrente", "IntTimestamp") IN (
 --     SELECT *
 --     FROM "CommentiOffensiviVista"
 -- );
+
+-- DEBUG
+SELECT * FROM "Interazione"
+WHERE ("Spettatore", "LiveCorrente", "IntTimestamp") IN (
+    SELECT *
+    FROM "CommentiOffensiviVista"
+);

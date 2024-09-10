@@ -1,11 +1,7 @@
 -- Op6 Controlla i nuovi utenti registrati
 
 SELECT
-    R.*,
-    CASE
-        WHEN C."StreamerProprietario" IS NOT NULL THEN true
-        ELSE false
-    END AS "HaCanale"
+    R.*
 FROM
     "Registrato" AS R
 LEFT JOIN

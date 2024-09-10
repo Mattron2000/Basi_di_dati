@@ -4,15 +4,7 @@ DROP VIEW IF EXISTS "UtentiSegnalatiVista";
 
 CREATE VIEW "UtentiSegnalatiVista" AS
 SELECT
-    U."NomeUtente",
-    R."UserPassword",
-    R."DataDiNascita",
-    R."DataRegistrazione",
-    R."NumeroDiTelefono",
-    R."IndirizzoMail",
-    R."Affiliate",
-    R."Premium",
-    R."LIS"
+    R.*
 FROM
     "Utente" AS U
 LEFT JOIN
