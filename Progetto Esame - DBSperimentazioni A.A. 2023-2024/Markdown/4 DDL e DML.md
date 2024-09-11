@@ -177,20 +177,20 @@ Alcune operazioni sono state effettuate mediante l'utilizzo di una singola vista
 
 Ogni operazione effettuata corrisponde a un operazione presente nella **_tavola delle operazioni_** ed è implementata attraverso una o più viste. Nello specifico:
 
-- Op1: realizzata mediante l'utilizzo di un JOIN e le viste di supporto **_UtenteStreamerView_**, **_NumeroFollowerView_**, **_AffluenzaMediaPerCanaleVista_**, **_AffluenzaMediaLiveVista_** e **_MinutiTotaliTrasmesseVista_**, si ricava il valore dei parametri richiesti per poter ottenere la qualifica di affiliate e si assegna questa qualifica allo streamer che rispetta i requisiti;
+- Op1: realizzata mediante l'utilizzo di un JOIN e le viste di supporto **_UtenteStreamerVista_**, **_NumeroFollowerVista_**, **_AffluenzaMediaPerCanaleVista_**, **_AffluenzaMediaLiveVista_** e **_MinutiTotaliTrasmesseVista_**, si ricava il valore dei parametri richiesti per poter ottenere la qualifica di affiliate e si assegna questa qualifica allo streamer che rispetta i requisiti;
   
-- Op2: realizzata mediante la vista **_NumeroFollowerView_**, attraverso un LEFT JOIN sulla tabella **_Follower_** si ottengono i follower di ogni streamer;
+- Op2: realizzata mediante la vista **_NumeroFollowerVista_**, si ottiene il numero di follower di ogni streamer;
   
-- Op3: realizzata mediante la vista **_MediaLikertPerContenutoVista_**, attraverso JOIN e raggruppamenti si ottiene la media di voti per ogni contenuto multimediale;
+- Op3: realizzata mediante la vista **_MediaLikertPerContenutoVista_**, si calcola la media dei voti per ogni contenuto multimediale;
   
-- Op4: realizzata mediante la vista **_RatingContenutiMultimedialiVista_**, attraverso JOIN e raggruppamenti si ottengono i video più votati;
+- Op4: realizzata mediante la vista **_RatingContenutiMultimedialiVista_**, si ottengono i video più votati per ogni streamer;
   
 - Op5: realizzata mediante la vista **_CommentiOffensiviVista_**, attraverso JOIN tra più tabelle si rilevano ed eliminano i commenti offensivi;
   
 - Op6: realizzata attraverso un LEFT JOIN sulla tabella **_Canale_**, si controllano tutti i nuovi utenti registrati sulla base di uno specifico intervallo di tempo;
   
-- Op7: realizzata mediante la vista **_UtentiSegnalatiVista_**, si controllano tutti gli utenti segnalati dagli streamer;
+- Op7: realizzata mediante la vista **_UtentiSegnalatiVista_**, si ottengono tutti gli utenti segnalati dagli streamer;
   
-- Op8: realizzata mediante la vista **_StoricoUtentiPremiumVista_**, si mostrano gli utenti premium storici e gli utenti premium dell'ultimo mese, oltre agli utenti premium di uno specifico range di date;
+- Op8: realizzata mediante la vista **_StoricoUtentiPremiumVista_**, si mostrano gli utenti premium sia storici che dell'ultimo mese, oltre agli utenti premium di uno specifico range di date;
   
 - Op9: realizzata mediante la vista **_LiveTrasmesseNelMeseSceltoVista_**, per ogni streamer si stila la media degli spettaori di ogni live uscita in un determinato mese operando sulle date di inizio e di fine di ogni live.
