@@ -1,8 +1,8 @@
 -- Op8 Visualizzare agli amministratori delle pagine lo storico degli utenti premium, sia quelli storici (dato un range di date) che quelli dell’ultimo mese
 
-DROP VIEW IF EXISTS "StoricoUtentiPremium";
+DROP VIEW IF EXISTS "StoricoUtentiPremiumVista";
 
-CREATE VIEW "StoricoUtentiPremium" AS
+CREATE VIEW "StoricoUtentiPremiumVista" AS
 SELECT
     R.*
 FROM
@@ -20,4 +20,4 @@ ORDER BY
     R."DataRegistrazione" DESC;
 
 SELECT *
-FROM "StoricoUtentiPremium";
+FROM "StoricoUtentiPremiumVista";
