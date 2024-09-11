@@ -177,7 +177,7 @@ Alcune operazioni sono state effettuate mediante l'utilizzo di una singola vista
 
 Ogni operazione effettuata corrisponde a un operazione presente nella **_tavola delle operazioni_** ed è implementata attraverso una o più viste. Nello specifico:
 
-- Op1: realizzata mediante l'utilizzo di un JOIN e le viste di supporto **_UtenteStreamerVista_**, **_NumeroFollowerVista_**, **_AffluenzaMediaPerCanaleVista_**, **_AffluenzaMediaLiveVista_** e **_MinutiTotaliTrasmesseVista_**, si ricava il valore dei parametri richiesti per poter ottenere la qualifica di affiliate e si assegna questa qualifica allo streamer che rispetta i requisiti;
+- Op1: realizzata mediante l'utilizzo di JOIN tra più tabelle e le viste di supporto **_UtenteStreamerVista_**, **_NumeroFollowerVista_**, **_AffluenzaMediaPerCanaleVista_**, **_AffluenzaMediaLiveVista_** e **_MinutiTotaliTrasmesseVista_**, si ricava il valore dei parametri richiesti per poter ottenere la qualifica di affiliate e si assegna questa qualifica allo streamer che rispetta i requisiti;
   
 - Op2: realizzata mediante la vista **_NumeroFollowerVista_**, si ottiene il numero di follower di ogni streamer;
   
