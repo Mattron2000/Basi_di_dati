@@ -1,8 +1,8 @@
 -- Vista dove elenca gli utenti streamer
 
-DROP VIEW IF EXISTS "UtenteStreamerView";
+DROP VIEW IF EXISTS "UtenteStreamerVista";
 
-CREATE VIEW "UtenteStreamerView" AS
+CREATE VIEW "UtenteStreamerVista" AS
 SELECT
     R.*
 FROM
@@ -10,13 +10,13 @@ FROM
     "Canale" AS C ON
     R."Username" = C."StreamerProprietario";
 
--- SELECT * FROM "UtenteStreamerView";
+-- SELECT * FROM "UtenteStreamerVista";
 
 -- Vista di nome streamer e il relativo numero di follower
 
-DROP VIEW IF EXISTS "NumeroFollowerView";
+DROP VIEW IF EXISTS "NumeroFollowerVista";
 
-CREATE VIEW "NumeroFollowerView" AS
+CREATE VIEW "NumeroFollowerVista" AS
 SELECT
     C."StreamerProprietario" AS "Streamer",
     COUNT(F."UtenteFollower") AS "NumeroFollower"
@@ -32,7 +32,7 @@ ORDER BY
     "NumeroFollower" DESC;
 
 -- SELECT *
--- FROM "NumeroFollowerView"
+-- FROM "NumeroFollowerVista"
 -- WHERE "NumeroFollower" >= 50;
 
 -- Vista per Affluenza media per ogni Live
@@ -117,7 +117,7 @@ WHERE "Username" IN (
         "AffluenzaMediaPerCanaleVista" AS A
         ON C."StreamerProprietario" = A."Canale"
     JOIN
-        "NumeroFollowerView" AS N
+        "NumeroFollowerVista" AS N
         ON C."StreamerProprietario" = N."Streamer"
     WHERE
         M."MinutiTotaliTrasmesse" >= 500

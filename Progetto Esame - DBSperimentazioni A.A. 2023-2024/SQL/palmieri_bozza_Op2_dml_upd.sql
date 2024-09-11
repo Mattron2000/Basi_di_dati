@@ -1,8 +1,8 @@
 -- Op2 Calcola la classifica degli streamer più seguiti
 
-DROP VIEW IF EXISTS "NumeroFollowerView";
+DROP VIEW IF EXISTS "NumeroFollowerVista";
 
-CREATE VIEW "NumeroFollowerView" AS
+CREATE VIEW "NumeroFollowerVista" AS
 SELECT
     C."StreamerProprietario" AS "Streamer",
     COUNT(F."UtenteFollower") AS "NumeroFollower"
@@ -18,4 +18,4 @@ ORDER BY
     "NumeroFollower" DESC;
 
 SELECT *
-FROM "NumeroFollowerView";
+FROM "NumeroFollowerVista";
