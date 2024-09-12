@@ -1,6 +1,6 @@
 # Basi di dati e Sistemi Informativi: Sperimentazioni A.A. 2023-2024 <!-- omit in toc -->
 
-## BOZZA DDL E DML <!-- omit in toc -->
+## DDL E DML <!-- omit in toc -->
 
 ---
 
@@ -26,6 +26,8 @@
   - [4.7 Canali e infromazioni opzionali nelle tabelle](#47-canali-e-infromazioni-opzionali-nelle-tabelle)
   - [4.8 Link social, subscription e affluenza](#48-link-social-subscription-e-affluenza)
 - [5 DML di modifica](#5-dml-di-modifica)
+
+<p style="page-break-after: always;"></p>
 
 ## 3 DDL di creazione del database
 <!--
@@ -64,6 +66,8 @@ Se l'amministratore vuole continuare con lo stesso provider verrá aggiornata so
 
 **_Programmazione_** é una tabella "parallela" alla tabella **_ContenutoMultimediale_**, dato che hanno molti attributi in comune che vengono utilizzati però in contesti diversi.
 
+<p style="page-break-after: always;"></p>
+
 ### 3.5 LinkSocial
 
 Per l'attributo **_"LinkProfilo"_** della tabella **_LinkSocial_** abbiamo impostato un CHECK regex simile ai CHECK presenti nella tabella **_Registrato_**, ma questa volta relativo agli indirizzi URL.
@@ -76,7 +80,7 @@ Il vincolo PRIMARY KEY presente in questa tabella segue gli stessi principi dell
 
 Come precedentemente scritto, questa tabella è "parallela" alla tabella **_Programmazione_**.
 
-Anche qui, l'attributo **_"IdURL"_** ha un CHECK simile a quello del sopracitato attributo **_"LinkSocial"_** per validare tramite regex l'indirizzo URL.  
+Anche qui, l'attributo **_"IdURL"_** ha un CHECK simile a quello del sopracitato attributo **_"LinkSocial"_** per validare tramite regex l'indirizzo URL.
 Per semplicitá, utilizzeremo un formato simbolico per gli URL composto dalla stringa **_'url'_ + numero intero univoco** incrementato ogni volta da una SEQUENCE di interi dedicata agli URL.
 
 L'esistenza di questa tabella é dettata dalla necessitá di semplificare la comunicazione utenti-contenuti in modo che ci sia solamente una singola tabella **_Voto_**, **_Interazione_** e **_Visita_** invece che avere le stesse tabelle moltiplicate per ogni tipo di contenuto multimediale (_Live_, _Video_ e _Clip_).
@@ -98,9 +102,11 @@ Il CHECK presente in questa tabella impone che l'attributo **_"Messaggio"_** sia
 > <qui inserite solo qualche commento (es. spiegazione del perché i dati da voi inseriti coprono i casi più frequenti e – possibilmente – quelli limite). Mettete il codice in un file a parte denominato VostriCognomi_DMLPOP.sql (es. Rossi_DMLPOP.sql)>
 >-->
 
-I dati inseriti ricoprono i casi più frequenti di inserimento in una basi di dati di questo tipo, considerando anche molti casi limite che si possono verificare.  
-Ci sono infatti inserimenti più frequenti per elementi cardine della piattaforma, come ad esempio l'aggiunta di un utente guest o registrato oppure l'aggiunta di un contenuto multimediale, mentre per altri elementi meno frequenti sono stati eseguiti pochi inserimenti, come ad esempio l'aggiunta di un amministratore o di un portafoglio.  
+I dati inseriti ricoprono i casi più frequenti di inserimento in una basi di dati di questo tipo, considerando anche molti casi limite che si possono verificare.
+Ci sono infatti inserimenti più frequenti per elementi cardine della piattaforma, come ad esempio l'aggiunta di un utente guest o registrato oppure l'aggiunta di un contenuto multimediale, mentre per altri elementi meno frequenti sono stati eseguiti pochi inserimenti, come ad esempio l'aggiunta di un amministratore o di un portafoglio.
 Nello specifico, i criteri principali che abbiamo utilizzato durante il popolamento della base di dati sono stati i seguenti (per comodità, vengono considerate alcune tabelle del database come esempio):
+
+<p style="page-break-after: always;"></p>
 
 ### 4.1 Utenti registrati e streamer
 
@@ -118,9 +124,9 @@ Criterio simile è stato applicato nel popolare la tabella **_Programmazione_**:
 
 ### 4.3 Amministratori, provider e rinnovi
 
-Per simulare ancora di più una situazione realistica, nelle tabella **_Amministratore_** e **_Rinnovo_** sono stati inseriti pochi dati perchè si suppone che i canali scelgano servizi di hosting diversi e che non tutti i provider vengano scelti dagli amministratori delle pagine.  
+Per simulare ancora di più una situazione realistica, nelle tabella **_Amministratore_** e **_Rinnovo_** sono stati inseriti pochi dati perchè si suppone che i canali scelgano servizi di hosting diversi e che non tutti i provider vengano scelti dagli amministratori delle pagine.
 
-I rinnovi inseriti sono i rinnovi correnti, con la relativa data di scadenza.  
+I rinnovi inseriti sono i rinnovi correnti, con la relativa data di scadenza.
 
 Sono stati inseriti anche i casi limite, che si possono verificare ad esempio quando un amministratore gestisce più di un canale e un provider non fornisce nessun servizio di hosting oppure quando un amministratore gestisce rinnovi verso provider diversi per canali diversi.
 
@@ -133,14 +139,16 @@ Anche le interazioni sono state inserite in modo realistico: non tutti gli spett
 ### 4.5 Visite e voti
 
 Qualsiasi utente può visualizzare contenuti multimediali pubblici, ma non tutti gli utenti possono assegnare un voto ai contenuti visualizzati.
-  
-Per questo motivo anche visite e voti sono stati inseriti tenendo conto che tutti gli utenti visitano contenuti pubblici e non tutti i viewer votano i contenuti visualizzati.  
+
+Per questo motivo anche visite e voti sono stati inseriti tenendo conto che tutti gli utenti visitano contenuti pubblici e non tutti i viewer votano i contenuti visualizzati.
+
+<p style="page-break-after: always;"></p>
 
 ### 4.6 Contenuti multimediali ed emoji
 
 Tra i dati inseriti ci sono anche contenuti multimediali riservati agli utenti premium oppure emoji personalizate per un determinato canale, utilizzabili solo dagli utenti abbonati ad esso: questo per rispettare i privilegi concessi agli abbonati al canale o alla piattaforma, garantendo una separazione tra contenuti pubblici e riservati.
 
-I contenuti multimediali sono stati inseriti in maniera il più possibile realistica: ci sono infatti live che non sono diventate video del canale e video che non sono stati divisi in clip.  
+I contenuti multimediali sono stati inseriti in maniera il più possibile realistica: ci sono infatti live che non sono diventate video del canale e video che non sono stati divisi in clip.
 
 Sono state inserite inoltre live che non sono diventate video pubblici ma solo premium e clip di video pubblici che sono riservate agli utenti premium, per rappresentare i casi limite dell'aggiunta di contenuti da parte di uno streamer.
 
@@ -152,7 +160,7 @@ Ad esempio, la mancanza di descrizione, immagine profilo e/o trailer di un canal
 
 Situazione analoga si ritrova ad esempio nella tabella **_Registrato_** per gli attributi **_"Affiliate"_** nel caso di utenti non streamer, **_"NumeroDiTelefono"_** e **_"IndirizzoMail"_** per tutti gli utenti registrati.
 
-L'utilizzo di valori di default si può notare ad esempio nelle opzioni **_"Premium"_** o **_"LIS"_** valorizzate di default a _false_, nella tabella **_"ContenutoMultimediale"_**.  
+L'utilizzo di valori di default si può notare ad esempio nelle opzioni **_"Premium"_** o **_"LIS"_** valorizzate di default a _false_, nella tabella **_"ContenutoMultimediale"_**.
 
 ### 4.8 Link social, subscription e affluenza
 
@@ -164,6 +172,8 @@ Situazione analoga si può verificare ad esempio per i link ai social di un cana
 
 Altra situazione verosimile si può presentare ad esempio nella tabella **_Affluenza_**, dove non per tutte le live viene calcolata l'affluenza momentanea a intervalli prestabiliti: ci sono infatti live dove l'affluenza viene calcolata una volta sola mentre altre dove il calcolo viene fatto più volte a intervalli regolari.
 
+<p style="page-break-after: always;"></p>
+
 ## 5 DML di modifica
 <!--
 > <soltanto qualche modifica del DB che rispecchi le operazioni più frequenti (es. aggiunta di un utente)>
@@ -171,26 +181,26 @@ Altra situazione verosimile si può presentare ad esempio nella tabella **_Afflu
 > <qui inserite solo qualche commento (es. quali operazioni del file corrispondono a quali operazioni della tabella delle operazioni). Mettete il codice in un file a parte denominato VostriCognomi_DMLUPD.sql (es. Rossi_DMLUPD.sql)>
 -->
 
-Le operazioni sono state gestiste attraverso delle viste per semplificare la manipolazione dei dati.  
+Le operazioni sono state gestiste attraverso delle viste per semplificare la manipolazione dei dati.
 
 Alcune operazioni sono state effettuate mediante l'utilizzo di una singola vista, mentre altre sono state effettuate con viste complementari di supporto.
 
 Ogni operazione effettuata corrisponde a un operazione presente nella **_tavola delle operazioni_** ed è implementata attraverso una o più viste. Nello specifico:
 
 - **Op1**: realizzata mediante l'utilizzo di JOIN tra più tabelle e le viste di supporto **_UtenteStreamerVista_**, **_NumeroFollowerVista_**, **_AffluenzaMediaPerCanaleVista_**, **_AffluenzaMediaLiveVista_** e **_MinutiTotaliTrasmesseVista_**, si ricava il valore dei parametri richiesti per poter ottenere la qualifica di affiliate e si assegna questa qualifica allo streamer che rispetta i requisiti;
-  
+
 - **Op2**: realizzata mediante la vista **_NumeroFollowerVista_**, si ottiene il numero di follower di ogni streamer;
-  
+
 - **Op3**: realizzata mediante la vista **_MediaLikertPerContenutoVista_**, si calcola la media dei voti per ogni contenuto multimediale;
-  
+
 - **Op4**: realizzata mediante la vista **_RatingContenutiMultimedialiVista_**, si ottengono i video più votati per ogni streamer;
-  
+
 - **Op5**: realizzata mediante la vista **_CommentiOffensiviVista_**, attraverso JOIN tra più tabelle si rilevano ed eliminano i commenti offensivi;
-  
+
 - **Op6**: realizzata attraverso un LEFT JOIN sulla tabella **_Canale_**, si controllano tutti i nuovi utenti registrati sulla base di uno specifico intervallo di tempo;
-  
+
 - **Op7**: realizzata mediante la vista **_UtentiSegnalatiVista_**, si ottengono tutti gli utenti segnalati dagli streamer;
-  
+
 - **Op8**: realizzata mediante la vista **_StoricoUtentiPremiumVista_**, si mostrano gli utenti premium sia storici che dell'ultimo mese, oltre agli utenti premium di uno specifico range di date;
-  
+
 - **Op9**: realizzata mediante la vista **_LiveTrasmesseNelMeseSceltoVista_**, per ogni streamer si stila la media degli spettaori di ogni live uscita in un determinato mese operando sulle date di inizio e di fine di ogni live.

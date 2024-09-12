@@ -1,6 +1,6 @@
 # Basi di dati e Sistemi Informativi: Sperimentazioni A.A. 2023-2024 <!-- omit in toc -->
 
-## BOZZA PROGETTAZIONE LOGICA <!-- omit in toc -->
+## PROGETTAZIONE LOGICA <!-- omit in toc -->
 
 ---
 
@@ -44,6 +44,8 @@
     - [2.4.1.1 Vincoli di Integrità](#2411-vincoli-di-integrità)
     - [2.4.1.2 Derivazioni](#2412-derivazioni)
 - [2.5 Schema relazionale con vincoli di integrità referenziale](#25-schema-relazionale-con-vincoli-di-integrità-referenziale)
+
+<p style="page-break-after: always;"></p>
 
 ## 2.1 Tavola dei volumi
 
@@ -205,6 +207,8 @@ Entità come `CATEGORIA` o `EMOJI` presentano volumi molto più bassi di entità
 | Op8        | Visualizzare agli amministratori delle pagine lo storico degli utenti premium, sia quelli storici (dato un range di date) che quelli dell’ultimo mese | I    | Una volta ogni 6 mesi  |
 | Op9        | Per ogni streamer, stilare la media degli spettatori per ogni live uscita in quel mese                                                                | B    | Una volta al mese      |
 
+<p style="page-break-after: always;"></p>
+
 ## 2.3 Ristrutturazione dello schema E-R
 
 ### 2.3.1 Analisi delle ridondanze
@@ -219,6 +223,8 @@ Per una maggiore leggibilità, i costrutti dello schema ER coinvolti verranno co
 #### 2.3.1.1 RIDONDANZA 1 (ridondanza dei likert)
 
 ![Ridondanza 1](../Immagini/ridondanze/2.3.1.1_rid_1_cor.png)
+
+<p style="page-break-after: always;"></p>
 
 ##### 2.3.1.1.1 DERIVAZIONE
 
@@ -249,6 +255,8 @@ Tavola degli accessi:
 
 La media dei voti di ogni contenuto multimediale si ottiene dividendo il punteggio totale in likert (**_totale likert_**) per il numero di voti (**_numero likert_**) ricevuti.
 
+<p style="page-break-after: always;"></p>
+
 | Costo | Valori                   |
 | ----- | ------------------------ |
 | S:    | 0 accessi/giorno         |
@@ -276,6 +284,8 @@ I video più votati saranno quelli con il maggiore numero di voti ricevuti.
 | L:    | (200,000 + 1) * 1 = 200,001 accessi/giorno |
 | TOT:  | 200,000 accessi/giorno circa               |
 
+<p style="page-break-after: always;"></p>
+
 ##### 2.3.1.1.4 ASSENZA DI RIDONDANZA
 
 ###### 2.3.1.1.4.1 Op3
@@ -299,6 +309,8 @@ La media di voti di ogni contenuto multimediale si otterrà dividendo la somma d
 | L:    | (1 + 1.4) * 1 = 2.4 accessi/giorno |
 | TOT:  | poco più di 2 accessi/giorno       |
 
+<p style="page-break-after: always;"></p>
+
 ###### 2.3.1.1.4.1 Op4
 
 Schema di operazione:
@@ -320,6 +332,8 @@ I video più votati saranno quelli con il maggiore numero di partecipazioni all'
 | S:    | 0 accessi/giorno    |
 | L:    | (1 + 1 + 7) * 1 = 9 |
 | TOT:  | 9 accesso/giorno    |
+
+<p style="page-break-after: always;"></p>
 
 ##### 2.3.1.1.5 TOTALI PER RIDONDANZA 1
 
@@ -352,11 +366,15 @@ Questa ridondanza richiede molti accessi al giorno e uno spreco di circa 8 MB: p
 
 L'attributo **_affluenza media_** dell'entità `LIVE` é derivabile dalla partecipazione di una live del mese corrente all'associazione `media spettatori` non appena la live termina.
 
+<p style="page-break-after: always;"></p>
+
 ##### 2.3.1.2.2 OPERAZIONI COINVOLTE
 
 | Operazione | Descrizione                                                                            | Tipo | Frequenza         |
 | ---------- | -------------------------------------------------------------------------------------- | ---- | ----------------- |
 | Op9        | Per ogni streamer, stilare la media degli spettatori per ogni live uscita in quel mese | B    | Una volta al mese |
+
+<p style="page-break-after: always;"></p>
 
 ##### 2.3.1.2.3 PRESENZA DI RIDONDANZA
 
@@ -377,6 +395,8 @@ Tavola degli accessi:
 | S:    | 0                      |
 | L:    | 1 * 1 = 1 accesso/mese |
 | TOT:  | 1 accesso/mese         |
+
+<p style="page-break-after: always;"></p>
 
 ##### 2.3.1.2.4 ASSENZA DI RIDONDANZA
 
@@ -399,6 +419,8 @@ Tavola degli accessi:
 | L:    | (1 + 2) * 1 = 3 accessi/mese |
 | TOT:  | 3 accessi/mese               |
 
+<p style="page-break-after: always;"></p>
+
 ##### 2.3.1.2.5 TOTALI PER RIDONDANZA 2
 
 Assumendo che l'attributo **_affluenza media_** occupi 4 byte, si ottengono i seguenti valori:
@@ -416,6 +438,8 @@ Assumendo che l'attributo **_affluenza media_** occupi 4 byte, si ottengono i se
 ##### 2.3.1.2.6 Decisione
 
 In conclusione, si evidenzia uno spreco di 1 MB solamente per diminuire il numero di accessi mensili: per questo motivo, si decide di togliere la ridondanza eliminando l'attributo **_affluenza media_** dell'entità `LIVE`.
+
+<p style="page-break-after: always;"></p>
 
 ### 2.3.2 Eliminazione delle generalizzazioni
 
@@ -463,6 +487,8 @@ L'entità `REGISTRATO` invece viene utilizzata per compiere azioni riservate agl
 - RVI: Solo un utente registrato che ha un canale (streamer) può avere l'attributo **_affiliate_**.
 - RVII: Solo uno streamer può partecipare all'associazione **_streaming_**.
 
+<p style="page-break-after: always;"></p>
+
 #### 2.3.2.2 Generalizzazione 2 (generalizzazione del contenuto multimediale)
 
 ![Generalizzazione 2a](../Immagini/generalizzazioni/2.3.2.2_gen_2a_cor.png)
@@ -502,6 +528,8 @@ Un aspetto degno di nota è la presenza di un attributo solo nell'entità `COMME
 
 Infine, si possono osservare le cardinalità in gran parte identiche con le quali le entità figlie vengono associate all'entità `EMOJI`: possono infatti essere uniformate a (0,N) grazie all'introduzione di vincoli, permettendo la fusione delle associazioni `presenza(C-E)` e `presenza(R-E)` in una sola associazione **_presenza_**.
 
+<p style="page-break-after: always;"></p>
+
 Per questi motivi, si sceglie di accorpare le entità figlie nell'entità genitore `INTERAZIONE`.
 
 ![Generalizzazione 3b](../Immagini/generalizzazioni/2.3.2.3_gen_3b.png)
@@ -519,6 +547,8 @@ Anche se questa scelta può portare a valori nulli e a uno spreco di spazio, per
 ### 2.3.3 Partizionamento/accorpamento di entità e associazioni
 
 Nello schema ER, considerato dopo l'eliminazione delle ridondanze e delle generalizzazioni, non sono stati individuati concetti da partizionare o accorpare.
+
+<p style="page-break-after: always;"></p>
 
 ### 2.3.4 Scelta degli identificatori principali
 
@@ -548,9 +578,13 @@ Gli identificatori rappresentati nello schema ristrutturato sono tutti costituit
 Molte entità hanno identitficatori esterni, ma costituiti da pochi attributi: per questo motivo si è deciso di mantenerli e di considerarli come chiavi primarie.
 Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDIALE`: questa entità infatti avrebbe avuto un identificatore composto da quattro attributi (uno dei quali esterno) e ciò avrebbe complicato la traduzione in schema logico, causando la propagazione del suo lungo identificatore anche alle entità che essa stessa avrebbe identificato. Per queste ragioni, si è deciso di considerare come identificatore soltanto l'attributo **_URL_**, essendo un URL già di per sè un identificatore univoco.
 
+<p style="page-break-after: always;"></p>
+
 ## 2.4 Schema E-R ristrutturato + regole aziendali
 
 ![Schema E-R Ristrutturato](../Immagini/2.4%20Schema%20E-R%20ristrutturato.png)
+
+<p style="page-break-after: always;"></p>
 
 ### 2.4.1 Regole aziendali
 
@@ -571,6 +605,8 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 | RV11 | La durata di una clip deve essere inferiore a quella di un video.                                                                                                                          |
 | RV12 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.                                                                                              |
 
+<p style="page-break-after: always;"></p>
+
 #### 2.4.1.2 Derivazioni
 
 | RDI | \<concetto\> si ottiene \<operazione\>                                                                                                              |
@@ -583,6 +619,8 @@ Unica eccezione a questa decisione risulta essere l'entità `CONTENUTO MULTIMEDI
 | RD6 | L'affluenza media di una live si ottiene dividendo l'affluenza totale per il numero di affluenze momentanee calcolate durante la live.              |
 | RD7 | Il numero di interazioni si ottiene sommando tutte le interazioni ricevute da un contenuto multimediale.                                            |
 | RD8 | La media di voti di un contenuto multimediale si ottiene dividendo il punteggio totale dei voti del contenuto per il numero di voti ricevuti.       |
+
+<p style="page-break-after: always;"></p>
 
 ## 2.5 Schema relazionale con vincoli di integrità referenziale
 

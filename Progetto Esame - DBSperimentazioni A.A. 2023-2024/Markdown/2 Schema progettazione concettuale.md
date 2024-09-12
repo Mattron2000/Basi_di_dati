@@ -1,6 +1,6 @@
 # Basi di dati e Sistemi Informativi: Sperimentazioni A.A. 2023-2024 <!-- omit in toc -->
 
-## BOZZA PROGETTAZIONE CONCETTUALE <!-- omit in toc -->
+## PROGETTAZIONE CONCETTUALE <!-- omit in toc -->
 
 ---
 
@@ -42,6 +42,8 @@
 
 ---
 
+<p style="page-break-after: always;"></p>
+
 ## 1.1 Requisiti iniziali
 
 <!-- > qui ci va il testo iniziale integrato con osservazioni fatte da voi. Per esempio, se vi vengono forniti dei file integrativi (screenshot dell’applicazione), potete integrare il testo con descrizioni di elementi/funzionalità che sono evidenti dai file. Oppure, potete integrare il testo con funzionalità ovvie dato il problema: se sto gestendo una piattaforma con degli utenti, ovviamente dovrò avere la possibilità di aggiungere un utente. -->
@@ -73,6 +75,8 @@
 - <span style="color:green">Ogni streamer può avere **un solo canale**</span>
 - <span style="color:green">**Streamer** e **Canale** saranno due entità legate da un vincolo di integrità referenziale</span>
 
+<p style="page-break-after: always;"></p>
+
 ### 1.1.3 Requisiti delle live, video e clip
 
 "*In ogni canale possono esserci live, video (live passate) e clip (video di durata breve). Le live possono anche non diventare video del canale ma ad ogni diretta live, viene inviata una notifica agli utenti che seguono il canale. Ognuno ha un titolo, una durata, appartiene a una categoria (Figura 1(b) e può essere associato a diversi hashtags/emojis etc..). Per ogni live, viene memorizzato il numero medio di spettatori, i commenti e le reazioni (emojis, hashtags etc..) mentre per i video e le clip il numero di visualizzazioni*"
@@ -98,6 +102,8 @@
 "*I viewer possono diventare follower del canale degli streamer che preferiscono, e le loro preferenze sono raccolte in un elenco di followee a cui possono accedere dal loro profilo. I viewer possono inoltre supportare gli streamer tramite la subscription (a pagamento) al loro canale, ottenendo dei privilegi (emoticon personalizzate, nessun limite di caratteri nella lunghezza dei commenti, ecc...)*"
 
 - <span style="color:green">Per ogni canale, verranno forniti dei **privilegi** a tutti **gli utenti che supportano il canale** tramite un abbonamento</span>
+
+<p style="page-break-after: always;"></p>
 
 ### 1.1.6 Requisiti dei bit
 
@@ -125,6 +131,8 @@
 
 - <span style="color:green">Viene tenuta traccia degli **utenti fragili** e per loro i contenuti verranno erogati in **modalità differente**</span>
 
+<p style="page-break-after: always;"></p>
+
 ### 1.1.11 Volume delle operazioni
 
 <em>"La base di dati deve supportare le seguenti operazioni:
@@ -144,7 +152,7 @@ Qualsiasi altra operazione/funzionalità del sistema e/o modellazione di requisi
 
 "*Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli amministratori delle pagine, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting*"
 
----
+<p style="page-break-after: always;"></p>
 
 ## 1.2 Glossario dei termini
 
@@ -207,6 +215,8 @@ Qualsiasi altra operazione/funzionalità del sistema e/o modellazione di requisi
 
 Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli amministratori delle pagine, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting.
 
+<p style="page-break-after: always;"></p>
+
 ## 1.4 Requisiti strutturati in gruppi di frasi omogenee
 
 | **Frasi di carattere generale** |
@@ -240,6 +250,8 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 | Frasi relative ai **canali** |
 | --- |
 | Ogni streamer ha un canale, che può essere caratterizzato tramite una descrizione. Ogni canale, può avere una lista di social associati (ad esempio Instagram, YouTube, ecc.), un’immagine profilo e anche un trailer (Figura 1(a)). In ogni canale possono esserci live, video (live passate) e clip (video di durata breve). Inoltre, sulla pagina del canale viene visualizzato il numero di followers. |
+
+<p style="page-break-after: always;"></p>
 
 | Frasi relative ai **social** |
 | --- |
@@ -281,6 +293,8 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 | --- |
 | Ogni canale, può avere [..] anche un trailer (Figura 1(a)). |
 
+<p style="page-break-after: always;"></p>
+
 | Frasi relative ai  **bit** |
 | --- |
 | gli utenti registrati hanno un portafoglio di bit (moneta virtuale che possono acquistare tramite la piattaforma), utilizzabile per effettuare donazioni agli streamer tramite differenti metodi di pagamento elettronici. |
@@ -297,6 +311,8 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 | --- |
 | Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma/server di video hosting esterna (e che quindi sia sufficiente memorizzare solo un URL o indirizzo IP). Per il servizio di hosting, gli amministratori delle pagine, devono pagare un corrispettivo mensile di 50$ al provider che fornisce il servizio di hosting. Se si verificano ritardi per un massimo di 15 giorni a partire dalla data di acquisto/rinnovo dell’hosting, il profilo/canale dello streamer verrà sospeso fino alla data di rinnovo (data di accredito) del pagamento del servizio di hosting. |
 
+<p style="page-break-after: always;"></p>
+
 ## 1.5 Schema E-R
 
 ![Mappa E-R](../Immagini/1.5%20Schema%20E-R.png)
@@ -309,6 +325,8 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
    - **Categoria e Hashtag**: Gli attributi `categoria` e `hashstag` dell'entità `CONTENUTO MULTIMEDIALE` sono stati reificati nelle due entità `CATEGORIA` e `HASHTAG` rispettivamente, permettendo quindi una migliore gestione di hashtag e categorie.
    - **Link Social**: L'attributo `link social` dell'entità `CANALE` è stato reificato nell'entità `LINK SOCIAL`, in modo tale da permettere una migliore gestione dei profili social del canale.
 
+<p style="page-break-after: always;"></p>
+
 2. **Instance-Of (Istanza di)**:
    - **Utenti e Registrati/Guest/Streamer/Spettatore**:
    Gli utenti del sistema possono essere istanze di diverse categorie, come registrati, guest, streamer o spettatori. Ogni categoria di utente ha attributi e permessi specifici, ma tutti derivano dalla stessa entità di base `UTENTE`.
@@ -319,7 +337,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 3. **Reificazione di un’associazione ricorsiva**:
    - **Messaggi**: L'associazione tra `UTENTE` (mittente) e `UTENTE` (destinatario) attraverso i messaggi è stata reificata in un'entità `MESSAGGIO`, catturando dettagli come il testo e il timestamp.
-  
+
 4. **Evoluzione di concetto**:
    - **Utenti**: La distinzione tra `GUEST`, `REGISTRATO`, `SPETTATORE` e `STREAMER` rappresenta l'evoluzione del concetto di utente nel sistema, con ruoli e permessi differenti.
 
@@ -340,7 +358,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 3. **Separazione delle Responsabilità**:
    - Le entità e le relazioni sono ben definite per separare le responsabilità e facilitare la gestione dei dati. Ad esempio, `MESSAGGIO` é prerogativa di `UTENTE`, separando così la gestione dei messaggi dagli utenti.
-  
+
 #### Analisi delle Relazioni e degli Attributi
 
 1. **Relazioni Utente-Contenuto**:
@@ -357,9 +375,11 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 5. **Attributi Chiave**:
    - Gli attributi chiave sono chiaramente identificati, come **_nome utente_** per `UTENTE` e **_timestamp_** per `MESSAGGIO`, assicurando l'unicità e la tracciabilità dei dati.
-  
+
 6. **Reazioni ed Emoji**:
    - La relazione tra `REAZIONE` ed `EMOJI` è da intendersi come segue: in una **_reazione_** è presente uno ed un solo _emoji_ (siccome una reazione è essa stessa un singolo emoji) mentre ogni singolo **_emoji_** può essere presente molte volte nelle varie _reazioni_ oppure non venire mai utlizzato in nessuna _reazione_.
+
+<p style="page-break-after: always;"></p>
 
 ### 1.5.1 Regole aziendali
 
@@ -378,6 +398,8 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 | RV9  | Ogni clip deve essere associata ad un video per poter esistere.                                              |
 | RV10 | La durata di una clip deve essere inferiore a quella di un video.                                            |
 | RV11 | Il voto ai contenuti multimediali di uno streamer deve essere concesso solo ai suoi follower.                |
+
+<p style="page-break-after: always;"></p>
 
 #### 1.5.1.2 Derivazioni
 

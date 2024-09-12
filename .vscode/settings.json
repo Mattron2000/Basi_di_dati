@@ -1,4 +1,6 @@
 {
     "hediet.vscode-drawio.codeLinkActivated": true,
-    "hediet.vscode-drawio.theme": "atlas"
+    "hediet.vscode-drawio.theme": "atlas",
+    "markdown-pdf.displayHeaderFooter": false,
+    "markdown-pdf.convertOnSave": true
 }
