@@ -634,86 +634,88 @@ Registrato(<U>Username</U>, UserPassword, DataDiNascita, DataRegistrazione, Nume
 > Registrato(Username) referenzia Utente(NomeUtente)
 
 Messaggio(<U>Mittente</U>, <U>TimestampMessaggio</U>, Destinatario, Testo)
-> Messaggio(Mittente) referenzia Registrato(Username)
-> Messaggio(Destinatario) referenzia Registrato(Username)
+> Messaggio(Mittente) referenzia Registrato(Username) <br>
+>Messaggio(Destinatario) referenzia Registrato(Username)
 
 Portafoglio(<U>UtenteProprietario</U>, TotaleBits)
 > Portafoglio(UtenteProprietario) referenzia Registrato(Username)
 
 Donazione(<U>ProprietarioPortafoglio</U>, <U>CanaleStreamer</U>, Timestamp, Bits)
-> Donazione(ProprietarioPortafoglio) referenzia Portfoglio(UtenteProprietario)
-> Donazione(CanaleStreamer) referenzia Canale(UtenteProprietario)
+> Donazione(ProprietarioPortafoglio) referenzia Portafoglio(UtenteProprietario) <br>
+>Donazione(CanaleStreamer) referenzia Canale(UtenteProprietario)
 
 Canale(<U>StreamerProprietario</U>, AdminCanale, HostingProvider, Descrizione*, ImmagineProfilo*, Trailer*)
-> Canale(StreamerProprietario) referenzia Registrato(Username)
-> Canale(AdminCanale) referenzia Amministratore(CodiceAdmin)
-> Canale(HostingProvider) referenzia Provider(NomeProvider)
+> Canale(StreamerProprietario) referenzia Registrato(Username) <br>
+>Canale(AdminCanale) referenzia Amministratore(CodiceAdmin) <br>
+>Canale(HostingProvider) referenzia Provider(NomeProvider)
 
 Amministratore(<U>CodiceAdmin</U>, Nome, Cognome)
 
 Provider(<U>NomeProvider</U>)
 
 Rinnovo(<U>Amministratore</U>, <U>Provider</U>, DataScadenza)
-> Rinnovo(Amministratore) referenzia Amministratore(CodiceAdmin)
-> Rinnovo(Provider) referenzia Provider(NomeProvider)
+> Rinnovo(Amministratore) referenzia Amministratore(CodiceAdmin) <br>
+>Rinnovo(Provider) referenzia Provider(NomeProvider)
 
 Programmazione(<U>Streamer</U>, <U>ProgTimestamp</U>, Titolo, LIS, Premium)
 > Programmazione(Streamer) referenzia Registrato(Username)
 
 Subscription(<U>UtenteAbbonato</U>, <U>Streamer</U>)
-> Subscription(UtenteAbbonato) referenzia Registrato(Username)
-> Subscription(Streamer) referenzia Canale(StreamerProprietario)
+> Subscription(UtenteAbbonato) referenzia Registrato(Username) <br>
+>Subscription(Streamer) referenzia Canale(StreamerProprietario)
 
 Follower(<U>UtenteFollower</U>, <U>StreamerSeguito</U>)
-> Follower(UtenteFollower) referenzia Registrato(Username)
-> Follower(StreamerSeguito) referenzia Canale(StreamerProprietario)
+> Follower(UtenteFollower) referenzia Registrato(Username) <br>
+>Follower(StreamerSeguito) referenzia Canale(StreamerProprietario)
+
+<p style="page-break-after: always;"></p>
 
 LinkSocial(<U>CanaleAssociato</U>, <U>Social</U>, LinkProfilo)
 > LinkSocial(CanaleAssociato) referenzia Canale(StreamerProprietario)
 
 ContenutoMultimediale(<U>IdURL</U>, Canale, Titolo, Categoria, LIS, Premium)
-> ContenutoMultimediale(Canale) referenzia Canale(StreamerProprietario)
-> ContenutoMultimediale(Categoria) referenzia Categoria(NomeCategoria)
+> ContenutoMultimediale(Canale) referenzia Canale(StreamerProprietario) <br>
+>ContenutoMultimediale(Categoria) referenzia Categoria(NomeCategoria)
 
 Voto(<U>UtenteRegistrato</U>, <U>ContenutoMultimediale</U>, Likert)
-> Voto(UtenteRegistrato) referenzia Registrato(Username)
-> Voto(ContenutoMultimediale) referenzia ContenutoMultimediale(IdURL)
+> Voto(UtenteRegistrato) referenzia Registrato(Username) <br>
+>Voto(ContenutoMultimediale) referenzia ContenutoMultimediale(IdURL)
 
 Visita(<U>Utente</U>, <U>ContenutoMultimediale</U>)
-> Visita(Utente) referenzia Utente(NomeUtente)
-> Visita(ContenutoMultimediale) referenzia ContenutoMultimediale(IdURL)
+> Visita(Utente) referenzia Utente(NomeUtente) <br>
+>Visita(ContenutoMultimediale) referenzia ContenutoMultimediale(IdURL)
 
 Categoria(<U>NomeCategoria</U>)
 
 Hashtag(<U>NomeHashtag</U>)
 
 Associazione(<U>Hashtag</U>, <U>ContenutoMultimediale</U>)
-> Associazione(Hashtag) referenzia Hashtag(NomeHashtag)
-> Associazione(ContenutoMultimediale) referenzia ContenutoMultimediale(IdURL)
+> Associazione(Hashtag) referenzia Hashtag(NomeHashtag) <br>
+>Associazione(ContenutoMultimediale) referenzia ContenutoMultimediale(IdURL)
 
 Live(<U>IdLive</U>, DataInizio, DataFine)
 > Live(IdLive) referenzia ContenutoMultimediale(IdURL)
 
 Clip(<U>IdClip</U>, Durata, Minutaggio, Video)
-> Clip(IdClip) referenzia ContenutoMultimediale(IdURL)
-> Clip(Video) referenzia Video(IdVideo)
+> Clip(IdClip) referenzia ContenutoMultimediale(IdURL) <br>
+>Clip(Video) referenzia Video(IdVideo)
 
 Video(<U>IdVideo</U>, Durata, Live)
-> Video(IdVideo) referenzia ContenutoMultimediale(IdURL)
-> Video(Live) referenzia Live(IdLive)
+> Video(IdVideo) referenzia ContenutoMultimediale(IdURL) <br>
+>Video(Live) referenzia Live(IdLive)
 
 Affluenza(<U>Live</U>, <U>TimestampAffluenza</U>, NumeroSpettatori)
 > Affluenza(Live) referenzia Live(IdLive)
 
 Interazione(<U>Spettatore</U>, <U>LiveCorrente</U>, <U>IntTimestamp</U>, Tipologia, Messaggio*)
-> Interazione(Spettatore) referenzia Registrato(Username)
-> Interazione(LiveCorrente) referenzia Live(IdLive)
+> Interazione(Spettatore) referenzia Registrato(Username) <br>
+>Interazione(LiveCorrente) referenzia Live(IdLive)
 
 Emoji(<U>Codice</U>, Personalizzato)
 > Emoji(Personalizzato) referenzia Canale(StreamerProprietario)
 
 Presenza(<U>SpettatoreLive</U>, <U>LiveAssociata</U>, <U>TimestampInt</U>, <U>CodiceEmoji</U>)
-> Presenza(SpettatoreLive) referenzia Interazione(Spettatore)
-> Presenza(LiveAssociata) referenzia Interazione(LiveCorrente)
-> Presenza(TimestampInt) referenzia Interazione(IntTimestamp)
-> Presenza(CodiceEmoji) referenzia Emoji(Codice)
+> Presenza(SpettatoreLive) referenzia Interazione(Spettatore) <br>
+>Presenza(LiveAssociata) referenzia Interazione(LiveCorrente) <br>
+>Presenza(TimestampInt) referenzia Interazione(IntTimestamp) <br>
+>Presenza(CodiceEmoji) referenzia Emoji(Codice)
