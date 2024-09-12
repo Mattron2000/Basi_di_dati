@@ -190,11 +190,11 @@ insert into "Visita" values ('utente3','url10');
 insert into "Visita" values ('utente3','url11');
 
 --inserimento voto
-insert into "Voto" values ('utente1','url9',9);
-insert into "Voto" values ('utente6','url9',10);
-insert into "Voto" values ('utente3','url7',8);
-insert into "Voto" values ('utente4','url3',7);
-insert into "Voto" values ('utente5','url3',3);
+insert into "Voto" values ('utente1','url3',9);
+insert into "Voto" values ('utente3','url9',10);
+insert into "Voto" values ('utente3','url10',8); 
+insert into "Voto" values ('utente5','url9',7); 
+insert into "Voto" values ('utente6','url3',3); 
 
 --inserimento associazione hashtag-contenuto
 insert into "Associazione" values ('game','url7');

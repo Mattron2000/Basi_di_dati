@@ -52,64 +52,64 @@
 
 "*Ogni utente può essere spettatore o streamer, o entrambi.*"
 
-- Ogni utente può essere **spettatore** o **streamer**, o entrambi (generalizzazione totale e sovrapposta)
+- <span style="color:green">Ogni utente può essere **spettatore** o **streamer**, o entrambi (generalizzazione totale e sovrapposta)</span>
 
 "*Gli spettatori possono essere registrati al servizio oppure possono guardare le live in modo anonimo (guest).*"
 
-- Gli spettatori possono essere **registrati** al servizio oppure possono guardare le live in modo anonimo come **“guest”** (quindi nel DB faremo dei vincoli tali da bloccare operazioni che normalmente solo gli utenti iscritti farebbero, come chattare o abbonarsi)
+- <span style="color:green">Gli spettatori possono essere **registrati** al servizio oppure possono guardare le live in modo anonimo come **“guest”** (quindi nel DB faremo dei vincoli tali da bloccare operazioni che normalmente solo gli utenti iscritti farebbero, come chattare o abbonarsi)</span>
 
 "*Per registrarsi, gli utenti devono indicare nome utente, password, data di nascita, numero di telefono o indirizzo mail.*"
 
-- Per registrarsi, gli utenti devono indicare **nome utente**, **password**, **data di nascita**, **numero di telefono** o **indirizzo mail** (opzionali il numero di telefono e indirizzo email)
+- <span style="color:green">Per registrarsi, gli utenti devono indicare **nome utente**, **password**, **data di nascita**, **numero di telefono** o **indirizzo mail** (opzionali il numero di telefono e indirizzo email)</span>
 
 "*Gli utenti iscritti possono chattare, seguire lo streamer, creare dirette. Gli utenti registrati possono abbonarsi (diventando utenti “premium”) ed avere così accesso a contenuti extra come interviste esclusive, podcast e chattare direttamente con i conduttori/artisti protagonisti dei film/concerti etc...*"
 
-- Mediante dei vincoli, verrà impedito agli spettatori “guest” di **chattare**, **abbonarsi**, **seguire lo streamer** e **creare dirette**
+- <span style="color:green">Mediante dei vincoli, verrà impedito agli spettatori “guest” di **chattare**, **abbonarsi**, **seguire lo streamer** e **creare dirette**</span>
 
 ### 1.1.2 Requisiti degli utenti che streammano
 
 "*Gli streamer hanno ciascuno un canale, che può essere caratterizzato tramite una descrizione. Per ogni canale, è possibile specificare una lista di social associati (ad esempio Instagram, YouTube, ecc.), un’immagine profilo e anche un trailer (Figura 1(a))*"
 
-- Ogni streamer può avere **un solo canale**
-- **Streamer** e **Canale** saranno due entità legate da un vincolo di integrità referenziale
+- <span style="color:green">Ogni streamer può avere **un solo canale**</span>
+- <span style="color:green">**Streamer** e **Canale** saranno due entità legate da un vincolo di integrità referenziale</span>
 
 ### 1.1.3 Requisiti delle live, video e clip
 
 "*In ogni canale possono esserci live, video (live passate) e clip (video di durata breve). Le live possono anche non diventare video del canale ma ad ogni diretta live, viene inviata una notifica agli utenti che seguono il canale. Ognuno ha un titolo, una durata, appartiene a una categoria (Figura 1(b) e può essere associato a diversi hashtags/emojis etc..). Per ogni live, viene memorizzato il numero medio di spettatori, i commenti e le reazioni (emojis, hashtags etc..) mentre per i video e le clip il numero di visualizzazioni*"
 
-- L'entità **Live** non avrà un attributo **durata**, siccome non è possibile calcolarne la durata al suo inizio. Per una live si salveranno quindi **data** e **ora** di inizio e di fine
+- <span style="color:green">L'entità **Live** non avrà un attributo **durata**, siccome non è possibile calcolarne la durata al suo inizio. Per una live si salveranno quindi **data** e **ora** di inizio e di fine</span>
 
 ### 1.1.4 Requisiti della statistica degli streamer
 
 "*Per ogni creatore di contenuti, si memorizzano il numero di live effettuate, il numero di minuti trasmessi (in diretta e non) e il numero medio di spettatori/utenti simultanei (sia premium che guest)*"
 
-- Mediante dei **contatori**, verranno calcolati questi valori
+- <span style="color:green">Mediante dei **contatori**, verranno calcolati questi valori</span>
 
 "*Inoltre, sulla pagina del canale viene visualizzato il numero di followers. Quando uno streamer rispetta determinati parametri di performance (un minimo di 500 minuti trasmessi, una media di tre o più spettatori simultanei, almeno 50 followers), può diventare affiliate*"
 
-- Si aggiunge un attributo **affiliate**, con valore sì oppure no, che sarà assegnato agli streamer a seguito di una selezione con queste condizioni
+- <span style="color:green">Si aggiunge un attributo **affiliate**, con valore sì oppure no, che sarà assegnato agli streamer a seguito di una selezione con queste condizioni</span>
 
 "*Le stream hanno degli orari. Ogni streamer ha un calendario in cui può dire quando farà stream e indicare il titolo delle prossime live. Inoltre, ogni streamer può anche decidere di trasmettere dirette live solo agli utenti premium (che hanno accesso a contenuti esclusivi)*"
 
 ### 1.1.5 Requisiti della statistica dei canali
 
-- Tra i follower del canale, verrà inviata una notifica della live solo agli **utenti premium**. Con dei **vincoli**, verrà impedito ai follower non premium di vedere la live
+- <span style="color:green">Tra i follower del canale, verrà inviata una notifica della live solo agli **utenti premium**. Con dei **vincoli**, verrà impedito ai follower non premium di vedere la live</span>
 
 "*I viewer possono diventare follower del canale degli streamer che preferiscono, e le loro preferenze sono raccolte in un elenco di followee a cui possono accedere dal loro profilo. I viewer possono inoltre supportare gli streamer tramite la subscription (a pagamento) al loro canale, ottenendo dei privilegi (emoticon personalizzate, nessun limite di caratteri nella lunghezza dei commenti, ecc...)*"
 
-- Per ogni canale, verranno forniti dei **privilegi** a tutti **gli utenti che supportano il canale** tramite un abbonamento
+- <span style="color:green">Per ogni canale, verranno forniti dei **privilegi** a tutti **gli utenti che supportano il canale** tramite un abbonamento</span>
 
 ### 1.1.6 Requisiti dei bit
 
 "*Inoltre, gli utenti hanno un portafoglio di bit (moneta virtuale che possono acquistare tramite la piattaforma), utilizzabile per effettuare donazioni agli streamer tramite differenti metodi di pagamento elettronici*"
 
-- Solo gli **utenti registrati** al servizio possono avere un **portafoglio di bit**
+- <span style="color:green">Solo gli **utenti registrati** al servizio possono avere un **portafoglio di bit**</span>
 
 ### 1.1.7 Requisiti dei follower
 
 "*Una volta che i viewer diventano follower, possono votare i contenuti multimediali degli streamer, esprimendosi tramite l’utilizzo di un voto su scala likert (nel range [1,10])*"
 
-- Il voto sarà concesso solo ai **follower**
+- <span style="color:green">Il voto sarà concesso solo ai **follower**</span>
 
 ### 1.1.8 Requisiti delle diverse chat
 
@@ -123,7 +123,7 @@
 
 "*Infine, gli utenti fragili, possono registrarsi al servizio avendo però a disposizione contenuti multimediali più inclusivi e accessibili (ad es. contenuti in LIS – Lingua Italiana dei Segni per le persone non udenti), oppure una versione delle pagine ad accesso facilitato (caratteri aumentati, stile delle pagine dei canali in b/w).*"
 
-- Viene tenuta traccia degli **utenti fragili** e per loro i contenuti verranno erogati in **modalità differente**
+- <span style="color:green">Viene tenuta traccia degli **utenti fragili** e per loro i contenuti verranno erogati in **modalità differente**</span>
 
 ### 1.1.11 Volume delle operazioni
 
