@@ -360,21 +360,19 @@ Questa ridondanza richiede molti accessi al giorno e uno spreco di circa 8 MB: p
 
 ![Ridondanza 2](../Immagini/ridondanze/2.3.1.2_rid_2_cor.png)
 
+<p style="page-break-after: always;"></p>
+
 ##### 2.3.1.2.1 DERIVAZIONE
 
 <!--L'attributo "affluenza media" dell'entità `LIVE` é derivabile dalla somma dei valori dell'attributo **_numero spettatori_** dell'entità `AFFLUENZA` diviso il numero di affluenze calcolate a partire dall'inizio della live (**_data inizio_**).-->
 
 L'attributo **_affluenza media_** dell'entità `LIVE` é derivabile dalla partecipazione di una live del mese corrente all'associazione `media spettatori` non appena la live termina.
 
-<p style="page-break-after: always;"></p>
-
 ##### 2.3.1.2.2 OPERAZIONI COINVOLTE
 
 | Operazione | Descrizione                                                                            | Tipo | Frequenza         |
 | ---------- | -------------------------------------------------------------------------------------- | ---- | ----------------- |
 | Op9        | Per ogni streamer, stilare la media degli spettatori per ogni live uscita in quel mese | B    | Una volta al mese |
-
-<p style="page-break-after: always;"></p>
 
 ##### 2.3.1.2.3 PRESENZA DI RIDONDANZA
 
