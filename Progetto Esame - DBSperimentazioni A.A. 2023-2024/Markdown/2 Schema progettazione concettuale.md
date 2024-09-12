@@ -297,7 +297,7 @@ Si può assumere che i contenuti multimediali vengano gestiti da una piattaforma
 
 | Frasi relative ai  **bit** |
 | --- |
-| gli utenti registrati hanno un portafoglio di bit (moneta virtuale che possono acquistare tramite la piattaforma), utilizzabile per effettuare donazioni agli streamer tramite differenti metodi di pagamento elettronici. |
+| Gli utenti registrati hanno un portafoglio di bit (moneta virtuale che possono acquistare tramite la piattaforma), utilizzabile per effettuare donazioni agli streamer tramite differenti metodi di pagamento elettronici. |
 
 | Frasi relative alla **registrazione** |
 | --- |
